@@ -23,4 +23,25 @@ then you trying to add item into that category:
 
 then go to `./cnmd/entity/Wiki Item.cn.md` edit the content.
 
-All detailed code is in `wiki` script of [github:kenpusney/kimiwiki]() repository.
+All detailed code is in `wiki` script of [github:kenpusney/wiki]() repository.
+
+## `./wiki` program reference
+
+ - `./wiki new <item>`, create a new toplevel wiki item
+ - `./wiki new category <cat>` create a new wiki category
+ - `./wiki new <cat> <item>` create a new item under category
+ - `./wiki index`, create search-engine index data, and write to `indexing.json`
+ - `./wiki hash`, create short url link for all wiki entries and add to `hashing.json`
+ - `./wiki serve`, start local http server for this wiki
+
+
+You can put following code into `.git/hooks/pre-commit` to automatially hasing and indexing:
+```bash
+#!/usr/bin/env bash
+
+./wiki index
+./wiki hash
+
+git add *.json
+```
+

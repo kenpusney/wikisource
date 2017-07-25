@@ -25,7 +25,7 @@ section below) if you are interested in following topics:
 
 ## Contribute
 
-You can go to [github:kenpusney/kimiwiki]() to make contribution and 
+You can go to [github:kenpusney/wiki]() to make contribution and 
 you can ref [:meta]() for details. you can also submit a issue for any 
 idea or concerns.
 
