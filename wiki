@@ -41,6 +41,8 @@ end
 
 command :serve do |lst|
     s = WEBrick::HTTPServer.new(:Port => 4000, :DocumentRoot => Dir::pwd)
+    Signal.trap("INT") { s.shutdown }
+    Signal.trap("TERM") { s.shutdown }
     s.start
 end
 
