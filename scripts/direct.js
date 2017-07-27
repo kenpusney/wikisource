@@ -7,7 +7,7 @@ define([
 
     var direct = function (hash) {
         var direct_key = hash.replace("#w/", "");
-        return $.get("/hashing.json", function (data) {
+        return $.get("/data/hashing.json", function (data) {
             data = _.isString(data) ? JSON.parse(data) : data
 
             if (data[direct_key] === undefined) {
@@ -24,7 +24,7 @@ define([
         if (item === undefined || item === "") {
             return;
         }
-        return $.get("/hashing.json", function (data) {
+        return $.get("/data/hashing.json", function (data) {
             data = _.isString(data) ? JSON.parse(data) : data
 
             if (data["reversed"][item] === undefined) {

@@ -47,7 +47,7 @@ define(["./zepto", "./lodash"], function ($, _) {
         if (search_term[0] === '+') {
             strict_mode = true;
         }
-        $.get("/indexing.json", function (data) {
+        $.get("/data/indexing.json", function (data) {
             var results = _.entries(_.isString(data) ? JSON.parse(data) : data).filter(function (key) {
                 return matches(key[0], search_term, strict_mode);
             });
