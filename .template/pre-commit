@@ -3,4 +3,4 @@
 ./wiki index
 ./wiki hash
 
-git add *.json
+git add data
