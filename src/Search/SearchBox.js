@@ -13,12 +13,12 @@ class SearchBox extends Component {
         return <div>
             <input type="text" value={this.state.keywords}
                     onChange={e => this.setState({keywords: e.target.value})}/>
-                <Link 
-                    className="btn btn-search btn-primary" 
-                    to={`/search/${this.state.keywords}`}> 
-                    <i className="glyphicon glyphicon-search"></i>
-                    &nbsp; Search
-                </Link>
+            <Link 
+                className="btn btn-search btn-primary" 
+                to={`/search/${this.state.keywords}`}> 
+                <i className="glyphicon glyphicon-search"></i>
+                &nbsp; Search
+            </Link>
             </div>
     }
 }

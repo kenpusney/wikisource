@@ -1,0 +1,12 @@
+footer a {
+  border-bottom: 1px solid #777777;
+}
+
+.footer-nav {
+  padding: 0;
+}
+
+.footer-nav li {
+  margin-right: 0.3em;
+  display: inline;
+}
