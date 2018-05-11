@@ -25,7 +25,7 @@ export default class CnmdLoader {
         let body = val
         if (fm.test(val)) {
             let data = fm(val)
-            metadata = data.attribute;
+            metadata = data.attributes;
             body = data.body
         }
         callback({body, metadata});

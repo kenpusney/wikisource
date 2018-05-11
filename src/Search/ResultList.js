@@ -1,5 +1,6 @@
 
 import React from "react"
+import WikiLink from "../Common/WikiLink";
 
 const searchLabel = (matched) => {
     return (
@@ -16,7 +17,7 @@ const listItem = (result) => {
     return (
         <div key={result.result}>
             <dt>
-                <h4><a href={`/#/wiki/${result.result}`}>{result.result}</a></h4>
+                <h4><WikiLink page={result.result} /></h4>
             </dt>
             <dd>
                 matches: {result.matched.map(searchLabel)}
