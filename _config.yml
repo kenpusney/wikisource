@@ -1,1 +1,1 @@
-exclude: ["**/*", "*.cn.md"]
+keep_files: ["**/*", "*.cn.md"]
