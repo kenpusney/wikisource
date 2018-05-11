@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 
 import marked from "marked"
-import fm from "front-matter"
 
 import CnmdRenderer from "./CnmdRenderer"
 import CnmdLoader from './CnmdLoader';
