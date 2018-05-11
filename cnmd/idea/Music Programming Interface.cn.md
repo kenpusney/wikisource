@@ -1,8 +1,9 @@
 Music Programming Interface
 ======
 
-## Idea
+Repo: [github:kenpusney/mpi]()
 
+## Idea
 
 ## Solutions
 

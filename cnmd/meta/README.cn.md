@@ -8,5 +8,5 @@ Basically is about how it works and how you can contribute & reuse the code.
 ## Index
 
   - Workflow: [:meta/Wiki workflow]()
-  - CNMD Notations: [:meta/CNMD Notations]()
+  - CNMD Notations: [:meta/CNMD]()
   - How to generate a new site like this [:meta/Fork Me]()

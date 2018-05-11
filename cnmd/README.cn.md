@@ -1,11 +1,18 @@
+---
+refs:
+  - faq
+---
 Kimmy Leo's Wiki
 =======
 
-// Just for fun
+## News
 
-You can get started from the [:Tech Stuff]()s or [:Non-Tech Stuff]()s.
+Here comes a **BRAND NEW** wiki built by [wiki:ReactJS]().
+Checkout [github:kenpusney/wikisource]() and [github:kenpusney/wikiflow](), see how it works.
 
 ## Guides
+
+You can get started from the [:Tech Stuff]()s or [:Non-Tech Stuff]()s.
 
 Here is the list of categories in this site:
 
@@ -21,9 +28,6 @@ I am interested in [:Programming Language]()s and their implementation, also
 have strong interests about automation and tools for [:Software Engineering]().
 
 Lots of things I am working on belong to these areas.
-
-## Suggested links
-  - ...
 
 ## About this wiki
 

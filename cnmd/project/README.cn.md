@@ -7,11 +7,12 @@ Here is a list of projects on GitHub I am working on:
  - VMs
    + [github:kenpusney/DC]() an ugly register-vm
    + [github:tdca/fuck-your-brain]() an ugly stack-vm inspired by brainfuck.
+
  - Languages
    + [github:kenpusney/ng]() next generation programming language.
    + [github:kenpusney/fix]() a post-fix stacked based programming language.
    + [github:kenpusney/fed]() ng-implementation.
-   + [github:Yample/Yample]() write AST by hand to programming.
+
  - Others
    + [github:rec-framework/rec-core]() the data modeling/transformation framework
    + [github:kenpusney/lit]() language invention tools in Java

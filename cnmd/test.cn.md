@@ -1,3 +1,10 @@
+---
+tags:
+  - test
+  - meta
+refs:
+  - meta
+---
 Test File about this site
 ======
 
@@ -42,6 +49,6 @@ List of DSLs which may exists in this site:
 ### Contributions
 
 If you have any new idea, or want to help me implement this, please visit
-[github:kenpusney/plt-collections/issues/new]()
+[github:kenpusney/wiki/issues/new]()
 
 Thanks!
