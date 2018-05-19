@@ -3,7 +3,6 @@ CNMD Notations
 
 CNMD, aka Cross Notation Markdown, is a syntax extension for Markdown.
 
-
 ## Extension used in this format
 
 ### namespaces
@@ -14,3 +13,20 @@ means that you want link this page to `https://en.wikipedia.org/wiki/Markdown`.
 
 For internal items(like in wikipedia, it's single page for one item),
 just put an `:` as a prefix, e.g. `[:about me]()` ([:about me]()).
+
+### Tags and Refs
+
+You can now add front-matter to include tags and refs declaration.
+
+```markdown
+---
+tags:
+  - hello world
+refs:
+  - meta/Fork Me
+---
+```
+
+## Extensions to be implemented:
+
+  - Alias

@@ -3,7 +3,7 @@
 
 ### Programming Languages I created
 
-  - [:ng.draft]()
+  - [:project/ng]()
   - [Passive Record](https://www.douban.com/note/322955493/) also [github:kenpusney/passive]()
   - see [:project] for more stuff I created
 
