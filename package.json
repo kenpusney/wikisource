@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "bootstrap": "3",
+    "cnmd": "^0.0.6",
     "front-matter": "^2.3.0",
     "lodash": "^4.17.10",
     "marked": "^0.3.17",

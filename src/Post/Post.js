@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 
 import marked from "marked"
 
-import CnmdRenderer from "./CnmdRenderer"
-import CnmdLoader from './CnmdLoader';
+import {CnmdRenderer} from "cnmd"
+import CnmdLoader from './CnmdLoader'
 
 import SeeAlso from "./Meta/SeeAlso"
 import Tags from "./Meta/Tags"
