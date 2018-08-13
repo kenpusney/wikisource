@@ -1,9 +1,12 @@
 ---
 refs:
+  - 中文版
   - faq
 ---
 Kimmy Leo's Wiki
 =======
+
+Most of pages on this site are either in Simplified Chinese or English. You can also visit this page's [:中文版]()
 
 ## News
 
