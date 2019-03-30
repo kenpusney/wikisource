@@ -64,7 +64,7 @@ export default (props) => {
                             value={token}
                             onChange={(e) => {setToken(e.target.value)}}
                             />
-                        <p><small>You can find a guide to generate a token in <a target='_blank' href="https://help.github.com/en/articles/creating-a-personal-access-token-for-the-command-line">here</a>.</small></p>
+                        <p><small>You can find a guide to generate a token in <a target='_blank' rel="noopener noreferrer" href="https://help.github.com/en/articles/creating-a-personal-access-token-for-the-command-line">here</a>.</small></p>
                     </Modal.Body>
 
                     <Modal.Footer>
