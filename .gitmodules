@@ -1,4 +1,0 @@
-[submodule "wikiflow"]
-	path = wikiflow
-	url = https://github.com/kenpusney/wikiflow
-	branch = stable
