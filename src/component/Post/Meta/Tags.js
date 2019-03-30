@@ -1,7 +1,7 @@
 
 import React from "react"
 import _ from "lodash"
-import {Label} from "react-bootstrap"
+import {Badge} from "react-bootstrap"
 
 export default ({tags}) => {
     tags = _.uniq(tags || [])
@@ -13,11 +13,7 @@ export default ({tags}) => {
     return (
         <div>
             Tags: &nbsp;
-            {
-                tags.map(tag => {
-                    return <span key={tag}><Label>{tag}</Label>&nbsp;</span>
-                })
-            }
+            { tags.map(tag => <span key={tag}><Badge variant='primary'>{tag}</Badge>&nbsp;</span> ) }
         </div>
     )
 }

@@ -1,8 +1,11 @@
-
-
 import _ from "lodash"
+import {
+    atob
+} from "b2a"
 
-const indexJsonUrl = "/data/indexing.json"
+import wikiConfig from "../config/wiki"
+
+import { oc } from "./client"
 
 export default class SearchService {
     constructor() {
@@ -32,14 +35,10 @@ export default class SearchService {
     }
 
     loadData(callback) {
-        fetch(indexJsonUrl)
-            .then(resp => {
-                if (resp.ok) {
-                    resp.text().then(body => {
-                        callback(body);
-                    });
-                }
-            });
+        const { owner, repo } = wikiConfig;
+        oc.repos.getContent({ owner, repo, path: "data/indexing.json" }).then(result => {
+            callback(atob(result.data.content));
+        });
     }
 
     search(searchKeywords) {
@@ -51,7 +50,7 @@ export default class SearchService {
             .map(indexKeys => _.uniq(_.flatten(_.at(indexData, indexKeys))))
             .reduce((merged, result) => merged ? _.intersection(merged, result) : result)
             .map(result => this.generateResult(result, searchKeywords))
-        
+
         return matching_info;
     }
 
@@ -62,7 +61,7 @@ export default class SearchService {
                     let searchKeys = searchKeywords.filter(searchKey => indexKey.includes(searchKey));
                     return { indexKey, searchKeys }
                 })
-                .map(combinedKey => 
+                .map(combinedKey =>
                     combinedKey.searchKeys
                         .map(searchKey => {
                             let wrapped = combinedKey.indexKey.replace(searchKey, `<b>${searchKey}</b>`);
