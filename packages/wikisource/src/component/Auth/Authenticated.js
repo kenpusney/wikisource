@@ -31,7 +31,7 @@ export default (props) => {
             type: "token",
             token: localStorage.getItem(token) || "undefined"
         });
-        setAuthed(true);
+        window.location.reload();
     }
 
     useEffect(() => {
