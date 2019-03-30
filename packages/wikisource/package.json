@@ -4,7 +4,7 @@
   "dependencies": {
     "@octokit/rest": "^15.13.0",
     "b2a": "^1.0.10",
-    "bootstrap": "~>4.1.2",
+    "bootstrap": ">=4.3.1",
     "cnmd": "^0.0.6",
     "front-matter": "^2.3.0",
     "lodash": "^4.17.10",
