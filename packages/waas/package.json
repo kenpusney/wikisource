@@ -1,0 +1,21 @@
+{
+  "name": "waas",
+  "version": "1.0.0",
+  "description": "Wiki as a Service",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "github.com/kenpusney/waas"
+  },
+  "author": "KimmyLeo",
+  "license": "MIT",
+  "dependencies": {
+    "@octokit/rest": "^15.13.0",
+    "body-parser": "^1.18.3",
+    "cors": "^2.8.5",
+    "express": "^4.16.4"
+  }
+}
