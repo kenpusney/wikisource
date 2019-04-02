@@ -1,5 +1,5 @@
 {
-  "name": "waas",
+  "name": "kimiwiki-server",
   "version": "1.0.0",
   "description": "Wiki as a Service",
   "main": "index.js",
