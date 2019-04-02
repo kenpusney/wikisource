@@ -25,3 +25,6 @@ yarn.lock
 
 *ing.json
 *-lock.json
+
+.cache/
+dist/
