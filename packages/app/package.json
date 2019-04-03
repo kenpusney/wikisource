@@ -27,6 +27,7 @@
     "not op_mini all"
   ],
   "devDependencies": {
+    "less": "^3.9.0",
     "parcel-bundler": "^1.12.3"
   }
 }

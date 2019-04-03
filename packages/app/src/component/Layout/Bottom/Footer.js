@@ -1,7 +1,7 @@
 
 
 import React from "react"
-import "./Footer.css"
+import "./Footer.less"
 import WikiLink from "../../Common/WikiLink";
 
 export default (props) => (

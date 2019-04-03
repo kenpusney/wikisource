@@ -7,7 +7,7 @@ import { parsePostPath } from "../../utils"
 import { Badge } from "react-bootstrap"
 import WikiLink from "../Common/WikiLink";
 
-import "./index.css"
+import "./index.less"
 
 const loader = new LoadingService();
 

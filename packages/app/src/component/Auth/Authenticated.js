@@ -4,7 +4,7 @@ import { Modal, Button, FormControl } from "react-bootstrap"
 
 import ReactLoading from "react-loading"
 
-import "./Auth.css"
+import "./Auth.less"
 
 import { oc } from "../../service/client"
 import wikiConfig from "../../config/wiki";
