@@ -1,0 +1,15 @@
+{
+  "name": "wiki-flow",
+  "version": "1.0.0",
+  "main": "cli.js",
+  "repository": "github.com/kenpusney/kimisource",
+  "author": "KimmyLeo",
+  "bin": {
+    "wiki": "cli.js"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "nodejieba": "^2.3.0",
+    "yargs": "^13.2.2"
+  }
+}
