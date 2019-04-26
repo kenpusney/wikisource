@@ -22,16 +22,25 @@ const authCheck = async (token) => {
 
 export default (props) => {
 
-    const [token, setToken] = useState("");
-    const [authed, setAuthed] = useState(false);
-
-    const saveToken = (token) => {
-        localStorage.setItem("WIKI_TOKEN", token);
+    const [token, setToken] = useState(localStorage.getItem("WIKI_TOKEN") || "");
+    const [authed, setAuthed] = useState(token != "");
+    if (authed) {
         oc.authenticate({
             type: "token",
-            token: localStorage.getItem(token) || "undefined"
+            token: token
         });
-        window.location.reload();
+    } else if (wikiConfig.tokenServer) {
+        fetch(wikiConfig.tokenServer).then(response => {
+            response.json().then(data => {        
+                oc.authenticate({
+                    type: "token",
+                    token: data.token
+                })
+                localStorage.setItem("WIKI_TOKEN", data.token)
+                setAuthed(true)
+                setToken(data.token)
+            })
+        })
     }
 
     useEffect(() => {
@@ -39,16 +48,21 @@ export default (props) => {
         
         if (!authed && token) {
             authCheck(token).then(() => {
-                setAuthed(true)
+                setToken(token)
             }).catch(() => {
                 localStorage.clear("WIKI_TOKEN");
             });
         }
     })
 
+    const saveToken = (token) => {
+        localStorage.setItem("WIKI_TOKEN", token);
+        window.location.reload();
+    }
+
     return (authed ?  
         props.children : 
-            <Waiting time={1800}>
+            <Waiting time={2300}>
                 <Modal.Dialog>
                     <Modal.Header closeButton>
                         <Modal.Title>Authentication Required</Modal.Title>

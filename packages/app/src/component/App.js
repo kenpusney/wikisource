@@ -13,7 +13,7 @@ import Authenticated from './Auth/Authenticated';
 
 export default (props) => {
     return (
-        <Authenticated>
+       <Authenticated>
             <Router>
                 <Container>
                     <Top />
@@ -21,6 +21,6 @@ export default (props) => {
                     <Bottom />
                 </Container>
             </Router>
-        </Authenticated>
+       </Authenticated>
     );
 }
