@@ -1,7 +1,7 @@
 ---
 refs:
   - books
-  - article
+  - articles
 ---
 # My publications
 

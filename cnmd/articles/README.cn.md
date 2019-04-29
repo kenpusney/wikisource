@@ -17,7 +17,7 @@ For more articles from me, please go to my blogs:
 
 ## Techies
 
- - [:article/Import Model]()
+ - [:articles/Import Model]()
 
 ## Non Techies
 

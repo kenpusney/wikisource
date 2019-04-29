@@ -6,7 +6,7 @@ Also you can checkout [:tech]() category for more topics.
 I am interested in programming languages and their implementations,
 so here are several interesting topics I've followed:
 
-  * [:article/Error Model]()
-  * [:article/Import Model]()
-  * [:article/Type System]()
+  * [:articles/Error Model]()
+  * [:articles/Import Model]()
+  * [:articles/Type System]()
   * [:tech/Meta-programming]()

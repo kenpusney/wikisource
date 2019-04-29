@@ -21,7 +21,7 @@ You can get started from the [:tech]() topics or [:non-tech]() topics.
 
 Here is the list of categories in this site:
 
- - [:article]()
+ - [:articles]()
  - [:project]()
  - [:idea]()
  - [:spec]()
