@@ -5,5 +5,7 @@
 
 创作中：
  - [:books/i2p]() 编程导引 Introduction to Programming
- - [:books/eoad]() 敏捷开发要素 Element of Agile Development
+ - [:books/eoad]() 敏捷开发要素 Element of Agile Development
  - [:books/bhoc]() 计算机简史 A Brief History of Computer
+ 
+我也参与翻译创作了其他的出版书籍，请参考[:publications]()。
