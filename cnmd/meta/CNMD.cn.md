@@ -12,7 +12,7 @@ a normal link, but with a `wiki:` prefix like `[wiki:Markdown]()`, it
 means that you want link this page to `https://en.wikipedia.org/wiki/Markdown`.
 
 For internal items(like in wikipedia, it's single page for one item),
-just put an `:` as a prefix, e.g. `[:about me]()` ([:about me]()).
+just put an `:` as a prefix, e.g. `[:about]()` ([:about]()).
 
 ### Tags and Refs
 
