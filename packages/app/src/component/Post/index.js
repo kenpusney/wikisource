@@ -8,6 +8,8 @@ import LoadingService from '../../service/LoadingService'
 import SeeAlso from "./Meta/SeeAlso"
 import Tags from "./Meta/Tags"
 
+import "./Post.css"
+
 import { parsePostPath } from "../../utils"
 
 const loader = new LoadingService();
