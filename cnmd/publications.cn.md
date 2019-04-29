@@ -1,8 +1,7 @@
 ---
 refs:
-  - project/Books planned
-  - article
   - books
+  - article
 ---
 # My publications
 
