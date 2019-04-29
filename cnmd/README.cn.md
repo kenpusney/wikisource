@@ -10,6 +10,8 @@ Kimmy Leo's Wiki
 
 ## News
 
+**New sidebar!!!** Now you can browse this wiki using sidebar on the right.
+
 Here comes a **BRAND NEW** wiki built by [wiki:ReactJS]().
 Checkout [github:kenpusney/wikisource]() and [github:kenpusney/wikiflow](), see how it works.
 
