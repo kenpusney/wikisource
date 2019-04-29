@@ -3,9 +3,9 @@
 
 ### Programming Languages I created
 
-  - [:project/ng]()
+  - [:projects/ng]()
   - [Passive Record](https://www.douban.com/note/322955493/) also [github:kenpusney/passive]()
-  - see [:project] for more stuff I created
+  - see [:projects] for more stuff I created
 
 ### Programming Languages I am familiar with
 
