@@ -23,7 +23,7 @@ Here is the list of categories in this site:
 
  - [:articles]()
  - [:project]()
- - [:idea]()
+ - [:ideas]()
  - [:spec]()
  - [:doc]()
 
