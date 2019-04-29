@@ -1,6 +1,8 @@
 Fork me
 ========
 
+**WARNING: This page is deprecated and out of date**
+
 This is the guide for you to build another site like this.
 
 ### Get the code
