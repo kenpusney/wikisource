@@ -24,7 +24,7 @@ Here is the list of categories in this site:
  - [:articles]()
  - [:projects]()
  - [:ideas]()
- - [:spec]()
+ - [:specs]()
  - [:doc]()
 
 ## My Interests
