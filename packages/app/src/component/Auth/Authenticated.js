@@ -37,8 +37,7 @@ export default (props) => {
                     token: data.token
                 })
                 localStorage.setItem("WIKI_TOKEN", data.token)
-                setAuthed(true)
-                setToken(data.token)
+                window.location.reload();
             })
         })
     }
