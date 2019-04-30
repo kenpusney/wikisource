@@ -1,2 +1,8 @@
+const indexing = require("./indexing")
 
-console.log("hello, world");
+const yargs = require("yargs")
+
+yargs.command("index", "create index data for wiki", {}, () => {
+    indexing("**/*.cn.md", 'data/indexing.json', 'cnmd/', '.cn.md')    
+})
+.help();
