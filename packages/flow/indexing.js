@@ -1,6 +1,7 @@
 const jieba = require("nodejieba");
 const glob = require("glob");
 const fs = require('fs')
+const chalk = require("chalk")
 
 jieba.load({
     userDict: `${__dirname}/user.dict.utf8`
@@ -10,6 +11,7 @@ const allowedTypes = ['n', 'eng']
 
 function indexing(from, to, prefix, postfix) {
     glob(from, {}, (err, files) => {
+        console.log(chalk.yellow("Start indexing..."))
         if (!err) {
             let keywords = new Map();
 
@@ -25,11 +27,16 @@ function indexing(from, to, prefix, postfix) {
                 set.forEach(collectToMap(keywords, id));
             });
 
+            console.log(chalk.yellow(`Successfully processed ${chalk.green(files.length)} file(s)`))
             fs.writeFileSync(to, JSON.stringify(strMapToObj(keywords)));
+            console.log(chalk.yellow(`Data persisted to: ${chalk.green(to)}`))
+            console.log(chalk.yellow("Done."))
+        } else {
+            console.log(chalk.red("Error!"));
+            console.log(chalk.red(JSON.stringify(err)));
         }
     });
 }
-
 
 function collectToMap(map, value) {
     return key => {
