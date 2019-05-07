@@ -12,6 +12,9 @@ import "./Post.css"
 
 import { parsePostPath } from "../../utils"
 
+import hljs from "highlight.js"
+import "highlight.js/styles/a11y-light.css"
+
 const loader = new LoadingService();
 const renderer = new CnmdRenderer({
     ...CnmdRenderer.default_handlers, "": (postfix) => {
@@ -24,7 +27,8 @@ const renderer = new CnmdRenderer({
 })
 
 const render = (text) => {
-    return marked(text, { renderer, })
+    return marked(text, { renderer, 
+        highlight: (code, lang) => hljs.highlightAuto(code, lang && [lang]).value})
 }
 
 export default (props) => {
