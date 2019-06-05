@@ -1,3 +1,7 @@
+---
+refs:
+  - tech/API_Gotchas
+---
 # API/Service SOLID 原则
 
 ## 单一指责原则 Single Responsibility Principle

@@ -1,3 +1,7 @@
+---
+refs:
+  - tech/SOLID Services
+---
 # API Gotchas
 
 ## API Category
