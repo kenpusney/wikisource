@@ -69,7 +69,27 @@ Provider将自身内部的领域对象整体暴露出去
 
 **场景**
 
-The servide that was cross-layered and depended by most of other services.
+The service that was cross-layered and depended by most of other services.
+
+**解决方案**
+
+?
+
+### 6. Circular Reference/Dependency
+
+**场景**
+
+Lower stream services have ex/implicit dependency for higher stream services.
+
+**解决方案**
+
+?
+
+### 7. Schema Inference
+
+**场景**
+
+Services provide nothing but an endpoint, client must try to understand the schema and behaviour by combinating every possible inputs.
 
 **解决方案**
 
