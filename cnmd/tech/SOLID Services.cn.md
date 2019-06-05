@@ -1,4 +1,4 @@
-# 微服务中的 SOLID 原则
+# API/Service SOLID 原则
 
 ## 单一指责原则 Single Responsibility Principle
 
