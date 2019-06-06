@@ -10,7 +10,7 @@
 
 这个系列叫做“软件领导力”，因为，毕竟这个还是关于软件开发的。希望你能喜欢。
 
-1. 软件架构师角色认知 [:translations/joeduffy/software leadeship/01]()
+1. 软件架构师角色认知 [:translations/joeduffy/software leadership/01]()
 2. 代码说明一切；爱上代码
 3. 权威性只是个假象
 4. 水可覆舟
