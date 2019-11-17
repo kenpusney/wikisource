@@ -13,11 +13,13 @@ jobs:
     - run: yarn install
     - run: yarn wiki index
     - name: Commit files
+      continue-on-error: true
       run: |
         git config --local user.email "tinikimi@qq.com"
         git config --local user.name "TiniKimi"
         git commit -m "Add changes" -a
     - name: Push changes
+      continue-on-error: true
       uses: ad-m/github-push-action@master
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
