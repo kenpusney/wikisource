@@ -2,16 +2,14 @@
 import React, { useEffect, useState } from "react"
 import { Modal, Button, FormControl } from "react-bootstrap"
 
-import "./Auth.less"
-
-import { oc } from "../../service/client"
+import { githubClient } from "../../service/client"
 import wikiConfig from "../../config/wiki";
 
 import loadingGif from "../../images/loading.gif"
 
 const authCheck = async (token) => {
     try {
-        await oc.repos.get(wikiConfig)
+        await githubClient.check(wikiConfig)
         console.log(token);
         return token;
     } catch (e) {
@@ -36,10 +34,7 @@ const clearSavedToken = () => {
 }
 
 const auth = (token) => {
-    oc.authenticate({
-        type: "token",
-        token: token
-    });
+    githubClient.authenticate(token)
 }
 
 const fetchFromServer = async (tokenServer) => {

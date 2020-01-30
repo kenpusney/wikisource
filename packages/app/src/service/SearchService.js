@@ -4,7 +4,7 @@ import {
 
 import wikiConfig from "../config/wiki"
 
-import { oc } from "./client"
+import { githubClient } from "./client"
 
 const uniq = (array) => {
     return Array.from(new Set(array));
@@ -48,9 +48,8 @@ export default class SearchService {
 
     async loadIndexing() {
         const { owner, repo } = wikiConfig;
-        const response = await oc.repos.getContent({ owner, repo, path: "data/indexing.json"});
-        console.log(response);
-        return JSON.parse(atob(response.data.content));
+        const response = await githubClient.getContents({ owner, repo, path: "data/indexing.json"});
+        return JSON.parse(atob(response.content));
     }
 
     search(searchKeywords) {

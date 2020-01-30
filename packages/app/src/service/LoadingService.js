@@ -4,7 +4,7 @@ import {
     atob
 } from "b2a"
 
-import { oc } from "./client"
+import { githubClient } from "./client"
 import wikiConfig from "../config/wiki"
 
 export default class LoadingService {
@@ -12,8 +12,8 @@ export default class LoadingService {
     async loadPost(postId, retry = false) {
         const {owner, repo, pathprefix} = wikiConfig;
         try {
-            const response = await oc.repos.getContent({ owner, repo, path: `${pathprefix}/${postId}.cn.md`});
-            const content = atob(response.data.content);
+            const response = await githubClient.getContents({ owner, repo, path: `${pathprefix}/${postId}.cn.md`});
+            const content = atob(response.content);
             return this.extractContent(content);
         } catch (ex) {
             if (retry) {
@@ -38,9 +38,9 @@ export default class LoadingService {
         const {owner, repo, pathprefix} = wikiConfig;
         let parent = postId.replace(/(.*\/)*.*/, '$1');
 
-        const result = await oc.repos.getContent({ owner, repo, path: `${pathprefix}/${parent}`})
+        const result = await githubClient.getContents({ owner, repo, path: `${pathprefix}/${parent}`})
 
-        const mapped = result.data.map(({name, path, type}) => {
+        const mapped = result.map(({name, path, type}) => {
             if (type === 'file') {
                 name = name.replace(/\.cn\.md$/, "");
             }
