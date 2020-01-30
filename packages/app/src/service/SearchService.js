@@ -1,4 +1,3 @@
-import _ from "lodash"
 import {
     atob
 } from "b2a"
@@ -6,6 +5,24 @@ import {
 import wikiConfig from "../config/wiki"
 
 import { oc } from "./client"
+
+const uniq = (array) => {
+    return Array.from(new Set(array));
+}
+
+const flatten_array = (arrays) => {
+    return arrays.reduce((a, b) => a.concat(b));
+}
+
+const intersection_array = (left, right) => {
+    const a = new Set(left);
+    const b = new Set(right);
+    return [...a].filter(x => b.has(x));
+}
+
+const object_at = (object, keys) => {
+    return keys.map(key => object[key])
+}
 
 export default class SearchService {
     constructor() {
@@ -17,7 +34,7 @@ export default class SearchService {
 
     reverseIndexing(data) {
         let index = {};
-        _.keys(data).forEach(k => {
+        Object.keys(data).forEach(k => {
             data[k].forEach(page => {
                 if (index[page]) {
                     index[page].push(k)
@@ -41,9 +58,9 @@ export default class SearchService {
         let indexData = this.indexData || {}
 
         let matching_info = searchKeywords
-            .map(searchKey => _.keys(indexData).filter(indexKey => indexKey.includes(searchKey)))
-            .map(indexKeys => _.uniq(_.flatten(_.at(indexData, indexKeys))))
-            .reduce((merged, result) => merged ? _.intersection(merged, result) : result)
+            .map(searchKey => Object.keys(indexData).filter(indexKey => indexKey.includes(searchKey)))
+            .map(indexKeys => uniq(flatten_array(object_at(indexData, indexKeys))))
+            .reduce((merged, result) => merged ? intersection_array(merged, result) : result)
             .map(result => this.generateResult(result, searchKeywords))
 
         return matching_info;
@@ -65,7 +82,7 @@ export default class SearchService {
                         }))
             return {
                 result,
-                matched: _.uniq(_.flatten(matchedIndexKeys))
+                matched: uniq(flatten_array(matchedIndexKeys))
             }
         }
         return { result, matched: [] }

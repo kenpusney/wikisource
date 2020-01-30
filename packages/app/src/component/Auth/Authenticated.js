@@ -2,12 +2,12 @@
 import React, { useEffect, useState } from "react"
 import { Modal, Button, FormControl } from "react-bootstrap"
 
-import ReactLoading from "react-loading"
-
 import "./Auth.less"
 
 import { oc } from "../../service/client"
 import wikiConfig from "../../config/wiki";
+
+import loadingGif from "../../images/loading.gif"
 
 const authCheck = async (token) => {
     try {
@@ -20,44 +20,58 @@ const authCheck = async (token) => {
     }
 }
 
+const TOKEN_KEY = "WIKI_TOKEN"
+
+const saveToken = (token) => {
+    localStorage.setItem(TOKEN_KEY, token);
+    window.location.reload();
+}
+
+const savedToken = () => {
+    return localStorage.getItem(TOKEN_KEY);
+}
+
+const clearSavedToken = () => {
+    localStorage.clear(TOKEN_KEY);
+}
+
+const auth = (token) => {
+    oc.authenticate({
+        type: "token",
+        token: token
+    });
+}
+
+const fetchFromServer = async (tokenServer) => {
+    const response = await fetch(tokenServer);
+    const data = await response.json();
+    return data.token;
+}
+
 export default (props) => {
 
-    const [token, setToken] = useState(localStorage.getItem("WIKI_TOKEN") || "");
-    const [authed, setAuthed] = useState(token != "");
+    const [token, setToken] = useState(savedToken() || "");
+    const [authed] = useState(token != "");
+
+
     if (authed) {
-        oc.authenticate({
-            type: "token",
-            token: token
-        });
+        auth(token);
     } else if (wikiConfig.tokenServer) {
-        fetch(wikiConfig.tokenServer).then(response => {
-            response.json().then(data => {        
-                oc.authenticate({
-                    type: "token",
-                    token: data.token
-                })
-                localStorage.setItem("WIKI_TOKEN", data.token)
-                window.location.reload();
-            })
+        fetchFromServer(wikiConfig.tokenServer).then((token) => {
+            auth(token);
+            saveToken(token);
         })
     }
 
     useEffect(() => {
-        const token = localStorage.getItem("WIKI_TOKEN");
+        const token = savedToken();
         
         if (!authed && token) {
             authCheck(token).then(() => {
                 setToken(token)
-            }).catch(() => {
-                localStorage.clear("WIKI_TOKEN");
-            });
+            }).catch(clearSavedToken);
         }
     })
-
-    const saveToken = (token) => {
-        localStorage.setItem("WIKI_TOKEN", token);
-        window.location.reload();
-    }
 
     return (authed ?  
         props.children : 
@@ -95,10 +109,14 @@ const Waiting = ({time, children}) => {
 
     return <div>
         { timeUp ?  children : 
-        <ReactLoading
-            type='spinningBubbles' 
-            className='loading-spinner'
-            color="darkgray">
-        </ReactLoading>}
+        <img src={loadingGif} style={{
+                position: "absolute",
+                left: "50%",
+                top: "50%",
+                height: "2em",
+                width: "2em",
+                marginLeft: "-1em",
+                marginTop: "-1em",
+            }} />}
     </div>
 }

@@ -1,5 +1,4 @@
 
-import _ from "lodash"
 
 import React from "react"
 import WikiLink from "../../Common/WikiLink";
@@ -8,7 +7,7 @@ import WikiLink from "../../Common/WikiLink";
 export default ({refs}) => {
     refs = refs || []
     
-    if (_.isEmpty(refs)) {
+    if (refs.length === 0) {
         return <div />
     }
 

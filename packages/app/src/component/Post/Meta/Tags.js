@@ -1,12 +1,11 @@
 
 import React from "react"
-import _ from "lodash"
 import {Badge} from "react-bootstrap"
 
 export default ({tags}) => {
-    tags = _.uniq(tags || [])
+    tags = Array.from(new Set(tags || []));
 
-    if (_.isEmpty(tags)) {
+    if (tags.length === 0) {
         return <div />
     }
     
