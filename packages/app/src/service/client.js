@@ -1,11 +1,7 @@
 
 import config from "../config/wiki"
 
-const TOKEN_KEY = "WIKI_TOKEN"
-
-const savedToken = () => {
-    return localStorage.getItem(TOKEN_KEY);
-}
+import { savedToken } from "./token"
 
 export const githubClient = new class {
     constructor() {

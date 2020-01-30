@@ -6,6 +6,7 @@ import { githubClient } from "../../service/client"
 import wikiConfig from "../../config/wiki";
 
 import loadingGif from "../../images/loading.gif"
+import { savedToken, saveToken, clearSavedToken } from "../../service/token"
 
 const authCheck = async (token) => {
     try {
@@ -16,21 +17,6 @@ const authCheck = async (token) => {
         console.log("failed");
         throw e;
     }
-}
-
-const TOKEN_KEY = "WIKI_TOKEN"
-
-const saveToken = (token) => {
-    localStorage.setItem(TOKEN_KEY, token);
-    window.location.reload();
-}
-
-const savedToken = () => {
-    return localStorage.getItem(TOKEN_KEY);
-}
-
-const clearSavedToken = () => {
-    localStorage.clear(TOKEN_KEY);
 }
 
 const auth = (token) => {
