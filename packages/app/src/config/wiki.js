@@ -1,7 +1,7 @@
 
 export default {
-    owner: "kenpusney",
-    repo: "wiki",
-    pathprefix: "cnmd",
-    tokenServer: "https://fw.kimleo.net/token"
+    owner: process.env.OWNER,
+    repo: process.env.REPO,
+    pathprefix: process.env.PATH_PREFIX,
+    tokenServer:  process.env.TOKEN_SERVER
 }

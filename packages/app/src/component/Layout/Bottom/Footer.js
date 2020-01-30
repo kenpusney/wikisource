@@ -3,6 +3,7 @@
 import React from "react"
 import "./Footer.less"
 import WikiLink from "../../Common/WikiLink";
+import config from "../../../config/wiki"
 
 export default (props) => (
   <footer style={{margin: "3em 0 1em 0", color: "#777777", fontSize: "0.8em"}}>
@@ -11,7 +12,7 @@ export default (props) => (
       <li><a href="/">Home</a></li>
       <li><WikiLink page="about" text="About" /></li>
       <li><WikiLink page="contact" text="Contact" /></li>
-      <li><a href="https://github.com/kenpusney/wiki/new/gh-pages/cnmd">New Page</a></li>
+      <li><a href={`https://github.com/${config.owner}/${config.repo}/new/master/${config.pathprefix}/`}>New Page</a></li>
       <li><a id="edit-page" href="/#">Edit Page</a></li>
     </ul>
   </footer>
