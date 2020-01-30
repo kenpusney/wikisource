@@ -42,7 +42,7 @@ export default (props) => {
         const postId = postPath.postId;
         if (current !== postId) {
             setCurrent(postId)
-            loader.listDir(postId, setSideBar);
+            loader.listDir(postId).then(setSideBar);
         }
     })
 

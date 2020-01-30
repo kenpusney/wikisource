@@ -22,7 +22,7 @@ export default (props) => {
         const newKeyword = getKeyword(props);
         if (newKeyword !== '' && keyword !== newKeyword) {
             setKeyword(newKeyword);
-            searchService.searchAsync(newKeyword, setResult);
+            searchService.searching(newKeyword).then(setResult);
         }
     })
 

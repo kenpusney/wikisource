@@ -40,7 +40,7 @@ export default (props) => {
         const postPath = parsePostPath(props)
         if (postId !== postPath.postId) {
             setPostId(postPath.postId)
-            loader.load(postPath.postId, setPost);
+            loader.loadPost(postPath.postId).then(setPost);
         }
     })
 
@@ -53,5 +53,3 @@ export default (props) => {
         </div>
     )
 }
-
-

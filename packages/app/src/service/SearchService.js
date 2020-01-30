@@ -9,10 +9,6 @@ import { oc } from "./client"
 
 export default class SearchService {
     constructor() {
-        this.loadData(body => {
-            this.indexData = JSON.parse(body)
-            this.reverseIndexing(this.indexData)
-        });
     }
 
     ready() {
@@ -30,15 +26,14 @@ export default class SearchService {
                 }
             })
         });
-
         this.reverseIndex = index
     }
 
-    loadData(callback) {
+    async loadIndexing() {
         const { owner, repo } = wikiConfig;
-        oc.repos.getContent({ owner, repo, path: "data/indexing.json" }).then(result => {
-            callback(atob(result.data.content));
-        });
+        const response = await oc.repos.getContent({ owner, repo, path: "data/indexing.json"});
+        console.log(response);
+        return JSON.parse(atob(response.data.content));
     }
 
     search(searchKeywords) {
@@ -76,15 +71,12 @@ export default class SearchService {
         return { result, matched: [] }
     }
 
-    searchAsync(keyword, callback) {
-        if (this.ready()) {
-            callback(this.search(keyword))
-        } else {
-            this.loadData(body => {
-                this.indexData = JSON.parse(body)
-                this.reverseIndexing(this.indexData)
-                callback(this.search(keyword))
-            });
-        }
+
+    async searching(keyword) {
+        if (!this.ready()) {
+            this.indexData = await this.loadIndexing();
+            this.reverseIndexing(this.indexData);
+        } 
+        return this.search(keyword);
     }
 }
