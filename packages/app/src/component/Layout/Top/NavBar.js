@@ -16,14 +16,19 @@ const toNavs = (items) => {
 }
 
 export default (props) => {
+
+    const [postId, setPostId] = useState("")
     const [items, setItems] = useState([])
 
     useEffect(() => {
         if (props.match && props.match.params.postId) {
             const newPostId = props.match.params.postId;
-            setItems(newPostId.split("/"));
+            if (newPostId !== postId) {
+                setItems(newPostId.split("/"));
+                setPostId(newPostId);
+            }
         } else {
-            setItems([])
+            // setItems([])
         }
     });
 
