@@ -4,10 +4,10 @@ import React, { useState, useEffect } from "react"
 import LoadingService from "../../service/LoadingService";
 
 import { parsePostPath } from "../../utils"
-import { Badge } from "react-bootstrap"
+import Badge from "react-bootstrap/Badge"
 import WikiLink from "../Common/WikiLink";
 
-import "./index.less"
+import "./index.css"
 
 const loader = new LoadingService();
 
@@ -44,7 +44,7 @@ export default (props) => {
             setCurrent(postId)
             loader.listDir(postId).then(setSideBar);
         }
-    })
+    }, [props, current])
 
     return (
         <div className="sidebar">

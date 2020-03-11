@@ -1,6 +1,6 @@
 
 import React from "react"
-import {Badge} from "react-bootstrap"
+import Badge from "react-bootstrap/Badge"
 
 export default ({tags}) => {
     tags = Array.from(new Set(tags || []));

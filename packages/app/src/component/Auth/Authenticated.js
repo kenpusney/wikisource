@@ -1,6 +1,9 @@
 
 import React, { useEffect, useState } from "react"
-import { Modal, Button, FormControl } from "react-bootstrap"
+
+import Modal from "react-bootstrap/Modal"
+import Button from "react-bootstrap/Button"
+import FormControl from "react-bootstrap/FormControl"
 
 import { githubClient } from "../../service/client"
 import wikiConfig from "../../config/wiki";
@@ -32,7 +35,7 @@ const fetchFromServer = async (tokenServer) => {
 export default (props) => {
 
     const [token, setToken] = useState(savedToken() || "");
-    const [authed] = useState(token != "");
+    const [authed] = useState(token !== "");
 
 
     if (authed) {
@@ -90,7 +93,7 @@ const Waiting = ({time, children}) => {
 
     return <div>
         { timeUp ?  children : 
-        <img src={loadingGif} style={{
+        <img alt="Loading" src={loadingGif} style={{
                 position: "absolute",
                 left: "50%",
                 top: "50%",

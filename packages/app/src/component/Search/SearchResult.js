@@ -24,7 +24,7 @@ export default (props) => {
             setKeyword(newKeyword);
             searchService.searching(newKeyword).then(setResult);
         }
-    })
+    }, [props, keyword])
 
     return (
         <div>

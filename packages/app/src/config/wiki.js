@@ -1,7 +1,7 @@
 
 export default {
-    owner: process.env.OWNER,
-    repo: process.env.REPO,
-    pathprefix: process.env.PATH_PREFIX,
-    tokenServer:  process.env.TOKEN_SERVER
+    owner: process.env.REACT_APP_OWNER,
+    repo: process.env.REACT_APP_REPO,
+    pathprefix: process.env.REACT_APP_PATH_PREFIX,
+    tokenServer:  process.env.REACT_APP_TOKEN_SERVER
 }

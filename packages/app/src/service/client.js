@@ -32,4 +32,4 @@ export const githubClient = new class {
 
         return response.json();
     }
-}
+}()

@@ -42,7 +42,7 @@ export default (props) => {
             setPostId(postPath.postId)
             loader.loadPost(postPath.postId).then(setPost);
         }
-    })
+    }, [props, postId])
 
     return (
         <div className="Post">

@@ -1,0 +1,7 @@
+.sidebar a:hover, 
+.sidebar a:active, 
+.sidebar a:visited, 
+.sidebar a:link
+{
+    color: white
+}

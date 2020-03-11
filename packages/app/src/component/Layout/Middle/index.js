@@ -1,7 +1,9 @@
 
 import React from "react"
 
-import { Row, Col } from "react-bootstrap"
+import Col from "react-bootstrap/Col"
+import Row from "react-bootstrap/Row"
+
 import { Route } from "react-router-dom";
 
 import SearchResult from "../../Search/SearchResult"

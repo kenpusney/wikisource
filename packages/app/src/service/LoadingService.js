@@ -40,6 +40,8 @@ export default class LoadingService {
 
         const result = await githubClient.getContents({ owner, repo, path: `${pathprefix}/${parent}`})
 
+        console.log(result);
+
         const mapped = result.map(({name, path, type}) => {
             if (type === 'file') {
                 name = name.replace(/\.cn\.md$/, "");

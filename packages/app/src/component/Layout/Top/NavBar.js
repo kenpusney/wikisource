@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect } from "react"
 
-import { Breadcrumb } from "react-bootstrap"
+import Breadcrumb from "react-bootstrap/Breadcrumb"
 
 
 const toNavs = (items) => {
@@ -30,7 +30,7 @@ export default (props) => {
         } else {
             // setItems([])
         }
-    });
+    }, [props.match, postId]);
 
     return (
         <Breadcrumb>

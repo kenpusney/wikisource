@@ -25,8 +25,6 @@ const object_at = (object, keys) => {
 }
 
 export default class SearchService {
-    constructor() {
-    }
 
     ready() {
         return this.indexData !== undefined;

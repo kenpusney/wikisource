@@ -3,7 +3,7 @@ import React from 'react';
 
 import 'bootstrap/dist/css/bootstrap.css';
 
-import { Container } from "react-bootstrap"
+import Container from "react-bootstrap/Container"
 import { HashRouter as Router } from "react-router-dom";
 
 import Top from "./Layout/Top"
