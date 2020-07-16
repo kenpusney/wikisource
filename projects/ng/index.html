@@ -1,0 +1,20 @@
+<!doctype html><html><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="Kimmy's Wiki"><link rel="shortcut icon" href=http://wiki.kimleo.net/favicon.ico><link rel=stylesheet href=/css/style.min.css><title></title></head><body><header id=banner><h2><a href=http://wiki.kimleo.net>Kimmy's Wiki</a></h2><nav><ul><li><a href=/ title=posts>posts</a></li><li><a href=/about/ title=about>about</a></li></ul></nav></header><main id=content><article><header id=post-header><h1></h1></header><h1 id=ng-next-generation-programming-language>NG: Next generation Programming language</h1><p>This is about the detailed description of ng-lang and for now
+it&rsquo;s still work in progress.</p><h2 id=core-concept>core concept</h2><p>ng is a programming language which may be different from today&rsquo;s
+programming languages, it won&rsquo;t be object-oriented, and it is
+strong and static-typed. It is also not so much like modern
+functional programming language, no such FP things annoying you.
+No vars, no macros, and no MONADs! and every function should
+be explicitly annotated with types.</p><p>And ng inherites <strong>template</strong> from C++/D with much powerful
+enhancement to let you do CTFE (Compile time function execution).</p><h2 id=types>Types</h2><p>Here we have to different kinds of types, everything with out
+the <code>ref</code> modifier is an value type, which is on value semantics.
+and ones with <code>ref</code>, is reference type, and on ref semantics.</p><p>Let me explain you what is this about in following details.</p><p>Simple type:</p><ul><li>Primitives:<ul><li>Num (what? float?? sorry, make it yourself!)</li><li>Bool</li><li>Char</li><li>Unit</li></ul></li><li>Composites:<ul><li>Tuples (a.k.a. Product types)</li><li>Records</li><li>Sum types</li></ul></li></ul><p>Parameterized type:</p><p>Let&rsquo;s say we want build a thing that may useful like an array.
+which can support different type with fixed size. How could
+you represent this? I got <code>Array&lt;Int, 3></code> here.</p><p>The Int and 3 in <code>Array&lt;Int, 3></code> are the parameters of this
+type. And for the prototype of array, should looks like</p><pre><code class=language-ng data-lang=ng>type Array&lt;'t, 'arity: Num&gt; where 'arity &gt;= 0
+</code></pre><p>The where clause is a constraints for &lsquo;arity parameter which
+indicates that field cannot be negative.</p><p>Here is another syntax to do this checking</p><pre><code class=language-ng data-lang=ng>type NonNegative&lt;'num: Num&gt; where 'num &gt;= 0
+
+type Array&lt;'t, 'arity: NonNegative&gt;
+</code></pre><p>NonNegative is like typeclass / type traits / concepts in
+other languages such like Haskell/C++/D.</p><p>Here is another constraint example in ng.</p><pre><code class=language-ng data-lang=ng>type ValueType&lt;'t: * 'a&gt; = 'a
+</code></pre><p>Here we can use ValueType<ref int> to represent Int now.</p></article></main><footer id=footer>Copyright © 2020 KimmyLeo</footer></body></html>

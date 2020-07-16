@@ -1,0 +1,184 @@
+<!doctype html><html><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="Kimmy's Wiki"><link rel="shortcut icon" href=http://wiki.kimleo.net/favicon.ico><link rel=stylesheet href=/css/style.min.css><title>论面向组合子程序设计方法 之八 monad</title></head><body><header id=banner><h2><a href=http://wiki.kimleo.net>Kimmy's Wiki</a></h2><nav><ul><li><a href=/ title=posts>posts</a></li><li><a href=/about/ title=about>about</a></li></ul></nav></header><main id=content><article><header id=post-header><h1>论面向组合子程序设计方法 之八 monad</h1><time>January 13, 2006</time></header><p>仍然是先用oo把轮廓划出来，我们需要建模一个接口来围绕它进行组合。</p><p>因为本文是关于co的论述，那么这个接口怎样分析出来的就暂时忽略掉了：</p><p>java代码:</p><div class=highlight><pre class=chroma><code class=language-java data-lang=java><span class=kd>interface</span> <span class=nc>Dependency</span><span class=o>{</span> 
+  <span class=n>Object</span> <span class=nf>getArgument</span><span class=o>(</span><span class=kt>int</span> <span class=n>i</span><span class=o>,</span> <span class=n>Class</span> <span class=n>type</span><span class=o>);</span> 
+  <span class=n>Class</span> <span class=nf>verifyArgument</span><span class=o>(</span><span class=kt>int</span> <span class=n>i</span><span class=o>,</span> <span class=n>Class</span> <span class=n>type</span><span class=o>);</span> 
+  <span class=n>Object</span> <span class=nf>getProperty</span><span class=o>(</span><span class=n>Object</span> <span class=n>key</span><span class=o>,</span> <span class=n>Class</span> <span class=n>type</span><span class=o>);</span> 
+  <span class=n>Class</span> <span class=nf>verifyProperty</span><span class=o>(</span><span class=n>Object</span> <span class=n>key</span><span class=o>,</span> <span class=n>Class</span> <span class=n>type</span><span class=o>);</span> 
+<span class=o>}</span>
+</code></pre></div><p>这个Dependency接口由每个不同的组件调用，来解决依赖。如果解析失败，则抛出异常。此处，我们暂时忽略异常这个细节。</p><p>getArgument负责解析一个函数参数，组件告诉Dependency对象，我需要给第3个参数，类型为String的解析依赖。于是就调用
+getArgument(2, String.class)。</p><p>getProperty负责解析一个用某个key来标识的属性。比如一个javabean的property。</p><p>那两个verify是只取得解析到的那个符合要求的组件类型，但是并不实际创建对象。</p><p>然后是Component接口。这里，为了名字简短，我们不用ComponentAdapter这么恶长的名字，直接就是Component好了。</p><p>java代码:</p><div class=highlight><pre class=chroma><code class=language-java data-lang=java><span class=kd>interface</span> <span class=nc>Component</span><span class=o>{</span> 
+  <span class=n>Class</span> <span class=nf>getType</span><span class=o>();</span> 
+  <span class=n>Object</span> <span class=nf>create</span><span class=o>(</span><span class=n>Dependency</span> <span class=n>dep</span><span class=o>);</span> 
+  <span class=n>Class</span> <span class=nf>verify</span><span class=o>(</span><span class=n>Dependency</span> <span class=n>dep</span><span class=o>);</span> 
+<span class=o>}</span>
+</code></pre></div><p>getType()用来返回这个Component生成的对象的类型。
+create用来创建这个对象。
+verify用来保证这个对象可以被创建。</p><p>至于容器接口，再简单不过了。我们都知道pico不过是个hash table，yan的容器也差不多，虽然多几个getComponentOfType()的方法，但是大体上就是一个hash table。</p><p>java代码:</p><div class=highlight><pre class=chroma><code class=language-java data-lang=java><span class=kd>interface</span> <span class=nc>Container</span><span class=o>{</span> 
+  <span class=n>Component</span> <span class=nf>getComponent</span><span class=o>(</span><span class=n>Object</span> <span class=n>key</span><span class=o>);</span> 
+  <span class=n>Component</span> <span class=nf>getComponentOfType</span><span class=o>(</span><span class=n>Class</span> <span class=n>type</span><span class=o>);</span> 
+<span class=o>}</span> 
+</code></pre></div><p>好了。oo完毕。下面来co。</p><p>首先，最简单的Component是什么？什么也不干，直接返回一个值。
+java代码:</p><div class=highlight><pre class=chroma><code class=language-java data-lang=java><span class=kd>class</span> <span class=nc>ValueComponent</span> <span class=kd>implements</span> <span class=n>Component</span><span class=o>{</span> 
+  <span class=kd>private</span> <span class=kd>final</span> <span class=n>Object</span> <span class=n>v</span><span class=o>;</span> 
+  <span class=kd>public</span> <span class=n>Class</span> <span class=nf>getType</span><span class=o>(){</span> 
+    <span class=k>return</span> <span class=n>v</span><span class=o>==</span><span class=kc>null</span><span class=o>?</span><span class=kc>null</span><span class=o>:</span><span class=n>v</span><span class=o>.</span><span class=na>getClass</span><span class=o>();</span> 
+  <span class=o>}</span> 
+  <span class=kd>public</span> <span class=n>Object</span> <span class=nf>create</span><span class=o>(</span><span class=n>Dependency</span> <span class=n>dep</span><span class=o>){</span> 
+    <span class=k>return</span> <span class=n>v</span><span class=o>;</span> 
+  <span class=o>}</span> 
+  <span class=kd>public</span> <span class=n>Class</span> <span class=nf>verify</span><span class=o>(</span><span class=n>Dependency</span> <span class=n>dep</span><span class=o>){</span> 
+    <span class=k>return</span> <span class=n>getType</span><span class=o>();</span> 
+  <span class=o>}</span> 
+<span class=o>}</span> 
+</code></pre></div><p>稍微难啃点的，是构造函数和工厂方法。这两个都会调用Dependency的getArgument()来取得自己需要的参数实例。
+实际上，java的reflection api里面的Method和Constructor还是有很多相似点的。
+为了抽取共性，我们定义一个新的接口，叫做Function:</p><p>java代码:</p><div class=highlight><pre class=chroma><code class=language-java data-lang=java><span class=kd>interface</span> <span class=nc>Function</span><span class=o>{</span> 
+  <span class=n>Class</span> <span class=nf>getReturnType</span><span class=o>();</span> 
+  <span class=n>Class</span><span class=o>[]</span> <span class=nf>getParameterTypes</span><span class=o>();</span> 
+  <span class=n>Object</span> <span class=nf>call</span><span class=o>(</span><span class=n>Object</span><span class=o>[]</span> <span class=n>args</span><span class=o>);</span> 
+<span class=o>}</span>
+</code></pre></div><p>这里，我就不展现把Method和Constructor匹配为Function的代码了，因为应该一目了然。
+我们只要知道我们现在可以有三个函数产生Function对象：</p><p>java代码:</p><div class=highlight><pre class=chroma><code class=language-java data-lang=java><span class=kd>class</span> <span class=nc>Functions</span><span class=o>{</span> 
+  <span class=kd>static</span> <span class=n>Function</span> <span class=nf>ctor</span><span class=o>(</span><span class=n>Constructor</span> <span class=n>ctor</span><span class=o>);</span> 
+  <span class=kd>static</span> <span class=n>Function</span> <span class=nf>method</span><span class=o>(</span><span class=n>Object</span> <span class=n>obj</span><span class=o>,</span> <span class=n>Method</span> <span class=n>mtd</span><span class=o>);</span> 
+  <span class=kd>static</span> <span class=n>Function</span> <span class=nf>static_method</span><span class=o>(</span><span class=n>Class</span> <span class=n>type</span><span class=o>,</span> <span class=n>Method</span> <span class=n>mtd</span><span class=o>);</span> 
+<span class=o>}</span>
+</code></pre></div><p>当然，还有一些辅助函数，
+比如：
+java代码:</p><div class=highlight><pre class=chroma><code class=language-java data-lang=java><span class=kd>static</span> <span class=n>Function</span> <span class=nf>ctor</span><span class=o>(</span><span class=n>Class</span> <span class=n>type</span><span class=o>);</span>
+</code></pre></div><p>然后是FunctionComponent。
+java代码:</p><div class=highlight><pre class=chroma><code class=language-java data-lang=java><span class=kd>class</span> <span class=nc>FunctionComponent</span> <span class=kd>implements</span> <span class=n>Component</span><span class=o>{</span> 
+  <span class=kd>private</span> <span class=kd>final</span> <span class=n>Function</span> <span class=n>f</span><span class=o>;</span> 
+  <span class=kd>public</span> <span class=n>Class</span> <span class=nf>getType</span><span class=o>(){</span> 
+    <span class=k>return</span> <span class=n>f</span><span class=o>.</span><span class=na>getReturnType</span><span class=o>();</span> 
+  <span class=o>}</span> 
+  <span class=kd>public</span> <span class=n>Object</span> <span class=nf>create</span><span class=o>(</span><span class=n>Dependency</span> <span class=n>dep</span><span class=o>){</span> 
+    <span class=kd>final</span> <span class=n>Class</span><span class=o>[]</span> <span class=n>types</span> <span class=o>=</span> <span class=n>f</span><span class=o>.</span><span class=na>getParameterTypes</span><span class=o>();</span> 
+    <span class=kd>final</span> <span class=n>Object</span><span class=o>[]</span> <span class=n>args</span> <span class=o>=</span> <span class=k>new</span> <span class=n>Object</span><span class=o>[</span><span class=n>types</span><span class=o>.</span><span class=na>length</span><span class=o>];</span> 
+    <span class=n>foreach</span><span class=o>(</span><span class=n>t</span><span class=o>:</span><span class=n>types</span><span class=o>){</span> 
+      <span class=n>args</span><span class=o>[</span><span class=n>i</span><span class=o>]</span> <span class=o>=</span> <span class=n>dep</span><span class=o>.</span><span class=na>getArgument</span><span class=o>(</span><span class=n>i</span><span class=o>,</span> <span class=n>t</span><span class=o>);</span> 
+    <span class=o>}</span> 
+    <span class=k>return</span> <span class=n>f</span><span class=o>.</span><span class=na>call</span><span class=o>(</span><span class=n>args</span><span class=o>);</span> 
+  <span class=o>}</span> 
+  <span class=kd>public</span> <span class=n>Class</span> <span class=nf>verify</span><span class=o>(</span><span class=n>Dependency</span> <span class=n>dep</span><span class=o>){</span> 
+    <span class=kd>final</span> <span class=n>Class</span><span class=o>[]</span> <span class=n>types</span> <span class=o>=</span> <span class=n>f</span><span class=o>.</span><span class=na>getParameterTypes</span><span class=o>();</span> 
+    <span class=n>foreach</span><span class=o>(</span><span class=n>t</span><span class=o>:</span><span class=n>types</span><span class=o>){</span> 
+      <span class=n>Class</span> <span class=n>arg_type</span> <span class=o>=</span> <span class=n>dep</span><span class=o>.</span><span class=na>verifyArgument</span><span class=o>(</span><span class=n>i</span><span class=o>,</span> <span class=n>t</span><span class=o>);</span> 
+      <span class=n>checkTypeMatch</span><span class=o>(</span><span class=n>types</span><span class=o>[</span><span class=n>i</span><span class=o>],</span> <span class=n>arg_type</span><span class=o>);</span> 
+    <span class=o>}</span> 
+    <span class=k>return</span> <span class=n>f</span><span class=o>.</span><span class=na>getReturnType</span><span class=o>();</span> 
+  <span class=o>}</span> 
+<span class=o>}</span> 
+</code></pre></div><p>然后一个基本的component应该是java bean的setter了，对应pico的SetterInjectionComponentAdapter，也对应spring的bean。
+java代码:</p><div class=highlight><pre class=chroma><code class=language-java data-lang=java><span class=kd>class</span> <span class=nc>BeanComponent</span>  <span class=kd>implements</span> <span class=n>Component</span><span class=o>{</span> 
+  <span class=kd>private</span> <span class=kd>final</span> <span class=n>Class</span> <span class=n>type</span><span class=o>;</span> 
+  <span class=kd>public</span> <span class=n>Class</span> <span class=nf>getType</span><span class=o>(){</span> 
+    <span class=k>return</span> <span class=n>type</span><span class=o>;</span> 
+  <span class=o>}</span> 
+  <span class=kd>public</span> <span class=n>Object</span> <span class=nf>create</span><span class=o>(</span><span class=n>Dependency</span> <span class=n>dep</span><span class=o>){</span> 
+    <span class=n>Object</span> <span class=n>r</span> <span class=o>=</span> <span class=n>createInstance</span><span class=o>();</span> 
+    <span class=n>setJavaBeans</span><span class=o>(</span><span class=n>r</span><span class=o>,</span><span class=n>dep</span><span class=o>);</span> 
+  <span class=o>}</span> 
+  <span class=kd>public</span> <span class=n>Class</span> <span class=nf>verify</span><span class=o>(</span><span class=n>Dependency</span> <span class=n>dep</span><span class=o>){</span> 
+    <span class=o>...</span> 
+  <span class=o>}</span> 
+<span class=o>}</span>
+</code></pre></div><p>具体的实现我省略了很多。因为会调用java.beans的api，并且会有一些caching优化的考虑，但是思路上很清楚，就是对每个property调用getProperty()就是了。</p><p>好，最基本的就这么几个了（其实，bean component并不是最基本的，后面我们会看到）。</p><p>下面看看都有些什么组合规则。</p><p>1。手工指定某个参数。
+java代码:</p><div class=highlight><pre class=chroma><code class=language-java data-lang=java><span class=kd>class</span> <span class=nc>WithArgument</span> <span class=kd>implements</span> <span class=n>Component</span><span class=o>{</span> 
+  <span class=kd>private</span> <span class=kd>final</span> <span class=n>Component</span> <span class=n>parent</span><span class=o>;</span> 
+  <span class=kd>private</span> <span class=kd>final</span> <span class=kt>int</span> <span class=n>pos</span><span class=o>;</span> 
+  <span class=kd>private</span> <span class=kd>final</span> <span class=n>Component</span> <span class=n>arg</span><span class=o>;</span> 
+  <span class=kd>public</span> <span class=n>Class</span> <span class=nf>getType</span><span class=o>(){</span> 
+    <span class=k>return</span> <span class=n>parent</span><span class=o>.</span><span class=na>getType</span><span class=o>();</span> 
+  <span class=o>}</span> 
+  <span class=kd>public</span> <span class=n>Object</span> <span class=nf>create</span><span class=o>(</span><span class=n>Dependency</span> <span class=n>dep</span><span class=o>){</span> 
+    <span class=k>return</span> <span class=n>parent</span><span class=o>.</span><span class=na>create</span><span class=o>(</span><span class=n>withArg</span><span class=o>(</span><span class=n>dep</span><span class=o>));</span> 
+  <span class=o>}</span> 
+  <span class=kd>public</span> <span class=n>Class</span> <span class=nf>verify</span><span class=o>(</span><span class=n>Dependency</span> <span class=n>dep</span><span class=o>){</span> 
+    <span class=k>return</span> <span class=n>parent</span><span class=o>.</span><span class=na>verify</span><span class=o>(</span><span class=n>withArg</span><span class=o>(</span><span class=n>dep</span><span class=o>));</span> 
+  <span class=o>}</span> 
+  <span class=kd>private</span> <span class=n>Dependency</span> <span class=nf>withArg</span><span class=o>(</span><span class=kd>final</span> <span class=n>Dependency</span> <span class=n>dep</span><span class=o>){</span> 
+    <span class=k>return</span> <span class=k>new</span> <span class=n>Dependency</span><span class=o>(){</span> 
+      <span class=kd>public</span> <span class=n>Object</span> <span class=nf>getArgument</span><span class=o>(</span><span class=kt>int</span> <span class=n>i</span><span class=o>,</span> <span class=n>Class</span> <span class=n>type</span><span class=o>){</span> 
+        <span class=k>if</span><span class=o>(</span><span class=n>i</span><span class=o>==</span><span class=n>pos</span><span class=o>){</span> 
+          <span class=n>checkTypeMatch</span><span class=o>(</span><span class=n>type</span><span class=o>,</span> <span class=n>arg</span><span class=o>);</span> 
+          <span class=k>return</span> <span class=n>arg</span><span class=o>.</span><span class=na>create</span><span class=o>(</span><span class=n>dep</span><span class=o>);</span> 
+        <span class=o>}</span> 
+        <span class=k>else</span> <span class=k>return</span> <span class=n>dep</span><span class=o>.</span><span class=na>getArgument</span><span class=o>(</span><span class=n>i</span><span class=o>,</span> <span class=n>type</span><span class=o>);</span> 
+      <span class=o>}</span> 
+    <span class=o>}</span> 
+    <span class=o>...</span> 
+  <span class=o>}</span> 
+<span class=o>}</span> 
+</code></pre></div><p>好，通过decorate这个Dependency对象，我们得到了手工制定某个参数的能力。
+这里，我们对参数仍然用Component，而不是一个简单的Object作为这个参数的值，是因为参数本身也可能需要创建，它的依赖关系也可能需要在Dependency对象中解析。如果参数不需要创建，那么，你尽可以用ValueComponent来包装一下。</p><p>2。手工指定property的值。跟上面的代码非常类似，就是重载了getProperty()和verifyProperty()。
+java代码:</p><div class=highlight><pre class=chroma><code class=language-java data-lang=java><span class=kd>class</span> <span class=nc>WithProperty</span> <span class=kd>implements</span> <span class=n>Component</span><span class=o>{</span> 
+  <span class=kd>private</span> <span class=kd>final</span> <span class=n>Component</span> <span class=n>parent</span><span class=o>;</span> 
+  <span class=kd>private</span> <span class=kd>final</span> <span class=n>Object</span> <span class=n>key</span><span class=o>;</span> 
+  <span class=kd>private</span> <span class=kd>final</span> <span class=n>Component</span> <span class=n>prop</span><span class=o>;</span> 
+  <span class=kd>public</span> <span class=n>Class</span> <span class=nf>getType</span><span class=o>(){</span> 
+    <span class=k>return</span> <span class=n>parent</span><span class=o>.</span><span class=na>getType</span><span class=o>();</span> 
+  <span class=o>}</span> 
+  <span class=kd>public</span> <span class=n>Object</span> <span class=nf>create</span><span class=o>(</span><span class=n>Dependency</span> <span class=n>dep</span><span class=o>){</span> 
+    <span class=k>return</span> <span class=n>parent</span><span class=o>.</span><span class=na>create</span><span class=o>(</span><span class=n>withProp</span><span class=o>(</span><span class=n>dep</span><span class=o>));</span> 
+  <span class=o>}</span> 
+  <span class=kd>public</span> <span class=n>Class</span> <span class=nf>verify</span><span class=o>(</span><span class=n>Dependency</span> <span class=n>dep</span><span class=o>){</span> 
+    <span class=k>return</span> <span class=n>parent</span><span class=o>.</span><span class=na>verify</span><span class=o>(</span><span class=n>withProp</span><span class=o>(</span><span class=n>dep</span><span class=o>));</span> 
+  <span class=o>}</span> 
+  <span class=kd>private</span> <span class=n>Dependency</span> <span class=nf>withProp</span><span class=o>(</span><span class=kd>final</span> <span class=n>Dependency</span> <span class=n>dep</span><span class=o>){</span> 
+    <span class=k>return</span> <span class=k>new</span> <span class=n>Dependency</span><span class=o>(){</span> 
+      <span class=kd>public</span> <span class=n>Object</span> <span class=nf>getProperty</span><span class=o>(</span><span class=n>Object</span> <span class=n>k</span><span class=o>,</span> <span class=n>Class</span> <span class=n>type</span><span class=o>){</span> 
+        <span class=k>if</span><span class=o>(</span><span class=n>k</span><span class=o>.</span><span class=na>equals</span><span class=o>(</span><span class=n>key</span><span class=o>)){</span> 
+          <span class=n>checkTypeMatch</span><span class=o>(</span><span class=n>type</span><span class=o>,</span> <span class=n>prop</span><span class=o>);</span> 
+          <span class=k>return</span> <span class=n>prop</span><span class=o>.</span><span class=na>create</span><span class=o>(</span><span class=n>dep</span><span class=o>);</span> 
+        <span class=o>}</span> 
+        <span class=k>else</span> <span class=k>return</span> <span class=n>dep</span><span class=o>.</span><span class=na>getProperty</span><span class=o>(</span><span class=n>k</span><span class=o>,</span> <span class=n>type</span><span class=o>);</span> 
+      <span class=o>}</span> 
+    <span class=o>}</span> 
+    <span class=o>...</span> 
+  <span class=o>}</span> 
+<span class=o>}</span> 
+</code></pre></div><p>3。和很多组合子一样，map是一个相当有用的组合规则。它负责把一个Component返回的对象作一下额外的处理，transform成另外一个对象。
+java代码:</p><div class=highlight><pre class=chroma><code class=language-java data-lang=java><span class=kd>interface</span> <span class=nc>Map</span><span class=o>{</span> 
+  <span class=n>Object</span> <span class=nf>map</span><span class=o>(</span><span class=n>Object</span> <span class=n>obj</span><span class=o>);</span> 
+<span class=o>}</span>
+</code></pre></div><p>java代码:</p><div class=highlight><pre class=chroma><code class=language-java data-lang=java><span class=kd>class</span> <span class=nc>MapComponent</span> <span class=kd>implements</span> <span class=n>Component</span><span class=o>{</span> 
+  <span class=kd>private</span> <span class=kd>final</span> <span class=n>Component</span> <span class=n>c</span><span class=o>;</span> 
+  <span class=kd>private</span> <span class=kd>final</span> <span class=n>Map</span> <span class=n>map</span><span class=o>;</span> 
+  <span class=kd>public</span> <span class=n>Class</span> <span class=nf>getType</span><span class=o>(){</span> 
+    <span class=k>return</span> <span class=kc>null</span><span class=o>;</span> 
+  <span class=o>}</span> 
+  <span class=kd>public</span> <span class=n>Object</span> <span class=nf>create</span><span class=o>(</span><span class=n>Dependency</span> <span class=n>dep</span><span class=o>){</span> 
+    <span class=k>return</span> <span class=n>map</span><span class=o>.</span><span class=na>map</span><span class=o>(</span><span class=n>c</span><span class=o>.</span><span class=na>create</span><span class=o>(</span><span class=n>dep</span><span class=o>));</span> 
+  <span class=o>}</span> 
+  <span class=kd>public</span> <span class=n>Class</span> <span class=nf>verify</span><span class=o>(</span><span class=n>Dependency</span> <span class=n>dep</span><span class=o>){</span> 
+    <span class=n>c</span><span class=o>.</span><span class=na>verify</span><span class=o>(</span><span class=n>dep</span><span class=o>);</span> 
+    <span class=k>return</span> <span class=n>Object</span><span class=o>.</span><span class=na>class</span><span class=o>;</span> 
+  <span class=o>}</span> 
+    <span class=o>...</span> 
+<span class=o>}</span> 
+</code></pre></div><p>注意，这里，因为我们无法预先知道Map这个接口返回的对象会是什么类型，所以，我们让getType()返回null来标示这是一个动态决定的组件类型。</p><p>4。比map更一般化一点的，是bind动作。所谓bind，也是根据一个Component创建的对象来决定接下来返回什么动作。不同的是，它用这个对象来产生另外一个Component，让这个Component来生成一个新对象。多说无益，让我们看代码：
+java代码:</p><div class=highlight><pre class=chroma><code class=language-java data-lang=java><span class=kd>interface</span> <span class=nc>Binder</span><span class=o>{</span> 
+  <span class=n>Component</span> <span class=nf>bind</span><span class=o>(</span><span class=n>Object</span> <span class=n>obj</span><span class=o>);</span> 
+<span class=o>}</span>
+</code></pre></div><p>java代码:</p><div class=highlight><pre class=chroma><code class=language-java data-lang=java><span class=kd>class</span> <span class=nc>BoundComponent</span> <span class=kd>implements</span> <span class=n>Component</span><span class=o>{</span> 
+  <span class=kd>private</span> <span class=kd>final</span> <span class=n>Component</span> <span class=n>c</span><span class=o>;</span> 
+  <span class=kd>private</span> <span class=kd>final</span> <span class=n>Binder</span> <span class=n>binder</span><span class=o>;</span> 
+  <span class=kd>public</span> <span class=n>Class</span> <span class=nf>getType</span><span class=o>(){</span> 
+    <span class=k>return</span> <span class=kc>null</span><span class=o>;</span> 
+  <span class=o>}</span> 
+  <span class=kd>public</span> <span class=n>Object</span> <span class=nf>create</span><span class=o>(</span><span class=n>Dependency</span> <span class=n>dep</span><span class=o>){</span> 
+    <span class=k>return</span> <span class=n>binder</span><span class=o>.</span><span class=na>bind</span><span class=o>(</span><span class=n>c</span><span class=o>.</span><span class=na>create</span><span class=o>(</span><span class=n>dep</span><span class=o>)).</span><span class=na>create</span><span class=o>(</span><span class=n>dep</span><span class=o>);</span> 
+  <span class=o>}</span> 
+  <span class=kd>public</span> <span class=n>Class</span> <span class=nf>verify</span><span class=o>(</span><span class=n>Dependency</span> <span class=n>dep</span><span class=o>){</span> 
+    <span class=n>c</span><span class=o>.</span><span class=na>verify</span><span class=o>(</span><span class=n>dep</span><span class=o>);</span> 
+    <span class=k>return</span> <span class=n>Object</span><span class=o>.</span><span class=na>class</span><span class=o>;</span> 
+  <span class=o>}</span> 
+    <span class=o>...</span> 
+<span class=o>}</span>
+</code></pre></div><p>这个Binder接口看似简单，但是它的存在对整个co都是生死攸关的大事。可以说，如果没有这个Binder, co就基本可以不存在了。
+为什么这么说呢？因为这个binder再加上前面的那个ValueComponent代表了一种非常一般性的计算模型：monad。有一个专门的数学分支：组论，就是研究monad的。
+它虽然不是放之四海皆准的计算模型，比如，有比它更为一般性的Arrow模型。但是，用它几乎可以描述我们一般所遇到的大量问题。</p><p>除了前面的几个基本组合子之外，几乎所有的组合子，如果我们愿意，都可以从这个bind推衍出来。比如上面的map，如果用简洁点的函数式语法来表述的话（原谅我还是忍不住用函数式，java的语法就象一砣一砣屎一样压得我喘不过气来）
+java代码:</p><div class=highlight><pre class=chroma><code class=language-haskell data-lang=haskell><span class=nf>map</span><span class=p>(</span><span class=n>a</span><span class=p>,</span> <span class=n>f</span><span class=p>)</span> <span class=ow>=</span> <span class=n>bind</span> <span class=p>(</span><span class=n>a</span><span class=p>,</span> <span class=nf>\</span><span class=n>x</span><span class=ow>-&gt;</span><span class=n>value</span><span class=p>(</span><span class=n>f</span><span class=p>(</span><span class=n>x</span><span class=p>)));</span>
+</code></pre></div><p>这个代码的意思是说，你可以很轻易地把一个Map对象adapt到Binder对象，只要在bind函数里面调用：
+java代码:</p><div class=highlight><pre class=chroma><code class=language-java data-lang=java><span class=k>return</span> <span class=k>new</span> <span class=n>ValueComponent</span><span class=o>(</span><span class=n>map</span><span class=o>.</span><span class=na>map</span><span class=o>(</span><span class=n>v</span><span class=o>));</span>
+</code></pre></div><p>就行了。</p><p>后面的很多组合子，比如对一个组件生成的对象调用某个方法，设置一些java bean setter，都是从这个bind组合子衍生出来的。</p><p>好了，今天时间紧迫，到此告一段落吧。</p></article></main><footer id=footer>Copyright © 2020 KimmyLeo</footer></body></html>
