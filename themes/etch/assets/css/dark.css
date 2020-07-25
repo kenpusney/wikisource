@@ -42,6 +42,12 @@ main#content ul#posts li a:hover {
 main#content header#post-header time {
     color: #a7a7a7;
 }
+
+main#content blockquote {
+    background-color: darkolivegreen;
+    padding: 0.2em 1em;
+    border-left: medium solid darkseagreen;
+}
 {{- if not (eq .Site.Params.dark "on") -}}
 }
 {{- end -}}
