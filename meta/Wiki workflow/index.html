@@ -32,12 +32,20 @@
             color: darkgray;
         }
 
+        nav, nav ul {
+            display: inline;
+        }
         .tags ul,
         footer ul {
             padding: 0;
             display: inline;
         }
 
+        header h1 {
+            display: inline;
+        }
+        
+        nav li,
         .tags li,
         footer li {
             display: inline;
@@ -45,6 +53,7 @@
             padding: 0 1em;
         }
 
+        nav li:last-child,
         .tags li:last-child,
         footer li:last-child {
             border: none;
@@ -62,13 +71,21 @@
         
             <h1>Wiki</h1>
         
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/articles">Articles</a></li>
+                <li><a href="/about">About</a></li>
+            </ul>
+        </nav>
+        <hr>
         <span>Author: <a href="/about">KimmyLeo</a></span>
-        <span>2011-11-11</span>
+        <span></span>
         
     </header>
     <article>
         <h1 id="workflow-of-this-wiki">Workflow of this wiki</h1>
-<p>The normal way of create a new wiki item is just add a new <a href="/#/wiki/CNMD" title="CNMD">CNMD</a> page, and then publish,
+<p>The normal way of create a new wiki item is just add a new <a href="/CNMD" title="CNMD">CNMD</a> page, and then publish,
 it will be accessible from anywhere of this wiki using the cross-notation reference.</p>
 <p>But for more complicated items, it may belongs to some specific category, like, an article, or
 a source code snippet. I use folders as categories, and then can using folder name as the namespace

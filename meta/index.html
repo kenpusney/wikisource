@@ -32,12 +32,20 @@
             color: darkgray;
         }
 
+        nav, nav ul {
+            display: inline;
+        }
         .tags ul,
         footer ul {
             padding: 0;
             display: inline;
         }
 
+        header h1 {
+            display: inline;
+        }
+        
+        nav li,
         .tags li,
         footer li {
             display: inline;
@@ -45,6 +53,7 @@
             padding: 0 1em;
         }
 
+        nav li:last-child,
         .tags li:last-child,
         footer li:last-child {
             border: none;
@@ -62,8 +71,16 @@
         
             <h1>Wiki</h1>
         
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/articles">Articles</a></li>
+                <li><a href="/about">About</a></li>
+            </ul>
+        </nav>
+        <hr>
         <span>Author: <a href="/about">KimmyLeo</a></span>
-        <span>2011-11-11</span>
+        <span></span>
         
     </header>
     <article>
@@ -72,9 +89,9 @@
 <p>Basically is about how it works and how you can contribute &amp; reuse the code.</p>
 <h2 id="index">Index</h2>
 <ul>
-<li>Workflow: <a href="/#/wiki/meta/Wiki%20workflow" title="meta/Wiki workflow">meta/Wiki workflow</a></li>
-<li>CNMD Notations: <a href="/#/wiki/meta/CNMD" title="meta/CNMD">meta/CNMD</a></li>
-<li>How to generate a new site like this <a href="/#/wiki/meta/Fork%20Me" title="meta/Fork Me">meta/Fork Me</a></li>
+<li>Workflow: <a href="/meta/Wiki%20workflow" title="meta/Wiki workflow">meta/Wiki workflow</a></li>
+<li>CNMD Notations: <a href="/meta/CNMD" title="meta/CNMD">meta/CNMD</a></li>
+<li>How to generate a new site like this <a href="/meta/Fork%20Me" title="meta/Fork Me">meta/Fork Me</a></li>
 </ul>
 
         

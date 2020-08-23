@@ -32,12 +32,20 @@
             color: darkgray;
         }
 
+        nav, nav ul {
+            display: inline;
+        }
         .tags ul,
         footer ul {
             padding: 0;
             display: inline;
         }
 
+        header h1 {
+            display: inline;
+        }
+        
+        nav li,
         .tags li,
         footer li {
             display: inline;
@@ -45,6 +53,7 @@
             padding: 0 1em;
         }
 
+        nav li:last-child,
         .tags li:last-child,
         footer li:last-child {
             border: none;
@@ -62,8 +71,16 @@
         
             <h1>Wiki</h1>
         
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/articles">Articles</a></li>
+                <li><a href="/about">About</a></li>
+            </ul>
+        </nav>
+        <hr>
         <span>Author: <a href="/about">KimmyLeo</a></span>
-        <span>2011-11-11</span>
+        <span></span>
         
     </header>
     <article>
@@ -72,8 +89,8 @@
 <p>This is the guide for you to build another site like this.</p>
 <h3 id="get-the-code">Get the code</h3>
 <p>The code of this site is contains in it self, you can just fork <a href="https://github.com/kenpusney/wiki" title="kenpusney/wiki">kenpusney/wiki</a>, and run <code>./wiki init</code> to start your own one.</p>
-<p>If you want to know the notations of CNMD, see <a href="/#/wiki/meta/CNMD" title="meta/CNMD">meta/CNMD</a>.</p>
-<p>If you want to know the usage of workflow script, see <a href="/#/wiki/meta/Wiki%20workflow" title="meta/Wiki workflow">meta/Wiki workflow</a>.</p>
+<p>If you want to know the notations of CNMD, see <a href="/meta/CNMD" title="meta/CNMD">meta/CNMD</a>.</p>
+<p>If you want to know the usage of workflow script, see <a href="/meta/Wiki%20workflow" title="meta/Wiki workflow">meta/Wiki workflow</a>.</p>
 <h3 id="if-you-need-help">If you need help</h3>
 <p>Please go to the repo <a href="https://github.com/kenpusney/wiki" title="kenpusney/wiki">kenpusney/wiki</a> and raise issue if you need help.</p>
 

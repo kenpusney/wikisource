@@ -32,12 +32,20 @@
             color: darkgray;
         }
 
+        nav, nav ul {
+            display: inline;
+        }
         .tags ul,
         footer ul {
             padding: 0;
             display: inline;
         }
 
+        header h1 {
+            display: inline;
+        }
+        
+        nav li,
         .tags li,
         footer li {
             display: inline;
@@ -45,6 +53,7 @@
             padding: 0 1em;
         }
 
+        nav li:last-child,
         .tags li:last-child,
         footer li:last-child {
             border: none;
@@ -62,13 +71,21 @@
         
             <h1>Import Model</h1>
         
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/articles">Articles</a></li>
+                <li><a href="/about">About</a></li>
+            </ul>
+        </nav>
+        <hr>
         <span>Author: <a href="/about">KimmyLeo</a></span>
-        <span>2011-11-11</span>
+        <span></span>
         
     </header>
     <article>
         <p>Import model is about how a component collaborate with another depending on 
-it. On example is in a specific <a href="/#/wiki/tech/Programming%20Language" title="tech/Programming Language">tech/Programming Language</a> how it import third
+it. On example is in a specific <a href="/tech/Programming%20Language" title="tech/Programming Language">tech/Programming Language</a> how it import third
 party module to the main program.</p>
 <h2 id="import-levels">Import levels</h2>
 <h3 id="build-level">Build level</h3>

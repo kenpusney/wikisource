@@ -32,12 +32,20 @@
             color: darkgray;
         }
 
+        nav, nav ul {
+            display: inline;
+        }
         .tags ul,
         footer ul {
             padding: 0;
             display: inline;
         }
 
+        header h1 {
+            display: inline;
+        }
+        
+        nav li,
         .tags li,
         footer li {
             display: inline;
@@ -45,6 +53,7 @@
             padding: 0 1em;
         }
 
+        nav li:last-child,
         .tags li:last-child,
         footer li:last-child {
             border: none;
@@ -62,8 +71,16 @@
         
             <h1>Wiki</h1>
         
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/articles">Articles</a></li>
+                <li><a href="/about">About</a></li>
+            </ul>
+        </nav>
+        <hr>
         <span>Author: <a href="/about">KimmyLeo</a></span>
-        <span>2011-11-11</span>
+        <span></span>
         
         <div class="tags"><span>标签：</span>
             <ul>
@@ -95,7 +112,7 @@ this style.</p>
 a normal link, but with a <code>wiki:</code> prefix like <code>[wiki:Markdown]()</code>, it
 means that you want link this page to <code>https://en.wikipedia.org/wiki/Markdown</code>.</p>
 <p>For internal items(like in wikipedia, it&#39;s single page for one item),
-just put an <code>:</code> as a prefix, e.g. <code>[:about me]()</code> (<a href="/#/wiki/about%20me" title="about me">about me</a>).</p>
+just put an <code>:</code> as a prefix, e.g. <code>[:about me]()</code> (<a href="/about%20me" title="about me">about me</a>).</p>
 <h3 id="other-dsls-for-complex-relationships-">Other DSLs for complex relationships.</h3>
 <p>Surely I&#39;ll invent lots of stuff with this format to represent my idea,
 like if I want try build an graph, will try graphviz/dot(although there

@@ -32,12 +32,20 @@
             color: darkgray;
         }
 
+        nav, nav ul {
+            display: inline;
+        }
         .tags ul,
         footer ul {
             padding: 0;
             display: inline;
         }
 
+        header h1 {
+            display: inline;
+        }
+        
+        nav li,
         .tags li,
         footer li {
             display: inline;
@@ -45,6 +53,7 @@
             padding: 0 1em;
         }
 
+        nav li:last-child,
         .tags li:last-child,
         footer li:last-child {
             border: none;
@@ -62,21 +71,29 @@
         
             <h1>Wiki</h1>
         
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/articles">Articles</a></li>
+                <li><a href="/about">About</a></li>
+            </ul>
+        </nav>
+        <hr>
         <span>Author: <a href="/about">KimmyLeo</a></span>
-        <span>2011-11-11</span>
+        <span></span>
         
     </header>
     <article>
         <h1 id="tech-stuffs">Tech Stuffs</h1>
 <p>This is a glossry of technical stuff on this wiki.
-Also you can checkout <a href="/#/wiki/tech" title="tech">tech</a> category for more topics.</p>
+Also you can checkout <a href="/tech" title="tech">tech</a> category for more topics.</p>
 <p>I am interested in programming languages and their implementations,
 so here are several interesting topics I&#39;ve followed:</p>
 <ul>
-<li><a href="/#/wiki/articles/Error%20Model" title="articles/Error Model">articles/Error Model</a></li>
-<li><a href="/#/wiki/articles/Import%20Model" title="articles/Import Model">articles/Import Model</a></li>
-<li><a href="/#/wiki/articles/Type%20System" title="articles/Type System">articles/Type System</a></li>
-<li><a href="/#/wiki/tech/Meta-programming" title="tech/Meta-programming">tech/Meta-programming</a></li>
+<li><a href="/articles/Error%20Model" title="articles/Error Model">articles/Error Model</a></li>
+<li><a href="/articles/Import%20Model" title="articles/Import Model">articles/Import Model</a></li>
+<li><a href="/articles/Type%20System" title="articles/Type System">articles/Type System</a></li>
+<li><a href="/tech/Meta-programming" title="tech/Meta-programming">tech/Meta-programming</a></li>
 </ul>
 
         
