@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wiki</title>
+    <style type="text/css">
+        body {
+            width: 60%;
+            margin: 0 auto;
+            padding: 2em;
+            font-family: 'Segoe UI',
+                "Microsoft Yahei Light",
+                "San Francisco",
+                "Ping Fang SC",
+                "Roboto",
+                "Noto Sans CJK",
+                Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        a {
+            text-decoration: none;
+            color: cornflowerblue;
+        }
+
+        a:visited {
+            color: cornflowerblue;
+        }
+
+        a:hover {
+            color: darkgray;
+        }
+
+        .tags ul,
+        footer ul {
+            padding: 0;
+            display: inline;
+        }
+
+        .tags li,
+        footer li {
+            display: inline;
+            border-right: 1px solid black;
+            padding: 0 1em;
+        }
+
+        .tags li:last-child,
+        footer li:last-child {
+            border: none;
+        }
+
+        .post-list h3 {
+            margin: 0.3em 0;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        
+            <h1>被抛弃的REST</h1>
+        
+        <span>Author: <a href="/about">KimmyLeo</a></span>
+        <span>2011-11-11</span>
+        
+    </header>
+    <article>
+        <p>近期看到关于REST的讨论忽然增多，最主要围绕的一个点就是如何说服那些使用HTTP 200状态码统一返回所有业务状态并用Response wrapper封装一切的人使用RESTful API。</p>
+<p>然而就这些人，连自己为什么要用RESTful API都没办法说出个一二来。非常多的人都是看了某些文章（比如搜索非常靠前的阮一峰的《RESTful API 设计指南》）以后了解到了某些点，并且在未经验证这些点是否合理的情况下，就觉得找到屠龙之技了。同样的问题也出现在其他任何被过度宣传了的技术概念上，而REST是表现非常明显的一个。</p>
+<h2 id="-rest">原教旨REST</h2>
+<p>我们先看看REST（REspresentational State Transfer，表现层状态转换）到底是什么。</p>
+<p>Roy Fielding博士2000年论文中最先提出的这个概念，其论文也是与REST相关的文章中被引用最多的。另外，Wikipedia上关于RESTful或者RESTful API的定向也是REST。所以我们的起点选在这里，<a href="https://www.ics.uci.edu/~fielding/pubs/dissertation/fielding_dissertation.pdf"><em>Architectural Styles and the Design of Network-based Software Architectures</em></a>。</p>
+<p>首先，REST是一种架构风格（architectural style），而不是具体的指导标准。什么是架构风格呢，在Fielding的论文中给的定义：</p>
+<blockquote>
+<p>An architectural style is a coordinated set of architectural <strong>constraints</strong> that restricts the <strong>roles/features</strong> of architectural elements and the allowed <strong>relationships</strong> among those elements within any architecture that conforms to that style.</p>
+<p>架构风格是一系列整理过的架构<strong>约束</strong>的集合，这些约束用于限制架构元素的<strong>角色/特性</strong>和满足这种风格的架构中各架构元素之间<strong>关系</strong>。</p>
+</blockquote>
+<p>我们看到这几个突出的关键字：约束、角色、特性、关系。</p>
+<p>类比一下architectural style在建筑领域的例子，REST大概是这种东西：</p>
+<ul>
+<li>巴洛克</li>
+<li>包豪斯</li>
+<li>哥特</li>
+<li>文艺复兴</li>
+<li>中式园林</li>
+</ul>
+<p>看出来问题了吧，REST可不是教给你怎么糊墙，怎么砌砖，怎么搅拌钢筋水泥。而是说，符合这样设计的软件架构应该会存在哪些角色、分别有什么特性、它们之间的关系是什么样的、应该满足哪些约束。人家才没有告诉你增删改查一定对应着POST DELETE PUT GET。</p>
+<p>其次呢，REST主要针对的是网络应用架构，更具体一点的话，针对的是（当时的）现代互联网（Modern Web）。因为整个设计源自于Fielding在设计HTTP1.0协议的时候形成的设计方法。</p>
+<p>但毕竟这个modern也已经是20多年前的事情了，连Fielding博士在2017年<a href="https://static.googleusercontent.com/media/research.google.com/en//pubs/archive/46310.pdf" title="Reflections on the REST Architectural Style and “Principled Design of the Modern Web Architecture”">重新审视REST的时候</a>，也提到说，REST已经成了一个用来描述基于HTTP的编程方法或者实现框架的buzzword了。</p>
+<h2 id="rest-">REST 架构约束</h2>
+<p>Fielding博士在论文中给出了他导出REST的6个主要约束：</p>
+<ul>
+<li>客户端-服务器架构 Client-Server</li>
+<li>无状态 Stateless</li>
+<li>可缓存 Cache</li>
+<li>统一接口 Uniform Interface</li>
+<li>分层系统  Layered System</li>
+<li>（可选的）按需执行代码 Code-On-Demand</li>
+</ul>
+<p>其他的几个元素在当前状态下都是比较好理解的，但统一接口这一点上，Fielding做了一些扩展，给了四个接口约束：</p>
+<ul>
+<li>资源识别方式 identification of resources</li>
+<li>通过表现层操纵资源的方式 manipulation of resources through representations</li>
+<li>自描述的消息 self descriptive messages</li>
+<li>超媒体作为应用状态引擎 hypermedia as the engine of application state， HATEOAS</li>
+</ul>
+<p>除了都出现在了Fielding论文中以外，这些文字没有一个跟HTTP和API有任何直接关系。这些约束可能导出出来完全不同的另外一种架构风格，并且应用到任何可以做互联的环境中（比如2003年就有篇<a href="https://www.ics.uci.edu/~rohit/Khare-Thesis-FINAL.pdf" title="Extending the REpresentational State Transfer (REST) Architectural Style for Decentralized Systems">Extending REST</a>提出来应用于去中心化系统中的扩展）。</p>
+<h2 id="rest-">REST 元素</h2>
+<p>REST主要围绕着“资源（Resource）”及其“表现（Representation）”存在。</p>
+<p>每个资源都有着其固定的标识符，同时也有相关的元数据和控制数据。REST中定义了下面几种数据元素：</p>
+<ul>
+<li>资源 resource</li>
+<li>资源标识 resource identifier</li>
+<li>表现 representation</li>
+<li>表现元数据 representation metadata</li>
+<li>资源元数据 resource metadata</li>
+<li>控制数据 control data</li>
+</ul>
+<p>分别类比到Web场景中，可以对应如下：</p>
+<table>
+<thead>
+<tr>
+<th>数据元素</th>
+<th>Web场景中的实例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>resource</td>
+<td>超文本所引用的概念实体</td>
+</tr>
+<tr>
+<td>resource identifier</td>
+<td>URL，URN</td>
+</tr>
+<tr>
+<td>representation</td>
+<td>HTML 文档，JPEG 图片</td>
+</tr>
+<tr>
+<td>representation metadata</td>
+<td>媒体类型，最近修改时间</td>
+</tr>
+<tr>
+<td>resource metadata</td>
+<td>源链接，alternates，vary</td>
+</tr>
+<tr>
+<td>control data</td>
+<td>if-modified-since，cache-control</td>
+</tr>
+</tbody></table>
+<p>所有数据通过不同的连接器（connector）来连通。REST中定义的连接器有：</p>
+<ul>
+<li>客户端 client</li>
+<li>服务端 server</li>
+<li>缓存层 cache</li>
+<li>解析器 resolver</li>
+<li>隧道 tunnel</li>
+</ul>
+<p>这里的连接器只是一个角色层面上的定义，某一个系统组件，可能既是客户端又是服务端，比如一个中间网关。而根据这些类似的角色组合关系，REST中定义了下面几种组件：</p>
+<ul>
+<li>源服务器 origin server</li>
+<li>网关 gateway</li>
+<li>代理 proxy</li>
+<li>用户代理 user agent</li>
+</ul>
+<p>终于似乎看到了一些熟悉的字眼，但是也恰好就在这里Fielding提到了最关键的一点：</p>
+<blockquote>
+<p>REST does not restrict communication to a particular protocol, but it does constrain the interface between components, and hence the scope of interaction and implementation assumptions that might otherwise be made between components.</p>
+<p>REST并不限制具体的通信协议，但它的确约束组件之间的交互接口，也即组件间可能的的交互范围和预设实现。</p>
+</blockquote>
+<p>所以不好意思有让大家失望了，还是跟HTTP没有直接的绑定关系。</p>
+<p>那到底RESTful API这一层的概念是来自于哪里？为什么总是会有人扯URL中不能出现动词、使用HTTP请求方法实现语义和使用HTTP状态码表示业务逻辑这种问题呢？</p>
+<h2 id="rfc7231-http-1-1-semantics-and-content">RFC7231: HTTP/1.1 Semantics and Content</h2>
+<p>还是得感谢Fielding博士，作为对RFC2616（HTTP/1.1）的修正性文档，2014年RFC7231的wording完全朝着REST靠拢。</p>
+<p>你可以对比两份文档中对于HTTP GET方法的描述</p>
+<blockquote>
+<p>RFC2616: The GET method means retrieve whatever information (in the form of an entity) is identified by the Request-URI.</p>
+<p>RFC7231: The GET method requests transfer of a current selected representation for the target resource. </p>
+</blockquote>
+<p>你看这个操作是反过来的，并不是HTTP就是REST，而是在REST概念有了以后，才逐渐转换到“符合”（conform）REST的。</p>
+<p>RFC732x系列文档的wording更新以后，一定程度上算是Fielding上承认了HTTP作为REST的de facto实例，但在这个基本的文档之上，还是没有足够的信息去支撑人去实现一个RESTful的API。原因很简单，首先只是在说如何处理资源和表示，而对于些许细节，以及作为HTTP API该有的表现，都没有规定；其次，这是HTTP协议的规范，而HTTP协议本身作为承载Web的基础，可不是只承载API的。</p>
+<p>RESTful API的大部分理论基础都来自于这篇文档。以至于脱离了这篇文档而存在的内容就变成了myth。一个典型的例子就是，URI中不能出现动词；另外比如，API治理中的版本控制。这些东西在这个文档中并没有给出结果，于是就成了一个谁都能来说一嘴的地方。</p>
+<p>所以回过头去看阮老师那篇文章，就到处都是槽点了。</p>
+<h2 id="myth">MYTH</h2>
+<p>REST成为一个buzzword以后，一系列的myth就开始了。</p>
+<ul>
+<li><strong>REST总是使用HTTP协议</strong></li>
+<li><strong>REST中对应的是CRUD操作</strong> 那么其他的业务逻辑怎么办呢？</li>
+<li>甚至是更进一步的道德绑架：<strong>REST API认证应该使用OAUTH</strong></li>
+<li><strong>REST就是最优的设计</strong></li>
+<li><strong>用上HTTP就是RESTful API了</strong></li>
+</ul>
+<blockquote>
+<p>Some architectural styles are often portrayed as “silver bullet” solutions for all forms of software. However, a good designer should select a style that matches the needs of the particular problem being solved.</p>
+<p>———— Roy Fielding</p>
+</blockquote>
+<p>以上大部分观点就是我拒绝使用REST风格API架构的原因。很多时候大部分人在没有完整了解概念以及没有过相应经验的情况下，单靠吹就想做到RESTful。一定就要满足HTTP Semantics，一定就得用resource来表示一切，一定就得使用某种特定技术来表示自己做的是对的。绝大多数时候是本末倒置后产生的行为，并且在遇到一个实际的挖坑问题的时候，自己就陷进去没有结论了。</p>
+<p>这种没能力的REST有个屁用。</p>
+<h2 id="restful-done-right">RESTful done right</h2>
+<p>其实我也没有非常done right的经验，但根据做不到的经验反推还是能有些建议的。</p>
+<p>首先要确定团队有没有能力使用REST风格的API架构，因为基于资源和表现的抽象导致整个的设计思路会远不同于基于流程或者数据的接口设计。超出这个范围只想上RESTful，一定是脑子瓦特了。在团队推行REST之前，也一定有足够的理解和实践，不然真的遇到坑，结果会得到一个四不像。</p>
+<p>其次是一定要有一套详细的规范，这个规范是团队所共识的。现有的实践是非常值得参考的，特别是当有心人整理出来一份详尽的文档而不是在闲扯一些脱离REST本意的解释的时候，可以参考一下。比如微软的<a href="https://github.com/microsoft/api-guidelines/blob/vNext/Guidelines.md">REST API Guidelines</a>，就细致地讨论了很多现实问题，虽然没有具体的框架支持，但在其设计思路之上很容易在任何已有框架上面改造出来对应的解决方案。</p>
+<p>最后，千万别再被buzzword和一些不负责任的文章给误导了。就算不做追根溯源，也没那么简单。</p>
+<hr>
+<p>送上一个几年前编的段子：</p>
+<blockquote>
+<ul>
+<li>成都是个很安逸滴城市，安逸用英语咋个说？</li>
+<li>RESTful</li>
+</ul>
+</blockquote>
+
+        
+
+    </article>
+    <div>
+        <h5>See Also</h5>
+        <ul>
+            <li><a href="/about">About Me</a></li>
+        </ul>
+    </div>
+    <hr>
+    <footer>
+        <ul>
+            <li><a href="/about">关于我</a></li>
+            <li><a href="/site.xml">站点地图</a></li>
+            <li><a href="/rss.xml">RSS</a></li>
+            <li>Copyright &copy; KimmyLeo</li>
+        </ul>
+    </footer>
+</body>
+
+</html>

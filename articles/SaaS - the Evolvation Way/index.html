@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wiki</title>
+    <style type="text/css">
+        body {
+            width: 60%;
+            margin: 0 auto;
+            padding: 2em;
+            font-family: 'Segoe UI',
+                "Microsoft Yahei Light",
+                "San Francisco",
+                "Ping Fang SC",
+                "Roboto",
+                "Noto Sans CJK",
+                Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        a {
+            text-decoration: none;
+            color: cornflowerblue;
+        }
+
+        a:visited {
+            color: cornflowerblue;
+        }
+
+        a:hover {
+            color: darkgray;
+        }
+
+        .tags ul,
+        footer ul {
+            padding: 0;
+            display: inline;
+        }
+
+        .tags li,
+        footer li {
+            display: inline;
+            border-right: 1px solid black;
+            padding: 0 1em;
+        }
+
+        .tags li:last-child,
+        footer li:last-child {
+            border: none;
+        }
+
+        .post-list h3 {
+            margin: 0.3em 0;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        
+            <h1>演进式 SaaS 系统</h1>
+        
+        <span>Author: <a href="/about">KimmyLeo</a></span>
+        <span>2011-11-11</span>
+        
+    </header>
+    <article>
+        <p>继续前面提到的<strong>隔离</strong>的话题。</p>
+<p>按照<a href="https://mp.weixin.qq.com/s/N2TGTxE1Qegqik_a85q4cg">前一篇文章</a>中顺序可以看到 SaaS 之间的隔离程度是越来越低的，同时也是越来越<strong>节省资源</strong>的。于是有人可能会想呢，我一步迈进到最后一个目标可不可以呢？当然没问题，但这其实刚好就是一个时间和空间权衡的结果：所谓的时间，就是指研发的时间成本，所谓的空间，就是整个系统运行和运营所占用的资源。</p>
+<p>这样可以看到，如果你的系统想<strong>尽早上线</strong>，那采用隔离级别最高的方式肯定是更快一些，因为只需要做到一些支撑系统，就能完成整个 SaaS 平台，与此同时带来的问题就是<strong>资源占用过多</strong>。而如果你想更快更好的节省资源，提供更完善的功能，那最好还是用隔离程度比较低的模式，但这样的结果是<strong>研发成本投入过高</strong>，研发时间过长，导致错失市场机会。</p>
+<p>有没有什么更好的方式来平衡呢？这也就是我安排上一篇文章的这种顺序的原因。这恰好是一个演进式的过程：</p>
+<ul>
+<li>最早我们可能提供的是一个非常简单的进行资源管理的 SaaS 平台；</li>
+<li>然后对其中内部的服务改造逐步把公共部分往后端移动；</li>
+<li>在做到比较完全租户化服务以后，对数据模型进行租户化把数据资源统一起来。</li>
+</ul>
+<p>这个过程实际上在每一步都会得到一个可用的结果，并且产出和业务量是有对应关系的。即便在早期，所使用的是高资源的高隔离度的结构，因为客户数量的原因其实能够带来的资源占用量导致的成本不会过高。这同时也给后续的<strong>租户化改造</strong>所带来的成本提供了一定的<strong>缓冲</strong>。</p>
+<p>这跟算法设计中<strong>以空间换时间</strong>的思路是一致的，我们牺牲部分资源来取得时间上的优势，而这种优势正是我们在业务竞争中非常重要的一个点。</p>
+<p><strong>置换</strong>是计算机科学中非常重要的一个思想，不只是在算法设计或者是在工程实践方面会有类似的应用，在任何我们比较看重某一个衡量指标的时候，都可以利用其他资源交换回来。而其中<strong>成本</strong>和<strong>收益</strong>的对比，就是我们要着重考量的内容。</p>
+<p>通常来说，<strong>时间减少</strong>的带来的长期收益基本会大于其他资源的投入；人力也一样。所以我们经常会看到<strong>自动化</strong>以后对一个团队带来的整体效率的提升：不仅仅是在他们工作的成果方面，他们投入的成本也更少了。</p>
+<p>而如果你仔细考虑这一点的话，SaaS 平台更多的就是把原本日常业务中过度依赖人工的流程给<strong>自动化</strong>起来。这其实正是各种 SaaS 应用在整个工作流程中起到的一个重要作用。而这些应用如何较好的<strong>集成</strong>和<strong>协作</strong>，也正是能够促进这种自动化进一步提升工作效率的一个关键点。</p>
+<p>接下来我们会更多关注这方面的内容。</p>
+
+        
+
+    </article>
+    <div>
+        <h5>See Also</h5>
+        <ul>
+            <li><a href="/about">About Me</a></li>
+        </ul>
+    </div>
+    <hr>
+    <footer>
+        <ul>
+            <li><a href="/about">关于我</a></li>
+            <li><a href="/site.xml">站点地图</a></li>
+            <li><a href="/rss.xml">RSS</a></li>
+            <li>Copyright &copy; KimmyLeo</li>
+        </ul>
+    </footer>
+</body>
+
+</html>

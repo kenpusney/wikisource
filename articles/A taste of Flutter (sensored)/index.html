@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wiki</title>
+    <style type="text/css">
+        body {
+            width: 60%;
+            margin: 0 auto;
+            padding: 2em;
+            font-family: 'Segoe UI',
+                "Microsoft Yahei Light",
+                "San Francisco",
+                "Ping Fang SC",
+                "Roboto",
+                "Noto Sans CJK",
+                Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        a {
+            text-decoration: none;
+            color: cornflowerblue;
+        }
+
+        a:visited {
+            color: cornflowerblue;
+        }
+
+        a:hover {
+            color: darkgray;
+        }
+
+        .tags ul,
+        footer ul {
+            padding: 0;
+            display: inline;
+        }
+
+        .tags li,
+        footer li {
+            display: inline;
+            border-right: 1px solid black;
+            padding: 0 1em;
+        }
+
+        .tags li:last-child,
+        footer li:last-child {
+            border: none;
+        }
+
+        .post-list h3 {
+            margin: 0.3em 0;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        
+            <h1>说说 Flutter：Skia、Dart 及其历史（预览版）</h1>
+        
+        <span>Author: <a href="/about">KimmyLeo</a></span>
+        <span>2011-11-11</span>
+        
+    </header>
+    <article>
+        <blockquote>
+<p>本文是预览版，内容有所删减，除部分话题直接隐藏掉意外，不影响正常阅读。后续会发布正式版文章。</p>
+<p>本文共 1301 字，预计阅读用时 5 ～ 8 分钟。</p>
+</blockquote>
+<p>最近因为工作需要，上手了用了用 Flutter。恰好加上前段时间空的时候糊了一些 C++ 的 2D 图形处理和渲染的代码，感触挺深。这里就简单聊一下，关于 Flutter、Dart 及其渲染引擎 Skia 相关的事情。</p>
+<h2 id="-ui-">跨平台 UI 框架</h2>
+<p>Flutter 是一个跨平台 UI 框架。与之前基于 WebView/Native 的框架不同，Flutter 的 UI 呈现与平台完全无关，所有的图形渲染工作都是通过 Skia 这个引擎来实现。</p>
+<p>这样做的一个非常重要的优点就是一致性的 UI 体验。传统的基于 WebView 和 Native 方法的跨平台框架，都必须强行忍受不同平台控件的兼容性，或者通过额外的样式代码来调整不同平台间的样式，使其保持一致。Flutter 则直接把这些问题全部通过 Skia 这一步操作给去掉了。所有 Flutter 的控件，跟平台完全无关，最终呈现出来的结果只是在 Skia 引擎上展现的 2D 图形，再由 Skia 渲染到对应的图像处理后端（比如 OpenGL）。</p>
+<p>举一个容易理解的例子，常规的 WebView/Native 开发，像是我们在浏览器里用各种 HTML 控件和 CSS 来控制样式，而使用了 Flutter 之后，就变成了在一个<code>&lt;canvas /&gt;</code>元素上直接画出来我们想要的效果就好了。平台可能对不同的 HTML 控件显示不一致，但是所有实现了 Canvas 的平台都能正常渲染 2D 图形。这时候把渲染就变成了平台无关的。</p>
+<h2 id="-">跨平台的运行时</h2>
+<p>助力 Flutter 跨平台的另外一个组件就是 Dart VM，跨平台的运行时。</p>
+<p><strong>（省略 322 个字符）</strong></p>
+<p>一个比较有意思的点是，无论早期的 Dart 还是 Dart 2，设计上都是受 Java 的影响比较大。其原因跟我们接下来要说的历史渊源有着很重要关系。</p>
+<h2 id="google-web-toolkit">Google Web Toolkit</h2>
+<p>估计已经有很多人没听过 RIA (Rich Internet Application)这个术语了，早在 2006 年，YUI 带起来的一波开源框架逐渐成为互联网应用开发的主流，这其中包括现在还没死透的 dojo、ExtJS 等。这些框架在充分利用了 JavaScript 对象系统的情况下实现了丰富的控件、布局和交互系统，让 JavaScript 有了开发复杂业务应用的能力。来自谷歌的 Google Web Toolkit (GWT) 也是其中一员。</p>
+<p><strong>（省略 280 个字符）</strong></p>
+<p>经由 GWT 开发的 Web 应用有一个显著的特点，就是在前端几乎不可逆，因为大量渲染和优化之后的结果都是自动生成的，跟背后的 Java 逻辑直接关联性已经不明显了。</p>
+<p>按照 Google 员工 David Chandler 的说法，Google 在 2011 年的时候已经有数百个项目使用 GWT 重写过了，其中还包含一些重量级项目比如 Blogger、Map、AdWords 和 Inbox 等。</p>
+<h2 id="flutter">Flutter</h2>
+<p>然而也就是在 2011 年，Google 公布了 Dart，这其中就有一部分人，从 GWT 项目转到了 Dart 上去。两年后 GWT 从 Google 的项目转成了一个完全开源的项目。</p>
+<p>而去了 Dart 的人，也就是把 Java-to-JavaScript 改成 Dart-to-JavaScript。这就不难理解 Dart 跟 Java 如此相似的原因了。<strong>（省略 103 个字符）</strong> 这样其实也就能理解为什么当年的 Dart 能编译到 JavaScript，并且带着一个庞大的运行时了。</p>
+<p>至于 Flutter 呢，整个的 UI 框架逻辑其实跟 Android 相去甚远，整个继承树反倒是跟 GWT 的一致性非常高。<strong>（省略 129 个字符）</strong></p>
+<p>并且，本身 Dart 生态不够丰富的情况下，直接做一个 source to source 的替换和翻译，就能先把 GWT 的代码一次性拿到手用着。这样 Flutter 快速成型，那再谈改进的事儿就简单多了。</p>
+<h2 id="adopting-flutter-">Adopting Flutter: 怎么引入？</h2>
+<p><strong>（省略 646 个字符）</strong></p>
+<h2 id="-">题外话</h2>
+<p>关于 Flutter 的主要话题大概就到这儿了。这里扯几点题外话。</p>
+<h3 id="-">理性技术狂热</h3>
+<p><strong>（省略 564 个字符）</strong></p>
+<h3 id="google-">Google 的轮子</h3>
+<p>如果你了解 golang 的话，再对比下如今的 Dart/Flutter，就会发现，Google 造的轮子，最重要的仍然是自身的需求。像 golang/Dart 这些被反复吐槽和诟病、有一些明显设计缺陷的编程语言，Google 也会毫不顾忌地拿出来。这种时候如果你的场景类似并且这个轮子刚搞够用，那自然还好。否则可能会痛苦的多。</p>
+<p>当然也不是说轮子非得开放到不停改进和演化，每年重学一遍编程语言的结果也挺累的。</p>
+<p>以上。</p>
+
+        
+
+    </article>
+    <div>
+        <h5>See Also</h5>
+        <ul>
+            <li><a href="/about">About Me</a></li>
+        </ul>
+    </div>
+    <hr>
+    <footer>
+        <ul>
+            <li><a href="/about">关于我</a></li>
+            <li><a href="/site.xml">站点地图</a></li>
+            <li><a href="/rss.xml">RSS</a></li>
+            <li>Copyright &copy; KimmyLeo</li>
+        </ul>
+    </footer>
+</body>
+
+</html>

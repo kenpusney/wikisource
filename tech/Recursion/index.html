@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wiki</title>
+    <style type="text/css">
+        body {
+            width: 60%;
+            margin: 0 auto;
+            padding: 2em;
+            font-family: 'Segoe UI',
+                "Microsoft Yahei Light",
+                "San Francisco",
+                "Ping Fang SC",
+                "Roboto",
+                "Noto Sans CJK",
+                Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        a {
+            text-decoration: none;
+            color: cornflowerblue;
+        }
+
+        a:visited {
+            color: cornflowerblue;
+        }
+
+        a:hover {
+            color: darkgray;
+        }
+
+        .tags ul,
+        footer ul {
+            padding: 0;
+            display: inline;
+        }
+
+        .tags li,
+        footer li {
+            display: inline;
+            border-right: 1px solid black;
+            padding: 0 1em;
+        }
+
+        .tags li:last-child,
+        footer li:last-child {
+            border: none;
+        }
+
+        .post-list h3 {
+            margin: 0.3em 0;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        
+            <h1>Wiki</h1>
+        
+        <span>Author: <a href="/about">KimmyLeo</a></span>
+        <span>2011-11-11</span>
+        
+        <div class="tags"><span>标签：</span>
+            <ul>
+                
+                <li>recursion</li>
+                
+                <li>technique</li>
+                
+            </ul>
+        </div>
+        
+    </header>
+    <article>
+        <h1 id="recursion-">Recursion 递归</h1>
+<p>递归，是指函数调用自身。</p>
+<p>一些典型的例子，比如斐波那契数列、阶乘函数等：</p>
+<pre><code class="language-js">function fib(n) {
+    if (n == 0 || n == 1) return 1;
+    return fib(n - 1) + fib(n-2);
+}
+
+function fact(n) {
+    if (n == 0) return 1;
+    return n * fact(n - 1);
+};</code></pre>
+<h2 id="-">尾递归</h2>
+<p>尾递归指的是函数以尾调用的形式递归调用自己。</p>
+<p>同样以阶乘函数 fact 为例，实现如下：</p>
+<pre><code class="language-js">function fact_impl(n, acc) {
+    if (n == 0) return acc;
+    return fact_impl(n-1, acc * n);
+}
+
+function fact(n) {
+    return fact(n, 1);
+}</code></pre>
+
+        
+
+    </article>
+    <div>
+        <h5>See Also</h5>
+        <ul>
+            <li><a href="/about">About Me</a></li>
+        </ul>
+    </div>
+    <hr>
+    <footer>
+        <ul>
+            <li><a href="/about">关于我</a></li>
+            <li><a href="/site.xml">站点地图</a></li>
+            <li><a href="/rss.xml">RSS</a></li>
+            <li>Copyright &copy; KimmyLeo</li>
+        </ul>
+    </footer>
+</body>
+
+</html>

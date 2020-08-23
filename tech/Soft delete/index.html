@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wiki</title>
+    <style type="text/css">
+        body {
+            width: 60%;
+            margin: 0 auto;
+            padding: 2em;
+            font-family: 'Segoe UI',
+                "Microsoft Yahei Light",
+                "San Francisco",
+                "Ping Fang SC",
+                "Roboto",
+                "Noto Sans CJK",
+                Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        a {
+            text-decoration: none;
+            color: cornflowerblue;
+        }
+
+        a:visited {
+            color: cornflowerblue;
+        }
+
+        a:hover {
+            color: darkgray;
+        }
+
+        .tags ul,
+        footer ul {
+            padding: 0;
+            display: inline;
+        }
+
+        .tags li,
+        footer li {
+            display: inline;
+            border-right: 1px solid black;
+            padding: 0 1em;
+        }
+
+        .tags li:last-child,
+        footer li:last-child {
+            border: none;
+        }
+
+        .post-list h3 {
+            margin: 0.3em 0;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        
+            <h1>Wiki</h1>
+        
+        <span>Author: <a href="/about">KimmyLeo</a></span>
+        <span>2011-11-11</span>
+        
+    </header>
+    <article>
+        <h1 id="soft-delete">Soft delete</h1>
+<p><a href="https://stackoverflow.com/questions/2549839/are-soft-deletes-a-good-idea">https://stackoverflow.com/questions/2549839/are-soft-deletes-a-good-idea</a>
+<a href="https://stackoverflow.com/questions/378331/physical-vs-logical-soft-delete-of-database-record">https://stackoverflow.com/questions/378331/physical-vs-logical-soft-delete-of-database-record</a></p>
+<p>Soft delete vs Hard delete
+<a href="http://abstraction.blog/2015/06/28/soft-vs-hard-delete">http://abstraction.blog/2015/06/28/soft-vs-hard-delete</a></p>
+<p>Arguments:</p>
+<p><a href="https://blog.entelect.co.za/view/9991/arguments-between-soft-and-hard-delete">https://blog.entelect.co.za/view/9991/arguments-between-soft-and-hard-delete</a></p>
+<p>Support:</p>
+<ul>
+<li><a href="http://udidahan.com/2009/09/01/dont-delete-just-dont/">http://udidahan.com/2009/09/01/dont-delete-just-dont/</a></li>
+<li><a href="https://www.infoq.com/news/2009/09/Do-Not-Delete-Data">https://www.infoq.com/news/2009/09/Do-Not-Delete-Data</a></li>
+</ul>
+<p>Against:</p>
+<ul>
+<li><a href="https://ayende.com/blog/4157/avoid-soft-deletes">https://ayende.com/blog/4157/avoid-soft-deletes</a></li>
+<li><a href="http://jameshalsall.co.uk/posts/why-soft-deletes-are-evil-and-what-to-do-instead">http://jameshalsall.co.uk/posts/why-soft-deletes-are-evil-and-what-to-do-instead</a></li>
+<li><a href="https://www.dbrnd.com/2015/10/database-design-the-truth-about-archive-table-and-soft-delete-of-historical-data/">https://www.dbrnd.com/2015/10/database-design-the-truth-about-archive-table-and-soft-delete-of-historical-data/</a></li>
+<li><a href="https://weblogs.asp.net/fbouma/soft-deletes-are-bad-m-kay">https://weblogs.asp.net/fbouma/soft-deletes-are-bad-m-kay</a></li>
+</ul>
+<h3 id="issues">Issues</h3>
+<ul>
+<li>出现逻辑复杂的SQL查询</li>
+<li>导致运行时数据冗余</li>
+</ul>
+
+        
+
+    </article>
+    <div>
+        <h5>See Also</h5>
+        <ul>
+            <li><a href="/about">About Me</a></li>
+        </ul>
+    </div>
+    <hr>
+    <footer>
+        <ul>
+            <li><a href="/about">关于我</a></li>
+            <li><a href="/site.xml">站点地图</a></li>
+            <li><a href="/rss.xml">RSS</a></li>
+            <li>Copyright &copy; KimmyLeo</li>
+        </ul>
+    </footer>
+</body>
+
+</html>

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wiki</title>
+    <style type="text/css">
+        body {
+            width: 60%;
+            margin: 0 auto;
+            padding: 2em;
+            font-family: 'Segoe UI',
+                "Microsoft Yahei Light",
+                "San Francisco",
+                "Ping Fang SC",
+                "Roboto",
+                "Noto Sans CJK",
+                Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        a {
+            text-decoration: none;
+            color: cornflowerblue;
+        }
+
+        a:visited {
+            color: cornflowerblue;
+        }
+
+        a:hover {
+            color: darkgray;
+        }
+
+        .tags ul,
+        footer ul {
+            padding: 0;
+            display: inline;
+        }
+
+        .tags li,
+        footer li {
+            display: inline;
+            border-right: 1px solid black;
+            padding: 0 1em;
+        }
+
+        .tags li:last-child,
+        footer li:last-child {
+            border: none;
+        }
+
+        .post-list h3 {
+            margin: 0.3em 0;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        
+            <h1>Wiki</h1>
+        
+        <span>Author: <a href="/about">KimmyLeo</a></span>
+        <span>2011-11-11</span>
+        
+    </header>
+    <article>
+        <h1 id="workflow-of-this-wiki">Workflow of this wiki</h1>
+<p>The normal way of create a new wiki item is just add a new <a href="/#/wiki/CNMD" title="CNMD">CNMD</a> page, and then publish,
+it will be accessible from anywhere of this wiki using the cross-notation reference.</p>
+<p>But for more complicated items, it may belongs to some specific category, like, an article, or
+a source code snippet. I use folders as categories, and then can using folder name as the namespace
+for all items in that category, and README.cn.md document under that folder will be the index of
+the category.</p>
+<p>Also I&#39;ve created a utility script to complete the workflow.</p>
+<p>e.g. if you want to create a new category:</p>
+<pre><code>./wiki new category entity</code></pre><p>then you trying to add item into that category:</p>
+<pre><code>./wiki new entity &quot;Wiki Item&quot;</code></pre><p>then go to <code>./cnmd/entity/Wiki Item.cn.md</code> edit the content.</p>
+<p>All detailed code is in <code>wiki</code> script of <a href="https://github.com/kenpusney/wiki" title="kenpusney/wiki">kenpusney/wiki</a> repository.</p>
+<h2 id="-wiki-program-reference"><code>./wiki</code> program reference</h2>
+<ul>
+<li><code>./wiki new &lt;item&gt;</code>, create a new toplevel wiki item</li>
+<li><code>./wiki new category &lt;cat&gt;</code> create a new wiki category</li>
+<li><code>./wiki new &lt;cat&gt; &lt;item&gt;</code> create a new item under category</li>
+<li><code>./wiki index</code>, create search-engine index data, and write to <code>indexing.json</code></li>
+<li><code>./wiki hash</code>, create short url link for all wiki entries and add to <code>hashing.json</code></li>
+<li><code>./wiki serve</code>, start local http server for this wiki</li>
+</ul>
+<p>You can put following code into <code>.git/hooks/pre-commit</code> to automatially hasing and indexing:</p>
+<pre><code class="language-bash">#!/usr/bin/env bash
+
+./wiki index
+./wiki hash
+
+git add *.json</code></pre>
+
+        
+
+    </article>
+    <div>
+        <h5>See Also</h5>
+        <ul>
+            <li><a href="/about">About Me</a></li>
+        </ul>
+    </div>
+    <hr>
+    <footer>
+        <ul>
+            <li><a href="/about">关于我</a></li>
+            <li><a href="/site.xml">站点地图</a></li>
+            <li><a href="/rss.xml">RSS</a></li>
+            <li>Copyright &copy; KimmyLeo</li>
+        </ul>
+    </footer>
+</body>
+
+</html>

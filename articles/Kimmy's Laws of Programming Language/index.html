@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wiki</title>
+    <style type="text/css">
+        body {
+            width: 60%;
+            margin: 0 auto;
+            padding: 2em;
+            font-family: 'Segoe UI',
+                "Microsoft Yahei Light",
+                "San Francisco",
+                "Ping Fang SC",
+                "Roboto",
+                "Noto Sans CJK",
+                Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        a {
+            text-decoration: none;
+            color: cornflowerblue;
+        }
+
+        a:visited {
+            color: cornflowerblue;
+        }
+
+        a:hover {
+            color: darkgray;
+        }
+
+        .tags ul,
+        footer ul {
+            padding: 0;
+            display: inline;
+        }
+
+        .tags li,
+        footer li {
+            display: inline;
+            border-right: 1px solid black;
+            padding: 0 1em;
+        }
+
+        .tags li:last-child,
+        footer li:last-child {
+            border: none;
+        }
+
+        .post-list h3 {
+            margin: 0.3em 0;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        
+            <h1>Kimmy 编程语言定律</h1>
+        
+        <span>Author: <a href="/about">KimmyLeo</a></span>
+        <span>2011-11-11</span>
+        
+    </header>
+    <article>
+        <h2 id="-">第一定律（领域特定原则）</h2>
+<p>初始版本：</p>
+<blockquote>
+<p>当且一个拥有静态类型的编程语言实现了内置（built-in）的关联集合（Map）和关联集合字面量（map literal）时，这个语言就无法再用作写操作系统（编译器、数据库系统等等）。</p>
+</blockquote>
+<p>其他表述：</p>
+<blockquote>
+<p>一切编程语言都是面向特定领域（Domain-Specific）的。
+（见[《如何设计编程语言》]({{&lt; relref &quot;/articles/htdpl/01. How To Design Programming Language.md&quot; &gt;}})</p>
+</blockquote>
+<p>示例：</p>
+<ul>
+<li>Go</li>
+</ul>
+<h2 id="-">第二定律（可用性定律）</h2>
+<p>初始版本：</p>
+<blockquote>
+<p>只有当一个编程语言/平台有了对应的xUnit框架，这个平台才能做到Production Ready。</p>
+</blockquote>
+<p>该定律有一系列的推论，比如：</p>
+<ol>
+<li>编程语言可用性：直到这个编程语言在没有xUnit框架之前，是不足以用于生产系统的。</li>
+<li>xUnit框架必要性：任何一个编程语言要想用于生产系统，就必须设计并提供一套可用的xUnit框架。</li>
+</ol>
+
+        
+
+    </article>
+    <div>
+        <h5>See Also</h5>
+        <ul>
+            <li><a href="/about">About Me</a></li>
+        </ul>
+    </div>
+    <hr>
+    <footer>
+        <ul>
+            <li><a href="/about">关于我</a></li>
+            <li><a href="/site.xml">站点地图</a></li>
+            <li><a href="/rss.xml">RSS</a></li>
+            <li>Copyright &copy; KimmyLeo</li>
+        </ul>
+    </footer>
+</body>
+
+</html>

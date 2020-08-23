@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wiki</title>
+    <style type="text/css">
+        body {
+            width: 60%;
+            margin: 0 auto;
+            padding: 2em;
+            font-family: 'Segoe UI',
+                "Microsoft Yahei Light",
+                "San Francisco",
+                "Ping Fang SC",
+                "Roboto",
+                "Noto Sans CJK",
+                Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        a {
+            text-decoration: none;
+            color: cornflowerblue;
+        }
+
+        a:visited {
+            color: cornflowerblue;
+        }
+
+        a:hover {
+            color: darkgray;
+        }
+
+        .tags ul,
+        footer ul {
+            padding: 0;
+            display: inline;
+        }
+
+        .tags li,
+        footer li {
+            display: inline;
+            border-right: 1px solid black;
+            padding: 0 1em;
+        }
+
+        .tags li:last-child,
+        footer li:last-child {
+            border: none;
+        }
+
+        .post-list h3 {
+            margin: 0.3em 0;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        
+            <h1>BS C++ 论文笔记</h1>
+        
+        <span>Author: <a href="/about">KimmyLeo</a></span>
+        <span>2011-11-11</span>
+        
+    </header>
+    <article>
+        <h2 id="hopl-4">HOPL 4</h2>
+<h3 id="-c-with-classes">背景：C with Classes</h3>
+<p>选择C语言，因为足够好并且有良好的支持：因为DMR和Brain Kernighan的办公室跟BS在同一走廊。</p>
+<p>C with Classes：最先加入的是构造器(new function)和析构器(delete function)。这也是C++至今都非常重要而且具有特色的一个功能（real heart of C++）。</p>
+<p>C++引导加入了函数参数类型检测，同时被C吸收，成为了“函数原型”。</p>
+<p>K&amp;R为C++贡献了很多，同时BS也觉得自己给C贡献了很多。（函数定义、函数原型、const、单行注释）。</p>
+<p>Object-orieted hype：
+C++从来没有声称过是一门面向对象的语言（但当年的新编程语言都说自己是“纯面向对象”）。</p>
+<p>按照BS所认为的标准表述：“C++是一门偏向系统编程的通用编程语言（general-purpose programming language），它：</p>
+<ul>
+<li>是一个更好的C</li>
+<li>支持数据抽象</li>
+<li>支持面向对象编程</li>
+<li>支持泛型编程”</li>
+</ul>
+<p>这依然是最准确的对C++的描述。当然相对“Everything is an object”来说，没那么吸引人。</p>
+<h3 id="-">第二个十年</h3>
+<p>主要是朝着工程化和标准化挺进：</p>
+<h4 id="-">语言特性</h4>
+<ul>
+<li>模板</li>
+<li>异常</li>
+<li>RTTI：dynamic_cast和typeid</li>
+<li>namespace</li>
+<li>named cast</li>
+<li>bool</li>
+</ul>
+<p>当然最重要的是RAII。</p>
+<h4 id="-">标准库</h4>
+<ul>
+<li>STL</li>
+<li>特性（Traits）</li>
+<li>字符串</li>
+<li>iostream 流</li>
+<li>bitset</li>
+<li>locale 本地化支持</li>
+<li>valarray</li>
+<li>auto_ptr 智能指针</li>
+</ul>
+<p>其中最重要的是基于Alexander Stepanov的标准模板库STL，以至于让C++在很长一段时间里都是泛型编程的标杆。</p>
+<h3 id="2006">2006</h3>
+<p>HOPL 2006的39个proposal（为了接下来的C++0x，后来成为了C++11）：</p>
+<ul>
+<li>前25个，有24个进入了C++11</li>
+<li>26-39没有一个进入了C++17</li>
+<li>第10个proposal &quot;Concept&quot;最后进入了C++20</li>
+</ul>
+<p>HOPL 2006 Proposal 列表：</p>
+<ol>
+<li>decltype &amp; auto type deduction from expressions</li>
+<li>Template alias</li>
+<li>Extern template</li>
+<li>Move semantics</li>
+<li>Static assertion</li>
+<li>long long &amp; other C99 features</li>
+<li><code>&gt;&gt;</code> without space to terminate 2 template specializations</li>
+<li>Unicode data type</li>
+<li>Variadic templates</li>
+<li>Concepts</li>
+<li>Generalized constant expression</li>
+<li>Initializer lists as expressions</li>
+<li>Scoped and strongly typed enumerations</li>
+<li>Control of alignment</li>
+<li>nullptr</li>
+<li>Range based <code>for</code> statement</li>
+<li>Deletating constructors</li>
+<li>Inherited constructors</li>
+<li>Atomic operations</li>
+<li>Thread-local storage</li>
+<li>Defaulting and inhibiting common operations</li>
+<li>Lambda functions</li>
+<li>Programmer-controlled garbage collection</li>
+<li>In-class member intializers</li>
+<li>Allow local classes as template parameters</li>
+<li>Modules</li>
+<li>Dynamic library support</li>
+<li>Integer sub-ranges</li>
+<li>Multi-methods</li>
+<li>Class namespaces</li>
+<li>Continuations</li>
+<li>Contract programming</li>
+<li>User-defined operator dot</li>
+<li>switch on string</li>
+<li>Simple compile-time reflection</li>
+<li>#nomacro</li>
+<li>GUI support (e.g. slot &amp; signals)</li>
+<li>Relfection</li>
+<li>Concurrency primitives in the language (not in a library)</li>
+</ol>
+<h4 id="-c-">已经进入了讨论是否要抛弃C++的阶段</h4>
+<p>原因：现代编程语言都是由一家控制并维护，C++仍处于传统的多个supplier维护，脱离于具体依赖的操作系统。</p>
+<p>例子：</p>
+<ul>
+<li>Apple - Swift</li>
+<li>Facebook - Hack</li>
+<li>Google - Golang</li>
+<li>Microsoft - C#</li>
+<li>Mozilla - Rust</li>
+</ul>
+<p>但C++：标准来自ISO、实现来自某几个vendor、各家有自己的扩展甚至是另外一种方言（C++/CLI、Objective C++）来配合自身的应用开发接口。</p>
+<p>C++开始被其它语言超越：</p>
+<ul>
+<li>应用编程平台逐渐脱离C++接口（Android：Java、Windows：C#）</li>
+<li>ABI不够稳定，导致C++作为公共编程语言不能比较好的提供稳定且灵活的接口，并且跨平台部署困难</li>
+<li>因为其他“易用性更强”的语言（比如Java）针对性的宣传：<ul>
+<li>通常会宣传Java GC对比C++的手动内存管理，却对RAII只字不提</li>
+</ul>
+</li>
+</ul>
+<h4 id="-boost">希望：Boost</h4>
+<p>Boost一定程度上推进了C++的进化，非常像是C++的一个标准试验田。</p>
+<ul>
+<li>regex</li>
+<li>thread</li>
+<li>shared_ptr</li>
+<li>variant</li>
+<li>file system</li>
+</ul>
+<h3 id="-">相互影响</h3>
+<p>借鉴自其他编程语言的概念：</p>
+<ul>
+<li>auto</li>
+<li>tuple</li>
+<li>regex</li>
+<li>Functional Programming</li>
+<li>future / propmise</li>
+<li>Range-for</li>
+<li>variant / any / optional</li>
+<li>final &amp; override</li>
+<li>Three-way comparison</li>
+<li>await</li>
+</ul>
+<p>影响了其他编程语言的概念：</p>
+<ul>
+<li>Generics：C#、Java</li>
+<li>Dispose：C#、Python、Java</li>
+<li>Compile time evaluation：D</li>
+<li>Lifetime based on Ctors &amp; Dtors：Rust（但比较逗的是现在很多人觉得C++借鉴了Rust这个概念）</li>
+<li>对C的反哺</li>
+</ul>
+<h3 id="c-11-">C++11：感觉就是个新语言</h3>
+<p>语言特性：</p>
+<ul>
+<li>内存模型</li>
+<li>auto / decltype</li>
+<li>range-for</li>
+<li>move semantics and rvalue reference</li>
+<li>uniform initialization</li>
+<li>nullptr</li>
+<li>constexpr functions</li>
+<li>user-defined literals</li>
+<li>raw string literals</li>
+<li>attributes</li>
+<li>lambdas</li>
+<li>varidic templates</li>
+<li>template aliases</li>
+<li>noexcept</li>
+<li>override and final</li>
+<li>static_assert</li>
+<li>long long</li>
+<li>default member initializers</li>
+</ul>
+<p>库：</p>
+<ul>
+<li>unique_ptr and shared_ptr</li>
+<li>memory model and atomic variables</li>
+<li>thread, mutex, condition_variables</li>
+<li>future, promise and packaged_task</li>
+<li>tuple</li>
+<li>type traits</li>
+<li>regular expression matching</li>
+<li>random numbers</li>
+<li>time</li>
+<li>unordered_map</li>
+<li>forward_list</li>
+<li>array</li>
+<li>emplace operations</li>
+<li>exception_ptr</li>
+</ul>
+<p>总体成功的点：</p>
+<ul>
+<li>支持并发</li>
+<li>简化使用</li>
+<li>提升对泛型编程的支持</li>
+<li>提升静态类型安全性</li>
+<li>支持更方便地构建库</li>
+<li>提供一些方便的标准库组件</li>
+</ul>
+<h3 id="c-14-c-11">C++14：完善C++11</h3>
+<ul>
+<li>二进制字面量和数值分隔符</li>
+<li>变量模板</li>
+<li>函数返回类型推导</li>
+<li>Generic lambda</li>
+<li>constexpr函数中的局部变量</li>
+<li>lambda中move捕获</li>
+<li>通过类型取tuple的元素</li>
+<li>标准库提供预定义的用户自定义字面量</li>
+</ul>
+<h3 id="concepts">Concepts</h3>
+<h4 id="-">史前时代</h4>
+<p>C++模板设计的时候主要希望实现泛型编程，并且具备以下特性：</p>
+<ul>
+<li>完整的通用性和表达能力</li>
+<li>对比手工编写的代码，要zero overhead</li>
+<li>要有良好的规范接口</li>
+</ul>
+<p>但是在实现过程中，很难同时达到三个点，所以只有：</p>
+<ul>
+<li>图灵完备的模板</li>
+<li>比手写稍微好的性能</li>
+<li>糟糕的接口（编译时鸭子类型），但基本能保证静态类型安全</li>
+</ul>
+<p>前两点确保了C++模板的成功，但因为接口约束的问题，以至于直到C++17，模板的错误信息依然几乎不可读。所以BS在很早就在考虑如何设计模板约束。</p>
+<p>Concepts来自Alex Stepanov在70年代后期的“Algebric structures”（&quot;代数结构&quot;），大概比Haskell的type class还要早了10年。90年代的时候Alex开始使用“concept”这个名字。</p>
+<p>早期的Concepts现在看起来问题挺多，但大致上提供了一些现有Concepts的雏形：</p>
+<ul>
+<li>提出了Concepts的概念</li>
+<li>以用例的方式来提供基础的约束</li>
+<li>提供了多参数concepts</li>
+<li>值和类型都可以作为concepts的参数</li>
+<li>提供了更简短的表述方式（作为模板参数或者函数类型约束）</li>
+<li>使用auto作为最基本的约束类型</li>
+<li>提供了统一函数调用（uniform function call）的支持</li>
+</ul>
+<h4 id="c-0x-concepts">C++0x Concepts</h4>
+<p>C++0x的Concepts来自于不同两拨人达成一致后的设计成果：一波是“印第安纳派”，Andrew Lumsdaine和Dogulas Gregor，其想法是把concept作为建模工具；一波是“德克萨斯派”，Bjarne Stroustrup和Gabriel Dos Reis，想法是把concept作为类型约束。</p>
+<p>这两者思路合并以后也就成了后面的一系列问题。</p>
+<p>C++0x的定义非常像一个类结构。使用起来比较简单，把Concept作为模板的约束（类似C#的where，后改成requires）或者作为模板参数的约束。</p>
+<p>同时C++0x的concept加入了定义检查，如果在被约束的类型中使用了未在concept中声明的操作，将会导致编译错误。而混用未加约束的代码更容易带来这个问题，于是加入了late_check块来避免。</p>
+<p>但是对于concept和类型的关系，需要用concept_map来显式实例化。（这就是“建模”方面的倾向）。经过这样的显式实例化以后，可以非侵入式地给一个自定义类型添加操作。</p>
+<p>但是如果作为约束的话，这样就很麻烦了，每个类型都要进行concept_map一下，而如果这个concept并没有添加新的功能，这样的动作就显得很多余。于是德克萨斯派提供了一套隐式concept_map的做法，即在concept定义的时候添加一个auto关键字，会自动对对应需要约束的类型自动作concept_map。</p>
+<p>于是关于显式或者隐式这个观点，就成了一个争议点，一直都没能达成统一。</p>
+<p>另外除了concept_map外，C++0x的Concepts作为一个大而全的设计，还加入了late_check、axiom等额外的功能。但这样一来，不止整个Concepts变得越来越复杂，相对于未加concept约束的代码，编译时间远超了很多倍。</p>
+<p>加上因为混合concept_map、late_check和约束/非约束代码的混合带来的整体混乱，以及“建模”概念对于大部分程序员“可能”的“不友好”，委员会决定把concept移出C++0x。</p>
+<h4 id="concepts-ts">Concepts TS</h4>
+<p>C++0x Concepts得出的设计结论：</p>
+<ul>
+<li>Concepts必须具备语义</li>
+<li>Concepts的数量相对应该较少</li>
+<li>Concepts应该基础的，而不是极小的</li>
+</ul>
+<p>Alex Stepanov在2011年拉了个会讨论新的Concepts，主要的关注点是，以使用者的角度设计一套STL泛型算法的约束。这个角度比C++0x的方向要直接得多，直接结果就是2016年的Concepts TS和C++20 concepts，并且这套设计从2012年就由Andrew Sutton实现并一直随着GCC 6.0发布验证。</p>
+<p>Concepts TS的主要关注点是：</p>
+<ul>
+<li>Concepts基于编译时断言</li>
+<li>以用例的形式指定基础约束</li>
+<li>concept可以被用在requires中、替换typename或者替换函数的类型名</li>
+<li>隐式匹配被约束的类型（没有concept_map）</li>
+<li>用于重载的concept之间的关系也是隐式的</li>
+<li>没有定义检查（至少目前来说，没有late_check）</li>
+<li>没有axiom，至少在当前不设计</li>
+</ul>
+<h4 id="c-20-concepts">C++20 Concepts</h4>
+<p>C++20的主要变动就是Concepts使用的时候的表示法，以某种形式增强了Concepts TS的语法，来避免可能存在的歧义。</p>
+<h3 id="c-17">C++17</h3>
+<p>语言特性：</p>
+<ul>
+<li>Constructor template argument deduction(CTAD)</li>
+<li>Deduction guide</li>
+<li>Structured biding</li>
+<li>inline variables</li>
+<li>Fold expressions</li>
+<li>Explicit test in conditions</li>
+<li>Guaranteed copy elision</li>
+<li>Stricter expression evaluation order</li>
+<li>auto as a template arugment type</li>
+<li>Standard attributes to catch common mistakes</li>
+<li>Hexadecimal folating-point literals</li>
+<li>Constant expression if</li>
+</ul>
+<p>库：</p>
+<ul>
+<li>optional, variant, any</li>
+<li>shared_mutex, shared_lock</li>
+<li>parallel STL</li>
+<li>file system</li>
+<li>string_view</li>
+<li>Mathematical special functions</li>
+</ul>
+<p>其中有部分非常希望进入C++17但没有的特性：</p>
+<ul>
+<li>Concepts</li>
+<li>Networking library</li>
+<li>Operator dot</li>
+<li>Uniform Function Call</li>
+<li>Default comparison operators</li>
+<li>Coroutines</li>
+</ul>
+
+        
+
+    </article>
+    <div>
+        <h5>See Also</h5>
+        <ul>
+            <li><a href="/about">About Me</a></li>
+        </ul>
+    </div>
+    <hr>
+    <footer>
+        <ul>
+            <li><a href="/about">关于我</a></li>
+            <li><a href="/site.xml">站点地图</a></li>
+            <li><a href="/rss.xml">RSS</a></li>
+            <li>Copyright &copy; KimmyLeo</li>
+        </ul>
+    </footer>
+</body>
+
+</html>
