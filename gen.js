@@ -77,7 +77,10 @@ function render(file, posts) {
         })
     }
 
-    const renderer = new cnmd.CnmdRenderer()
+    const renderer = new cnmd.CnmdRenderer({
+        ...cnmd.CnmdRenderer.default_handlers,
+        "": postfix => postfix.startsWith(".") ? `../${postfix}` : `/${postfix}`
+    })
 
     const content = loadFileContent(file, registry);
 
