@@ -93,8 +93,3 @@ Minecraft 对于沙盒游戏的贡献还不止于此。
 感谢 Chaos 同学提供话题，关于 sandbox/开放世界的选题上次在看他朋友圈的时候就已经在构思了。如果你有什么想要讨论或者了解的话题内容，可以通过留言、公众号消息或者私信告诉我。
 
 ![开放世界和沙盒的概念确实容易混](https://imgkr.cn-bj.ufileos.com/82b785e3-2833-4a54-a450-8749c8db1f07.png)
-
-
-往期游戏相关的话题：
-
-[银河恶魔城 Metroidvania](https://mp.weixin.qq.com/s/45GZ7TdQzi5DReGaPjJX_Q)｜[角色扮演 RPG](https://mp.weixin.qq.com/s/ZCqKRMP72IL6Fc3vVmBJ-Q)｜[Roguelike](https://mp.weixin.qq.com/s/yav4aT1ZO9Sgza9DpCOpGA)｜[天外世界 The Outer World](https://mp.weixin.qq.com/s/gcrXjoUfOv1bfKLcQcbvng)｜[赛博朋克 2077 Cyberpunk](https://mp.weixin.qq.com/s/C6o_LNq-KQB1iTBukMwKPg)｜[兜帽](https://mp.weixin.qq.com/s/A29tvamtE5WCqvrkoTBCzQ)｜[工口 Eroge](https://mp.weixin.qq.com/s/hXq8leIVFiXttmsLyAUglw)｜[学习玩游戏？](https://mp.weixin.qq.com/s/9Nod5WihIO88C-bMM3kayw)｜[锈湖 Rusty Lake](https://mp.weixin.qq.com/s/2k38nfRYQKfTG9zyUV4V3A)｜[奇异人生 Life is Strange](https://mp.weixin.qq.com/s/qqxAQsoX0jO4SY4H4eKZ8Q)｜[Team Alto](https://mp.weixin.qq.com/s/KcoGdIiwKmxj4G7xe6yWAQ)｜[女性主角 Female Protagonist](https://mp.weixin.qq.com/s/KcoGdIiwKmxj4G7xe6yWAQ)｜[游戏推荐](https://mp.weixin.qq.com/s/07O887kJlqWXRDmWDuBvxw)｜[2019 年总结](https://mp.weixin.qq.com/s/gCzpOYved_8ryjWo_vwm-w)
