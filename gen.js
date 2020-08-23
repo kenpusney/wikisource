@@ -19,12 +19,12 @@ glob("content/**/*.md", function (err, data) {
     })
 });
 
-glob("static/**/*.*", function(err, data) {
+glob("static/**/*", function(err, data) {
     data.forEach(file => copyToPublic(file))
 });
 
 function copyToPublic(file) {
-    const subFileName = file.substring("static/");
+    const subFileName = file.substring("static/".length);
 
     const targetFileName = "public/" + subFileName;
 
