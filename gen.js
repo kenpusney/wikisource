@@ -19,6 +19,22 @@ glob("content/**/*.md", function (err, data) {
     })
 });
 
+glob("static/**/*.*", function(err, data) {
+    data.forEach(file => copyToPublic(file))
+});
+
+function copyToPublic(file) {
+    const subFileName = file.substring("static/");
+
+    const targetFileName = "public/" + subFileName;
+
+    const pathName = path.dirname(targetFileName);
+
+    fs.mkdirSync(pathName, { recursive: true });
+
+    fs.copyFileSync(file, targetFileName);
+}
+
 function postsInFolder(readme, allfile) {
     if (new String(readme).endsWith("README.md")) {
         const folder = readme.substring(0, readme.length - "README.md".length);
