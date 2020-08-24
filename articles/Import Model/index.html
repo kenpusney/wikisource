@@ -4,8 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wiki</title>
-    <style type="text/css">
+    
+        <title>Import Model</title>
+    
+        <style type="text/css">
         body {
             width: 60%;
             margin: 0 auto;
@@ -30,6 +32,11 @@
 
         a:hover {
             color: darkgray;
+        }
+
+        a.disabled-link {
+            color: lightcoral;
+            text-decoration: line-through;
         }
 
         nav, nav ul {
@@ -85,14 +92,14 @@
     </header>
     <article>
         <p>Import model is about how a component collaborate with another depending on 
-it. On example is in a specific <a href="/tech/Programming%20Language" title="tech/Programming Language">tech/Programming Language</a> how it import third
+it. On example is in a specific <a href="/tech/Programming Language" title="Programming Language">Programming Language</a> how it import third
 party module to the main program.</p>
 <h2 id="import-levels">Import levels</h2>
 <h3 id="build-level">Build level</h3>
 <h3 id="linking-level">Linking level</h3>
 <h3 id="runtime-level">Runtime level</h3>
 <h3 id="distributed-systems">Distributed systems</h3>
-<h2 id="environment-symbol-management">Environment &amp; Symbol management</h2>
+<h2 id="environment--symbol-management">Environment &amp; Symbol management</h2>
 <h2 id="models">Models</h2>
 <h3 id="direct-include">Direct include</h3>
 <h3 id="static-linking">Static linking</h3>
@@ -117,6 +124,15 @@ party module to the main program.</p>
             <li>Copyright &copy; KimmyLeo</li>
         </ul>
     </footer>
+    <script type="text/javascript">
+        document.querySelectorAll(".disabled-link").forEach(elem => {
+            elem.addEventListener("click", (e) => {
+                alert("链接页面不存在！");
+
+                e.preventDefault();
+            })
+        })
+    </script>
 </body>
 
 </html>

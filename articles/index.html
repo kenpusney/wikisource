@@ -4,8 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wiki</title>
-    <style type="text/css">
+    
+        <title>articles</title>
+    
+        <style type="text/css">
         body {
             width: 60%;
             margin: 0 auto;
@@ -30,6 +32,11 @@
 
         a:hover {
             color: darkgray;
+        }
+
+        a.disabled-link {
+            color: lightcoral;
+            text-decoration: line-through;
         }
 
         nav, nav ul {
@@ -69,7 +76,7 @@
 
     <header>
         
-            <h1>Wiki</h1>
+            <h1>articles</h1>
         
         <nav>
             <ul>
@@ -101,13 +108,15 @@
             
                 <li><h3><a href="/articles/AI Programmer">人工智能取代程序员？</a><small> 2017-10-09 </small></h3></li>
             
+                <li><h3><a href="/articles/Ajoo_combinators">Ajoo: 论面向组合子程序设计方法 系列文章/</a><small> 2006-01-13 </small></h3></li>
+            
                 <li><h3><a href="/articles/architect_tool">软件架构的图形工具</a><small> 2020-07-14 </small></h3></li>
             
                 <li><h3><a href="/articles/Cpp in 21 days">21天精通C++模板语言</a><small> 2014-12-31 </small></h3></li>
             
                 <li><h3><a href="/articles/Electronic Heroin">谁制造了电子海洛因</a><small> 2020-05-18 </small></h3></li>
             
-                <li><h3><a href="/articles/Game Genres">游戏流派</a><small>  </small></h3></li>
+                <li><h3><a href="/articles/Fundamental Arithmetics">算术基础系列/</a><small> 2013-07-08 </small></h3></li>
             
                 <li><h3><a href="/articles/github arctic archive 2020">强力文集：GitHub北极代码归档是对人类发展的不自信</a><small> 2020-07-26 </small></h3></li>
             
@@ -121,9 +130,9 @@
             
                 <li><h3><a href="/articles/htlpl">如何学习编程语言</a><small> 2013-04-02 </small></h3></li>
             
-                <li><h3><a href="/articles/Import Model">Import Model</a><small>  </small></h3></li>
-            
                 <li><h3><a href="/articles/Interviewed-A-Golang-User">面试了一个精通Go语言的人…（上）</a><small> 2018-03-27 </small></h3></li>
+            
+                <li><h3><a href="/articles/JSONSpec">Rethink JSONSpec/</a><small> 2019-04-29 </small></h3></li>
             
                 <li><h3><a href="/articles/Kimmy's Laws of Programming Language">Kimmy 编程语言定律</a><small> 2014-11-22 </small></h3></li>
             
@@ -133,19 +142,13 @@
             
                 <li><h3><a href="/articles/Long Live Unsafe">actix-web 已死，unsafe 永生</a><small> 2020-01-18 </small></h3></li>
             
-                <li><h3><a href="/articles/My View On Lisp">My View On Lisp</a><small>  </small></h3></li>
-            
                 <li><h3><a href="/articles/Now use the light, we want to see">Now Use the Light, We Want to See</a><small> 2020-03-17 </small></h3></li>
-            
-                <li><h3><a href="/articles/On Openworld">说说开放世界 Open World</a><small>  </small></h3></li>
             
                 <li><h3><a href="/articles/On REST">被抛弃的REST</a><small> 2020-08-11 </small></h3></li>
             
                 <li><h3><a href="/articles/On Roguelike">聊聊Roguelike</a><small> 2019-02-11 </small></h3></li>
             
                 <li><h3><a href="/articles/On Sandbox Game">说说沙盒游戏</a><small> 2020-05-02 </small></h3></li>
-            
-                <li><h3><a href="/articles/On Soulslike">说说类魂游戏 Souls-like</a><small>  </small></h3></li>
             
                 <li><h3><a href="/articles/Pac-Man - 40th">40 周年：关于《吃豆人》Pac-Man</a><small> 2020-05-03 </small></h3></li>
             
@@ -158,8 +161,6 @@
                 <li><h3><a href="/articles/Team Alto">《阿尔托的冒险》和《阿尔托的奥德赛》</a><small> 2020-02-24 </small></h3></li>
             
                 <li><h3><a href="/articles/The End of Programming Language">编程语言的终结</a><small> 2013-05-21 </small></h3></li>
-            
-                <li><h3><a href="/articles/The Problem of Immutability in Java">Java 中的不可变性问题</a><small>  </small></h3></li>
             
                 <li><h3><a href="/articles/What is Ajax">什么是 Ajax</a><small> 2013-05-20 </small></h3></li>
             
@@ -192,6 +193,15 @@
             <li>Copyright &copy; KimmyLeo</li>
         </ul>
     </footer>
+    <script type="text/javascript">
+        document.querySelectorAll(".disabled-link").forEach(elem => {
+            elem.addEventListener("click", (e) => {
+                alert("链接页面不存在！");
+
+                e.preventDefault();
+            })
+        })
+    </script>
 </body>
 
 </html>

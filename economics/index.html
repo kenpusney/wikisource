@@ -4,8 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wiki</title>
-    <style type="text/css">
+    
+        <title>economics</title>
+    
+        <style type="text/css">
         body {
             width: 60%;
             margin: 0 auto;
@@ -30,6 +32,11 @@
 
         a:hover {
             color: darkgray;
+        }
+
+        a.disabled-link {
+            color: lightcoral;
+            text-decoration: line-through;
         }
 
         nav, nav ul {
@@ -69,7 +76,7 @@
 
     <header>
         
-            <h1>Wiki</h1>
+            <h1>economics</h1>
         
         <nav>
             <ul>
@@ -111,6 +118,15 @@
             <li>Copyright &copy; KimmyLeo</li>
         </ul>
     </footer>
+    <script type="text/javascript">
+        document.querySelectorAll(".disabled-link").forEach(elem => {
+            elem.addEventListener("click", (e) => {
+                alert("链接页面不存在！");
+
+                e.preventDefault();
+            })
+        })
+    </script>
 </body>
 
 </html>

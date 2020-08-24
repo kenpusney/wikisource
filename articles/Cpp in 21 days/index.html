@@ -4,8 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wiki</title>
-    <style type="text/css">
+    
+        <title>21天精通C++模板语言</title>
+    
+        <style type="text/css">
         body {
             width: 60%;
             margin: 0 auto;
@@ -30,6 +32,11 @@
 
         a:hover {
             color: darkgray;
+        }
+
+        a.disabled-link {
+            color: lightcoral;
+            text-decoration: line-through;
         }
 
         nav, nav ul {
@@ -86,8 +93,8 @@
     <article>
         <p>这篇文章最初发布于我的Lofter博客：</p>
 <ul>
-<li><a href="http://kimleo.lofter.com/post/46977_4f86f38">http://kimleo.lofter.com/post/46977_4f86f38</a></li>
-<li><a href="http://kimleo.lofter.com/post/46977_509271f">http://kimleo.lofter.com/post/46977_509271f</a></li>
+<li><a href="http://kimleo.lofter.com/post/46977_4f86f38" title="undefined">http://kimleo.lofter.com/post/46977_4f86f38</a></li>
+<li><a href="http://kimleo.lofter.com/post/46977_509271f" title="undefined">http://kimleo.lofter.com/post/46977_509271f</a></li>
 </ul>
 <p>这是看憋了很久没有完成的21天学成Erlang之后才萌生的一个想法。所有的代码源自于我的一个项目Canvas/tpl。</p>
 <p>另外：</p>
@@ -479,6 +486,15 @@ struct eval&lt;Env, $exists&lt;Var, Prop&gt;&gt; {
             <li>Copyright &copy; KimmyLeo</li>
         </ul>
     </footer>
+    <script type="text/javascript">
+        document.querySelectorAll(".disabled-link").forEach(elem => {
+            elem.addEventListener("click", (e) => {
+                alert("链接页面不存在！");
+
+                e.preventDefault();
+            })
+        })
+    </script>
 </body>
 
 </html>

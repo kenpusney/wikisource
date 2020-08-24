@@ -4,8 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wiki</title>
-    <style type="text/css">
+    
+        <title>演进式 SaaS 系统</title>
+    
+        <style type="text/css">
         body {
             width: 60%;
             margin: 0 auto;
@@ -30,6 +32,11 @@
 
         a:hover {
             color: darkgray;
+        }
+
+        a.disabled-link {
+            color: lightcoral;
+            text-decoration: line-through;
         }
 
         nav, nav ul {
@@ -85,7 +92,7 @@
     </header>
     <article>
         <p>继续前面提到的<strong>隔离</strong>的话题。</p>
-<p>按照<a href="https://mp.weixin.qq.com/s/N2TGTxE1Qegqik_a85q4cg">前一篇文章</a>中顺序可以看到 SaaS 之间的隔离程度是越来越低的，同时也是越来越<strong>节省资源</strong>的。于是有人可能会想呢，我一步迈进到最后一个目标可不可以呢？当然没问题，但这其实刚好就是一个时间和空间权衡的结果：所谓的时间，就是指研发的时间成本，所谓的空间，就是整个系统运行和运营所占用的资源。</p>
+<p>按照<a href="https://mp.weixin.qq.com/s/N2TGTxE1Qegqik_a85q4cg" title="null">前一篇文章</a>中顺序可以看到 SaaS 之间的隔离程度是越来越低的，同时也是越来越<strong>节省资源</strong>的。于是有人可能会想呢，我一步迈进到最后一个目标可不可以呢？当然没问题，但这其实刚好就是一个时间和空间权衡的结果：所谓的时间，就是指研发的时间成本，所谓的空间，就是整个系统运行和运营所占用的资源。</p>
 <p>这样可以看到，如果你的系统想<strong>尽早上线</strong>，那采用隔离级别最高的方式肯定是更快一些，因为只需要做到一些支撑系统，就能完成整个 SaaS 平台，与此同时带来的问题就是<strong>资源占用过多</strong>。而如果你想更快更好的节省资源，提供更完善的功能，那最好还是用隔离程度比较低的模式，但这样的结果是<strong>研发成本投入过高</strong>，研发时间过长，导致错失市场机会。</p>
 <p>有没有什么更好的方式来平衡呢？这也就是我安排上一篇文章的这种顺序的原因。这恰好是一个演进式的过程：</p>
 <ul>
@@ -118,6 +125,15 @@
             <li>Copyright &copy; KimmyLeo</li>
         </ul>
     </footer>
+    <script type="text/javascript">
+        document.querySelectorAll(".disabled-link").forEach(elem => {
+            elem.addEventListener("click", (e) => {
+                alert("链接页面不存在！");
+
+                e.preventDefault();
+            })
+        })
+    </script>
 </body>
 
 </html>

@@ -4,8 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wiki</title>
-    <style type="text/css">
+    
+        <title>projects</title>
+    
+        <style type="text/css">
         body {
             width: 60%;
             margin: 0 auto;
@@ -30,6 +32,11 @@
 
         a:hover {
             color: darkgray;
+        }
+
+        a.disabled-link {
+            color: lightcoral;
+            text-decoration: line-through;
         }
 
         nav, nav ul {
@@ -69,7 +76,7 @@
 
     <header>
         
-            <h1>Wiki</h1>
+            <h1>projects</h1>
         
         <nav>
             <ul>
@@ -107,7 +114,7 @@
 <li><a href="https://github.com/kenpusney/koala" title="kenpusney/koala">kenpusney/koala</a> parser combinator in Kotlin</li>
 <li><a href="https://github.com/kenpusney/YMind" title="kenpusney/YMind">kenpusney/YMind</a> a syntax based on YAML to do mindmapping</li>
 <li><a href="https://github.com/kenpusney/Canvas" title="kenpusney/Canvas">kenpusney/Canvas</a> a library in C++ to do some practical things</li>
-<li><a href="https://github.com/kenpusney/passive" title="kenpusney/passive">kenpusney/passive</a> a modeling tools inspired by <a href="https://en.wikipedia.org/wiki/Tutorial%20D" title="Tutorial D">Tutorial D</a></li>
+<li><a href="https://github.com/kenpusney/passive" title="kenpusney/passive">kenpusney/passive</a> a modeling tools inspired by <a href="https://en.wikipedia.org/wiki/Tutorial D" title="Tutorial D">Tutorial D</a></li>
 </ul>
 </li>
 </ul>
@@ -140,6 +147,15 @@
             <li>Copyright &copy; KimmyLeo</li>
         </ul>
     </footer>
+    <script type="text/javascript">
+        document.querySelectorAll(".disabled-link").forEach(elem => {
+            elem.addEventListener("click", (e) => {
+                alert("链接页面不存在！");
+
+                e.preventDefault();
+            })
+        })
+    </script>
 </body>
 
 </html>

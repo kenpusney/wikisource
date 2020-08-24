@@ -4,8 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wiki</title>
-    <style type="text/css">
+    
+        <title>C++ 20 解析 —— 总览</title>
+    
+        <style type="text/css">
         body {
             width: 60%;
             margin: 0 auto;
@@ -30,6 +32,11 @@
 
         a:hover {
             color: darkgray;
+        }
+
+        a.disabled-link {
+            color: lightcoral;
+            text-decoration: line-through;
         }
 
         nav, nav ul {
@@ -84,9 +91,9 @@
         
     </header>
     <article>
-        <h2 id="-">总览</h2>
+        <h2 id="总览">总览</h2>
 <p>我们会在这里对C++20的新特性，以及关联的2006年后新加入的特性进行一个简单的概述。对于2006年之前的一些内容和设计，BS有一本知名的书《C++语言设计与演化》，里面有更详细的讲解。</p>
-<h3 id="-">主要新增语言特性</h3>
+<h3 id="主要新增语言特性">主要新增语言特性</h3>
 <p>主要标榜的语言级新特性是概念concept、模块 module 和协程 coroutine这三个。</p>
 <ul>
 <li><p>模版元编程</p>
@@ -100,7 +107,7 @@
 <li><p><code>&lt;future&gt;</code></p>
 </li>
 </ul>
-<h3 id="-">编译时计算</h3>
+<h3 id="编译时计算">编译时计算</h3>
 <ul>
 <li><p>consteval</p>
 </li>
@@ -111,7 +118,7 @@
 <li><p>模版元编程</p>
 </li>
 </ul>
-<h3 id="-">库和组件</h3>
+<h3 id="库和组件">库和组件</h3>
 <ul>
 <li><p>Ranges</p>
 </li>
@@ -126,7 +133,7 @@
 <li><p>string_view</p>
 </li>
 </ul>
-<h3 id="-">其他</h3>
+<h3 id="其他">其他</h3>
 
         
 
@@ -146,6 +153,15 @@
             <li>Copyright &copy; KimmyLeo</li>
         </ul>
     </footer>
+    <script type="text/javascript">
+        document.querySelectorAll(".disabled-link").forEach(elem => {
+            elem.addEventListener("click", (e) => {
+                alert("链接页面不存在！");
+
+                e.preventDefault();
+            })
+        })
+    </script>
 </body>
 
 </html>

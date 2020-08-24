@@ -4,8 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wiki</title>
-    <style type="text/css">
+    
+        <title>论面向组合子程序设计方法 之十一 微步毂纹生</title>
+    
+        <style type="text/css">
         body {
             width: 60%;
             margin: 0 auto;
@@ -30,6 +32,11 @@
 
         a:hover {
             color: darkgray;
+        }
+
+        a.disabled-link {
+            color: lightcoral;
+            text-decoration: line-through;
         }
 
         nav, nav ul {
@@ -85,7 +92,7 @@
     </header>
     <article>
         <p>最近。age0提出了一个OO设计的问题。因为这个例子更加贴近生活，是我们老百姓所喜闻乐见的商场折扣问题，所以我准备改铉更张用这个例子了。具体的例子请看： 
-<a href="http://forum.javaeye.com/viewtopic.php?t=17714&amp;start=0">http://forum.javaeye.com/viewtopic.php?t=17714&amp;start=0</a> </p>
+<a href="http://forum.javaeye.com/viewtopic.php?t=17714&amp;start=0" title="undefined">http://forum.javaeye.com/viewtopic.php?t=17714&amp;start=0</a> </p>
 <p>简要的说，需求是： 
 引用:</p>
 <blockquote>
@@ -483,6 +490,15 @@ end</code></pre>
             <li>Copyright &copy; KimmyLeo</li>
         </ul>
     </footer>
+    <script type="text/javascript">
+        document.querySelectorAll(".disabled-link").forEach(elem => {
+            elem.addEventListener("click", (e) => {
+                alert("链接页面不存在！");
+
+                e.preventDefault();
+            })
+        })
+    </script>
 </body>
 
 </html>

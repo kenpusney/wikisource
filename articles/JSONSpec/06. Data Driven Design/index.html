@@ -4,8 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wiki</title>
-    <style type="text/css">
+    
+        <title>JSONSpec: Data Driven Design</title>
+    
+        <style type="text/css">
         body {
             width: 60%;
             margin: 0 auto;
@@ -30,6 +32,11 @@
 
         a:hover {
             color: darkgray;
+        }
+
+        a.disabled-link {
+            color: lightcoral;
+            text-decoration: line-through;
         }
 
         nav, nav ul {
@@ -85,7 +92,7 @@
     </header>
     <article>
         <blockquote>
-<p>原文发表于 2015-08-06，我的lofter：<a href="http://kimleo.lofter.com/post/46977_7d65f99">http://kimleo.lofter.com/post/46977_7d65f99</a></p>
+<p>原文发表于 2015-08-06，我的lofter：<a href="http://kimleo.lofter.com/post/46977_7d65f99" title="undefined">http://kimleo.lofter.com/post/46977_7d65f99</a></p>
 </blockquote>
 <p>今天听到的同事一个session，关于产品组件化和可定制的。</p>
 <p>于是现状是，当前的某些特定领域的项目，我们能够快速地提供一体化的完善的解决方案，同时还能够针对当前领域的可变需求进行控制。</p>
@@ -121,6 +128,15 @@
             <li>Copyright &copy; KimmyLeo</li>
         </ul>
     </footer>
+    <script type="text/javascript">
+        document.querySelectorAll(".disabled-link").forEach(elem => {
+            elem.addEventListener("click", (e) => {
+                alert("链接页面不存在！");
+
+                e.preventDefault();
+            })
+        })
+    </script>
 </body>
 
 </html>

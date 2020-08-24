@@ -4,8 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wiki</title>
-    <style type="text/css">
+    
+        <title>Recursion</title>
+    
+        <style type="text/css">
         body {
             width: 60%;
             margin: 0 auto;
@@ -30,6 +32,11 @@
 
         a:hover {
             color: darkgray;
+        }
+
+        a.disabled-link {
+            color: lightcoral;
+            text-decoration: line-through;
         }
 
         nav, nav ul {
@@ -69,7 +76,7 @@
 
     <header>
         
-            <h1>Wiki</h1>
+            <h1>Recursion</h1>
         
         <nav>
             <ul>
@@ -94,7 +101,7 @@
         
     </header>
     <article>
-        <h1 id="recursion-">Recursion 递归</h1>
+        <h1 id="recursion-递归">Recursion 递归</h1>
 <p>递归，是指函数调用自身。</p>
 <p>一些典型的例子，比如斐波那契数列、阶乘函数等：</p>
 <pre><code class="language-js">function fib(n) {
@@ -106,7 +113,7 @@ function fact(n) {
     if (n == 0) return 1;
     return n * fact(n - 1);
 };</code></pre>
-<h2 id="-">尾递归</h2>
+<h2 id="尾递归">尾递归</h2>
 <p>尾递归指的是函数以尾调用的形式递归调用自己。</p>
 <p>同样以阶乘函数 fact 为例，实现如下：</p>
 <pre><code class="language-js">function fact_impl(n, acc) {
@@ -136,6 +143,15 @@ function fact(n) {
             <li>Copyright &copy; KimmyLeo</li>
         </ul>
     </footer>
+    <script type="text/javascript">
+        document.querySelectorAll(".disabled-link").forEach(elem => {
+            elem.addEventListener("click", (e) => {
+                alert("链接页面不存在！");
+
+                e.preventDefault();
+            })
+        })
+    </script>
 </body>
 
 </html>

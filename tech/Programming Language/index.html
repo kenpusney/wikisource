@@ -4,8 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wiki</title>
-    <style type="text/css">
+    
+        <title>Programming Language</title>
+    
+        <style type="text/css">
         body {
             width: 60%;
             margin: 0 auto;
@@ -30,6 +32,11 @@
 
         a:hover {
             color: darkgray;
+        }
+
+        a.disabled-link {
+            color: lightcoral;
+            text-decoration: line-through;
         }
 
         nav, nav ul {
@@ -69,7 +76,7 @@
 
     <header>
         
-            <h1>Wiki</h1>
+            <h1>Programming Language</h1>
         
         <nav>
             <ul>
@@ -87,13 +94,13 @@
         <h1 id="programming-language">Programming Language</h1>
 <h3 id="programming-languages-i-created">Programming Languages I created</h3>
 <ul>
-<li><a href="/projects/ng" title="projects/ng">projects/ng</a></li>
-<li><a href="https://www.douban.com/note/322955493/">Passive Record</a> also <a href="https://github.com/kenpusney/passive" title="kenpusney/passive">kenpusney/passive</a></li>
+<li><a href="/projects/ng" title="ng">ng</a></li>
+<li><a href="https://www.douban.com/note/322955493/" title="null">Passive Record</a> also <a href="https://github.com/kenpusney/passive" title="kenpusney/passive">kenpusney/passive</a></li>
 <li>see [:projects] for more stuff I created</li>
 </ul>
 <h3 id="programming-languages-i-am-familiar-with">Programming Languages I am familiar with</h3>
 <ul>
-<li><a href="https://www.douban.com/note/289071944/">Languages I&#39;ve tried</a></li>
+<li><a href="https://www.douban.com/note/289071944/" title="null">Languages I&#39;ve tried</a></li>
 </ul>
 <p>Experienced (in production, ★★★★★):</p>
 <ul>
@@ -138,6 +145,15 @@
             <li>Copyright &copy; KimmyLeo</li>
         </ul>
     </footer>
+    <script type="text/javascript">
+        document.querySelectorAll(".disabled-link").forEach(elem => {
+            elem.addEventListener("click", (e) => {
+                alert("链接页面不存在！");
+
+                e.preventDefault();
+            })
+        })
+    </script>
 </body>
 
 </html>

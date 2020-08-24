@@ -4,8 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wiki</title>
-    <style type="text/css">
+    
+        <title>如何设计编程语言</title>
+    
+        <style type="text/css">
         body {
             width: 60%;
             margin: 0 auto;
@@ -30,6 +32,11 @@
 
         a:hover {
             color: darkgray;
+        }
+
+        a.disabled-link {
+            color: lightcoral;
+            text-decoration: line-through;
         }
 
         nav, nav ul {
@@ -85,7 +92,7 @@
     </header>
     <article>
         <blockquote>
-<p>原文发布于 2014-11-29，我的lofter：<a href="http://kimleo.lofter.com/post/46977_3fadb3a">http://kimleo.lofter.com/post/46977_3fadb3a</a></p>
+<p>原文发布于 2014-11-29，我的lofter：<a href="http://kimleo.lofter.com/post/46977_3fadb3a" title="undefined">http://kimleo.lofter.com/post/46977_3fadb3a</a></p>
 </blockquote>
 <p>受vczh去年的那一系列文章影响，开始慢慢思考这个问题，如今vczh的连载已经完结了一年多了，而自己也在这段时间产生过一些想法。但是，对于这个主题该说的都让vczh给说个差不多了，我也就没必要再多做拙劣的抄袭，只是简单谈谈我的观点吧。</p>
 <p>两周前参加了公司组织的第一次培训，其中一个buddy写了下面一段内容：</p>
@@ -127,6 +134,15 @@
             <li>Copyright &copy; KimmyLeo</li>
         </ul>
     </footer>
+    <script type="text/javascript">
+        document.querySelectorAll(".disabled-link").forEach(elem => {
+            elem.addEventListener("click", (e) => {
+                alert("链接页面不存在！");
+
+                e.preventDefault();
+            })
+        })
+    </script>
 </body>
 
 </html>

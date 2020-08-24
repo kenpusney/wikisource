@@ -4,8 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wiki</title>
-    <style type="text/css">
+    
+        <title>09</title>
+    
+        <style type="text/css">
         body {
             width: 60%;
             margin: 0 auto;
@@ -30,6 +32,11 @@
 
         a:hover {
             color: darkgray;
+        }
+
+        a.disabled-link {
+            color: lightcoral;
+            text-decoration: line-through;
         }
 
         nav, nav ul {
@@ -69,7 +76,7 @@
 
     <header>
         
-            <h1>Wiki</h1>
+            <h1>09</h1>
         
         <nav>
             <ul>
@@ -86,7 +93,7 @@
     <article>
         <h1 id="software-leadership-9-on-the-importance-of-intellectual-honesty">Software Leadership #9: On the Importance of Intellectual Honesty</h1>
 <p>November 2, 2015</p>
-<p>There’s one especially important trait I look for in great team members: intellectual honesty. Many other traits typically follow suit, but lacking this foundation can lead to frequent <a href="https://en.wikipedia.org/wiki/Kobayashi_Maru">Kobayashi Maru</a> situations. At best, those slow down the team without adding value, and at worst, turn an entire team toxic and ruin its core cultural values. And it can happen quickly.</p>
+<p>There’s one especially important trait I look for in great team members: intellectual honesty. Many other traits typically follow suit, but lacking this foundation can lead to frequent <a href="https://en.wikipedia.org/wiki/Kobayashi_Maru" title="null">Kobayashi Maru</a> situations. At best, those slow down the team without adding value, and at worst, turn an entire team toxic and ruin its core cultural values. And it can happen quickly.</p>
 <p>The best engineers and leaders I’ve worked with have an insatiable curiosity for how things work, a desire to discover how to do things better, and fundamentally understand that careers are about a lifetime of learning. If you don’t know something, it’s an opportunity to learn, not cover up the fact you don’t know. Everybody has missing information. It’s impossible to hold the world of knowledge in a single person’s head (at least with today’s technologies). The best leaders know this, and ask endless streams of insightful questions.</p>
 <p>The worst engineers and leaders, on the other hand, fake it, or worse, actively avoid the truth. They feel insecure and enter into a campaign of systemic intellectual dishonesty. I’m sure you’ve worked with at least one person like this over the course of your career. I’ve never been sure if people like this do it consciously. Probably it’s some inherent instict that kicks in. But whatever it is, you’ve got to train yourself – and your team – to never go down this path, and to catch and squash this bad behavior ruthlessly.</p>
 <p>Maybe this sounds abstract. Let’s imagine a hypothetical situation. In a design review, someone asks an uncomfortable question. It’s uncomfortable because it reveals a flaw in the design. How does the team react? How do leaders react, and how do team members react? Hopefully they react by asking more questions and exploring the intricacies of the flaw.</p>
@@ -113,6 +120,15 @@
             <li>Copyright &copy; KimmyLeo</li>
         </ul>
     </footer>
+    <script type="text/javascript">
+        document.querySelectorAll(".disabled-link").forEach(elem => {
+            elem.addEventListener("click", (e) => {
+                alert("链接页面不存在！");
+
+                e.preventDefault();
+            })
+        })
+    </script>
 </body>
 
 </html>

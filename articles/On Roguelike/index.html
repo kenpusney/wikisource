@@ -4,8 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wiki</title>
-    <style type="text/css">
+    
+        <title>聊聊Roguelike</title>
+    
+        <style type="text/css">
         body {
             width: 60%;
             margin: 0 auto;
@@ -30,6 +32,11 @@
 
         a:hover {
             color: darkgray;
+        }
+
+        a.disabled-link {
+            color: lightcoral;
+            text-decoration: line-through;
         }
 
         nav, nav ul {
@@ -86,7 +93,7 @@
     <article>
         <p>如果你在玩这样一款游戏：每一次进入游戏都是新的地图，面向的都是新的挑战和探索空间，每一步都是未知：新的资源、装备、新的怪物挑战，以及（可能的）新的冒险故事。</p>
 <p>拥有了这样一款游戏是不是就等于拥有了无数款游戏？这就是Roguelike能够带给你的。</p>
-<h2 id="roguelike-">Roguelike是什么</h2>
+<h2 id="roguelike是什么">Roguelike是什么</h2>
 <p>Roguelike是一种游戏类型，跟其他的分类如 Metroidvania（类银河战士/恶魔城）、Souls-like（类魂）和 GTA-clone（类GTA）等一样，是把具有共同特点的一些游戏把其标杆作品拿出来加到了名字上产生的一种游戏类型。显然，Roguelike指的就是<strong>跟Rogue类似的游戏</strong>。</p>
 <p>那么Rogue又是什么呢。</p>
 <p>实际这个词根本没有靠谱的中文翻译。按照某些权威词典的解释，是 a dishonest or unprincipled man（不诚实或者没有原则的人）。</p>
@@ -103,13 +110,13 @@
 </ul>
 <p>当然这并不是全部，不过看到这些特点大家是不是眼前已经浮现出原来一些游戏了。比如还是爸爸的时候的暴雪做的暗黑破坏神，就有典型的Roguelike元素在。</p>
 <p>为什么这里特别强调的是Roguelike元素，而非 真·Roguelike 呢，因为真Roguelike是迎合到很难让普通人适应的，比如Turn-based和Grid-based，比如还要求用字符界面显示等等。比如下面是一款真·Roguelike的游戏截图，体验一下：</p>
-<h2 id="rogue-">Rogue的魅力</h2>
+<h2 id="rogue的魅力">Rogue的魅力</h2>
 <p>作为最早融入这套元素的游戏，Rogue其实是一个典型的角色扮演游戏（Role-Playing Game）。有角色的创建和成长、有种族和职业、有属性装备和不同的角色技能。而这一点则是传承自欧美70年代热火朝天的桌上角色扮演（TRPG）：一个主持人（Game Master）带领多个玩家角色（Player Character）进行一场冒险故事（Adventure）。</p>
 <p>而Rogue的思路则是直接把主持人的工作交给了计算机：冒险故事随着你的每一步行动产生，冒险旅程也是由计算机随机生成。这也就是为什么这种游戏模式一直存在并且至今仍然在影响主流游戏圈的一个点：没人会拒绝精彩的故事，更不用说每次的故事都不一样。</p>
 <blockquote>
 <p>另外来自朋友的一个观点，Rogue这种随机迷宫的游戏，在游戏攻略触手可及且云玩家不断增多的今天，足够大限度地保留了游戏的可玩性：每一次重来都是全新的体验，就不会有剧透、完美攻略或者看完流程/攻略之后的索然无味。</p>
 </blockquote>
-<h2 id="roguelike-">Roguelike游戏</h2>
+<h2 id="roguelike游戏">Roguelike游戏</h2>
 <p>Nethack</p>
 <p>首先说一说就是所谓的真·Roguelike游戏，现代RL5萌们吧。一个比较推荐的游戏就是Nethack。这款游戏出现至今已经有30多年的历史了。作为一个经典的Roguelike游戏，非常值得体验。另外nethack作为一个老派游戏，影响的人还是挺多的。现在下载到的（没错这个游戏免费而且开源，你可以在GitHub上找到源代码）游戏发行版里面包含了一份游戏文档，这个文档的原作者就是Eric S. Raymond。</p>
 <p>没错就是那个写了《大教堂与市集》和《Unix编程艺术》的ESR。</p>
@@ -122,10 +129,10 @@
 同样的基因源自暗黑破坏神的火炬之光系列也算是比较Roguelike的游戏。</p>
 <p>另外需要提一点的，暗黑2的出生点叫做罗格营地（Rogue Encampment），是不是就在致敬Rogue呢？</p>
 <p>Rogue Encampment（罗格营地）</p>
-<h2 id="-roguelike-aka-roguelite-">轻量级Roguelike（aka Roguelite）</h2>
+<h2 id="轻量级roguelike（aka-roguelite）">轻量级Roguelike（aka Roguelite）</h2>
 <p>前面提到了，Roguelike相对来说还是非常硬核的，所以许多游戏选择性地实现了部分特性，也能够让大家玩的很嗨。而多数情况下这些游戏都源自于独立开发团队。这正是因为Roguelike游戏其本身的特点，不需要涉足太多的场景叙事和世界规划，进而给独立开发者/团队以足够的时间来打磨游戏玩法和数值。</p>
 <p>并且，游戏的形式也不再局限于俯视角地城探索类游戏，像Spelunky 洞穴探险和Dead Cells 死亡细胞是平台动作类，Slay the spire杀戮尖塔是卡牌构筑类，Enter the Gungeon 挺进地牢是弹幕射击类。因为其几个典型的特点可以应用到各种游戏流派汇中，于是我们看到充满Roguelike特色的游戏最近几年突然涌现出来。</p>
-<h2 id="-roguelike-">其他的一些Roguelike游戏</h2>
+<h2 id="其他的一些roguelike游戏">其他的一些Roguelike游戏</h2>
 <ul>
 <li>Binding of Issac: Rebirth 以撒的结合：重生</li>
 <li>Hand of Fate 命运之手</li>
@@ -143,7 +150,7 @@
 </ul>
 </li>
 </ul>
-<h2 id="-rogue">其他的Rogue</h2>
+<h2 id="其他的rogue">其他的Rogue</h2>
 <p>来见识一下其他的Rogue，你就知道这个词要翻译起来到底有多纠结了：</p>
 
         
@@ -164,6 +171,15 @@
             <li>Copyright &copy; KimmyLeo</li>
         </ul>
     </footer>
+    <script type="text/javascript">
+        document.querySelectorAll(".disabled-link").forEach(elem => {
+            elem.addEventListener("click", (e) => {
+                alert("链接页面不存在！");
+
+                e.preventDefault();
+            })
+        })
+    </script>
 </body>
 
 </html>

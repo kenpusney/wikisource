@@ -4,8 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wiki</title>
-    <style type="text/css">
+    
+        <title>Soft delete</title>
+    
+        <style type="text/css">
         body {
             width: 60%;
             margin: 0 auto;
@@ -30,6 +32,11 @@
 
         a:hover {
             color: darkgray;
+        }
+
+        a.disabled-link {
+            color: lightcoral;
+            text-decoration: line-through;
         }
 
         nav, nav ul {
@@ -69,7 +76,7 @@
 
     <header>
         
-            <h1>Wiki</h1>
+            <h1>Soft delete</h1>
         
         <nav>
             <ul>
@@ -85,23 +92,23 @@
     </header>
     <article>
         <h1 id="soft-delete">Soft delete</h1>
-<p><a href="https://stackoverflow.com/questions/2549839/are-soft-deletes-a-good-idea">https://stackoverflow.com/questions/2549839/are-soft-deletes-a-good-idea</a>
-<a href="https://stackoverflow.com/questions/378331/physical-vs-logical-soft-delete-of-database-record">https://stackoverflow.com/questions/378331/physical-vs-logical-soft-delete-of-database-record</a></p>
+<p><a href="https://stackoverflow.com/questions/2549839/are-soft-deletes-a-good-idea" title="undefined">https://stackoverflow.com/questions/2549839/are-soft-deletes-a-good-idea</a>
+<a href="https://stackoverflow.com/questions/378331/physical-vs-logical-soft-delete-of-database-record" title="undefined">https://stackoverflow.com/questions/378331/physical-vs-logical-soft-delete-of-database-record</a></p>
 <p>Soft delete vs Hard delete
-<a href="http://abstraction.blog/2015/06/28/soft-vs-hard-delete">http://abstraction.blog/2015/06/28/soft-vs-hard-delete</a></p>
+<a href="http://abstraction.blog/2015/06/28/soft-vs-hard-delete" title="undefined">http://abstraction.blog/2015/06/28/soft-vs-hard-delete</a></p>
 <p>Arguments:</p>
-<p><a href="https://blog.entelect.co.za/view/9991/arguments-between-soft-and-hard-delete">https://blog.entelect.co.za/view/9991/arguments-between-soft-and-hard-delete</a></p>
+<p><a href="https://blog.entelect.co.za/view/9991/arguments-between-soft-and-hard-delete" title="undefined">https://blog.entelect.co.za/view/9991/arguments-between-soft-and-hard-delete</a></p>
 <p>Support:</p>
 <ul>
-<li><a href="http://udidahan.com/2009/09/01/dont-delete-just-dont/">http://udidahan.com/2009/09/01/dont-delete-just-dont/</a></li>
-<li><a href="https://www.infoq.com/news/2009/09/Do-Not-Delete-Data">https://www.infoq.com/news/2009/09/Do-Not-Delete-Data</a></li>
+<li><a href="http://udidahan.com/2009/09/01/dont-delete-just-dont/" title="undefined">http://udidahan.com/2009/09/01/dont-delete-just-dont/</a></li>
+<li><a href="https://www.infoq.com/news/2009/09/Do-Not-Delete-Data" title="undefined">https://www.infoq.com/news/2009/09/Do-Not-Delete-Data</a></li>
 </ul>
 <p>Against:</p>
 <ul>
-<li><a href="https://ayende.com/blog/4157/avoid-soft-deletes">https://ayende.com/blog/4157/avoid-soft-deletes</a></li>
-<li><a href="http://jameshalsall.co.uk/posts/why-soft-deletes-are-evil-and-what-to-do-instead">http://jameshalsall.co.uk/posts/why-soft-deletes-are-evil-and-what-to-do-instead</a></li>
-<li><a href="https://www.dbrnd.com/2015/10/database-design-the-truth-about-archive-table-and-soft-delete-of-historical-data/">https://www.dbrnd.com/2015/10/database-design-the-truth-about-archive-table-and-soft-delete-of-historical-data/</a></li>
-<li><a href="https://weblogs.asp.net/fbouma/soft-deletes-are-bad-m-kay">https://weblogs.asp.net/fbouma/soft-deletes-are-bad-m-kay</a></li>
+<li><a href="https://ayende.com/blog/4157/avoid-soft-deletes" title="undefined">https://ayende.com/blog/4157/avoid-soft-deletes</a></li>
+<li><a href="http://jameshalsall.co.uk/posts/why-soft-deletes-are-evil-and-what-to-do-instead" title="undefined">http://jameshalsall.co.uk/posts/why-soft-deletes-are-evil-and-what-to-do-instead</a></li>
+<li><a href="https://www.dbrnd.com/2015/10/database-design-the-truth-about-archive-table-and-soft-delete-of-historical-data/" title="undefined">https://www.dbrnd.com/2015/10/database-design-the-truth-about-archive-table-and-soft-delete-of-historical-data/</a></li>
+<li><a href="https://weblogs.asp.net/fbouma/soft-deletes-are-bad-m-kay" title="undefined">https://weblogs.asp.net/fbouma/soft-deletes-are-bad-m-kay</a></li>
 </ul>
 <h3 id="issues">Issues</h3>
 <ul>
@@ -127,6 +134,15 @@
             <li>Copyright &copy; KimmyLeo</li>
         </ul>
     </footer>
+    <script type="text/javascript">
+        document.querySelectorAll(".disabled-link").forEach(elem => {
+            elem.addEventListener("click", (e) => {
+                alert("链接页面不存在！");
+
+                e.preventDefault();
+            })
+        })
+    </script>
 </body>
 
 </html>

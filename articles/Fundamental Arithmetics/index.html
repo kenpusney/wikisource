@@ -4,8 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wiki</title>
-    <style type="text/css">
+    
+        <title>算术基础系列</title>
+    
+        <style type="text/css">
         body {
             width: 60%;
             margin: 0 auto;
@@ -30,6 +32,11 @@
 
         a:hover {
             color: darkgray;
+        }
+
+        a.disabled-link {
+            color: lightcoral;
+            text-decoration: line-through;
         }
 
         nav, nav ul {
@@ -84,7 +91,7 @@
         
     </header>
     <article>
-        <h1 id="-">算术基础</h1>
+        <h1 id="算术基础">算术基础</h1>
 <p>这个系列是我在最初尝试引导一些初学者入门了解计算机科学的基础知识的时候写的一部分文章（又一个烂尾系列），有一部分的灵感来自于知名的三卷本《软件工程》。</p>
 <p>其实更想涉及的是离散数学的知识，只是觉得从算术和数论入手结合的更直观一些。</p>
 <p>01 ~ 03发表于2013年7月份，在我的豆瓣日记。</p>
@@ -120,6 +127,15 @@
             <li>Copyright &copy; KimmyLeo</li>
         </ul>
     </footer>
+    <script type="text/javascript">
+        document.querySelectorAll(".disabled-link").forEach(elem => {
+            elem.addEventListener("click", (e) => {
+                alert("链接页面不存在！");
+
+                e.preventDefault();
+            })
+        })
+    </script>
 </body>
 
 </html>

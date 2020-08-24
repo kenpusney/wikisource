@@ -4,8 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wiki</title>
-    <style type="text/css">
+    
+        <title>protocol-design</title>
+    
+        <style type="text/css">
         body {
             width: 60%;
             margin: 0 auto;
@@ -30,6 +32,11 @@
 
         a:hover {
             color: darkgray;
+        }
+
+        a.disabled-link {
+            color: lightcoral;
+            text-decoration: line-through;
         }
 
         nav, nav ul {
@@ -69,7 +76,7 @@
 
     <header>
         
-            <h1>Wiki</h1>
+            <h1>protocol-design</h1>
         
         <nav>
             <ul>
@@ -88,25 +95,25 @@
 <ul>
 <li><p>Sproto by cloudwu</p>
 <ul>
-<li><a href="https://blog.codingnow.com/2014/07/ejoyproto.html">https://blog.codingnow.com/2014/07/ejoyproto.html</a></li>
-<li><a href="https://blog.codingnow.com/2014/07/sproto.html">https://blog.codingnow.com/2014/07/sproto.html</a></li>
-<li><a href="https://blog.codingnow.com/2017/03/sproto_new_feature.html">https://blog.codingnow.com/2017/03/sproto_new_feature.html</a></li>
+<li><a href="https://blog.codingnow.com/2014/07/ejoyproto.html" title="undefined">https://blog.codingnow.com/2014/07/ejoyproto.html</a></li>
+<li><a href="https://blog.codingnow.com/2014/07/sproto.html" title="undefined">https://blog.codingnow.com/2014/07/sproto.html</a></li>
+<li><a href="https://blog.codingnow.com/2017/03/sproto_new_feature.html" title="undefined">https://blog.codingnow.com/2017/03/sproto_new_feature.html</a></li>
 </ul>
 </li>
 <li><p>Msgpack spec</p>
 <ul>
-<li><a href="https://github.com/msgpack/msgpack/blob/master/spec.md">https://github.com/msgpack/msgpack/blob/master/spec.md</a></li>
+<li><a href="https://github.com/msgpack/msgpack/blob/master/spec.md" title="undefined">https://github.com/msgpack/msgpack/blob/master/spec.md</a></li>
 </ul>
 </li>
 <li><p>Telegram</p>
 <ul>
-<li><a href="https://core.telegram.org/mtproto">https://core.telegram.org/mtproto</a></li>
+<li><a href="https://core.telegram.org/mtproto" title="undefined">https://core.telegram.org/mtproto</a></li>
 </ul>
 </li>
 <li><p>Prototype Buffers</p>
 <ul>
-<li><a href="https://developers.google.com/protocol-buffers/docs/reference/proto3-spec">https://developers.google.com/protocol-buffers/docs/reference/proto3-spec</a></li>
-<li><a href="https://developers.google.com/protocol-buffers/docs/encoding">https://developers.google.com/protocol-buffers/docs/encoding</a></li>
+<li><a href="https://developers.google.com/protocol-buffers/docs/reference/proto3-spec" title="undefined">https://developers.google.com/protocol-buffers/docs/reference/proto3-spec</a></li>
+<li><a href="https://developers.google.com/protocol-buffers/docs/encoding" title="undefined">https://developers.google.com/protocol-buffers/docs/encoding</a></li>
 </ul>
 </li>
 </ul>
@@ -129,6 +136,15 @@
             <li>Copyright &copy; KimmyLeo</li>
         </ul>
     </footer>
+    <script type="text/javascript">
+        document.querySelectorAll(".disabled-link").forEach(elem => {
+            elem.addEventListener("click", (e) => {
+                alert("链接页面不存在！");
+
+                e.preventDefault();
+            })
+        })
+    </script>
 </body>
 
 </html>

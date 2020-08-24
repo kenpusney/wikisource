@@ -4,8 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wiki</title>
-    <style type="text/css">
+    
+        <title>non-tech</title>
+    
+        <style type="text/css">
         body {
             width: 60%;
             margin: 0 auto;
@@ -30,6 +32,11 @@
 
         a:hover {
             color: darkgray;
+        }
+
+        a.disabled-link {
+            color: lightcoral;
+            text-decoration: line-through;
         }
 
         nav, nav ul {
@@ -69,7 +76,7 @@
 
     <header>
         
-            <h1>Wiki</h1>
+            <h1>non-tech</h1>
         
         <nav>
             <ul>
@@ -87,9 +94,9 @@
         <h1 id="non-techinical-topics-in-this-wiki">Non Techinical Topics in this wiki</h1>
 <p>This is a portal of my interested non-tech topics.</p>
 <p>Firstly, I am a huge fan of <a href="/history" title="history">history</a>, so there will be plenty of topics related to this.
-I am also interested in <a href="/linguistics" title="linguistics">linguistics</a>, <a href="/psychology" title="psychology">psychology</a> and <a href="/economics" title="economics">economics</a>.</p>
+I am also interested in <a href="#" class="disabled-link">linguistics</a>, <a href="#" class="disabled-link">psychology</a> and <a href="/economics" title="economics">economics</a>.</p>
 <p>Besides all above, I have few <a href="/articles" title="articles">articles</a>s and <a href="/ideas" title="ideas">ideas</a>s related to non-tech fields, you can
-also find something from my <a href="/quotes" title="quotes">quotes</a>.</p>
+also find something from my <a href="#" class="disabled-link">quotes</a>.</p>
 
         
 
@@ -109,6 +116,15 @@ also find something from my <a href="/quotes" title="quotes">quotes</a>.</p>
             <li>Copyright &copy; KimmyLeo</li>
         </ul>
     </footer>
+    <script type="text/javascript">
+        document.querySelectorAll(".disabled-link").forEach(elem => {
+            elem.addEventListener("click", (e) => {
+                alert("链接页面不存在！");
+
+                e.preventDefault();
+            })
+        })
+    </script>
 </body>
 
 </html>

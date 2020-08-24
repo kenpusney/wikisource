@@ -4,8 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wiki</title>
-    <style type="text/css">
+    
+        <title>面试了一个精通Go语言的人…（上）</title>
+    
+        <style type="text/css">
         body {
             width: 60%;
             margin: 0 auto;
@@ -30,6 +32,11 @@
 
         a:hover {
             color: darkgray;
+        }
+
+        a.disabled-link {
+            color: lightcoral;
+            text-decoration: line-through;
         }
 
         nav, nav ul {
@@ -87,7 +94,8 @@
         <p> （故事内容纯属虚构）</p>
 <p>如果不了解背景的话可以去看前几篇文章。</p>
 <pre><code>在简历上写了“精通 C++”后……
-作为一名程序员，我这属于什么水平？</code></pre><p>我知道你肯定会想，这家伙怎么又来吹牛逼了。</p>
+作为一名程序员，我这属于什么水平？</code></pre>
+<p>我知道你肯定会想，这家伙怎么又来吹牛逼了。</p>
 <p>讲道理这一次我还真不是吹牛逼，虽然我确实在公司里面搞了一个叫吹牛逼的组织。不过也只是我们业余追求geek精神的地方，不是拿来瞎白话的。</p>
 <p>前几天HR告诉我，我们有一个精通Go语言的人前来面试，其他人对Go不是太熟，你既然了解那么多编程技术栈，不如你去吧。于是我就被赶鸭子上架成了 面试官 。</p>
 <p>周四下午就开始了这场神奇的面试。</p>
@@ -124,6 +132,15 @@
             <li>Copyright &copy; KimmyLeo</li>
         </ul>
     </footer>
+    <script type="text/javascript">
+        document.querySelectorAll(".disabled-link").forEach(elem => {
+            elem.addEventListener("click", (e) => {
+                alert("链接页面不存在！");
+
+                e.preventDefault();
+            })
+        })
+    </script>
 </body>
 
 </html>

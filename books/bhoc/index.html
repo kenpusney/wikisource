@@ -4,8 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wiki</title>
-    <style type="text/css">
+    
+        <title>bhoc</title>
+    
+        <style type="text/css">
         body {
             width: 60%;
             margin: 0 auto;
@@ -30,6 +32,11 @@
 
         a:hover {
             color: darkgray;
+        }
+
+        a.disabled-link {
+            color: lightcoral;
+            text-decoration: line-through;
         }
 
         nav, nav ul {
@@ -69,7 +76,7 @@
 
     <header>
         
-            <h1>Wiki</h1>
+            <h1>bhoc</h1>
         
         <nav>
             <ul>
@@ -84,8 +91,8 @@
         
     </header>
     <article>
-        <h1 id="a-brief-history-of-computer-">A Brief History of Computer 计算机简史</h1>
-<h3 id="-">计划中的目录：</h3>
+        <h1 id="a-brief-history-of-computer-计算机简史">A Brief History of Computer 计算机简史</h1>
+<h3 id="计划中的目录：">计划中的目录：</h3>
 <ul>
 <li><p>缘起</p>
 <ul>
@@ -157,6 +164,8 @@
             <h2>当前类目下的页面：</h2>
             
         <ul class="post-list">
+            
+                <li><h3><a href="/books/bhoc/holy">holy/</a><small>  </small></h3></li>
              
         </ul>
         
@@ -177,6 +186,15 @@
             <li>Copyright &copy; KimmyLeo</li>
         </ul>
     </footer>
+    <script type="text/javascript">
+        document.querySelectorAll(".disabled-link").forEach(elem => {
+            elem.addEventListener("click", (e) => {
+                alert("链接页面不存在！");
+
+                e.preventDefault();
+            })
+        })
+    </script>
 </body>
 
 </html>

@@ -4,8 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wiki</title>
-    <style type="text/css">
+    
+        <title>Kimmy 编程语言定律</title>
+    
+        <style type="text/css">
         body {
             width: 60%;
             margin: 0 auto;
@@ -30,6 +32,11 @@
 
         a:hover {
             color: darkgray;
+        }
+
+        a.disabled-link {
+            color: lightcoral;
+            text-decoration: line-through;
         }
 
         nav, nav ul {
@@ -84,7 +91,7 @@
         
     </header>
     <article>
-        <h2 id="-">第一定律（领域特定原则）</h2>
+        <h2 id="第一定律（领域特定原则）">第一定律（领域特定原则）</h2>
 <p>初始版本：</p>
 <blockquote>
 <p>当且一个拥有静态类型的编程语言实现了内置（built-in）的关联集合（Map）和关联集合字面量（map literal）时，这个语言就无法再用作写操作系统（编译器、数据库系统等等）。</p>
@@ -92,13 +99,13 @@
 <p>其他表述：</p>
 <blockquote>
 <p>一切编程语言都是面向特定领域（Domain-Specific）的。
-（见[《如何设计编程语言》]({{&lt; relref &quot;/articles/htdpl/01. How To Design Programming Language.md&quot; &gt;}})</p>
+（见<a href="/articles/htdpl/01. How To Design Programming Language" title="如何设计编程语言">如何设计编程语言</a></p>
 </blockquote>
 <p>示例：</p>
 <ul>
 <li>Go</li>
 </ul>
-<h2 id="-">第二定律（可用性定律）</h2>
+<h2 id="第二定律（可用性定律）">第二定律（可用性定律）</h2>
 <p>初始版本：</p>
 <blockquote>
 <p>只有当一个编程语言/平台有了对应的xUnit框架，这个平台才能做到Production Ready。</p>
@@ -127,6 +134,15 @@
             <li>Copyright &copy; KimmyLeo</li>
         </ul>
     </footer>
+    <script type="text/javascript">
+        document.querySelectorAll(".disabled-link").forEach(elem => {
+            elem.addEventListener("click", (e) => {
+                alert("链接页面不存在！");
+
+                e.preventDefault();
+            })
+        })
+    </script>
 </body>
 
 </html>

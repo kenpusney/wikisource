@@ -4,8 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wiki</title>
-    <style type="text/css">
+    
+        <title>05</title>
+    
+        <style type="text/css">
         body {
             width: 60%;
             margin: 0 auto;
@@ -30,6 +32,11 @@
 
         a:hover {
             color: darkgray;
+        }
+
+        a.disabled-link {
+            color: lightcoral;
+            text-decoration: line-through;
         }
 
         nav, nav ul {
@@ -69,7 +76,7 @@
 
     <header>
         
-            <h1>Wiki</h1>
+            <h1>05</h1>
         
         <nav>
             <ul>
@@ -100,7 +107,7 @@
 <p>I have a belief that I’m almost embarassed to admit: I believe that most people are incredibly lazy. I think most quality comprimise stems from an inherent laziness that leads to details being glossed over, even if they are consciously recognized as needing attention. The best developers maintain this almost supernatural drive that comes from somewhere deep within, and they use this drive to stave off the laziness. If you’re moving fast and writing a lot of code, strive to utilize every ounce of intellectual horsepower you can muster – sustained, for the entire time you are writing code. Even if that’s for 16 hours straight. If at any moment a thought occurs that might save you time down the road, stop, ponder it, course correct on the fly. This is a way of “slowing down to speed up” but in a way where you can still be moving fast. Many lazier people let these fleeting thoughts go without exploring them fully. They will consciously do the wrong thing because doing the right thing takes more time.</p>
 <p>I’ve developed odd habits over the years. As a compile runs, I literally pore over every modified line of code, wondering if there’s a better way to do it. If I see something, I push it on the stack and make sure to come back to it. By the time I’ve actually commited some new code – regardless of whether it’s 10,000 lines of freshly written code, or a 10 line modification to some existing stuff – chances are that I’ve read each line of code at least three times. I disallow any detail I see to slip through the cracks. And my mind obsesses over all aspects of my work, even during “off times” (e.g., eating dinner, walking down the hallway, etc). Each of these opportunities represents a chance to slow down, reflect, and course correct.</p>
 <p>Do I still miss thing? Sure I do. But that’s why it’s so critical to have a team around you who shares the same principles and will help to identify any shortcomings that I’ve missed.</p>
-<p>Another practice I encourage on my team is fixing broken windows. I’m sure folks are aware of the so-called <a href="https://en.wikipedia.org/wiki/Fixing_Broken_Windows">broken windows theory</a>, where neighborhoods in which broken windows are tolerated tend to accumulate more and more broken windows with time. It happens in code, too. If people are discouraged from stopping to fix the broken windows, you will end up with lots of them. And guess what, each broken window actually slows you down. As more and more accumulate, it can become a real chore to get anything meaningful done. I guarantee you will not be able to move very fast if too many broken windows pile up and start needing attention. Slowing down to fix them incrementally, as soon as they are noticed, speeds you up down the road.</p>
+<p>Another practice I encourage on my team is fixing broken windows. I’m sure folks are aware of the so-called <a href="https://en.wikipedia.org/wiki/Fixing_Broken_Windows" title="null">broken windows theory</a>, where neighborhoods in which broken windows are tolerated tend to accumulate more and more broken windows with time. It happens in code, too. If people are discouraged from stopping to fix the broken windows, you will end up with lots of them. And guess what, each broken window actually slows you down. As more and more accumulate, it can become a real chore to get anything meaningful done. I guarantee you will not be able to move very fast if too many broken windows pile up and start needing attention. Slowing down to fix them incrementally, as soon as they are noticed, speeds you up down the road.</p>
 <p>Building a quality-focused team isn’t easy. But creating a culture that slows down to do the right thing, while simultaneously moving fast, provides an enormous competitive advantage. It’s not as common as you might think.</p>
 
         
@@ -121,6 +128,15 @@
             <li>Copyright &copy; KimmyLeo</li>
         </ul>
     </footer>
+    <script type="text/javascript">
+        document.querySelectorAll(".disabled-link").forEach(elem => {
+            elem.addEventListener("click", (e) => {
+                alert("链接页面不存在！");
+
+                e.preventDefault();
+            })
+        })
+    </script>
 </body>
 
 </html>

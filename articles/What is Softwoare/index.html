@@ -4,8 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wiki</title>
-    <style type="text/css">
+    
+        <title>什么是软件</title>
+    
+        <style type="text/css">
         body {
             width: 60%;
             margin: 0 auto;
@@ -30,6 +32,11 @@
 
         a:hover {
             color: darkgray;
+        }
+
+        a.disabled-link {
+            color: lightcoral;
+            text-decoration: line-through;
         }
 
         nav, nav ul {
@@ -107,11 +114,11 @@
 <p>认识到什么是软件之后，接下来就该认识不同类型的软件了。</p>
 <p>首先，有这么两大类，一类是让计算机硬件能够维持正常的稳定的运行和工作的，他们和计算机硬件一起构成了一个稳定的系统，我们称之为系统软件（System Software）；另外一类，就是在系统软件之上执行特定的（有用的）计算任务的软件，我们称之为应用软件（Application Software）。因为要执行除了维持计算机执行之外的其他任务，是拥有特定领域需求并且要被应用（apply）在特定领域的，这就是他名字的由来。至于都有哪些领域，维基百科给出了一个非常长的列表，应该比较方便理解。同样，智能手机上的App如此丰富，也应该某种程度上体现了“应用”的多样性。</p>
 <p>这里出现了几个值得细推敲的地方。</p>
-<h4 id="-">第一，软件和硬件的关系。</h4>
+<h4 id="第一，软件和硬件的关系。">第一，软件和硬件的关系。</h4>
 <p>因为软件本身就是依赖于硬件服务于硬件的，所以，即便是研究软件，也不能脱离对硬件的理解，否则就是舍本求末了。</p>
-<h4 id="-">第二，软件和程序的关系。</h4>
+<h4 id="第二，软件和程序的关系。">第二，软件和程序的关系。</h4>
 <p>上面提到的观点是“软件是程序的某种特殊存在形式”。</p>
-<h4 id="-">第三，数据。</h4>
+<h4 id="第三，数据。">第三，数据。</h4>
 <hr>
 <p>我们回到最开始。</p>
 <p>为什么说SNS也是软件？</p>
@@ -138,6 +145,15 @@
             <li>Copyright &copy; KimmyLeo</li>
         </ul>
     </footer>
+    <script type="text/javascript">
+        document.querySelectorAll(".disabled-link").forEach(elem => {
+            elem.addEventListener("click", (e) => {
+                alert("链接页面不存在！");
+
+                e.preventDefault();
+            })
+        })
+    </script>
 </body>
 
 </html>

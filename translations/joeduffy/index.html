@@ -4,8 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wiki</title>
-    <style type="text/css">
+    
+        <title>joeduffy</title>
+    
+        <style type="text/css">
         body {
             width: 60%;
             margin: 0 auto;
@@ -30,6 +32,11 @@
 
         a:hover {
             color: darkgray;
+        }
+
+        a.disabled-link {
+            color: lightcoral;
+            text-decoration: line-through;
         }
 
         nav, nav ul {
@@ -69,7 +76,7 @@
 
     <header>
         
-            <h1>Wiki</h1>
+            <h1>joeduffy</h1>
         
         <nav>
             <ul>
@@ -84,13 +91,13 @@
         
     </header>
     <article>
-        <h1 id="joe-duffy-">Joe Duffy 的文章翻译</h1>
+        <h1 id="joe-duffy-的文章翻译">Joe Duffy 的文章翻译</h1>
 <p><strong>关于翻译版权的信息正在争取中</strong></p>
-<p>这里是关于Joe Duffy先生的<a href="http://joeduffyblog.com/">个人博客</a>中部分文章的翻译。 Joe Duffy是 Pulumi 公司的创始人和CEO，同时也是前微软的工程师。参与了 Midori 系统的研发，并且在编程语言、开发者工具和Cloud方面有丰富独到的经验和见解。</p>
+<p>这里是关于Joe Duffy先生的<a href="http://joeduffyblog.com/" title="null">个人博客</a>中部分文章的翻译。 Joe Duffy是 Pulumi 公司的创始人和CEO，同时也是前微软的工程师。参与了 Midori 系统的研发，并且在编程语言、开发者工具和Cloud方面有丰富独到的经验和见解。</p>
 <p>正在翻译中的系列：</p>
 <ul>
-<li>Midori系列 <a href="http://joeduffyblog.com/2015/11/03/blogging-about-midori/">原文</a> <a href="/translations/joeduffy/midori" title="translations/joeduffy/midori">translations/joeduffy/midori</a></li>
-<li>软件领导力系列 <a href="http://joeduffyblog.com/2013/02/17/software-leadership-series/">原文</a> <a href="/translations/joeduffy/software%20leadership" title="translations/joeduffy/software leadership">translations/joeduffy/software leadership</a></li>
+<li>Midori系列 <a href="http://joeduffyblog.com/2015/11/03/blogging-about-midori/" title="null">原文</a> <a href="/translations/joeduffy/midori" title="midori">midori</a></li>
+<li>软件领导力系列 <a href="http://joeduffyblog.com/2013/02/17/software-leadership-series/" title="null">原文</a> <a href="/translations/joeduffy/software leadership" title="software leadership">software leadership</a></li>
 </ul>
 
         
@@ -98,6 +105,10 @@
             <h2>当前类目下的页面：</h2>
             
         <ul class="post-list">
+            
+                <li><h3><a href="/translations/joeduffy/midori">midori/</a><small>  </small></h3></li>
+            
+                <li><h3><a href="/translations/joeduffy/software leadership">software leadership/</a><small>  </small></h3></li>
              
         </ul>
         
@@ -118,6 +129,15 @@
             <li>Copyright &copy; KimmyLeo</li>
         </ul>
     </footer>
+    <script type="text/javascript">
+        document.querySelectorAll(".disabled-link").forEach(elem => {
+            elem.addEventListener("click", (e) => {
+                alert("链接页面不存在！");
+
+                e.preventDefault();
+            })
+        })
+    </script>
 </body>
 
 </html>

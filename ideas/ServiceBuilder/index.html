@@ -4,8 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wiki</title>
-    <style type="text/css">
+    
+        <title>ServiceBuilder</title>
+    
+        <style type="text/css">
         body {
             width: 60%;
             margin: 0 auto;
@@ -30,6 +32,11 @@
 
         a:hover {
             color: darkgray;
+        }
+
+        a.disabled-link {
+            color: lightcoral;
+            text-decoration: line-through;
         }
 
         nav, nav ul {
@@ -69,7 +76,7 @@
 
     <header>
         
-            <h1>Wiki</h1>
+            <h1>ServiceBuilder</h1>
         
         <nav>
             <ul>
@@ -85,7 +92,7 @@
     </header>
     <article>
         <h1 id="on-service-builder">On Service Builder</h1>
-<h2 id="-">目录</h2>
+<h2 id="目录">目录</h2>
 <ul>
 <li>源起<ul>
 <li>微服务</li>
@@ -93,7 +100,7 @@
 </ul>
 </li>
 </ul>
-<h2 id="-">源起</h2>
+<h2 id="源起">源起</h2>
 <ul>
 <li><p>后端开发的历程</p>
 <ul>
@@ -114,7 +121,7 @@
 </ul>
 </li>
 </ul>
-<h2 id="-">统一模型</h2>
+<h2 id="统一模型">统一模型</h2>
 <ul>
 <li>输入（source）</li>
 <li>处理（processor）</li>
@@ -140,6 +147,15 @@
             <li>Copyright &copy; KimmyLeo</li>
         </ul>
     </footer>
+    <script type="text/javascript">
+        document.querySelectorAll(".disabled-link").forEach(elem => {
+            elem.addEventListener("click", (e) => {
+                alert("链接页面不存在！");
+
+                e.preventDefault();
+            })
+        })
+    </script>
 </body>
 
 </html>

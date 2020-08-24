@@ -4,8 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wiki</title>
-    <style type="text/css">
+    
+        <title>API_Gotchas</title>
+    
+        <style type="text/css">
         body {
             width: 60%;
             margin: 0 auto;
@@ -30,6 +32,11 @@
 
         a:hover {
             color: darkgray;
+        }
+
+        a.disabled-link {
+            color: lightcoral;
+            text-decoration: line-through;
         }
 
         nav, nav ul {
@@ -69,7 +76,7 @@
 
     <header>
         
-            <h1>Wiki</h1>
+            <h1>API_Gotchas</h1>
         
         <nav>
             <ul>
@@ -93,7 +100,7 @@
 <li>Aggregation Layer</li>
 </ol>
 <h3 id="1-version-hell">1. Version Hell</h3>
-<h4 id="-">场景</h4>
+<h4 id="场景">场景</h4>
 <ul>
 <li>v1：支撑最初业务需求的API</li>
 <li>v2：新需求导致业务流程需要简单改进</li>
@@ -101,15 +108,15 @@
 <li>v4：上面那堆东西写成了一坨屎，我们新建一个项目吧</li>
 <li>v5：不好意思新需求又来了</li>
 </ul>
-<h4 id="-">原因</h4>
+<h4 id="原因">原因</h4>
 <ul>
 <li>版本与消费者（客户端）的管理不到位</li>
 <li>业务场景划分不明确导致频繁变更</li>
 </ul>
-<h4 id="-">解决方案</h4>
+<h4 id="解决方案">解决方案</h4>
 <p>？</p>
 <h3 id="2-version-tree">2. Version Tree</h3>
-<h4 id="-">场景</h4>
+<h4 id="场景-1">场景</h4>
 <p>BFF或者Aggregator：</p>
 <ul>
 <li>v1依赖A-v1和B-v1</li>
@@ -118,37 +125,37 @@
 <li>Version Hell导致v1 v2 v3都不能被彻底摆脱</li>
 <li>新建项目把所有依赖升级到最新版</li>
 </ul>
-<h4 id="-">原因</h4>
+<h4 id="原因-1">原因</h4>
 <ul>
 <li>Provider Management</li>
 <li>Cross-Refed Dependency</li>
 </ul>
-<h4 id="-">解决方案</h4>
+<h4 id="解决方案-1">解决方案</h4>
 <p>？</p>
 <h3 id="3-schema-violation">3. Schema Violation</h3>
-<h4 id="-">场景</h4>
+<h4 id="场景-2">场景</h4>
 <p>Consumer与Provider之间采用强Schema进行约束，任何一方都绝对依赖于另外一方。</p>
-<h4 id="-">解决方案</h4>
+<h4 id="解决方案-2">解决方案</h4>
 <p>？</p>
 <h3 id="4-exposed-domain-entity">4. Exposed Domain Entity</h3>
-<h4 id="-">场景</h4>
+<h4 id="场景-3">场景</h4>
 <p>Provider将自身内部的领域对象整体暴露出去</p>
-<h4 id="-">解决方案</h4>
+<h4 id="解决方案-3">解决方案</h4>
 <p>？</p>
 <h3 id="5-god-service">5. God service</h3>
-<h4 id="-">场景</h4>
+<h4 id="场景-4">场景</h4>
 <p>The service that was cross-layered and depended by most of other services.</p>
-<h4 id="-">解决方案</h4>
+<h4 id="解决方案-4">解决方案</h4>
 <p>?</p>
-<h3 id="6-circular-reference-dependency">6. Circular Reference/Dependency</h3>
-<h4 id="-">场景</h4>
+<h3 id="6-circular-referencedependency">6. Circular Reference/Dependency</h3>
+<h4 id="场景-5">场景</h4>
 <p>Lower stream services have ex/implicit dependency for higher stream services.</p>
-<h4 id="-">解决方案</h4>
+<h4 id="解决方案-5">解决方案</h4>
 <p>?</p>
 <h3 id="7-schema-inference">7. Schema Inference</h3>
-<h4 id="-">场景</h4>
+<h4 id="场景-6">场景</h4>
 <p>Services provide nothing but an endpoint, client must try to understand the schema and behaviour by combinating every possible inputs.</p>
-<h4 id="-">解决方案</h4>
+<h4 id="解决方案-6">解决方案</h4>
 <p>?</p>
 
         
@@ -169,6 +176,15 @@
             <li>Copyright &copy; KimmyLeo</li>
         </ul>
     </footer>
+    <script type="text/javascript">
+        document.querySelectorAll(".disabled-link").forEach(elem => {
+            elem.addEventListener("click", (e) => {
+                alert("链接页面不存在！");
+
+                e.preventDefault();
+            })
+        })
+    </script>
 </body>
 
 </html>

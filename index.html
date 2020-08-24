@@ -4,8 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wiki</title>
-    <style type="text/css">
+    
+        <title>Kimmy's Wiki</title>
+    
+        <style type="text/css">
         body {
             width: 60%;
             margin: 0 auto;
@@ -30,6 +32,11 @@
 
         a:hover {
             color: darkgray;
+        }
+
+        a.disabled-link {
+            color: lightcoral;
+            text-decoration: line-through;
         }
 
         nav, nav ul {
@@ -85,7 +92,7 @@
     </header>
     <article>
         <p>欢迎来到我的Wiki。这次又更新了。从原本的SPA变成了由<del>hugo</del><strong>手写生成器</strong>生成的纯静态站点。</p>
-<p>下面是来自于我的<a href="https://zhuanlan.zhihu.com/lessmore">知乎专栏</a>、微信公众号（kimmyfun / lightych）、豆瓣和我的原博客的部分文章集合。因为有些文章是在此以草稿的形式编辑完后发布到不同平台的，所以内容上会有些稍许差异。</p>
+<p>下面是来自于我的<a href="https://zhuanlan.zhihu.com/lessmore" title="null">知乎专栏</a>、微信公众号（kimmyfun / lightych）、豆瓣和我的原博客的部分文章集合。因为有些文章是在此以草稿的形式编辑完后发布到不同平台的，所以内容上会有些稍许差异。</p>
 
         
 
@@ -93,21 +100,45 @@
             
         <ul class="post-list">
             
-                <li><h3><a href="/./about">关于我</a><small>  </small></h3></li>
+                <li><h3><a href="/about">关于我</a><small>  </small></h3></li>
             
-                <li><h3><a href="/./Code Of Conduct">Code Of Conduct</a><small>  </small></h3></li>
+                <li><h3><a href="/articles">articles/</a><small>  </small></h3></li>
             
-                <li><h3><a href="/./contact">contact</a><small>  </small></h3></li>
+                <li><h3><a href="/books">books/</a><small>  </small></h3></li>
             
-                <li><h3><a href="/./faq">faq</a><small>  </small></h3></li>
+                <li><h3><a href="/Code Of Conduct">Code Of Conduct</a><small>  </small></h3></li>
             
-                <li><h3><a href="/./non-tech">non-tech</a><small>  </small></h3></li>
+                <li><h3><a href="/contact">contact</a><small>  </small></h3></li>
             
-                <li><h3><a href="/./publications">publications</a><small>  </small></h3></li>
+                <li><h3><a href="/docs">docs/</a><small>  </small></h3></li>
             
-                <li><h3><a href="/./Tech Stuff">Tech Stuff</a><small>  </small></h3></li>
+                <li><h3><a href="/economics">economics/</a><small>  </small></h3></li>
             
-                <li><h3><a href="/./test">test</a><small>  </small></h3></li>
+                <li><h3><a href="/faq">faq</a><small>  </small></h3></li>
+            
+                <li><h3><a href="/history">history/</a><small>  </small></h3></li>
+            
+                <li><h3><a href="/ideas">ideas/</a><small>  </small></h3></li>
+            
+                <li><h3><a href="/lifestyle">lifestyle/</a><small>  </small></h3></li>
+            
+                <li><h3><a href="/lists">lists/</a><small>  </small></h3></li>
+            
+                <li><h3><a href="/meta">meta/</a><small>  </small></h3></li>
+            
+                <li><h3><a href="/non-tech">non-tech</a><small>  </small></h3></li>
+            
+                <li><h3><a href="/projects">projects/</a><small>  </small></h3></li>
+            
+                <li><h3><a href="/publications">publications</a><small>  </small></h3></li>
+            
+                <li><h3><a href="/specs">specs/</a><small>  </small></h3></li>
+            
+                <li><h3><a href="/Tech Stuff">Tech Stuff</a><small>  </small></h3></li>
+            
+                <li><h3><a href="/tech">tech/</a><small>  </small></h3></li>
+            
+                <li><h3><a href="/test">test</a><small>  </small></h3></li>
              
         </ul>
         
@@ -128,6 +159,15 @@
             <li>Copyright &copy; KimmyLeo</li>
         </ul>
     </footer>
+    <script type="text/javascript">
+        document.querySelectorAll(".disabled-link").forEach(elem => {
+            elem.addEventListener("click", (e) => {
+                alert("链接页面不存在！");
+
+                e.preventDefault();
+            })
+        })
+    </script>
 </body>
 
 </html>

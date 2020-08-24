@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+        <title>Ajoo: 论面向组合子程序设计方法 系列文章</title>
+    
+        <style type="text/css">
+        body {
+            width: 60%;
+            margin: 0 auto;
+            padding: 2em;
+            font-family: 'Segoe UI',
+                "Microsoft Yahei Light",
+                "San Francisco",
+                "Ping Fang SC",
+                "Roboto",
+                "Noto Sans CJK",
+                Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        a {
+            text-decoration: none;
+            color: cornflowerblue;
+        }
+
+        a:visited {
+            color: cornflowerblue;
+        }
+
+        a:hover {
+            color: darkgray;
+        }
+
+        a.disabled-link {
+            color: lightcoral;
+            text-decoration: line-through;
+        }
+
+        nav, nav ul {
+            display: inline;
+        }
+        .tags ul,
+        footer ul {
+            padding: 0;
+            display: inline;
+        }
+
+        header h1 {
+            display: inline;
+        }
+        
+        nav li,
+        .tags li,
+        footer li {
+            display: inline;
+            border-right: 1px solid black;
+            padding: 0 1em;
+        }
+
+        nav li:last-child,
+        .tags li:last-child,
+        footer li:last-child {
+            border: none;
+        }
+
+        .post-list h3 {
+            margin: 0.3em 0;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        
+            <h1>Ajoo: 论面向组合子程序设计方法 系列文章</h1>
+        
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/articles">Articles</a></li>
+                <li><a href="/about">About</a></li>
+            </ul>
+        </nav>
+        <hr>
+        <span>Author: <a href="/about">KimmyLeo</a></span>
+        <span>2006-01-13</span>
+        
+    </header>
+    <article>
+        <ol>
+<li>[创世纪]<a href="/articles/Ajoo_combinators/01. Genesis" title="论面向组合子程序设计方法 之一 创世纪">论面向组合子程序设计方法 之一 创世纪</a> <a href="http://www.blogjava.net/ajoo/archive/2013/06/29/27838.html" title="undefined">http://www.blogjava.net/ajoo/archive/2013/06/29/27838.html</a></li>
+<li>[失乐园]<a href="/articles/Ajoo_combinators/02. Paradise Lost" title="论面向组合子程序设计方法 之二 失乐园">论面向组合子程序设计方法 之二 失乐园</a> <a href="http://www.blogjava.net/ajoo/articles/27839.html" title="undefined">http://www.blogjava.net/ajoo/articles/27839.html</a></li>
+<li>[失乐园 之 补充]<a href="/articles/Ajoo_combinators/03. Paradise Lost part 2" title="论面向组合子程序设计方法 之三 失乐园 之补充">论面向组合子程序设计方法 之三 失乐园 之补充</a> <a href="http://www.blogjava.net/ajoo/articles/27840.html" title="undefined">http://www.blogjava.net/ajoo/articles/27840.html</a></li>
+<li>[燃烧的荆棘]<a href="/articles/Ajoo_combinators/04. Burning Thorns" title="论面向组合子程序设计方法 之四 燃烧的荆棘">论面向组合子程序设计方法 之四 燃烧的荆棘</a> <a href="http://www.blogjava.net/ajoo/articles/27841.html" title="undefined">http://www.blogjava.net/ajoo/articles/27841.html</a></li>
+<li>[新约]<a href="/articles/Ajoo_combinators/05. New Testament" title="论面向组合子程序设计方法 之五 新约">论面向组合子程序设计方法 之五 新约</a> <a href="http://www.blogjava.net/ajoo/articles/27842.html" title="undefined">http://www.blogjava.net/ajoo/articles/27842.html</a></li>
+<li>[oracle]<a href="/articles/Ajoo_combinators/06. Oracle" title="论面向组合子程序设计方法 之六 oracle">论面向组合子程序设计方法 之六 oracle</a> <a href="http://www.blogjava.net/ajoo/articles/27843.html" title="undefined">http://www.blogjava.net/ajoo/articles/27843.html</a></li>
+<li>[重构]<a href="/articles/Ajoo_combinators/07. Refactoring" title="论面向组合子程序设计方法 之七 重构">论面向组合子程序设计方法 之七 重构</a> <a href="http://www.blogjava.net/ajoo/articles/27844.html" title="undefined">http://www.blogjava.net/ajoo/articles/27844.html</a></li>
+<li>[Monad]<a href="/articles/Ajoo_combinators/08. Monad" title="论面向组合子程序设计方法 之八 monad">论面向组合子程序设计方法 之八 monad</a> <a href="http://www.blogjava.net/ajoo/articles/27849.html" title="undefined">http://www.blogjava.net/ajoo/articles/27849.html</a></li>
+<li>[南无阿弥陀佛]<a href="/articles/Ajoo_combinators/09. The Buddha" title="论面向组合子程序设计方法 之九 南无阿弥陀佛">论面向组合子程序设计方法 之九 南无阿弥陀佛</a> <a href="http://www.blogjava.net/ajoo/articles/27850.html" title="undefined">http://www.blogjava.net/ajoo/articles/27850.html</a></li>
+<li>[还是重构]<a href="/articles/Ajoo_combinators/10. Refactoring (again)" title="论面向组合子程序设计方法 之十 还是重构">论面向组合子程序设计方法 之十 还是重构</a> <a href="http://www.blogjava.net/ajoo/articles/27845.html" title="undefined">http://www.blogjava.net/ajoo/articles/27845.html</a></li>
+<li>[微步毂纹生]<a href="/articles/Ajoo_combinators/11. The End" title="论面向组合子程序设计方法 之十一 微步毂纹生">论面向组合子程序设计方法 之十一 微步毂纹生</a> <a href="http://www.blogjava.net/ajoo/articles/27846.html" title="undefined">http://www.blogjava.net/ajoo/articles/27846.html</a></li>
+</ol>
+
+        
+
+            <h2>当前类目下的页面：</h2>
+            
+        <ul class="post-list">
+            
+                <li><h3><a href="/articles/Ajoo_combinators/01. Genesis">论面向组合子程序设计方法 之一 创世纪</a><small> 2006-01-13 </small></h3></li>
+            
+                <li><h3><a href="/articles/Ajoo_combinators/02. Paradise Lost">论面向组合子程序设计方法 之二 失乐园</a><small> 2006-01-13 </small></h3></li>
+            
+                <li><h3><a href="/articles/Ajoo_combinators/03. Paradise Lost part 2">论面向组合子程序设计方法 之三 失乐园 之补充</a><small> 2006-01-13 </small></h3></li>
+            
+                <li><h3><a href="/articles/Ajoo_combinators/04. Burning Thorns">论面向组合子程序设计方法 之四 燃烧的荆棘</a><small> 2006-01-13 </small></h3></li>
+            
+                <li><h3><a href="/articles/Ajoo_combinators/05. New Testament">论面向组合子程序设计方法 之五 新约</a><small> 2006-01-13 </small></h3></li>
+            
+                <li><h3><a href="/articles/Ajoo_combinators/06. Oracle">论面向组合子程序设计方法 之六 oracle</a><small> 2006-01-13 </small></h3></li>
+            
+                <li><h3><a href="/articles/Ajoo_combinators/07. Refactoring">论面向组合子程序设计方法 之七 重构</a><small> 2006-01-13 </small></h3></li>
+            
+                <li><h3><a href="/articles/Ajoo_combinators/08. Monad">论面向组合子程序设计方法 之八 monad</a><small> 2006-01-13 </small></h3></li>
+            
+                <li><h3><a href="/articles/Ajoo_combinators/09. The Buddha">论面向组合子程序设计方法 之九 南无阿弥陀佛</a><small> 2006-01-13 </small></h3></li>
+            
+                <li><h3><a href="/articles/Ajoo_combinators/10. Refactoring (again)">论面向组合子程序设计方法 之十 还是重构</a><small> 2006-01-13 </small></h3></li>
+            
+                <li><h3><a href="/articles/Ajoo_combinators/11. The End">论面向组合子程序设计方法 之十一 微步毂纹生</a><small> 2006-01-13 </small></h3></li>
+             
+        </ul>
+        
+
+    </article>
+    <div>
+        <h5>See Also</h5>
+        <ul>
+            <li><a href="/about">About Me</a></li>
+        </ul>
+    </div>
+    <hr>
+    <footer>
+        <ul>
+            <li><a href="/about">关于我</a></li>
+            <li><a href="/site.xml">站点地图</a></li>
+            <li><a href="/rss.xml">RSS</a></li>
+            <li>Copyright &copy; KimmyLeo</li>
+        </ul>
+    </footer>
+    <script type="text/javascript">
+        document.querySelectorAll(".disabled-link").forEach(elem => {
+            elem.addEventListener("click", (e) => {
+                alert("链接页面不存在！");
+
+                e.preventDefault();
+            })
+        })
+    </script>
+</body>
+
+</html>

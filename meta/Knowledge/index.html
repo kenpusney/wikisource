@@ -4,8 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wiki</title>
-    <style type="text/css">
+    
+        <title>Knowledge</title>
+    
+        <style type="text/css">
         body {
             width: 60%;
             margin: 0 auto;
@@ -30,6 +32,11 @@
 
         a:hover {
             color: darkgray;
+        }
+
+        a.disabled-link {
+            color: lightcoral;
+            text-decoration: line-through;
         }
 
         nav, nav ul {
@@ -69,7 +76,7 @@
 
     <header>
         
-            <h1>Wiki</h1>
+            <h1>Knowledge</h1>
         
         <nav>
             <ul>
@@ -85,13 +92,13 @@
     </header>
     <article>
         <h1 id="how-knowledege-get-weaving-together">How knowledege get weaving together</h1>
-<h1 id="-">关于知识是如何交织在一起的</h1>
+<h1 id="关于知识是如何交织在一起的">关于知识是如何交织在一起的</h1>
 <p>这个问题源于跟同事讨论怎么组织“知识点”这个问题。</p>
 <p>我的感觉，简单的树形是绝对不够的，而且知识也并不是对某个单独特定的点起作用。</p>
 <p>所以可能需要一种新的组织形式来概括和发现各个知识点之间的相关性。</p>
-<h2 id="-">结构</h2>
-<h2 id="-">聚合</h2>
-<h2 id="-">发现</h2>
+<h2 id="结构">结构</h2>
+<h2 id="聚合">聚合</h2>
+<h2 id="发现">发现</h2>
 <p>知识发现很重要，但是更重要的是通过引入新的点来整理旧的知识。</p>
 <p>所以这样就有3个过程：</p>
 <ol>
@@ -99,7 +106,7 @@
 <li>通过整理现有所有的条目来实时寻找相关主题。</li>
 <li>针对特定主题能够自动发现现有条目与之相关性强的内容。</li>
 </ol>
-<h2 id="-">消费</h2>
+<h2 id="消费">消费</h2>
 <p>如何消费这些知识？</p>
 
         
@@ -120,6 +127,15 @@
             <li>Copyright &copy; KimmyLeo</li>
         </ul>
     </footer>
+    <script type="text/javascript">
+        document.querySelectorAll(".disabled-link").forEach(elem => {
+            elem.addEventListener("click", (e) => {
+                alert("链接页面不存在！");
+
+                e.preventDefault();
+            })
+        })
+    </script>
 </body>
 
 </html>

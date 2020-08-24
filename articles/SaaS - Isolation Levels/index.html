@@ -4,8 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wiki</title>
-    <style type="text/css">
+    
+        <title>SaaS：隔离级别</title>
+    
+        <style type="text/css">
         body {
             width: 60%;
             margin: 0 auto;
@@ -30,6 +32,11 @@
 
         a:hover {
             color: darkgray;
+        }
+
+        a.disabled-link {
+            color: lightcoral;
+            text-decoration: line-through;
         }
 
         nav, nav ul {
@@ -86,28 +93,28 @@
     <article>
         <p>我们来说一下 SaaS 平台里面的隔离。因为大部分的 SaaS 产品，并不是直接从零开始构建的，而是根据已有的系统在之上作改造。这就有一个很大的问题，原本的软件系统可能在设计上没有考虑到 SaaS 和多租户，资源或者是数据共享上就会有一些问题，而这些问题，就是 SaaS 最大的，也是最难解决的。怎么样能看出来这一点呢？</p>
 <p>我们首先要引入一个概念，隔离。</p>
-<h2 id="saas-">SaaS 的基本功能</h2>
-<p><a href="https://mp.weixin.qq.com/s/pOHLnddmsE77Y6lQtoHZQQ">上一篇文章</a>我们提到了 SaaS 系统结构的概念，与用户接近的那一端可以叫做前端，与具体的公共业务流程接近了一端叫后端。这样前后端形成一个整体，为用户提供服务，<strong>前端</strong>灵活的处理<strong>定制功能</strong>，<strong>后端</strong>完善<strong>核心业务</strong>。但当你从已有的软件系统中抽离这个 SaaS 平台的时候。你会发现后端不是那么显而易见的就可以改造出来。这个时候要么你选择花很长一段时间把这个后端实现，要么你选择依然使用原来的解决方案——就永远都完不成 SaaS 化这个目标。</p>
+<h2 id="saas-的基本功能">SaaS 的基本功能</h2>
+<p><a href="https://mp.weixin.qq.com/s/pOHLnddmsE77Y6lQtoHZQQ" title="null">上一篇文章</a>我们提到了 SaaS 系统结构的概念，与用户接近的那一端可以叫做前端，与具体的公共业务流程接近了一端叫后端。这样前后端形成一个整体，为用户提供服务，<strong>前端</strong>灵活的处理<strong>定制功能</strong>，<strong>后端</strong>完善<strong>核心业务</strong>。但当你从已有的软件系统中抽离这个 SaaS 平台的时候。你会发现后端不是那么显而易见的就可以改造出来。这个时候要么你选择花很长一段时间把这个后端实现，要么你选择依然使用原来的解决方案——就永远都完不成 SaaS 化这个目标。</p>
 <p>首先我们来看 SaaS 化最基本的两个功能：<strong>租户管理</strong>和在这之上的<strong>配置中心</strong>。配置中心里包含很多东西，比如租户的套餐或者是租户的资源信息以及一些个性化配置等等这些相关的配置管理。</p>
 <p>除了这两个基本功能以外，就是你当前这个 SaaS 软件的主要业务场景了。也就是说无论如何在一个单体应用改造成上述应用的情况下，必须要完成的就是把这两个基本功能。</p>
-<h2 id="-">完全隔离</h2>
+<h2 id="完全隔离">完全隔离</h2>
 <p>这样定义以后，第 1 个层面上的隔离的效果就已经出来了。这个时候所谓的 SaaS 平台只是为每一个租户提供资源管理功能。</p>
 <p><img src="https://imgkr.cn-bj.ufileos.com/5ca403be-3581-4aa3-abe6-573d12d52e1f.png" alt="完全隔离"></p>
 <p>绝大多数情况下，SaaS 平台能够做到这种效果已经非常不错了。
 至少这样省掉了很多手动的工作，让你每新来一个客户自助服务，创建一套他们的资源。能够省掉大量的运维工作，并且在这这些资源统一为你自己所管理的情况下，能够统一的对其进行升级修复和改造。</p>
 <p>这样设计的 SaaS 平台，隔离级别最高，单个租户最容易维护，但也意味着成本最高，因为除了 SaaS 的入口之外，没有任何资源被共享的。</p>
-<h2 id="-">数据存储隔离</h2>
+<h2 id="数据存储隔离">数据存储隔离</h2>
 <p>我们试着降低一下隔离级别。让租户去共享一下公共的服务。</p>
 <p>这样我们就需要对不同的服务抽离出租户的参数，然后利用这个参数来请求到不同的数据源。这样会有一部分工作，就是在原有的服务中加入，根据租户，切换数据源的动作。</p>
 <p><img src="https://imgkr.cn-bj.ufileos.com/1d66b4ef-aaa6-4561-ae0d-cbd1606d8fd6.png" alt="数据存储隔离"></p>
 <p>当然对应的结果就是一部分公共的服务被移到了后端来，前端所占有的资源进一步的变少。对应用租户的数据依然保持在可控的范围，因为他们还是相互隔离的。</p>
 <p>同样其实这也存在一个风险，就是公共服务如果挂掉会影响所有的租户。</p>
-<h2 id="-">数据模型隔离</h2>
+<h2 id="数据模型隔离">数据模型隔离</h2>
 <p>更进一步地，我们可以尝试在数据模型上加上租户信息。于是，我们就可以尝试把所有的租户数据源进行合并。这样一来所有租户的数据资源也都放到了后端，作为公共资源享有。进一步的降低了我们的成本。</p>
 <p><img src="https://imgkr.cn-bj.ufileos.com/0ae7c728-68ca-4e6a-903b-c0fef8c0a180.png" alt="数据模型隔离"></p>
 <p>当然这样带来另外一个后果就是单个的租户数据就变得难以分析，因为它们是跟其他数据混杂在一起的。除非我们再单独抽离资源去做数据分析平台。</p>
 <p>这个时候我们的隔离仅限于数据模型。请求从前端进来，以租户信息作为参数，服务器利用参数来筛选数据模型进行业务操作，返回结果。</p>
-<h2 id="-">其他隔离级别</h2>
+<h2 id="其他隔离级别">其他隔离级别</h2>
 <p>其实在此基础之上还有另外一些混合的模型。微软的 <a href="https://docs.microsoft.com/en-us/azure/sql-database/saas-tenancy-app-design-patterns" title="Azure 架构文档">Azure 架构文档</a>里，有详细的说明。</p>
 
         
@@ -128,6 +135,15 @@
             <li>Copyright &copy; KimmyLeo</li>
         </ul>
     </footer>
+    <script type="text/javascript">
+        document.querySelectorAll(".disabled-link").forEach(elem => {
+            elem.addEventListener("click", (e) => {
+                alert("链接页面不存在！");
+
+                e.preventDefault();
+            })
+        })
+    </script>
 </body>
 
 </html>

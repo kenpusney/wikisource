@@ -4,8 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wiki</title>
-    <style type="text/css">
+    
+        <title>如何设计编程语言（2）：类型</title>
+    
+        <style type="text/css">
         body {
             width: 60%;
             margin: 0 auto;
@@ -30,6 +32,11 @@
 
         a:hover {
             color: darkgray;
+        }
+
+        a.disabled-link {
+            color: lightcoral;
+            text-decoration: line-through;
         }
 
         nav, nav ul {
@@ -85,7 +92,7 @@
     </header>
     <article>
         <blockquote>
-<p>原文发表于 2015-12-03，我的lofter：<a href="http://kimleo.lofter.com/post/46977_922c9c7">http://kimleo.lofter.com/post/46977_922c9c7</a></p>
+<p>原文发表于 2015-12-03，我的lofter：<a href="http://kimleo.lofter.com/post/46977_922c9c7" title="undefined">http://kimleo.lofter.com/post/46977_922c9c7</a></p>
 </blockquote>
 <p>接触过DDD（Domain Driven Design）的人都知道有很多很多很多很多的东西。</p>
 <p>比如Value Object, 比如Entity, 比如Repository，比如Factory，比如Service。</p>
@@ -115,6 +122,15 @@
             <li>Copyright &copy; KimmyLeo</li>
         </ul>
     </footer>
+    <script type="text/javascript">
+        document.querySelectorAll(".disabled-link").forEach(elem => {
+            elem.addEventListener("click", (e) => {
+                alert("链接页面不存在！");
+
+                e.preventDefault();
+            })
+        })
+    </script>
 </body>
 
 </html>

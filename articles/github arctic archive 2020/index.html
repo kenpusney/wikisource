@@ -4,8 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wiki</title>
-    <style type="text/css">
+    
+        <title>强力文集：GitHub北极代码归档是对人类发展的不自信</title>
+    
+        <style type="text/css">
         body {
             width: 60%;
             margin: 0 auto;
@@ -30,6 +32,11 @@
 
         a:hover {
             color: darkgray;
+        }
+
+        a.disabled-link {
+            color: lightcoral;
+            text-decoration: line-through;
         }
 
         nav, nav ul {
@@ -85,7 +92,7 @@
     </header>
     <article>
         <blockquote>
-<p>“强力文集”系列是源自于“<a href="http://kimleo.net/strength">强力宣言</a>”的一系列虚构作品，作为强力宣言的主要价值观、原则和观点的展示。</p>
+<p>“强力文集”系列是源自于“<a href="http://kimleo.net/strength" title="null">强力宣言</a>”的一系列虚构作品，作为强力宣言的主要价值观、原则和观点的展示。</p>
 </blockquote>
 <blockquote>
 <p>⚠本故事纯属虚构。</p>
@@ -117,6 +124,15 @@
             <li>Copyright &copy; KimmyLeo</li>
         </ul>
     </footer>
+    <script type="text/javascript">
+        document.querySelectorAll(".disabled-link").forEach(elem => {
+            elem.addEventListener("click", (e) => {
+                alert("链接页面不存在！");
+
+                e.preventDefault();
+            })
+        })
+    </script>
 </body>
 
 </html>

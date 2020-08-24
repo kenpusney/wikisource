@@ -4,8 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wiki</title>
-    <style type="text/css">
+    
+        <title>JSONSpec: Build a well-typed Web.</title>
+    
+        <style type="text/css">
         body {
             width: 60%;
             margin: 0 auto;
@@ -30,6 +32,11 @@
 
         a:hover {
             color: darkgray;
+        }
+
+        a.disabled-link {
+            color: lightcoral;
+            text-decoration: line-through;
         }
 
         nav, nav ul {
@@ -85,7 +92,7 @@
     </header>
     <article>
         <blockquote>
-<p>原文发布于 2015年5月2日 我的Lofter：<a href="http://kimleo.lofter.com/post/46977_6d03e67">http://kimleo.lofter.com/post/46977_6d03e67</a></p>
+<p>原文发布于 2015年5月2日 我的Lofter：<a href="http://kimleo.lofter.com/post/46977_6d03e67" title="undefined">http://kimleo.lofter.com/post/46977_6d03e67</a></p>
 </blockquote>
 <p>开始写这篇文章的时候忽然想到了我之前设计的Lispairs。也就是那个时候，我开始思考，关于数据、表示、约束和语义：JSON格式的不足，XML属性的必要性，以及如何用List表示一切结构。</p>
 <p>刚好是在跟一群朋友交流REST服务以及交互接口的时候，想起了Google JSON style guide里面表示JSON格式类型的一个方式。加上本来自觉对类型和形式约束有些简单的理解，于是就想到，定义一种提供JSON格式的数据约束的方式，来解决我们可能遇到的问题。</p>
@@ -151,6 +158,15 @@
             <li>Copyright &copy; KimmyLeo</li>
         </ul>
     </footer>
+    <script type="text/javascript">
+        document.querySelectorAll(".disabled-link").forEach(elem => {
+            elem.addEventListener("click", (e) => {
+                alert("链接页面不存在！");
+
+                e.preventDefault();
+            })
+        })
+    </script>
 </body>
 
 </html>

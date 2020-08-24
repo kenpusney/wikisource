@@ -4,8 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wiki</title>
-    <style type="text/css">
+    
+        <title>JSONSpec</title>
+    
+        <style type="text/css">
         body {
             width: 60%;
             margin: 0 auto;
@@ -30,6 +32,11 @@
 
         a:hover {
             color: darkgray;
+        }
+
+        a.disabled-link {
+            color: lightcoral;
+            text-decoration: line-through;
         }
 
         nav, nav ul {
@@ -69,7 +76,7 @@
 
     <header>
         
-            <h1>Wiki</h1>
+            <h1>JSONSpec</h1>
         
         <nav>
             <ul>
@@ -88,14 +95,14 @@
 <p>Here is a list of articles I wrote in 2015, which briefly discribed
 the idea of JSONSpec, a specification framework for data / services.</p>
 <ul>
-<li><a href="http://kimleo.lofter.com/post/46977_6d03e67">JSONSpec: Build a Well-typed Web</a></li>
-<li><a href="http://kimleo.lofter.com/post/46977_6e75c68">JSONSpec: Build an Enhanced Service</a></li>
-<li><a href="http://kimleo.lofter.com/post/46977_7468038">TypeSpec: TypeScript based JSONSpec</a></li>
-<li><a href="http://kimleo.lofter.com/post/46977_791b281">JSONSpec: Workflow as a service</a></li>
-<li><a href="http://kimleo.lofter.com/post/46977_7c0165f">JSONSpec: AST as a service</a></li>
-<li><a href="http://kimleo.lofter.com/post/46977_7d65f99">JSONSpec: Data driven design</a></li>
-<li><a href="http://kimleo.lofter.com/post/46977_7ddad6a">JSONSpec: Next step</a></li>
-<li><a href="http://kimleo.lofter.com/post/46977_7e28c65">JSONSpec: Why spec?</a></li>
+<li><a href="http://kimleo.lofter.com/post/46977_6d03e67" title="null">JSONSpec: Build a Well-typed Web</a></li>
+<li><a href="http://kimleo.lofter.com/post/46977_6e75c68" title="null">JSONSpec: Build an Enhanced Service</a></li>
+<li><a href="http://kimleo.lofter.com/post/46977_7468038" title="null">TypeSpec: TypeScript based JSONSpec</a></li>
+<li><a href="http://kimleo.lofter.com/post/46977_791b281" title="null">JSONSpec: Workflow as a service</a></li>
+<li><a href="http://kimleo.lofter.com/post/46977_7c0165f" title="null">JSONSpec: AST as a service</a></li>
+<li><a href="http://kimleo.lofter.com/post/46977_7d65f99" title="null">JSONSpec: Data driven design</a></li>
+<li><a href="http://kimleo.lofter.com/post/46977_7ddad6a" title="null">JSONSpec: Next step</a></li>
+<li><a href="http://kimleo.lofter.com/post/46977_7e28c65" title="null">JSONSpec: Why spec?</a></li>
 </ul>
 <p>I am now trying to summarize all of these ideas and trying to build
 JSONSpec v2, and using it in various my own projects.</p>
@@ -118,6 +125,15 @@ JSONSpec v2, and using it in various my own projects.</p>
             <li>Copyright &copy; KimmyLeo</li>
         </ul>
     </footer>
+    <script type="text/javascript">
+        document.querySelectorAll(".disabled-link").forEach(elem => {
+            elem.addEventListener("click", (e) => {
+                alert("链接页面不存在！");
+
+                e.preventDefault();
+            })
+        })
+    </script>
 </body>
 
 </html>

@@ -4,8 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wiki</title>
-    <style type="text/css">
+    
+        <title>BS C++ 论文笔记</title>
+    
+        <style type="text/css">
         body {
             width: 60%;
             margin: 0 auto;
@@ -30,6 +32,11 @@
 
         a:hover {
             color: darkgray;
+        }
+
+        a.disabled-link {
+            color: lightcoral;
+            text-decoration: line-through;
         }
 
         nav, nav ul {
@@ -85,7 +92,7 @@
     </header>
     <article>
         <h2 id="hopl-4">HOPL 4</h2>
-<h3 id="-c-with-classes">背景：C with Classes</h3>
+<h3 id="背景：c-with-classes">背景：C with Classes</h3>
 <p>选择C语言，因为足够好并且有良好的支持：因为DMR和Brain Kernighan的办公室跟BS在同一走廊。</p>
 <p>C with Classes：最先加入的是构造器(new function)和析构器(delete function)。这也是C++至今都非常重要而且具有特色的一个功能（real heart of C++）。</p>
 <p>C++引导加入了函数参数类型检测，同时被C吸收，成为了“函数原型”。</p>
@@ -100,9 +107,9 @@ C++从来没有声称过是一门面向对象的语言（但当年的新编程�
 <li>支持泛型编程”</li>
 </ul>
 <p>这依然是最准确的对C++的描述。当然相对“Everything is an object”来说，没那么吸引人。</p>
-<h3 id="-">第二个十年</h3>
+<h3 id="第二个十年">第二个十年</h3>
 <p>主要是朝着工程化和标准化挺进：</p>
-<h4 id="-">语言特性</h4>
+<h4 id="语言特性">语言特性</h4>
 <ul>
 <li>模板</li>
 <li>异常</li>
@@ -112,7 +119,7 @@ C++从来没有声称过是一门面向对象的语言（但当年的新编程�
 <li>bool</li>
 </ul>
 <p>当然最重要的是RAII。</p>
-<h4 id="-">标准库</h4>
+<h4 id="标准库">标准库</h4>
 <ul>
 <li>STL</li>
 <li>特性（Traits）</li>
@@ -173,7 +180,7 @@ C++从来没有声称过是一门面向对象的语言（但当年的新编程�
 <li>Relfection</li>
 <li>Concurrency primitives in the language (not in a library)</li>
 </ol>
-<h4 id="-c-">已经进入了讨论是否要抛弃C++的阶段</h4>
+<h4 id="已经进入了讨论是否要抛弃c的阶段">已经进入了讨论是否要抛弃C++的阶段</h4>
 <p>原因：现代编程语言都是由一家控制并维护，C++仍处于传统的多个supplier维护，脱离于具体依赖的操作系统。</p>
 <p>例子：</p>
 <ul>
@@ -193,7 +200,7 @@ C++从来没有声称过是一门面向对象的语言（但当年的新编程�
 </ul>
 </li>
 </ul>
-<h4 id="-boost">希望：Boost</h4>
+<h4 id="希望：boost">希望：Boost</h4>
 <p>Boost一定程度上推进了C++的进化，非常像是C++的一个标准试验田。</p>
 <ul>
 <li>regex</li>
@@ -202,7 +209,7 @@ C++从来没有声称过是一门面向对象的语言（但当年的新编程�
 <li>variant</li>
 <li>file system</li>
 </ul>
-<h3 id="-">相互影响</h3>
+<h3 id="相互影响">相互影响</h3>
 <p>借鉴自其他编程语言的概念：</p>
 <ul>
 <li>auto</li>
@@ -224,7 +231,7 @@ C++从来没有声称过是一门面向对象的语言（但当年的新编程�
 <li>Lifetime based on Ctors &amp; Dtors：Rust（但比较逗的是现在很多人觉得C++借鉴了Rust这个概念）</li>
 <li>对C的反哺</li>
 </ul>
-<h3 id="c-11-">C++11：感觉就是个新语言</h3>
+<h3 id="c11：感觉就是个新语言">C++11：感觉就是个新语言</h3>
 <p>语言特性：</p>
 <ul>
 <li>内存模型</li>
@@ -272,7 +279,7 @@ C++从来没有声称过是一门面向对象的语言（但当年的新编程�
 <li>支持更方便地构建库</li>
 <li>提供一些方便的标准库组件</li>
 </ul>
-<h3 id="c-14-c-11">C++14：完善C++11</h3>
+<h3 id="c14：完善c11">C++14：完善C++11</h3>
 <ul>
 <li>二进制字面量和数值分隔符</li>
 <li>变量模板</li>
@@ -284,7 +291,7 @@ C++从来没有声称过是一门面向对象的语言（但当年的新编程�
 <li>标准库提供预定义的用户自定义字面量</li>
 </ul>
 <h3 id="concepts">Concepts</h3>
-<h4 id="-">史前时代</h4>
+<h4 id="史前时代">史前时代</h4>
 <p>C++模板设计的时候主要希望实现泛型编程，并且具备以下特性：</p>
 <ul>
 <li>完整的通用性和表达能力</li>
@@ -309,7 +316,7 @@ C++从来没有声称过是一门面向对象的语言（但当年的新编程�
 <li>使用auto作为最基本的约束类型</li>
 <li>提供了统一函数调用（uniform function call）的支持</li>
 </ul>
-<h4 id="c-0x-concepts">C++0x Concepts</h4>
+<h4 id="c0x-concepts">C++0x Concepts</h4>
 <p>C++0x的Concepts来自于不同两拨人达成一致后的设计成果：一波是“印第安纳派”，Andrew Lumsdaine和Dogulas Gregor，其想法是把concept作为建模工具；一波是“德克萨斯派”，Bjarne Stroustrup和Gabriel Dos Reis，想法是把concept作为类型约束。</p>
 <p>这两者思路合并以后也就成了后面的一系列问题。</p>
 <p>C++0x的定义非常像一个类结构。使用起来比较简单，把Concept作为模板的约束（类似C#的where，后改成requires）或者作为模板参数的约束。</p>
@@ -337,9 +344,9 @@ C++从来没有声称过是一门面向对象的语言（但当年的新编程�
 <li>没有定义检查（至少目前来说，没有late_check）</li>
 <li>没有axiom，至少在当前不设计</li>
 </ul>
-<h4 id="c-20-concepts">C++20 Concepts</h4>
+<h4 id="c20-concepts">C++20 Concepts</h4>
 <p>C++20的主要变动就是Concepts使用的时候的表示法，以某种形式增强了Concepts TS的语法，来避免可能存在的歧义。</p>
-<h3 id="c-17">C++17</h3>
+<h3 id="c17">C++17</h3>
 <p>语言特性：</p>
 <ul>
 <li>Constructor template argument deduction(CTAD)</li>
@@ -392,6 +399,15 @@ C++从来没有声称过是一门面向对象的语言（但当年的新编程�
             <li>Copyright &copy; KimmyLeo</li>
         </ul>
     </footer>
+    <script type="text/javascript">
+        document.querySelectorAll(".disabled-link").forEach(elem => {
+            elem.addEventListener("click", (e) => {
+                alert("链接页面不存在！");
+
+                e.preventDefault();
+            })
+        })
+    </script>
 </body>
 
 </html>

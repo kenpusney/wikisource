@@ -4,8 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wiki</title>
-    <style type="text/css">
+    
+        <title>JSONSpec: AST as a Service</title>
+    
+        <style type="text/css">
         body {
             width: 60%;
             margin: 0 auto;
@@ -30,6 +32,11 @@
 
         a:hover {
             color: darkgray;
+        }
+
+        a.disabled-link {
+            color: lightcoral;
+            text-decoration: line-through;
         }
 
         nav, nav ul {
@@ -85,9 +92,9 @@
     </header>
     <article>
         <blockquote>
-<p>原文发表于 2015-07-27，我的lofter：<a href="http://kimleo.lofter.com/post/46977_7c0165f">http://kimleo.lofter.com/post/46977_7c0165f</a></p>
+<p>原文发表于 2015-07-27，我的lofter：<a href="http://kimleo.lofter.com/post/46977_7c0165f" title="undefined">http://kimleo.lofter.com/post/46977_7c0165f</a></p>
 </blockquote>
-<p>今晚刚刚设置好自己的Medium账户，然后就看到了<a href="https://medium.com/relevant-stories/rel-chapter-1-907ff616bf80">这篇文章</a>（原链接已失效），遂想起来之前关于Workflow的想法，以及一直在纠结究竟要不要提出的概念：AST as a Service。</p>
+<p>今晚刚刚设置好自己的Medium账户，然后就看到了<a href="https://medium.com/relevant-stories/rel-chapter-1-907ff616bf80" title="null">这篇文章</a>（原链接已失效），遂想起来之前关于Workflow的想法，以及一直在纠结究竟要不要提出的概念：AST as a Service。</p>
 <p>当然，Adolfo Rodriguez关于Relevant的这篇文章，仍然更像是把JSON作为描述Workflow的语言（参见其GitHub Repo），而且依据我们之前的论述，一个语言只要满足Repeating、Branching和Reference就能够完成大多数任务了。</p>
 <p>然而问题究竟在哪儿呢？</p>
 <p>首先是关于是否有必要在请求的结果中描述逻辑的问题。</p>
@@ -145,6 +152,15 @@ if(foo) {
             <li>Copyright &copy; KimmyLeo</li>
         </ul>
     </footer>
+    <script type="text/javascript">
+        document.querySelectorAll(".disabled-link").forEach(elem => {
+            elem.addEventListener("click", (e) => {
+                alert("链接页面不存在！");
+
+                e.preventDefault();
+            })
+        })
+    </script>
 </body>
 
 </html>

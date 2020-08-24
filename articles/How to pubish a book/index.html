@@ -4,8 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wiki</title>
-    <style type="text/css">
+    
+        <title>怎样出书</title>
+    
+        <style type="text/css">
         body {
             width: 60%;
             margin: 0 auto;
@@ -30,6 +32,11 @@
 
         a:hover {
             color: darkgray;
+        }
+
+        a.disabled-link {
+            color: lightcoral;
+            text-decoration: line-through;
         }
 
         nav, nav ul {
@@ -85,7 +92,7 @@
     </header>
     <article>
         <blockquote>
-<p>原文发表于 2014-03-08，我的豆瓣日记，用于回复知乎的问题：<a href="https://www.zhihu.com/question/22949396">薛非写的《品悟C》是一本什么样的书？</a></p>
+<p>原文发表于 2014-03-08，我的豆瓣日记，用于回复知乎的问题：<a href="https://www.zhihu.com/question/22949396" title="null">薛非写的《品悟C》是一本什么样的书？</a></p>
 </blockquote>
 <p>好吧，无论从哪些方面来看我都不适合讨论这个主题：我从来没有出过书（包括使用其他的笔名）；看过的书虽然超过了30本，但也远不如某些友邻多；而且迄今为止保留下来的文字还没有鲁迅先生的半年的日记多。不过，鉴于当前的潮流，作为如此一个人，虽没有正式的经验，我反倒可以拿出些东西来说说。</p>
 <p>当然，出书第一个就是要“立论”的：究竟这本书你要写什么，出于什么目的，必然是要明确的。虽然在微博、知乎等社交媒体出现之后，要进行骂战、进行批判远比当年方便的多了，但如果真得有必要，这反倒是一个非常正当的出书目的：通过挑别人的刺儿来为自己正名，更能唤醒那些被蛊惑的大众，一石三鸟之法。当然，也并不一定非要如此，毕竟还是有些人是在满怀热情的写书来将自己多年的心血抒寓其中，作为对他人警醒教育的良作。但总的说来，无论目的如何，总得有这个目的，来作为该书的总纲领，以指导后事。</p>
@@ -117,6 +124,15 @@
             <li>Copyright &copy; KimmyLeo</li>
         </ul>
     </footer>
+    <script type="text/javascript">
+        document.querySelectorAll(".disabled-link").forEach(elem => {
+            elem.addEventListener("click", (e) => {
+                alert("链接页面不存在！");
+
+                e.preventDefault();
+            })
+        })
+    </script>
 </body>
 
 </html>

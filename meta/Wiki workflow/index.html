@@ -4,8 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wiki</title>
-    <style type="text/css">
+    
+        <title>Wiki workflow</title>
+    
+        <style type="text/css">
         body {
             width: 60%;
             margin: 0 auto;
@@ -30,6 +32,11 @@
 
         a:hover {
             color: darkgray;
+        }
+
+        a.disabled-link {
+            color: lightcoral;
+            text-decoration: line-through;
         }
 
         nav, nav ul {
@@ -69,7 +76,7 @@
 
     <header>
         
-            <h1>Wiki</h1>
+            <h1>Wiki workflow</h1>
         
         <nav>
             <ul>
@@ -85,7 +92,7 @@
     </header>
     <article>
         <h1 id="workflow-of-this-wiki">Workflow of this wiki</h1>
-<p>The normal way of create a new wiki item is just add a new <a href="/CNMD" title="CNMD">CNMD</a> page, and then publish,
+<p>The normal way of create a new wiki item is just add a new <a href="#" class="disabled-link">CNMD</a> page, and then publish,
 it will be accessible from anywhere of this wiki using the cross-notation reference.</p>
 <p>But for more complicated items, it may belongs to some specific category, like, an article, or
 a source code snippet. I use folders as categories, and then can using folder name as the namespace
@@ -93,10 +100,12 @@ for all items in that category, and README.cn.md document under that folder will
 the category.</p>
 <p>Also I&#39;ve created a utility script to complete the workflow.</p>
 <p>e.g. if you want to create a new category:</p>
-<pre><code>./wiki new category entity</code></pre><p>then you trying to add item into that category:</p>
-<pre><code>./wiki new entity &quot;Wiki Item&quot;</code></pre><p>then go to <code>./cnmd/entity/Wiki Item.cn.md</code> edit the content.</p>
+<pre><code>./wiki new category entity</code></pre>
+<p>then you trying to add item into that category:</p>
+<pre><code>./wiki new entity &quot;Wiki Item&quot;</code></pre>
+<p>then go to <code>./cnmd/entity/Wiki Item.cn.md</code> edit the content.</p>
 <p>All detailed code is in <code>wiki</code> script of <a href="https://github.com/kenpusney/wiki" title="kenpusney/wiki">kenpusney/wiki</a> repository.</p>
-<h2 id="-wiki-program-reference"><code>./wiki</code> program reference</h2>
+<h2 id="wiki-program-reference"><code>./wiki</code> program reference</h2>
 <ul>
 <li><code>./wiki new &lt;item&gt;</code>, create a new toplevel wiki item</li>
 <li><code>./wiki new category &lt;cat&gt;</code> create a new wiki category</li>
@@ -131,6 +140,15 @@ git add *.json</code></pre>
             <li>Copyright &copy; KimmyLeo</li>
         </ul>
     </footer>
+    <script type="text/javascript">
+        document.querySelectorAll(".disabled-link").forEach(elem => {
+            elem.addEventListener("click", (e) => {
+                alert("链接页面不存在！");
+
+                e.preventDefault();
+            })
+        })
+    </script>
 </body>
 
 </html>

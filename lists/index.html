@@ -4,8 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wiki</title>
-    <style type="text/css">
+    
+        <title>lists</title>
+    
+        <style type="text/css">
         body {
             width: 60%;
             margin: 0 auto;
@@ -30,6 +32,11 @@
 
         a:hover {
             color: darkgray;
+        }
+
+        a.disabled-link {
+            color: lightcoral;
+            text-decoration: line-through;
         }
 
         nav, nav ul {
@@ -69,7 +76,7 @@
 
     <header>
         
-            <h1>Wiki</h1>
+            <h1>lists</h1>
         
         <nav>
             <ul>
@@ -88,7 +95,7 @@
 <p>These are collections of my favorite stuff. Part of them are hosted on external site and I&#39;ll quote them here as a link.</p>
 <h3 id="reading-lists">Reading Lists</h3>
 <ul>
-<li>C++: From Novice to Professional: <a href="https://www.douban.com/doulist/4041785/">https://www.douban.com/doulist/4041785/</a></li>
+<li>C++: From Novice to Professional: <a href="https://www.douban.com/doulist/4041785/" title="undefined">https://www.douban.com/doulist/4041785/</a></li>
 </ul>
 
         
@@ -118,6 +125,15 @@
             <li>Copyright &copy; KimmyLeo</li>
         </ul>
     </footer>
+    <script type="text/javascript">
+        document.querySelectorAll(".disabled-link").forEach(elem => {
+            elem.addEventListener("click", (e) => {
+                alert("链接页面不存在！");
+
+                e.preventDefault();
+            })
+        })
+    </script>
 </body>
 
 </html>

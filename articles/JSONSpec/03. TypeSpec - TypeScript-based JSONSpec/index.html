@@ -4,8 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wiki</title>
-    <style type="text/css">
+    
+        <title>TypeSpec: TypeScript-based JSONSpec</title>
+    
+        <style type="text/css">
         body {
             width: 60%;
             margin: 0 auto;
@@ -30,6 +32,11 @@
 
         a:hover {
             color: darkgray;
+        }
+
+        a.disabled-link {
+            color: lightcoral;
+            text-decoration: line-through;
         }
 
         nav, nav ul {
@@ -85,14 +92,14 @@
     </header>
     <article>
         <blockquote>
-<p>原文发布于 2015-06-12 我的Lofter：<a href="http://kimleo.lofter.com/post/46977_7468038">http://kimleo.lofter.com/post/46977_7468038</a></p>
+<p>原文发布于 2015-06-12 我的Lofter：<a href="http://kimleo.lofter.com/post/46977_7468038" title="undefined">http://kimleo.lofter.com/post/46977_7468038</a></p>
 </blockquote>
 <p>哦，难道你不觉得这很自然吗？</p>
 <p>毕竟TypeScript支持Union了。</p>
 <p>更何况还有VS Code这样的IDE。</p>
 <p>哦，还有一点，Service Spec的感觉跟TypeProvider（F# / FunScript）的感觉很像。</p>
 <p>就是这样。</p>
-<p>哦，还有，<a href="http://definitelytyped.org">http://definitelytyped.org</a></p>
+<p>哦，还有，<a href="http://definitelytyped.org" title="undefined">http://definitelytyped.org</a></p>
 
         
 
@@ -112,6 +119,15 @@
             <li>Copyright &copy; KimmyLeo</li>
         </ul>
     </footer>
+    <script type="text/javascript">
+        document.querySelectorAll(".disabled-link").forEach(elem => {
+            elem.addEventListener("click", (e) => {
+                alert("链接页面不存在！");
+
+                e.preventDefault();
+            })
+        })
+    </script>
 </body>
 
 </html>

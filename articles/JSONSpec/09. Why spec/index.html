@@ -4,8 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wiki</title>
-    <style type="text/css">
+    
+        <title>JSONSpec: Why spec?</title>
+    
+        <style type="text/css">
         body {
             width: 60%;
             margin: 0 auto;
@@ -30,6 +32,11 @@
 
         a:hover {
             color: darkgray;
+        }
+
+        a.disabled-link {
+            color: lightcoral;
+            text-decoration: line-through;
         }
 
         nav, nav ul {
@@ -84,9 +91,9 @@
         
     </header>
     <article>
-        <h1 id="why-spec-">Why spec?</h1>
+        <h1 id="why-spec">Why spec?</h1>
 <blockquote>
-<p>原文发表于 2015-08-12，我的lofter：<a href="http://kimleo.lofter.com/post/46977_7e28c65">http://kimleo.lofter.com/post/46977_7e28c65</a></p>
+<p>原文发表于 2015-08-12，我的lofter：<a href="http://kimleo.lofter.com/post/46977_7e28c65" title="undefined">http://kimleo.lofter.com/post/46977_7e28c65</a></p>
 </blockquote>
 <p>Specification(以下简称Spec)，是指使用特定的方式来描述一个系统（或者对象）的方法，其中涉及到该系统应有的行为和应满足的规范，同时，Spec关注的更多事系统“做什么”，而不是“怎么做”。</p>
 <ol>
@@ -115,6 +122,15 @@
             <li>Copyright &copy; KimmyLeo</li>
         </ul>
     </footer>
+    <script type="text/javascript">
+        document.querySelectorAll(".disabled-link").forEach(elem => {
+            elem.addEventListener("click", (e) => {
+                alert("链接页面不存在！");
+
+                e.preventDefault();
+            })
+        })
+    </script>
 </body>
 
 </html>
