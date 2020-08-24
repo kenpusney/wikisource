@@ -5,9 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-        <title>fpi</title>
+    <title>fpi</title>
     
-        <style type="text/css">
+    <style type="text/css">
         body {
             width: 60%;
             margin: 0 auto;
@@ -39,9 +39,11 @@
             text-decoration: line-through;
         }
 
-        nav, nav ul {
+        nav,
+        nav ul {
             display: inline;
         }
+
         .tags ul,
         footer ul {
             padding: 0;
@@ -51,7 +53,7 @@
         header h1 {
             display: inline;
         }
-        
+
         nav li,
         .tags li,
         footer li {
@@ -76,7 +78,7 @@
 
     <header>
         
-            <h1>fpi</h1>
+        <h1>fpi</h1>
         
         <nav>
             <ul>
@@ -87,7 +89,7 @@
         </nav>
         <hr>
         <span>Author: <a href="/about">KimmyLeo</a></span>
-        <span></span>
+        <span>2020-08-24</span>
         
     </header>
     <article>
@@ -357,20 +359,13 @@ bg(forward); // 8</code></pre>
 
         
 
-            <h2>当前类目下的页面：</h2>
-            
-        <ul class="post-list">
-             
-        </ul>
-        
-
     </article>
-    <div>
+    <!-- <div>
         <h5>See Also</h5>
         <ul>
             <li><a href="/about">About Me</a></li>
         </ul>
-    </div>
+    </div> -->
     <hr>
     <footer>
         <ul>
@@ -381,13 +376,10 @@ bg(forward); // 8</code></pre>
         </ul>
     </footer>
     <script type="text/javascript">
-        document.querySelectorAll(".disabled-link").forEach(elem => {
-            elem.addEventListener("click", (e) => {
-                alert("链接页面不存在！");
-
-                e.preventDefault();
-            })
-        })
+        document.querySelectorAll(".disabled-link").forEach(el => el.addEventListener("click", (e) => {
+            alert("链接页面不存在！");
+            e.preventDefault();
+        }))
     </script>
 </body>
 
