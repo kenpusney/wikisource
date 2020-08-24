@@ -5,11 +5,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <% if (locals.title) { %>
-        <title><%- title %></title>
+    <title><%- title %></title>
     <% } else { %>
-        <title>Wiki</title>
+    <title>Wiki</title>
     <% } %>
-        <style type="text/css">
+    <style type="text/css">
         body {
             width: 60%;
             margin: 0 auto;
@@ -41,9 +41,11 @@
             text-decoration: line-through;
         }
 
-        nav, nav ul {
+        nav,
+        nav ul {
             display: inline;
         }
+
         .tags ul,
         footer ul {
             padding: 0;
@@ -53,7 +55,7 @@
         header h1 {
             display: inline;
         }
-        
+
         nav li,
         .tags li,
         footer li {
@@ -78,9 +80,9 @@
 
     <header>
         <% if (locals.title) { %>
-            <h1><%- title %></h1>
+        <h1><%- title %></h1>
         <% } else { %>
-            <h1>Wiki</h1>
+        <h1>Wiki</h1>
         <% } %>
         <nav>
             <ul>
@@ -104,24 +106,26 @@
     </header>
     <article>
         <%- body %>
-        <% if(file.endsWith("README.md")) { %>
-
-            <h2>当前类目下的页面：</h2>
-            
+        <% if(file.endsWith("README.md")&&posts.length > 0) { %>
+        <h2>当前类目下的页面：</h2>
         <ul class="post-list">
             <% posts.forEach(p => { %>
-                <li><h3><a href="/<%- p.visitPath %>"><%- p.title ? p.title : p.fileName %><%- p.isCategory ? "/" : "" %></a><small> <%- p.date ? p.date : "" %> </small></h3></li>
-            <% }) %> 
+            <li>
+                <h3><a
+                        href="/<%- p.visitPath %>"><%- p.title ? p.title : p.fileName %><%- p.isCategory ? "/" : "" %></a><small>
+                        <%- p.date ? p.date : "" %> </small></h3>
+            </li>
+            <% }) %>
         </ul>
         <% } %>
 
     </article>
-    <div>
+    <!-- <div>
         <h5>See Also</h5>
         <ul>
             <li><a href="/about">About Me</a></li>
         </ul>
-    </div>
+    </div> -->
     <hr>
     <footer>
         <ul>
@@ -132,13 +136,10 @@
         </ul>
     </footer>
     <script type="text/javascript">
-        document.querySelectorAll(".disabled-link").forEach(elem => {
-            elem.addEventListener("click", (e) => {
-                alert("链接页面不存在！");
-
-                e.preventDefault();
-            })
-        })
+        document.querySelectorAll(".disabled-link").forEach(el => el.addEventListener("click", (e) => {
+            alert("链接页面不存在！");
+            e.preventDefault();
+        }))
     </script>
 </body>
 

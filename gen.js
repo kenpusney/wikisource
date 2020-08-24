@@ -34,6 +34,10 @@ function loadFileContent(file, registry) {
     if (!registry[file]) {
 
         const text = fs.readFileSync(file, { encoding: "utf-8" });
+        const stat = fs.statSync(file);
+
+
+
         const visitPathStartsAt = "content/".length;
         const relativePath = file.substring(visitPathStartsAt);
 
@@ -66,6 +70,8 @@ function loadFileContent(file, registry) {
 
         if (content.attributes.date) {
             content.attributes.date = moment(content.attributes.date).format("YYYY-MM-DD");
+        } else {
+            content.attributes.date = moment(stat.mtime).format("YYYY-MM-DD");
         }
 
         registry[file] = {
@@ -91,16 +97,18 @@ function render(wikiItem, posts) {
 
     const cnmdR = new cnmd.CnmdRenderer({
         ...cnmd.CnmdRenderer.default_handlers,
-        "": (postfix, r) => posts[postfix] ? 
+        "": (postfix, r) => posts[postfix] ?
             r(postfix.startsWith(".") ? `../${postfix}` : `/${postfix}`, posts[postfix].title) :
             `<a href="#" class="disabled-link">${postfix}</a>`,
     })
 
-    marked.use({ renderer: {
-        link(href, title, text) {
-            return cnmdR.link(href, title, text);
+    marked.use({
+        renderer: {
+            link(href, title, text) {
+                return cnmdR.link(href, title, text);
+            }
         }
-    } });
+    });
 
     const data = {
         ...wikiItem,
@@ -133,7 +141,7 @@ const WIKI = {
 }
 
 
-function loadWikiData(files, { tags, posts }) {
+function loadWikiData(files, wiki) {
     files.forEach(file => {
         const content = loadFileContent(file, registry);
         const post = {
@@ -143,13 +151,13 @@ function loadWikiData(files, { tags, posts }) {
             target: "public/" + content.visitPath + "/index.html"
         }
 
-        posts[content.visitPath] = post;
+        wiki.posts[content.visitPath] = post;
 
         if (post.tags) {
             fillTags(tags, post);
         }
     });
-    return Object.values(posts);
+    return Object.values(wiki.posts);
 }
 
 function fillTags(tags, post) {
@@ -171,6 +179,10 @@ if (require.main === module) {
             render(item, posts).then(result => {
                 save(item.target, result);
             });
+        })
+
+        ejs.renderFile("sitemap.xml.ejs", { posts: Object.values(posts) }).then(result => {
+            save("public/sitemap.xml", result);
         })
     });
 
