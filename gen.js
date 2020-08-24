@@ -5,6 +5,8 @@ const cnmd = require("cnmd");
 const ejs = require("ejs");
 const marked = require("marked");
 
+const _ = require('lodash');
+
 const fs = require('fs');
 const path = require('path').posix;
 
@@ -23,9 +25,9 @@ function copyToPublic(file) {
 }
 
 function postsInFolder(category, allWikiItems) {
-    return allWikiItems.filter(item => {
+    return _.reverse(_.sortBy(allWikiItems.filter(item => {
         return item.parentName === category && !(item.draft === true);
-    })
+    }), item => item.date));
 }
 
 const registry = {};

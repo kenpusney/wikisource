@@ -24,4 +24,4 @@ and to enterprise:
 
 ### Contact me
 
-You can contact me via email: [kimmy@typecons.com](mailto:kimmy@typecons.com?subject=Consulting%20From%20Wiki)
+You can contact me via email: [kimmy📧typecons.com](mailto:kimmy📧typecons.com?subject=Consulting%20From%20Wiki)
