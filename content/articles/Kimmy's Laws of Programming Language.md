@@ -12,7 +12,7 @@ date: 2014-11-22
 其他表述：
 
 > 一切编程语言都是面向特定领域（Domain-Specific）的。
-> （见[《如何设计编程语言》]({{< relref "/articles/htdpl/01. How To Design Programming Language.md" >}})
+> （见[:articles/htdpl/01. How To Design Programming Language]()
 
 示例：
 - Go

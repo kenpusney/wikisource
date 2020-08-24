@@ -7,16 +7,6 @@ date: 2019-04-29
 
 ### JSONSpec
 
-01. [JSONSpec: Build a well-typed Web]({{< relref "/articles/JSONSpec/01. Build a well-typed Web.md" >}})
-02. [JSONSpec: Build an enhanced service]({{< relref "/articles/JSONSpec/02. Build an enhanced service.md" >}})
-03. [JSONSpec: TypeSpec - Typescript-based JSONSpec]({{< relref "/articles/JSONSpec/03. TypeSpec - Typescript-based JSONSpec.md" >}})
-04. [JSONSpec: Workflow as a Service]({{< relref "/articles/JSONSpec/04. Workflow as a Service.md" >}})
-05. [JSONSpec: AST as a Service]({{< relref "/articles/JSONSpec/05. AST as a Service.md" >}})
-06. [JSONSpec: Data Driven Design]({{< relref "/articles/JSONSpec/06. Data Driven Design.md" >}})
-07. [JSONSpec: Next step]({{< relref "/articles/JSONSpec/07. Next step.md" >}})
-08. [JSONSpec: GraphQL]({{< relref "/articles/JSONSpec/08. GraphQL.md" >}})
-09. [JSONSpec: Why spec]({{< relref "/articles/JSONSpec/09. Why spec.md" >}})
-
 这个目录里的是一系列我个人于2015年5月到8月之间发表的关于Web接口、服务和后端应用设计的一系列文章。这个思考过程也逐渐影响了我工作中所使用和坚持的一些实践，比如 Schema First，比如偏好强类型和显示标注的接口设计，比如使用从 RAML / Swagger 到 GraphQL 这些框架和工具。
 
 实践证明这也是一个明显的趋势，从Web端TypeScript的逐步火热，到Schema First的设计逐渐流行，都说明了，类型、Specification等在编程活动中起到了非常重要的作用：建模、验证和生成代码以及测试工具，都有各种对应的轮子。我个人也挖了不少坑来辅助这件事儿。（见对应文章 Why Spec）
