@@ -6,8 +6,6 @@ const { highlightAuto } = require("highlight.js");
 
 test("should run test", () => {
     expect(1 + 2).toBe(3);
-
-    console.log(highlightAuto("<pre class='language-c++'>class</pre>"));
 });
 
 test("copy file", () => {
@@ -23,9 +21,9 @@ test("load README file content", () => {
 
 
     expect(content.isCategory).toBeTruthy();
-    expect(content.visitPath).toBe(".");
+    expect(content.visitPath).toBe("");
     expect(content.parentName).toBe("..");
-    expect(content.fileName).toBe(".");
+    expect(content.fileName).toBe("");
 });
 
 test("load plain file content", () => {
@@ -33,7 +31,7 @@ test("load plain file content", () => {
 
     expect(content.isCategory).toBeFalsy();
     expect(content.visitPath).toBe("about");
-    expect(content.parentName).toBe(".");
+    expect(content.parentName).toBe("");
     expect(content.fileName).toBe("about")
 });
 
@@ -43,7 +41,7 @@ test("load second level README content", () => {
     expect(content.isCategory).toBeTruthy();
     expect(content.fileName).toBe("articles");
     expect(content.visitPath).toBe("articles");
-    expect(content.parentName).toBe(".");
+    expect(content.parentName).toBe("");
 });
 
 test("load second level file content", () => {
