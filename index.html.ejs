@@ -32,6 +32,8 @@
 
         span.field {
             display: inline-block;
+            font-weight: bolder;
+            font-size: smaller;
         }
 
         pre {
@@ -129,8 +131,6 @@
         </nav>
         <hr>
         <span class="field">Author: <a href="/about">KimmyLeo</a></span>
-        <span class="field">创建时间：<%- date %></span>
-        <span class="field">最近更新时间：<%- updateDate %></span>
         <% if(locals.tags) { %>
         <div class="tags"><span>标签：</span>
             <ul>
@@ -163,6 +163,8 @@
             <li><a href="/about">About Me</a></li>
         </ul>
     </div> -->
+    <span class="field">创建时间：<%- date %></span>
+    <span class="field">最近更新时间：<%- updateDate %></span>
     <hr>
     <footer>
         <ul>
