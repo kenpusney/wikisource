@@ -1,5 +1,7 @@
-CNMD Notations
-========
+---
+title: CNMD 标记语法
+date: 2017-01-17
+---
 
 CNMD, aka Cross Notation Markdown, is a syntax extension for Markdown.
 

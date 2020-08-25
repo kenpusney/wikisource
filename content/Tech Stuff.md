@@ -1,3 +1,7 @@
+---
+title: 技术类话题
+date: 2016-11-30
+---
 # Tech Stuffs
 
 This is a glossry of technical stuff on this wiki.

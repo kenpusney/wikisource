@@ -1,5 +1,7 @@
-Meta wiki
-===========
+---
+title: Meta wiki
+date: 2017-01-17
+---
 
 This is the document of this wiki and its utility to generate this wiki site.
 

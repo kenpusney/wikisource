@@ -1,5 +1,6 @@
 ---
 title: "Kimmy's Wiki"
+date: 2014-02-26
 ---
 
 

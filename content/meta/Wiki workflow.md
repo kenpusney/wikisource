@@ -1,5 +1,8 @@
-Workflow of this wiki
-==========
+---
+title: Workflow of this wiki
+date: 2017-01-17
+deprecated: true
+---
 
 The normal way of create a new wiki item is just add a new [:CNMD]() page, and then publish,
 it will be accessible from anywhere of this wiki using the cross-notation reference.

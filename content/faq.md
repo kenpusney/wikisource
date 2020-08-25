@@ -1,6 +1,7 @@
-FAQ
-======
-
+---
+title: FAQ
+date: 2016-05-05
+---
 
 ## Site related
 

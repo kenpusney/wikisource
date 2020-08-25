@@ -1,3 +1,7 @@
+---
+title: NG
+date: 2016-05-05
+---
 NG: Next generation Programming language
 ======
 
