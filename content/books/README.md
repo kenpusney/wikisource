@@ -10,4 +10,4 @@ date: 2018-08-14
  - [:books/eoad]() 敏捷开发要素 Element of Agile Development
  - [:books/bhoc]() 计算机简史 A Brief History of Computer
  
-我也参与翻译创作了其他的出版书籍，请参考[:publications]()。
+我也参与翻译创作了其他的出版书籍，请参考[:books/publications]()。
