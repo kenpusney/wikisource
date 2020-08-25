@@ -13,7 +13,12 @@
     <title>Kimmy's Wiki</title>
     
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
+        media="(prefers-color-scheme: light)">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/dracula.min.css"
+        media="(prefers-color-scheme: dark)">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
+        media="(prefers-color-scheme: no-preference)">
     <style type="text/css">
         body {
             width: 60%;
@@ -37,6 +42,8 @@
         pre {
             max-width: 90%;
             overflow-x: scroll;
+            padding: 1em;
+            border-radius: 5px;
         }
 
         a {
@@ -86,6 +93,7 @@
                 padding: 0;
                 margin: 1em auto;
             }
+
             header h1 {
                 max-width: 90%;
                 width: 90%;
@@ -96,7 +104,7 @@
         .tags li,
         footer li {
             display: inline;
-            border-right: 1px solid black;
+            border-right: 1px solid darkgray;
             padding: 0 1em;
         }
 
@@ -115,6 +123,17 @@
             border: 1px dotted darkgrey;
             border-radius: 0.5em;
             padding: 0 1em;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            body {
+                background-color: #090810;
+                color: floralwhite;
+            }
+
+            pre {
+                background-color: #282a36;
+            }
         }
     </style>
 </head>
@@ -138,7 +157,7 @@
     </header>
     <article>
         <p>欢迎来到我的Wiki。这次又更新了。从原本的SPA变成了由<del>hugo</del><strong>手写生成器</strong>生成的纯静态站点。</p>
-<p>下面是来自于我的<a href="https://zhuanlan.zhihu.com/lessmore" title="null">知乎专栏</a>、微信公众号（kimmyfun / lightych）、豆瓣和我的原博客的部分文章集合。因为有些文章是在此以草稿的形式编辑完后发布到不同平台的，所以内容上会有些稍许差异。</p>
+<p>本站包含了来自于我的<a href="https://zhuanlan.zhihu.com/lessmore" title="null">知乎专栏</a>、微信公众号（kimmyfun / lightych）、豆瓣和我的原博客的部分文章集合。因为有些文章是在此以草稿的形式编辑完后发布到不同平台的，所以内容上会有些稍许差异。</p>
 
         
         <h2>当前类目下的页面：</h2>

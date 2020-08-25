@@ -13,7 +13,12 @@
     <title>API Gotchas</title>
     
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
+        media="(prefers-color-scheme: light)">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/dracula.min.css"
+        media="(prefers-color-scheme: dark)">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
+        media="(prefers-color-scheme: no-preference)">
     <style type="text/css">
         body {
             width: 60%;
@@ -37,6 +42,8 @@
         pre {
             max-width: 90%;
             overflow-x: scroll;
+            padding: 1em;
+            border-radius: 5px;
         }
 
         a {
@@ -86,6 +93,7 @@
                 padding: 0;
                 margin: 1em auto;
             }
+
             header h1 {
                 max-width: 90%;
                 width: 90%;
@@ -96,7 +104,7 @@
         .tags li,
         footer li {
             display: inline;
-            border-right: 1px solid black;
+            border-right: 1px solid darkgray;
             padding: 0 1em;
         }
 
@@ -115,6 +123,17 @@
             border: 1px dotted darkgrey;
             border-radius: 0.5em;
             padding: 0 1em;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            body {
+                background-color: #090810;
+                color: floralwhite;
+            }
+
+            pre {
+                background-color: #282a36;
+            }
         }
     </style>
 </head>
