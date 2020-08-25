@@ -699,7 +699,7 @@
 
     <url>
         <loc>http://wiki.kimleo.net/books/bhoc/holy</loc>
-        <lastmod>#N/A</lastmod>
+        <lastmod>2019-05-05</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
     </url>
@@ -708,7 +708,7 @@
 
     <url>
         <loc>http://wiki.kimleo.net/books/bhoc</loc>
-        <lastmod>#N/A</lastmod>
+        <lastmod>2018-08-14</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
     </url>
@@ -717,7 +717,7 @@
 
     <url>
         <loc>http://wiki.kimleo.net/books/eoad</loc>
-        <lastmod>#N/A</lastmod>
+        <lastmod>2018-08-14</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
     </url>
@@ -726,7 +726,7 @@
 
     <url>
         <loc>http://wiki.kimleo.net/books/fpi</loc>
-        <lastmod>#N/A</lastmod>
+        <lastmod>2020-07-17</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
     </url>
@@ -744,7 +744,7 @@
 
     <url>
         <loc>http://wiki.kimleo.net/books</loc>
-        <lastmod>#N/A</lastmod>
+        <lastmod>2018-08-14</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
     </url>
@@ -762,7 +762,7 @@
 
     <url>
         <loc>http://wiki.kimleo.net/collect/preferred-tech-practice</loc>
-        <lastmod>#N/A</lastmod>
+        <lastmod>2019-11-20</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
     </url>
@@ -771,7 +771,7 @@
 
     <url>
         <loc>http://wiki.kimleo.net/collect/protocol-design</loc>
-        <lastmod>#N/A</lastmod>
+        <lastmod>2019-04-09</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
     </url>
@@ -780,7 +780,7 @@
 
     <url>
         <loc>http://wiki.kimleo.net/collect/Python Tutorials</loc>
-        <lastmod>#N/A</lastmod>
+        <lastmod>2019-05-28</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
     </url>
@@ -789,16 +789,7 @@
 
     <url>
         <loc>http://wiki.kimleo.net/collect</loc>
-        <lastmod>#N/A</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>1.0</priority>
-    </url>
-
-    
-
-    <url>
-        <loc>http://wiki.kimleo.net/contact</loc>
-        <lastmod>2017-07-04</lastmod>
+        <lastmod>2019-04-09</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
     </url>
@@ -807,16 +798,7 @@
 
     <url>
         <loc>http://wiki.kimleo.net/docs</loc>
-        <lastmod>#N/A</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>1.0</priority>
-    </url>
-
-    
-
-    <url>
-        <loc>http://wiki.kimleo.net/economics</loc>
-        <lastmod>#N/A</lastmod>
+        <lastmod>2017-07-04</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
     </url>
@@ -833,17 +815,8 @@
     
 
     <url>
-        <loc>http://wiki.kimleo.net/history</loc>
-        <lastmod>#N/A</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>1.0</priority>
-    </url>
-
-    
-
-    <url>
         <loc>http://wiki.kimleo.net/ideas/complex</loc>
-        <lastmod>#N/A</lastmod>
+        <lastmod>2019-04-04</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
     </url>
@@ -852,7 +825,7 @@
 
     <url>
         <loc>http://wiki.kimleo.net/ideas/Music Programming Interface</loc>
-        <lastmod>#N/A</lastmod>
+        <lastmod>2017-07-04</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
     </url>
@@ -861,7 +834,7 @@
 
     <url>
         <loc>http://wiki.kimleo.net/ideas</loc>
-        <lastmod>#N/A</lastmod>
+        <lastmod>2017-07-04</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
     </url>
@@ -870,34 +843,7 @@
 
     <url>
         <loc>http://wiki.kimleo.net/ideas/ServiceBuilder</loc>
-        <lastmod>#N/A</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>1.0</priority>
-    </url>
-
-    
-
-    <url>
-        <loc>http://wiki.kimleo.net/lifestyle</loc>
-        <lastmod>#N/A</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>1.0</priority>
-    </url>
-
-    
-
-    <url>
-        <loc>http://wiki.kimleo.net/lists/links</loc>
-        <lastmod>#N/A</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>1.0</priority>
-    </url>
-
-    
-
-    <url>
-        <loc>http://wiki.kimleo.net/lists</loc>
-        <lastmod>#N/A</lastmod>
+        <lastmod>2019-05-10</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
     </url>
@@ -960,7 +906,7 @@
 
     <url>
         <loc>http://wiki.kimleo.net/notes/ml/Data Science for Beginners</loc>
-        <lastmod>#N/A</lastmod>
+        <lastmod>2019-05-10</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
     </url>
@@ -1004,35 +950,8 @@
     
 
     <url>
-        <loc>http://wiki.kimleo.net/specs/JSONSpec</loc>
-        <lastmod>#N/A</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>1.0</priority>
-    </url>
-
-    
-
-    <url>
-        <loc>http://wiki.kimleo.net/specs</loc>
-        <lastmod>#N/A</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>1.0</priority>
-    </url>
-
-    
-
-    <url>
-        <loc>http://wiki.kimleo.net/Tech Stuff</loc>
-        <lastmod>2016-11-30</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>1.0</priority>
-    </url>
-
-    
-
-    <url>
         <loc>http://wiki.kimleo.net/tech/API_Gotchas</loc>
-        <lastmod>#N/A</lastmod>
+        <lastmod>2017-11-15</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
     </url>
@@ -1041,7 +960,7 @@
 
     <url>
         <loc>http://wiki.kimleo.net/tech/Meta-programming</loc>
-        <lastmod>#N/A</lastmod>
+        <lastmod>2017-07-11</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
     </url>
@@ -1050,7 +969,7 @@
 
     <url>
         <loc>http://wiki.kimleo.net/tech/Open Source</loc>
-        <lastmod>#N/A</lastmod>
+        <lastmod>2019-04-30</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
     </url>
@@ -1059,7 +978,7 @@
 
     <url>
         <loc>http://wiki.kimleo.net/tech/Programming Language</loc>
-        <lastmod>#N/A</lastmod>
+        <lastmod>2018-05-11</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
     </url>
@@ -1068,7 +987,7 @@
 
     <url>
         <loc>http://wiki.kimleo.net/tech</loc>
-        <lastmod>#N/A</lastmod>
+        <lastmod>2016-11-30</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
     </url>
@@ -1077,7 +996,7 @@
 
     <url>
         <loc>http://wiki.kimleo.net/tech/Recursion</loc>
-        <lastmod>#N/A</lastmod>
+        <lastmod>2018-05-19</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
     </url>
@@ -1086,7 +1005,7 @@
 
     <url>
         <loc>http://wiki.kimleo.net/tech/Regex</loc>
-        <lastmod>#N/A</lastmod>
+        <lastmod>2018-09-19</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
     </url>
@@ -1095,7 +1014,7 @@
 
     <url>
         <loc>http://wiki.kimleo.net/tech/Soft delete</loc>
-        <lastmod>#N/A</lastmod>
+        <lastmod>2019-09-19</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
     </url>
@@ -1104,7 +1023,7 @@
 
     <url>
         <loc>http://wiki.kimleo.net/tech/SOLID Services</loc>
-        <lastmod>#N/A</lastmod>
+        <lastmod>2019-05-05</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
     </url>
