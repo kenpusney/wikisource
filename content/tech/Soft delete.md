@@ -1,4 +1,7 @@
-# Soft delete
+---
+date: 2019-09-19
+title: Soft delete
+---
 
 https://stackoverflow.com/questions/2549839/are-soft-deletes-a-good-idea
 https://stackoverflow.com/questions/378331/physical-vs-logical-soft-delete-of-database-record

@@ -1,6 +1,8 @@
 ---
+title: API Gotchas
 refs:
   - tech/SOLID Services
+date: 2017-11-15
 ---
 # API Gotchas
 

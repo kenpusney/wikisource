@@ -1,5 +1,7 @@
-# A Brief History of Computer 计算机简史
-
+---
+title: A Brief History of Computer 计算机简史
+date: 2018-08-14
+---
 ### 计划中的目录：
 
  - 缘起

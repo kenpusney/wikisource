@@ -1,4 +1,7 @@
-# Meta-Programming (draft)
+---
+title: Meta-Programming (draft)
+date: 2017-07-11
+---
 
 元编程，参考[wiki:Metaprogramming]()，表示一种高级的编程技巧：即，可以操纵程序的程序。
 通过把程序作为数据，读取、生成、分析和转换从而得到（特别是功能上）更加完善的程序。

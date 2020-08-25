@@ -1,4 +1,7 @@
-# Data Science for Beginners
+---
+title: Data Science for Beginners
+date: 2019-05-10
+---
 
 5 problems can be anwser:
 

@@ -1,8 +1,9 @@
 ---
+title: API/Service SOLID 原则
+date: 2019-05-05
 refs:
   - tech/API_Gotchas
 ---
-# API/Service SOLID 原则
 
 ## 单一指责原则 Single Responsibility Principle
 

@@ -1,11 +1,12 @@
 ---
+title: Recursion 递归
+date: 2018-05-19
 refs:
   - tech/Recursion
 tags:
   - recursion
   - technique
 ---
-# Recursion 递归
 
 递归，是指函数调用自身。
 

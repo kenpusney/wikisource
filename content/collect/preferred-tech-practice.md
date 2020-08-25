@@ -1,4 +1,7 @@
-# 值得参考的技术实践
+---
+title: 值得参考的技术实践
+date: 2019-11-20
+---
 
   - 极限编程核心实践：http://extremeprogramming.cn/content/xp/development.html
   - Trunk-based Development：https://trunkbaseddevelopment.com/
