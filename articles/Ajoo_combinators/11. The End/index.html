@@ -41,7 +41,7 @@
 
         nav,
         nav ul {
-            display: inline;
+            display: inline-block;
         }
 
         .tags ul,
@@ -51,7 +51,19 @@
         }
 
         header h1 {
-            display: inline;
+            display: inline-block;
+            min-width: 320px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            margin: auto;
+        }
+
+        @media screen and (max-width: 1200px) {
+            body {
+                width: 90%;
+                max-width: 720px;
+            }
         }
 
         nav li,
@@ -78,7 +90,7 @@
 
     <header>
         
-        <h1>论面向组合子程序设计方法 之十一 微步毂纹生</h1>
+        <h1 title="论面向组合子程序设计方法 之十一 微步毂纹生">论面向组合子程序设计方法 之十一 微步毂纹生</h1>
         
         <nav>
             <ul>

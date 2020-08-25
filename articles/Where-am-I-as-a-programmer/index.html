@@ -41,7 +41,7 @@
 
         nav,
         nav ul {
-            display: inline;
+            display: inline-block;
         }
 
         .tags ul,
@@ -51,7 +51,19 @@
         }
 
         header h1 {
-            display: inline;
+            display: inline-block;
+            min-width: 320px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            margin: auto;
+        }
+
+        @media screen and (max-width: 1200px) {
+            body {
+                width: 90%;
+                max-width: 720px;
+            }
         }
 
         nav li,
@@ -78,7 +90,7 @@
 
     <header>
         
-        <h1>作为一名程序员，我这属于什么水平？</h1>
+        <h1 title="作为一名程序员，我这属于什么水平？">作为一名程序员，我这属于什么水平？</h1>
         
         <nav>
             <ul>

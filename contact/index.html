@@ -41,7 +41,7 @@
 
         nav,
         nav ul {
-            display: inline;
+            display: inline-block;
         }
 
         .tags ul,
@@ -51,7 +51,19 @@
         }
 
         header h1 {
-            display: inline;
+            display: inline-block;
+            min-width: 320px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            margin: auto;
+        }
+
+        @media screen and (max-width: 1200px) {
+            body {
+                width: 90%;
+                max-width: 720px;
+            }
         }
 
         nav li,
@@ -78,7 +90,7 @@
 
     <header>
         
-        <h1>contact</h1>
+        <h1 title="contact">contact</h1>
         
         <nav>
             <ul>
@@ -89,7 +101,7 @@
         </nav>
         <hr>
         <span>Author: <a href="/about">KimmyLeo</a></span>
-        <span>2020-08-24</span>
+        <span>2020-08-25</span>
         
     </header>
     <article>
