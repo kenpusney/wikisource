@@ -5,6 +5,8 @@ const cnmd = require("cnmd");
 const ejs = require("ejs");
 const marked = require("marked");
 
+const hljs = require("highlight.js");
+
 const _ = require('lodash');
 
 const fs = require('fs');
@@ -114,7 +116,15 @@ function render(wikiItem, posts) {
 
     const data = {
         ...wikiItem,
-        body: marked(wikiItem.body),
+        body: marked(wikiItem.body, {
+            highlight: function(code, lang) {
+                if (lang && hljs.listLanguages().includes(lang)) {
+                    return hljs.highlight(lang, code, true).value;
+                } else {
+                    return hljs.highlightAuto(code).value;
+                }
+            }
+        }),
         posts: children,
     };
 

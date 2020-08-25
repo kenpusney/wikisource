@@ -2,9 +2,12 @@
 const gen = require("./gen");
 
 const fs = require('fs');
+const { highlightAuto } = require("highlight.js");
 
 test("should run test", () => {
     expect(1 + 2).toBe(3);
+
+    console.log(highlightAuto("<pre class='language-c++'>class</pre>"));
 });
 
 test("copy file", () => {
