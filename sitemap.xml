@@ -743,6 +743,15 @@
     
 
     <url>
+        <loc>http://wiki.kimleo.net/books/publications</loc>
+        <lastmod>2018-05-19</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>1.0</priority>
+    </url>
+
+    
+
+    <url>
         <loc>http://wiki.kimleo.net/books</loc>
         <lastmod>2018-08-14</lastmod>
         <changefreq>weekly</changefreq>
@@ -790,15 +799,6 @@
     <url>
         <loc>http://wiki.kimleo.net/collect</loc>
         <lastmod>2019-04-09</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>1.0</priority>
-    </url>
-
-    
-
-    <url>
-        <loc>http://wiki.kimleo.net/docs</loc>
-        <lastmod>2017-07-04</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
     </url>
@@ -896,15 +896,6 @@
     
 
     <url>
-        <loc>http://wiki.kimleo.net/non-tech</loc>
-        <lastmod>#N/A</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>1.0</priority>
-    </url>
-
-    
-
-    <url>
         <loc>http://wiki.kimleo.net/notes/ml/Data Science for Beginners</loc>
         <lastmod>2019-05-10</lastmod>
         <changefreq>weekly</changefreq>
@@ -925,15 +916,6 @@
     <url>
         <loc>http://wiki.kimleo.net/projects</loc>
         <lastmod>2016-05-10</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>1.0</priority>
-    </url>
-
-    
-
-    <url>
-        <loc>http://wiki.kimleo.net/publications</loc>
-        <lastmod>2018-05-19</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
     </url>
