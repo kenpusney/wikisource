@@ -1,5 +1,5 @@
 
-const gen = require("./gen");
+const gen = require("../gen");
 
 const fs = require('fs');
 const { highlightAuto } = require("highlight.js");

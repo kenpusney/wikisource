@@ -112,24 +112,23 @@ function render(wikiItem, posts) {
             link(href, title, text) {
                 return cnmdR.link(href, title, text);
             }
+        },
+        highlight: function(code, lang) {
+            if (lang && hljs.listLanguages().includes(lang)) {
+                return hljs.highlight(lang, code, true).value;
+            } else {
+                return hljs.highlightAuto(code).value;
+            }
         }
     });
 
     const data = {
         ...wikiItem,
-        body: marked(wikiItem.body, {
-            highlight: function(code, lang) {
-                if (lang && hljs.listLanguages().includes(lang)) {
-                    return hljs.highlight(lang, code, true).value;
-                } else {
-                    return hljs.highlightAuto(code).value;
-                }
-            }
-        }),
+        body: marked(wikiItem.body),
         posts: children,
     };
 
-    const result = ejs.renderFile("index.html.ejs", data)
+    const result = ejs.renderFile("template/index.html.ejs", data)
     return result;
 }
 
@@ -194,7 +193,7 @@ if (require.main === module) {
             });
         })
 
-        ejs.renderFile("sitemap.xml.ejs", { posts: Object.values(posts) }).then(result => {
+        ejs.renderFile("template/sitemap.xml.ejs", { posts: Object.values(posts) }).then(result => {
             save("public/sitemap.xml", result);
         })
     });
