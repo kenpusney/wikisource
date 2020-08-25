@@ -6,7 +6,7 @@
 
     <url>
         <loc>http://wiki.kimleo.net/about</loc>
-        <lastmod>2020-08-25</lastmod>
+        <lastmod>2016-05-11</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
     </url>
@@ -357,7 +357,7 @@
 
     <url>
         <loc>http://wiki.kimleo.net/articles/Import Model</loc>
-        <lastmod>2020-08-25</lastmod>
+        <lastmod>2017-01-17</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
     </url>
@@ -573,7 +573,7 @@
 
     <url>
         <loc>http://wiki.kimleo.net/articles</loc>
-        <lastmod>2020-08-25</lastmod>
+        <lastmod>2017-04-15</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
     </url>
@@ -753,7 +753,7 @@
 
     <url>
         <loc>http://wiki.kimleo.net/Code Of Conduct</loc>
-        <lastmod>2020-08-25</lastmod>
+        <lastmod>2016-11-30</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
     </url>
@@ -788,8 +788,17 @@
     
 
     <url>
-        <loc>http://wiki.kimleo.net/contact</loc>
+        <loc>http://wiki.kimleo.net/collect</loc>
         <lastmod>2020-08-25</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>1.0</priority>
+    </url>
+
+    
+
+    <url>
+        <loc>http://wiki.kimleo.net/contact</loc>
+        <lastmod>2017-07-04</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
     </url>
@@ -816,7 +825,7 @@
 
     <url>
         <loc>http://wiki.kimleo.net/faq</loc>
-        <lastmod>2020-08-25</lastmod>
+        <lastmod>2016-05-05</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
     </url>
@@ -897,7 +906,7 @@
 
     <url>
         <loc>http://wiki.kimleo.net/meta/CNMD</loc>
-        <lastmod>2020-08-25</lastmod>
+        <lastmod>2017-01-17</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
     </url>
@@ -906,7 +915,7 @@
 
     <url>
         <loc>http://wiki.kimleo.net/meta/Fork Me</loc>
-        <lastmod>2020-08-25</lastmod>
+        <lastmod>2017-07-04</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
     </url>
@@ -924,7 +933,7 @@
 
     <url>
         <loc>http://wiki.kimleo.net/meta</loc>
-        <lastmod>2020-08-25</lastmod>
+        <lastmod>2017-01-17</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
     </url>
@@ -933,7 +942,7 @@
 
     <url>
         <loc>http://wiki.kimleo.net/meta/Wiki workflow</loc>
-        <lastmod>2020-08-25</lastmod>
+        <lastmod>2017-01-17</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
     </url>
@@ -960,7 +969,7 @@
 
     <url>
         <loc>http://wiki.kimleo.net/projects/ng</loc>
-        <lastmod>2020-08-25</lastmod>
+        <lastmod>2016-05-05</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
     </url>
@@ -969,7 +978,7 @@
 
     <url>
         <loc>http://wiki.kimleo.net/projects</loc>
-        <lastmod>2020-08-25</lastmod>
+        <lastmod>2016-05-10</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
     </url>
@@ -978,7 +987,7 @@
 
     <url>
         <loc>http://wiki.kimleo.net/publications</loc>
-        <lastmod>2020-08-25</lastmod>
+        <lastmod>2018-05-19</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
     </url>
@@ -987,7 +996,7 @@
 
     <url>
         <loc>http://wiki.kimleo.net/</loc>
-        <lastmod>2020-08-25</lastmod>
+        <lastmod>2014-02-26</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
     </url>
@@ -1014,7 +1023,7 @@
 
     <url>
         <loc>http://wiki.kimleo.net/Tech Stuff</loc>
-        <lastmod>2020-08-25</lastmod>
+        <lastmod>2016-11-30</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
     </url>
@@ -1104,7 +1113,7 @@
 
     <url>
         <loc>http://wiki.kimleo.net/test</loc>
-        <lastmod>2020-08-25</lastmod>
+        <lastmod>2016-05-11</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
     </url>
