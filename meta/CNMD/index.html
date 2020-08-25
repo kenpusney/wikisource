@@ -12,6 +12,8 @@
     
     <title>CNMD</title>
     
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css">
     <style type="text/css">
         body {
             width: 60%;
@@ -24,6 +26,11 @@
                 "Roboto",
                 "Noto Sans CJK",
                 Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        pre {
+            max-width: 90%;
+            overflow-x: scroll;
         }
 
         a {
@@ -129,10 +136,10 @@ just put an <code>:</code> as a prefix, e.g. <code>[:about]()</code> (<a href="/
 <p>You can now add front-matter to include tags and refs declaration.</p>
 <pre><code class="language-markdown">---
 tags:
-  - hello world
+<span class="hljs-bullet">  -</span> hello world
 refs:
-  - meta/Fork Me
----</code></pre>
+<span class="hljs-section">  - meta/Fork Me
+---</span></code></pre>
 <h2 id="extensions-to-be-implemented">Extensions to be implemented:</h2>
 <ul>
 <li>Alias</li>

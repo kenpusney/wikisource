@@ -12,6 +12,8 @@
     
     <title>论面向组合子程序设计方法 之五 新约</title>
     
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css">
     <style type="text/css">
         body {
             width: 60%;
@@ -24,6 +26,11 @@
                 "Roboto",
                 "Noto Sans CJK",
                 Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        pre {
+            max-width: 90%;
+            overflow-x: scroll;
         }
 
         a {
@@ -146,14 +153,14 @@ java代码: </p>
 <p>5。不仅仅是log文件，我们还希望能够在标准错误输出上直接看见错误，普通的信息可以打印到log文件中，对错误信息，我们希望log文件和标准输出上都有。 </p>
 <p>可以创建针对标准输出的Logger，然后和打印log 文件的logger串联起来。 
 java代码: </p>
-<pre><code class="language-java">Logger std_logger = writer(new PrintWriter(System.err)); 
+<pre><code class="language-java">Logger std_logger = writer(<span class="hljs-keyword">new</span> PrintWriter(System.err)); 
 std_logger = ignore(ERROR, std_logger); 
 logger = sequence(std_logger, logger); </code></pre>
 <p>6。标准输出上的东西只要通知我们出错了就行，大概不需要详细的stack trace，所以exception stack trace可以打印到文件中，而屏幕上有个简短的exception的message就够了。 </p>
 <p>这里需要对std_logger稍微改写一下： 
 java代码: </p>
-<pre><code class="language-java">PrintWriter out = new PrintWriter(System.err); 
-std_logger = new ErrorMessageLogger(out, writer(out)); 
+<pre><code class="language-java">PrintWriter out = <span class="hljs-keyword">new</span> PrintWriter(System.err); 
+std_logger = <span class="hljs-keyword">new</span> ErrorMessageLogger(out, writer(out)); 
 std_logger = ignore(ERROR, std_logger, nop()); </code></pre>
 <p>用ErrorMessageLogger来改写对异常的log逻辑。 </p>
 <p>7。warning似乎也应该输出到屏幕上。 </p>
@@ -180,67 +187,67 @@ java代码: </p>
 <p>14。因为printExecutionTrace()和printEvaluationTrace()本身已经打印了这个异常的getMessage()，所以，对这两种异常，我们就不再象对待其它种类的异常那样在屏幕上打印getMessage()了，以免重复。 </p>
 <p>就是说，一旦一个exception被发现是NeptuneException，那么ErrorMessageLogger就要被跳过了。 
 java代码: </p>
-<pre><code class="language-java">    final Logger err_logger = new ErrorMessageLogger(writer); 
-    final Logger jaskell_logger = new JaskellExceptionLogger(writer, err_logger); 
-    final Logger neptune_logger = new NeptuneExceptionLogger(writer, jaskell_logger); 
-    return neptune_logger;</code></pre>
+<pre><code class="language-java">    <span class="hljs-keyword">final</span> Logger err_logger = <span class="hljs-keyword">new</span> ErrorMessageLogger(writer); 
+    <span class="hljs-keyword">final</span> Logger jaskell_logger = <span class="hljs-keyword">new</span> JaskellExceptionLogger(writer, err_logger); 
+    <span class="hljs-keyword">final</span> Logger neptune_logger = <span class="hljs-keyword">new</span> NeptuneExceptionLogger(writer, jaskell_logger); 
+    <span class="hljs-keyword">return</span> neptune_logger;</code></pre>
 <p>这个neptune_logger先判断异常是不是NeptuneException，如果是，直接处理，否则，传递给 jaskell_logger。jaskell_logger继续判断，如果不是它感兴趣的，再传递给ErrorMessageLogger来做最后的缺 省处理。 </p>
 <p>15。也许还有一些暂时没有想到的需求， 比如不是写入log文件，而是画个图之类的变态要求。 </p>
 <p>放马过来吧。看我们的组合子能不能对付。 </p>
 <p>很惊讶地发现，就这么几个小儿科似的积木，就似乎全部解决了曾让我们烦恼的这些需求？ </p>
 <p>为了给大家一个完整的印象，下面是我实际项目中使用这些组合子应对上面这些需求的代码： 
 java代码: </p>
-<pre><code class="language-java">public class StreamLogger { 
-  private final OutputStream out; 
+<pre><code class="language-java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">StreamLogger</span> </span>{ 
+  <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> OutputStream out; 
 
-  /** 
+  <span class="hljs-comment">/** 
    * To create a StreamLogger object. 
-   * @param out the OutputStream object that the log message should go to. 
-   */ 
-  public StreamLogger(OutputStream out) { 
-    this.out = out; 
+   * <span class="hljs-doctag">@param</span> out the OutputStream object that the log message should go to. 
+   */</span> 
+  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">StreamLogger</span><span class="hljs-params">(OutputStream out)</span> </span>{ 
+    <span class="hljs-keyword">this</span>.out = out; 
   } 
 
-  /** 
+  <span class="hljs-comment">/** 
    * To get the OutputStream that the log messages should go to. 
-   */ 
-  public OutputStream getStream() { 
-    return out; 
+   */</span> 
+  <span class="hljs-function"><span class="hljs-keyword">public</span> OutputStream <span class="hljs-title">getStream</span><span class="hljs-params">()</span> </span>{ 
+    <span class="hljs-keyword">return</span> out; 
   } 
-  private static Logger getBaseLogger(PrintWriter writer){ 
-    final Logger nop = new NopLogger(); 
-    final Logger base = Loggers.logger(writer); 
-    final Logger neptune_logger = new NeptuneExceptionLogger(writer, nop); 
-    final Logger jaskell_logger = new JaskellExceptionLogger(writer, nop); 
-    return Loggers.sequence( 
-        new Logger[]{neptune_logger, jaskell_logger, base} 
+  <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> Logger <span class="hljs-title">getBaseLogger</span><span class="hljs-params">(PrintWriter writer)</span></span>{ 
+    <span class="hljs-keyword">final</span> Logger nop = <span class="hljs-keyword">new</span> NopLogger(); 
+    <span class="hljs-keyword">final</span> Logger base = Loggers.logger(writer); 
+    <span class="hljs-keyword">final</span> Logger neptune_logger = <span class="hljs-keyword">new</span> NeptuneExceptionLogger(writer, nop); 
+    <span class="hljs-keyword">final</span> Logger jaskell_logger = <span class="hljs-keyword">new</span> JaskellExceptionLogger(writer, nop); 
+    <span class="hljs-keyword">return</span> Loggers.sequence( 
+        <span class="hljs-keyword">new</span> Logger[]{neptune_logger, jaskell_logger, base} 
     ); 
   } 
-  private static Logger getEchoLogger(PrintWriter writer){ 
-    return new ErrorMessageLogger(writer); 
+  <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> Logger <span class="hljs-title">getEchoLogger</span><span class="hljs-params">(PrintWriter writer)</span></span>{ 
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> ErrorMessageLogger(writer); 
   } 
-  private static Logger getErrorLogger(PrintWriter writer){ 
-    final Logger err_logger = new ErrorMessageLogger(writer); 
-    final Logger jaskell_logger = new JaskellExceptionLogger(writer, err_logger); 
-    final Logger neptune_logger = new NeptuneExceptionLogger(writer, jaskell_logger); 
-    return neptune_logger; 
+  <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> Logger <span class="hljs-title">getErrorLogger</span><span class="hljs-params">(PrintWriter writer)</span></span>{ 
+    <span class="hljs-keyword">final</span> Logger err_logger = <span class="hljs-keyword">new</span> ErrorMessageLogger(writer); 
+    <span class="hljs-keyword">final</span> Logger jaskell_logger = <span class="hljs-keyword">new</span> JaskellExceptionLogger(writer, err_logger); 
+    <span class="hljs-keyword">final</span> Logger neptune_logger = <span class="hljs-keyword">new</span> NeptuneExceptionLogger(writer, jaskell_logger); 
+    <span class="hljs-keyword">return</span> neptune_logger; 
   } 
-  /** 
+  <span class="hljs-comment">/** 
    * Get the Logger instance. 
-   * @param min_level the minimal critical level for a log message to show up in the log. 
-   * @return the Logger instance. 
-   */ 
-  public Logger getDefaultLogger(int min_level){ 
-    final PrintWriter writer = new PrintWriter(out, true); 
-    final PrintWriter err = new PrintWriter(System.err, true); 
-    final PrintWriter warn = new PrintWriter(System.out, true); 
-    final Logger all = Loggers.sequence(new Logger[]{ 
+   * <span class="hljs-doctag">@param</span> min_level the minimal critical level for a log message to show up in the log. 
+   * <span class="hljs-doctag">@return</span> the Logger instance. 
+   */</span> 
+  <span class="hljs-function"><span class="hljs-keyword">public</span> Logger <span class="hljs-title">getDefaultLogger</span><span class="hljs-params">(<span class="hljs-keyword">int</span> min_level)</span></span>{ 
+    <span class="hljs-keyword">final</span> PrintWriter writer = <span class="hljs-keyword">new</span> PrintWriter(out, <span class="hljs-keyword">true</span>); 
+    <span class="hljs-keyword">final</span> PrintWriter err = <span class="hljs-keyword">new</span> PrintWriter(System.err, <span class="hljs-keyword">true</span>); 
+    <span class="hljs-keyword">final</span> PrintWriter warn = <span class="hljs-keyword">new</span> PrintWriter(System.out, <span class="hljs-keyword">true</span>); 
+    <span class="hljs-keyword">final</span> Logger all = Loggers.sequence(<span class="hljs-keyword">new</span> Logger[]{ 
         Loggers.ignore(getErrorLogger(err), Logger.ERROR), 
         Loggers.filter(getEchoLogger(warn), Logger.WARNING), 
         getBaseLogger(writer) 
       } 
     ); 
-    return Loggers.ignore(all, min_level); 
+    <span class="hljs-keyword">return</span> Loggers.ignore(all, min_level); 
   } 
 }</code></pre>
 <p>为了偷懒，我没有用配置文件，就是把这些策略硬编码进java了。好在上面的代码非常declarative，改起来也很容易。 </p>
@@ -251,10 +258,10 @@ java代码: </p>
 <p>如果你仔细看上面的代码，也许你会有所感觉：对Logger的千奇百怪的组合本身已经有点象一个程序代码了。 
 如果用伪码表示： </p>
 <p>java代码: </p>
-<pre><code class="language-java">  all_logger = ignore messages below ERROR for getErrorLogger(err); 
-          filter messages except WARNING for getEchoLogger(warn); 
+<pre><code class="language-java">  all_logger = <span class="hljs-function">ignore messages below ERROR <span class="hljs-keyword">for</span> <span class="hljs-title">getErrorLogger</span><span class="hljs-params">(err)</span></span>; 
+          <span class="hljs-function">filter messages except WARNING <span class="hljs-keyword">for</span> <span class="hljs-title">getEchoLogger</span><span class="hljs-params">(warn)</span></span>; 
           baseBaseLogger(writer); 
-  ignore messages below lvl for all_logger;</code></pre>
+  ignore messages below lvl <span class="hljs-keyword">for</span> all_logger;</code></pre>
 <p>当组合子越来越多，需求越来越复杂，这个组合就会越来越象个程序。 </p>
 <p>这里，实际上，（至少我希望如此），我们的思维已经从打印什么什么东西上升为在Logger这个级别的组装了。 </p>
 <p>这也就是所谓higher order logic的意思。 </p>

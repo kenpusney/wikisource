@@ -12,6 +12,8 @@
     
     <title>论面向组合子程序设计方法 之七 重构</title>
     
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css">
     <style type="text/css">
         body {
             width: 60%;
@@ -24,6 +26,11 @@
                 "Roboto",
                 "Noto Sans CJK",
                 Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        pre {
+            max-width: 90%;
+            overflow-x: scroll;
         }
 
         a {
@@ -126,70 +133,70 @@
 <p>分析这个需求，可以发现，两者都要求在一行的开始打印一些东西。似乎有些共性. 
 这个&quot;在行首打印一些前缀&quot;就成了一个可以抽象出来的共性.于是重构: </p>
 <p>java代码: </p>
-<pre><code class="language-java">interface Factory{ 
-  String create(); 
+<pre><code class="language-java"><span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">Factory</span></span>{ 
+  <span class="hljs-function">String <span class="hljs-title">create</span><span class="hljs-params">()</span></span>; 
 } 
-class PrefixLogger implements Logger{ 
-  private final Logger logger; 
-  private final Factory factory; 
-  private boolean freshline = true; 
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">PrefixLogger</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Logger</span></span>{ 
+  <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> Logger logger; 
+  <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> Factory factory; 
+  <span class="hljs-keyword">private</span> <span class="hljs-keyword">boolean</span> freshline = <span class="hljs-keyword">true</span>; 
 
-  private void prefix(int lvl){ 
-    if(freshline){ 
+  <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">prefix</span><span class="hljs-params">(<span class="hljs-keyword">int</span> lvl)</span></span>{ 
+    <span class="hljs-keyword">if</span>(freshline){ 
       Object r = factory.create(); 
-      if(r!=null) 
+      <span class="hljs-keyword">if</span>(r!=<span class="hljs-keyword">null</span>) 
         logger.print(lvl, r); 
-      freshline = false; 
+      freshline = <span class="hljs-keyword">false</span>; 
     } 
   } 
-  public void print(int lvl, String s){ 
+  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">print</span><span class="hljs-params">(<span class="hljs-keyword">int</span> lvl, String s)</span></span>{ 
     prefix(lvl); 
     logger.print(lvl, s); 
   } 
-  public void println(int lvl, String s){ 
+  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">println</span><span class="hljs-params">(<span class="hljs-keyword">int</span> lvl, String s)</span></span>{ 
     prefix(lvl); 
     logger.println(lvl, s); 
-    freshline = true; 
+    freshline = <span class="hljs-keyword">true</span>; 
   } 
-  public void printException(int lvl, Throwable e){ 
+  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">printException</span><span class="hljs-params">(<span class="hljs-keyword">int</span> lvl, Throwable e)</span></span>{ 
     prefix(lvl); 
     logger.printException(lvl, e); 
-    freshline = true; 
+    freshline = <span class="hljs-keyword">true</span>; 
   } 
 }</code></pre>
 <p>这里，Factory接口用来抽象往行首打印的前缀。这个地方之所以不是一个String，是因为考虑到生成这个前缀可能是比较昂贵的（比如打印行号，这需要创建一个临时异常对象）</p>
 <p>另外，真正的Logger接口，会负责打印所有的原始类型和Object类型，例子中我们简化了这个接口，为了演示方便。 </p>
 <p>然后，先重构timestamp: </p>
 <p>java代码: </p>
-<pre><code class="language-java">class TimestampFactory implements Factory{ 
-  private final DateFormat fmt; 
-  public String create(){ 
-    return fmt.format(new Date()); 
+<pre><code class="language-java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TimestampFactory</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Factory</span></span>{ 
+  <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> DateFormat fmt; 
+  <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">create</span><span class="hljs-params">()</span></span>{ 
+    <span class="hljs-keyword">return</span> fmt.format(<span class="hljs-keyword">new</span> Date()); 
   } 
 }</code></pre>
 <p>这样，就把timestamp和“行首打印”解耦了出来。 </p>
 <p>下面添加TraceBackFactory，负责打印当前行号等源代码相关信息。 
 java代码: </p>
-<pre><code class="language-java">interface SourceLocationFormat{ 
-  String format(StackTraceElement frame); 
+<pre><code class="language-java"><span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">SourceLocationFormat</span></span>{ 
+  <span class="hljs-function">String <span class="hljs-title">format</span><span class="hljs-params">(StackTraceElement frame)</span></span>; 
 } 
-class TraceBackFactory implements Factory{ 
-  private final SourceLocationFormat fmt; 
-  public String create(){ 
-    final StackTraceElement frame = getNearestUserFrame(); 
-    if(frame!=null) 
-      return fmt.format(frame); 
-    else return null; 
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TraceBackFactory</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Factory</span></span>{ 
+  <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> SourceLocationFormat fmt; 
+  <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">create</span><span class="hljs-params">()</span></span>{ 
+    <span class="hljs-keyword">final</span> StackTraceElement frame = getNearestUserFrame(); 
+    <span class="hljs-keyword">if</span>(frame!=<span class="hljs-keyword">null</span>) 
+      <span class="hljs-keyword">return</span> fmt.format(frame); 
+    <span class="hljs-keyword">else</span> <span class="hljs-keyword">return</span> <span class="hljs-keyword">null</span>; 
   } 
-  private StackTraceElement getNearestUserFrame(){ 
-    final StackTraceElement[] frames = new Throwable().getStackTrace(); 
+  <span class="hljs-function"><span class="hljs-keyword">private</span> StackTraceElement <span class="hljs-title">getNearestUserFrame</span><span class="hljs-params">()</span></span>{ 
+    <span class="hljs-keyword">final</span> StackTraceElement[] frames = <span class="hljs-keyword">new</span> Throwable().getStackTrace(); 
     foreach(frame: frames){ 
-      if(!frame.getClassName().startsWith(&quot;org.mylogging&quot;)){ 
-        //user frame 
-        return frame; 
+      <span class="hljs-keyword">if</span>(!frame.getClassName().startsWith(<span class="hljs-string">&quot;org.mylogging&quot;</span>)){ 
+        <span class="hljs-comment">//user frame </span>
+        <span class="hljs-keyword">return</span> frame; 
       } 
     } 
-    return null; 
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">null</span>; 
   } 
 }</code></pre>
 <p>具体的SourceLocationFormat的实现我就不写了。 </p>
@@ -198,34 +205,34 @@ class TraceBackFactory implements Factory{
 <p>下面开始对factory做一些co的勾当： 
 先是最简单的： </p>
 <p>java代码: </p>
-<pre><code class="language-java">class ReturnFactory implements Factory{ 
-  private final String s; 
-  public String create(){return s;} 
+<pre><code class="language-java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ReturnFactory</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Factory</span></span>{ 
+  <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> String s; 
+  <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">create</span><span class="hljs-params">()</span></span>{<span class="hljs-keyword">return</span> s;} 
 }</code></pre>
 <p>然后是两个factory的串联， </p>
 <p>java代码: </p>
-<pre><code class="language-java">class ConcatFactory implements Factory{ 
-  private final Factory[] fs; 
-  public String create(){ 
-    StringBuffer buf = new StringBuffer(); 
+<pre><code class="language-java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ConcatFactory</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Factory</span></span>{ 
+  <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> Factory[] fs; 
+  <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">create</span><span class="hljs-params">()</span></span>{ 
+    StringBuffer buf = <span class="hljs-keyword">new</span> StringBuffer(); 
     foreach(f: fs){ 
       buf.append(f.create()); 
     } 
-    return buf.toString(); 
+    <span class="hljs-keyword">return</span> buf.toString(); 
   } 
 }</code></pre>
 <p>最后，我们把这几个零件组合在一起： </p>
 <p>java代码: </p>
-<pre><code class="language-java">Logger myprefix(Logger l){ 
-  Factory timestamp = new TimestampFactory(some_date_format); 
-  Factory traceback = new TraceBackFactory(some_location_format); 
-  Factory both = new ConcatFactory( 
+<pre><code class="language-java"><span class="hljs-function">Logger <span class="hljs-title">myprefix</span><span class="hljs-params">(Logger l)</span></span>{ 
+  Factory timestamp = <span class="hljs-keyword">new</span> TimestampFactory(some_date_format); 
+  Factory traceback = <span class="hljs-keyword">new</span> TraceBackFactory(some_location_format); 
+  Factory both = <span class="hljs-keyword">new</span> ConcatFactory( 
     timestamp, 
-    new ReturnFactory(&quot; - &quot;), 
+    <span class="hljs-keyword">new</span> ReturnFactory(<span class="hljs-string">&quot; - &quot;</span>), 
     traceback, 
-    new ReturnFactory(&quot; : &quot;) 
+    <span class="hljs-keyword">new</span> ReturnFactory(<span class="hljs-string">&quot; : &quot;</span>) 
   ); 
-  return new PrefixLogger(both, l); 
+  <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> PrefixLogger(both, l); 
 }</code></pre>
 <p>如此，基本上，在行首添加东西的需求就差不多了，我们甚至也可以在行尾添加东西，还可以重用这些factory的组合子。 </p>
 <p>另一点我想说明的是：这种重构是相当局部的，仅仅影响几个组合子，而并不影响整个组合子框架。 </p>
@@ -257,10 +264,10 @@ class TraceBackFactory implements Factory{
 一个用ioc设计出来的类，本身对ioc容器是一无所知的。使用它的时候，可以根据实际情况选择直接new，直接调用setter等等比较直接的方法，但是，当这样的组件非常非常多的时候，用一个ioc容器来统一管理这些对象的组装就可以被考虑。 </p>
 <p>拿pico作为例子，对应这样一个类： </p>
 <p>java代码: </p>
-<pre><code class="language-java">class Boy{ 
-  private final Girl girl; 
-  public Boy(Girl g){ 
-    this.girl = g; 
+<pre><code class="language-java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Boy</span></span>{ 
+  <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> Girl girl; 
+  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Boy</span><span class="hljs-params">(Girl g)</span></span>{ 
+    <span class="hljs-keyword">this</span>.girl = g; 
   } 
 ... 
 }</code></pre>
@@ -269,7 +276,7 @@ class TraceBackFactory implements Factory{
 <p>但是，如果这种需要组装的类太多，那么这个组装就变成一件累人的活了。 </p>
 <p>于是，pico container提供了一个统一管理组建的方法： 
 java代码: </p>
-<pre><code class="language-java">picocontainer container = new DefaultContainer(); 
+<pre><code class="language-java">picocontainer container = <span class="hljs-keyword">new</span> DefaultContainer(); 
 container.registerComponentImplementation(Boy.class); 
 container.registerComponentImplementation(Girl.class); </code></pre>
 <p>这个代码，很可能不是直接写在程序里面，而是先读取配置文件或者什么东西，然后动态地调用这段代码。 </p>
@@ -285,24 +292,24 @@ container.registerComponentImplementation(Girl.class); </code></pre>
 <p>但是，pico的灵活性就到这里了，它要求你的这个girl必须被直接登记在这个容器中，占用一个宝贵的全局key，即使这个girl只是专门为这个body临时制造的夏娃。 </p>
 <p>在java中，遇到这种情况： </p>
 <p>java代码: </p>
-<pre><code class="language-java">void A createA(){ 
-  B b = new B(); 
-  return new A(b,b); 
+<pre><code class="language-java"><span class="hljs-function"><span class="hljs-keyword">void</span> A <span class="hljs-title">createA</span><span class="hljs-params">()</span></span>{ 
+  B b = <span class="hljs-keyword">new</span> B(); 
+  <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> A(b,b); 
 }</code></pre>
 <p>我们只需要把b作为一个局部变量，构造完A，b就扔掉了。然而，pico里面这不成，b必须被登记在这个容器中。这就相当于你必须要把b定义成一个全局变量一样。 
 pico的对应代码： </p>
 <p>java代码: </p>
-<pre><code class="language-java">container.registerComponent(&quot;b&quot; new CachingComponentAdapter(new ConstructorInjectionComponentAdapter(B.class))); 
-container.registerComponent(&quot;a&quot;, new ConstructorInjectionComponentAdapter(A.class));</code></pre>
+<pre><code class="language-java">container.registerComponent(<span class="hljs-string">&quot;b&quot;</span> <span class="hljs-keyword">new</span> CachingComponentAdapter(<span class="hljs-keyword">new</span> ConstructorInjectionComponentAdapter(B.class))); 
+container.registerComponent(&quot;a&quot;, <span class="hljs-keyword">new</span> ConstructorInjectionComponentAdapter(A.class));</code></pre>
 <p>这里，为了对应上面java代码中的两个参数公用一个b的实例的要求，必须把a登记成一个singleton。 CachingComponentAdapter负责singleton化某个组件，而 ConstructorInjectionComponentAdapter就是一个调用构造函数的组建匹配器。 </p>
 <p>当然，这样做其实还是有麻烦的，当container不把a登记成singleton的时候（pico缺省都登记成singleton，但是你可以换缺省不用singleton的container。），麻烦就来了。 </p>
 <p>大家可以看到，上面的createA()函数如果调用两次，会创建两个A对象，两个B对象，而用这段pico代码，调用两次getComponentInstance(&quot;a&quot;)，会生成两个A对象，但是却只有一个B对象！因为b被被迫登记为singleton了。 </p>
 <p>2。pico除了支持constructor injection，也支持setter injection甚至factory method injection。（对最后一点我有点含糊，不过就假设它支持）。所以，跟spring对比，除了没有一个配置文件，life-cycle不太优雅之 外，什么都有了。 </p>
 <p>但是，这就够了吗？如果我们把上面的那个createA函数稍微变一下： </p>
 <p>java代码: </p>
-<pre><code class="language-java">A createA(){ 
-  B b = new B(); 
-  return new A(b, b.createC(x_component)); 
+<pre><code class="language-java"><span class="hljs-function">A <span class="hljs-title">createA</span><span class="hljs-params">()</span></span>{ 
+  B b = <span class="hljs-keyword">new</span> B(); 
+  <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> A(b, b.createC(x_component)); 
 }</code></pre>
 <p>现在，我们要在b组件上面调用createC()来生成一个C对象。完了，我们要的既不是构造函数，也不是工厂方法，而是在某个临时组件的基础上调用一个函数。 </p>
 <p>缺省提供的几个ComponentAdapter这时就不够用了，我们被告知要自己实现ComponentAdapter。 </p>
@@ -320,8 +327,8 @@ container.registerComponent(&quot;a&quot;, new ConstructorInjectionComponentAdap
 <p>java代码: </p>
 <pre><code class="language-java">b_component = Components.ctor(B.class).singleton(); 
 a_component = Components.ctor(A.class) 
-  .withArgument(0, b_component) 
-  .withArgument(1, b_component.method(&quot;createC&quot;));</code></pre>
+  .withArgument(<span class="hljs-number">0</span>, b_component) 
+  .withArgument(<span class="hljs-number">1</span>, b_component.method(<span class="hljs-string">&quot;createC&quot;</span>));</code></pre>
 <p>b_component不需要登记在容器中，它作为局部component存在。 
 是不是非常declarative呢？ </p>
 <p>下一节，你会发现，用面向组合子的方法，ioc容器这种东西真的不难。我们不需要仔细分析各种需求，精心分配责任。让我们再次体验一下吊儿郎当不知不觉间就天下大治的感觉吧。 </p>

@@ -12,6 +12,8 @@
     
     <title>论面向组合子程序设计方法 之六 oracle</title>
     
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css">
     <style type="text/css">
         body {
             width: 60%;
@@ -24,6 +26,11 @@
                 "Roboto",
                 "Noto Sans CJK",
                 Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        pre {
+            max-width: 90%;
+            overflow-x: scroll;
         }
 
         a {
@@ -126,10 +133,10 @@
 但是dsl的实现不是那么容易的。而co是不是可以说给我们提供了一个相对廉价的创建自己的domain specific language的途径呢? 
 我们虽然不能说 
 java代码: </p>
-<pre><code class="language-java">if level &gt; 1 then logger1 else logger2</code></pre>
+<pre><code class="language-java"><span class="hljs-keyword">if</span> level &gt; <span class="hljs-number">1</span> then logger1 <span class="hljs-keyword">else</span> logger2</code></pre>
 <p>至少可以退而求其次，写出 
 java代码: </p>
-<pre><code class="language-java">ignore(1, logger1, logger2);</code></pre>
+<pre><code class="language-java">ignore(<span class="hljs-number">1</span>, logger1, logger2);</code></pre>
 <p>当然，这种子语言相比于宿主语言，缺乏调试器的帮助，缺乏编译器的优化，缺乏各种ide的支持，可用性程度是大大不如的。 </p>
 <p>但是，它也有它的好处，那就是，不用额外进行一次编译；写出来的东西和宿主语言无缝集成；可以自动利用宿主语言里面的一切设施。等等。 </p>
 <p>那么如果把co作为一个语言来考虑，是不是会给我们一些别的启示呢？ </p>

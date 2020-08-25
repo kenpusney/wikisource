@@ -12,6 +12,8 @@
     
     <title>JSONSpec: Build a well-typed Web.</title>
     
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css">
     <style type="text/css">
         body {
             width: 60%;
@@ -24,6 +26,11 @@
                 "Roboto",
                 "Noto Sans CJK",
                 Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        pre {
+            max-width: 90%;
+            overflow-x: scroll;
         }
 
         a {
@@ -131,18 +138,18 @@
 <p>所以我们需要解决这个问题；所以我想到了JSONSpec。</p>
 <p>试想这样一个场景，我们像服务器获取一本书的信息，服务器会返回给我们如下格式的文档：</p>
 <pre><code class="language-json">{
-    &quot;title&quot;: &quot;Life, Universe and Everything&quot;,
-    &quot;author&quot;: [ &quot;Douglas Adam&quot; ],
-    &quot;isbn&quot;: &quot;....&quot;
+    <span class="hljs-attr">&quot;title&quot;</span>: <span class="hljs-string">&quot;Life, Universe and Everything&quot;</span>,
+    <span class="hljs-attr">&quot;author&quot;</span>: [ <span class="hljs-string">&quot;Douglas Adam&quot;</span> ],
+    <span class="hljs-attr">&quot;isbn&quot;</span>: <span class="hljs-string">&quot;....&quot;</span>
     ....
 }</code></pre>
 <p>对于这条数据，我们怎么来定义他的spec如下：</p>
-<pre><code class="language-json">//file: Book.type.json
+<pre><code class="language-json"><span class="hljs-comment">//file: Book.type.json</span>
 {
-    &quot;title&quot;: &quot;string&quot;,
-    &quot;subtitle?&quot;: &quot;string&quot;,
-    &quot;author&quot;: &quot;[Person | string]&quot;,
-    &quot;isbn&quot;: &quot;ISBN&quot;
+    <span class="hljs-attr">&quot;title&quot;</span>: <span class="hljs-string">&quot;string&quot;</span>,
+    <span class="hljs-attr">&quot;subtitle?&quot;</span>: <span class="hljs-string">&quot;string&quot;</span>,
+    <span class="hljs-attr">&quot;author&quot;</span>: <span class="hljs-string">&quot;[Person | string]&quot;</span>,
+    <span class="hljs-attr">&quot;isbn&quot;</span>: <span class="hljs-string">&quot;ISBN&quot;</span>
 }</code></pre>
 <p>我们逐行解读这条信息：</p>
 <p>首先，我们就定义了title这个属性，对应的值是string，其实这就是spec的格式：属性，和属性对应的类型。因为对于data-type这种spec我们依然作为JSON来处理，所以对应的类型也以字符串的方式保存。所以，对于这一项我们可以简单的理解为：title属性的类型是string。</p>
@@ -150,16 +157,16 @@
 <p>接下来是author，看类型这是一个数组，其中的每一个元素都是<code>Person | string</code>类型，这个类型类似于C/Pascal中的Union/Variant，意思是说，对于author这个属性，其类型是一个数组，该数组中的元素可以是Person，或者只是一个string（就像&quot;Douglas Adam&quot;）。</p>
 <p>所以，可以看到，在这条spec里面出现了两个特殊的类型，Person和ISBN。也就是说，我们可以在spec里面添加自定义类型，同时，也需要给出他们所对应的spec。</p>
 <p>比如：</p>
-<pre><code class="language-json">//file: Person.type.json
+<pre><code class="language-json"><span class="hljs-comment">//file: Person.type.json</span>
 {
-    &quot;first_name&quot;: &quot;string&quot;,
-    &quot;last_name&quot;: &quot;string&quot;,
-    &quot;born_of&quot;: &quot;Date&quot;,
+    <span class="hljs-attr">&quot;first_name&quot;</span>: <span class="hljs-string">&quot;string&quot;</span>,
+    <span class="hljs-attr">&quot;last_name&quot;</span>: <span class="hljs-string">&quot;string&quot;</span>,
+    <span class="hljs-attr">&quot;born_of&quot;</span>: <span class="hljs-string">&quot;Date&quot;</span>,
     ...
 }
 
-//file ISBN.type.json
-&quot;string &amp; /[0-9]{10}[0-9]{3}?/&quot;</code></pre>
+<span class="hljs-comment">//file ISBN.type.json</span>
+<span class="hljs-string">&quot;string &amp; /[0-9]{10}[0-9]{3}?/&quot;</span></code></pre>
 <p>也即：Person是另外一个JSON Object, 更丰富的属性和内容，用来表示一个人（Person）。而，ISBN则非常的简单，就是一个string，只是用了一个正则表达式来做数据格式上的约束：10位或者13位数字。</p>
 <p>于是我们就可以很详细的表示我们要用到的数据究竟长成什么样子的了。</p>
 <p>同样地，我们还可以把这些格式映射到具体的编程语言里面，比如一个type spec可能就表示一个Java POJO或者一个.Net POCO，这样只要对应的语言提供了序列化和反序列化的服务和约束检查，那么就可以很轻松地把JSONSpec应用到服务的设计和构建中去了。</p>

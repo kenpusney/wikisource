@@ -12,6 +12,8 @@
     
     <title>论面向组合子程序设计方法 之九 南无阿弥陀佛</title>
     
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css">
     <style type="text/css">
         body {
             width: 60%;
@@ -24,6 +26,11 @@
                 "Roboto",
                 "Noto Sans CJK",
                 Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        pre {
+            max-width: 90%;
+            overflow-x: scroll;
         }
 
         a {
@@ -119,20 +126,20 @@
         <p>其实，前面我还忘了提一个非常重要的基本组合子：singleton。 
 这里补充提一下： 
 java代码: </p>
-<pre><code class="language-java">class SingletonComponent implements Component{ 
-  private final Component c; 
-  private Object val; 
-  public Class getType(){ 
-    return c.getType(); 
+<pre><code class="language-java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SingletonComponent</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Component</span></span>{ 
+  <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> Component c; 
+  <span class="hljs-keyword">private</span> Object val; 
+  <span class="hljs-function"><span class="hljs-keyword">public</span> Class <span class="hljs-title">getType</span><span class="hljs-params">()</span></span>{ 
+    <span class="hljs-keyword">return</span> c.getType(); 
   } 
-  public synchronized Object create(Dependency dep){ 
-    if(val!=null) return val; 
+  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">synchronized</span> Object <span class="hljs-title">create</span><span class="hljs-params">(Dependency dep)</span></span>{ 
+    <span class="hljs-keyword">if</span>(val!=<span class="hljs-keyword">null</span>) <span class="hljs-keyword">return</span> val; 
     val = c.create(dep); 
-    return val; 
+    <span class="hljs-keyword">return</span> val; 
   } 
-  public synchronized Class verify(Dependency dep){ 
-    if(val!=null) return val.getClass(); 
-    else return c.verify(dep); 
+  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">synchronized</span> Class <span class="hljs-title">verify</span><span class="hljs-params">(Dependency dep)</span></span>{ 
+    <span class="hljs-keyword">if</span>(val!=<span class="hljs-keyword">null</span>) <span class="hljs-keyword">return</span> val.getClass(); 
+    <span class="hljs-keyword">else</span> <span class="hljs-keyword">return</span> c.verify(dep); 
   } 
 }</code></pre>
 <p>代码没什么可说的，就是最简单的singleton模式。 </p>
@@ -141,9 +148,9 @@ java代码: </p>
 <p>有了bind，很多的功能都可以自然推演出来了。 </p>
 <p>比如我们前面用来刁难pico的那个例子，甚至，为了更强调复杂性，我们可以给B和A再另外增加一些参数，这些参数要求从容器解析（毕竟，我们之所以需要容器，就是为了自动解析一些依赖关系，要是全部依赖关系都hard-code，意义就不大了）： 
 java代码: </p>
-<pre><code class="language-java">void A createA(){ 
-  B b = new B(...); 
-  return new A(b,b, ...); 
+<pre><code class="language-java"><span class="hljs-function"><span class="hljs-keyword">void</span> A <span class="hljs-title">createA</span><span class="hljs-params">()</span></span>{ 
+  B b = <span class="hljs-keyword">new</span> B(...); 
+  <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> A(b,b, ...); 
 }</code></pre>
 <p>用bind，我们的思路可以是这样： 
 1。用B的构造函数生成一个Component。 
@@ -151,12 +158,12 @@ java代码: </p>
 3。这个产生的对象被传递给一个对应A的Component当作参数。这一步可以用bind来搞定。 </p>
 <p>java代码: </p>
 <pre><code class="language-java">Component b_component = Components.ctor(B.class); 
-return new BoundComponent(b_component, new Binder(){ 
-  public Component bind(Object b){ 
-    final Component arg = Components.value(b); 
-    return new WithArgument( 
-      new WithArgument(a, 0, arg), 
-    1, arg); 
+<span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> BoundComponent(b_component, <span class="hljs-keyword">new</span> Binder(){ 
+  <span class="hljs-function"><span class="hljs-keyword">public</span> Component <span class="hljs-title">bind</span><span class="hljs-params">(Object b)</span></span>{ 
+    <span class="hljs-keyword">final</span> Component arg = Components.value(b); 
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> WithArgument( 
+      <span class="hljs-keyword">new</span> WithArgument(a, <span class="hljs-number">0</span>, arg), 
+    <span class="hljs-number">1</span>, arg); 
   } 
 }); </code></pre>
 <p>Components.value(Object)是我们写的一个对ValueComponent的封装静态函数。 
@@ -171,35 +178,35 @@ cc.value(obj)。舒服些了吧？ </p>
 我们可以处理if-else，可以处理循环，递归，任何可以直接用java写出来的对象创建方式，我们都可以在高阶逻辑上得到对应的组合版本，只 要我们有足够的原子组合子。（所谓原字组合子，不过是：FunctionComponent, BeanComponent，ValueComponent几种） </p>
 <p>比如，对应于： </p>
 <p>java代码: </p>
-<pre><code class="language-java">X createX(){ 
+<pre><code class="language-java"><span class="hljs-function">X <span class="hljs-title">createX</span><span class="hljs-params">()</span></span>{ 
   A a = A.instance(...); 
-  if(a.isX(...)){ 
-    return new X(...); 
+  <span class="hljs-keyword">if</span>(a.isX(...)){ 
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> X(...); 
   } 
-  else{ 
-    return new Y(a, ...).getX(...); 
+  <span class="hljs-keyword">else</span>{ 
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> Y(a, ...).getX(...); 
   } 
 }</code></pre>
 <p>这里，所有的省略号都代表可能需要从容器解析的参数。使用高阶Component对象而不是直接调用createX()函数的一个原因，就是我们想要把依赖解析隐藏起来并且集中灵活地配置和管理。 </p>
 <p>对此，我们可以写成： 
 java代码: </p>
 <pre><code class="language-java">Component a_component = Components.static_method(A.class, &quot;instance&quot;); 
-return new BoundComponent(a_component, new Binder(){ 
-  public Component bind(final Object a){ 
-    final Component isx_component = Components.method(a, &quot;isX&quot;); 
-    return new BoundComponent(isx_component, new Binder(){ 
-      public Component bind(Object isx){ 
-        final Boolean v = (Boolean)isx; 
-        if(v.booleanValue()){ 
-          return Components.ctor(X.class); 
+<span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> BoundComponent(a_component, <span class="hljs-keyword">new</span> Binder(){ 
+  <span class="hljs-function"><span class="hljs-keyword">public</span> Component <span class="hljs-title">bind</span><span class="hljs-params">(<span class="hljs-keyword">final</span> Object a)</span></span>{ 
+    <span class="hljs-keyword">final</span> Component isx_component = Components.method(a, <span class="hljs-string">&quot;isX&quot;</span>); 
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> BoundComponent(isx_component, <span class="hljs-keyword">new</span> Binder(){ 
+      <span class="hljs-function"><span class="hljs-keyword">public</span> Component <span class="hljs-title">bind</span><span class="hljs-params">(Object isx)</span></span>{ 
+        <span class="hljs-keyword">final</span> Boolean v = (Boolean)isx; 
+        <span class="hljs-keyword">if</span>(v.booleanValue()){ 
+          <span class="hljs-keyword">return</span> Components.ctor(X.class); 
         } 
-        else{ 
-          final Coponent y_component = 
-           new WithArgument(Components.ctor(Y.class), 0, 
+        <span class="hljs-keyword">else</span>{ 
+          <span class="hljs-keyword">final</span> Coponent y_component = 
+           <span class="hljs-keyword">new</span> WithArgument(Components.ctor(Y.class), <span class="hljs-number">0</span>, 
               Components.value(a)); 
-          return new BoundComponent(y_component, new Binder(){ 
-            public Component bind(Object y){ 
-              return Components.method(y, &quot;getX&quot;); 
+          <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> BoundComponent(y_component, <span class="hljs-keyword">new</span> Binder(){ 
+            <span class="hljs-function"><span class="hljs-keyword">public</span> Component <span class="hljs-title">bind</span><span class="hljs-params">(Object y)</span></span>{ 
+              <span class="hljs-keyword">return</span> Components.method(y, <span class="hljs-string">&quot;getX&quot;</span>); 
             } 
           }); 
 
@@ -225,22 +232,22 @@ new BoundComponent(c1, ...)，而写：c1.bind(...)。
 new WithArgument(c, 0, arg)，而写：c.withArgument(0, arg)。 
 可以避免写： 
 java代码: </p>
-<pre><code class="language-java">new BoundComponent(c1, new Binder(){ 
-  public Component bind(Object obj){ 
-    return Components.method(obj, &quot;method&quot;); 
+<pre><code class="language-java"><span class="hljs-keyword">new</span> BoundComponent(c1, <span class="hljs-keyword">new</span> Binder(){ 
+  <span class="hljs-function"><span class="hljs-keyword">public</span> Component <span class="hljs-title">bind</span><span class="hljs-params">(Object obj)</span></span>{ 
+    <span class="hljs-keyword">return</span> Components.method(obj, <span class="hljs-string">&quot;method&quot;</span>); 
   } 
 });</code></pre>
 <p>而写成： 
 java代码: </p>
-<pre><code class="language-java">c1.method(&quot;method&quot;);</code></pre>
+<pre><code class="language-java">c1.method(<span class="hljs-string">&quot;method&quot;</span>);</code></pre>
 <p>可以避免写： 
 java代码: </p>
-<pre><code class="language-java">new BoundComponent(c1, new Binder(){ 
-  public Component bind(Object obj){ 
-    if(((Boolean)obj).booleanValue()){ 
-      return a; 
+<pre><code class="language-java"><span class="hljs-keyword">new</span> BoundComponent(c1, <span class="hljs-keyword">new</span> Binder(){ 
+  <span class="hljs-function"><span class="hljs-keyword">public</span> Component <span class="hljs-title">bind</span><span class="hljs-params">(Object obj)</span></span>{ 
+    <span class="hljs-keyword">if</span>(((Boolean)obj).booleanValue()){ 
+      <span class="hljs-keyword">return</span> a; 
     } 
-    else return b; 
+    <span class="hljs-keyword">else</span> <span class="hljs-keyword">return</span> b; 
   } 
 });</code></pre>
 <p>而写成： 
@@ -252,46 +259,46 @@ java代码: </p>
 <p>经过这个改动，上面的对应createX的高阶代码变成： </p>
 <p>java代码: </p>
 <pre><code class="language-java">Component a_component = Components.static_method(A.class, &quot;instance&quot;); 
-return a_component.bind(new Binder(){ 
-  public Component bind(final Object a){ 
-    final Component isx_component = Components.method(a, &quot;isX&quot;); 
-    return isx_component.ifelse( 
+<span class="hljs-keyword">return</span> a_component.bind(<span class="hljs-keyword">new</span> Binder(){ 
+  <span class="hljs-function"><span class="hljs-keyword">public</span> Component <span class="hljs-title">bind</span><span class="hljs-params">(<span class="hljs-keyword">final</span> Object a)</span></span>{ 
+    <span class="hljs-keyword">final</span> Component isx_component = Components.method(a, <span class="hljs-string">&quot;isX&quot;</span>); 
+    <span class="hljs-keyword">return</span> isx_component.ifelse( 
       Components.ctor(X.class), 
       Components.ctor(Y.class) 
-        .withArgument(0, Components.value(a)) 
-        .method(&quot;getX&quot;) 
+        .withArgument(<span class="hljs-number">0</span>, Components.value(a)) 
+        .method(<span class="hljs-string">&quot;getX&quot;</span>) 
     ); 
   } 
 });</code></pre>
 <p>稍微好些了。而如果我们不需要给Y的构造函数指定参数，那么效果还会更好。 
 比如对 
 java代码: </p>
-<pre><code class="language-java">X createX(){ 
+<pre><code class="language-java"><span class="hljs-function">X <span class="hljs-title">createX</span><span class="hljs-params">()</span></span>{ 
   A a = A.instance(...); 
-  if(a.isX(...)){ 
-    return new X(...); 
+  <span class="hljs-keyword">if</span>(a.isX(...)){ 
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> X(...); 
   } 
-  else{ 
-    return new Y(...).getX(...); 
+  <span class="hljs-keyword">else</span>{ 
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> Y(...).getX(...); 
   } 
 }</code></pre>
 <p>高阶代码会变成： 
 java代码: </p>
 <pre><code class="language-java">Component a_component = Components.static_method(A.class, &quot;instance&quot;); 
-return a_component.method(&quot;isX&quot;).ifelse( 
+<span class="hljs-keyword">return</span> a_component.method(<span class="hljs-string">&quot;isX&quot;</span>).ifelse( 
     Components.ctor(X.class), 
     Components.ctor(Y.class) 
-      .withArgument(0, Components.value(a)) 
-      .method(&quot;getX&quot;) 
+      .withArgument(<span class="hljs-number">0</span>, Components.value(a)) 
+      .method(<span class="hljs-string">&quot;getX&quot;</span>) 
 ); </code></pre>
 <p>又简洁了不少。 </p>
 <p>当然，说实话，如果我们把情况任意复杂化，比如： </p>
 <p>java代码: </p>
-<pre><code class="language-java">Y createY(){ 
+<pre><code class="language-java"><span class="hljs-function">Y <span class="hljs-title">createY</span><span class="hljs-params">()</span></span>{ 
   a = A.createA(...); 
   b = B.createB(a, ...); 
   c = C.createC(a,b,...); 
-  return Y.create(a,b,c,...); 
+  <span class="hljs-keyword">return</span> Y.create(a,b,c,...); 
 }</code></pre>
 <p>要对createY写出高阶对应版本，这bind要嵌套三层，代码无论如何不可能好看了。对此，我们只能耸耸肩说：无能为力了。因为我们这里已经接触到了java语言的底线。 </p>
 <p>值得欣慰的是，至少： 
@@ -302,14 +309,14 @@ return a_component.method(&quot;isX&quot;).ifelse(
 <p>只不过，缺乏语言上的良好支持，让我们在采用co设计的时候的代价有所增大。如何权衡？是co带来的缺点（不方便调试，运行效率低，语法麻烦）大，还是它带来的好处（灵活应对变化，减少代码数量，方便重用）大，则是一个需要主观经验决定的事情了。 </p>
 <p>其实，在一个真正支持monad组合子的语言里面，createY会被类似写成这样： 
 java代码: </p>
-<pre><code class="language-haskell">do 
-  a &lt;- static_method(A.class, &quot;createA&quot;); 
-  b &lt;- static_method(B.class, &quot;createB&quot;) 
-    .withArgument(0, a); 
-  c &lt;- static_method(C.class, &quot;createC&quot;) 
-    .withArgument(0, a).withArgument(1, b); 
-  return (static_method(Y.class, &quot;create&quot;) 
-    .withArgument(0,a).withArgument(1,b).withArgument(2,c); 
+<pre><code class="language-haskell"><span class="hljs-title">do</span> 
+  a &lt;- static_method(<span class="hljs-type">A</span>.<span class="hljs-keyword">class</span>, <span class="hljs-string">&quot;createA&quot;</span>); 
+  b &lt;- static_method(<span class="hljs-type">B</span>.<span class="hljs-keyword">class</span>, <span class="hljs-string">&quot;createB&quot;</span>) 
+    .withArgument(<span class="hljs-number">0</span>, a); 
+  c &lt;- static_method(<span class="hljs-type">C</span>.<span class="hljs-keyword">class</span>, <span class="hljs-string">&quot;createC&quot;</span>) 
+    .withArgument(<span class="hljs-number">0</span>, a).withArgument(<span class="hljs-number">1</span>, b); 
+  return (static_method(<span class="hljs-type">Y</span>.<span class="hljs-keyword">class</span>, <span class="hljs-string">&quot;create&quot;</span>) 
+    .withArgument(<span class="hljs-number">0</span>,a).withArgument(<span class="hljs-number">1</span>,b).withArgument(<span class="hljs-number">2</span>,c); 
   ) </code></pre>
 <p>所有的Binder匿名类会被自动生成。 
 这叫&quot;do-notation&quot;，是haskell里面用来方便处理monad组合子的利器。 </p>
@@ -319,11 +326,11 @@ java代码: </p>
 <p>一个可以说得上对co有支持的语言，即使不直接支持do-notation，也应该把写匿名类的代价降到和一个lamda函数相接近的程度。 
 即使我不能写 </p>
 <p>java代码: </p>
-<pre><code class="language-haskell">a &lt;- createA 
-b &lt;- createB a </code></pre>
+<pre><code class="language-haskell"><span class="hljs-title">a</span> &lt;- createA 
+<span class="hljs-title">b</span> &lt;- createB a </code></pre>
 <p>也要能够写成： </p>
 <p>java代码: </p>
-<pre><code class="language-haskell">createA &gt;&gt;= \a-&gt;createB a</code></pre>
+<pre><code class="language-haskell"><span class="hljs-title">createA</span> &gt;&gt;= \a-&gt;createB a</code></pre>
 <p>组合并不仅仅是几个简单的decorator套起来。真正复杂的co里，不同组合子之间是需要通过bind来通信的。而组合子之间的通信能力才是co强大的根源。</p>
 
         

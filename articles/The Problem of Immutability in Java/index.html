@@ -12,6 +12,8 @@
     
     <title>Java 中的不可变性问题</title>
     
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css">
     <style type="text/css">
         body {
             width: 60%;
@@ -24,6 +26,11 @@
                 "Roboto",
                 "Noto Sans CJK",
                 Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        pre {
+            max-width: 90%;
+            overflow-x: scroll;
         }
 
         a {
@@ -139,58 +146,58 @@
 <h2 id="不同编程语言中的不可变性">不同编程语言中的不可变性</h2>
 <p>In most cases immutability is a powerful tool that allows us to keep our code clean and simple even in a multithreaded environment. Each language allow us to write such code in a different way, and the majority of popular languages just allow us to define all fields of such object as final/readonly/notmutable. For example, in Java our immutable type definition would look like this:</p>
 <p>大部分情况下，不可变性是一个非常强大的工具，可以允许我们在多线程的环境下保持代码的简单整洁。每种语言都允许我们以不同的方式写出这样的代码，绝大部分编程语言仅仅允许我们声明一些对象的某字段是 final/readonly/notmutable。比如，在Java中一个不可变类型的定义如下：</p>
-<pre><code class="language-java">public final class Enemy {
-    private final int id;
-    private final EnemyType type;
-    private final String name;
-    // +constructor
+<pre><code class="language-java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">final</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Enemy</span> </span>{
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> id;
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> EnemyType type;
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> String name;
+    <span class="hljs-comment">// +constructor</span>
 }</code></pre>
 <p>We need to keep in mind and remember that every referenced object must be immutable too. If we added a field with a list in it, we would either need to use some <code>ImmutableList</code> as field type or ensure in constructor that provided list is copied to some immutable collection. A common mistake here is using and trusting <a href="https://projectlombok.org/features/Value" title="null">lombok</a>. Adding <code>@Value</code> to our class does not magically handle immutability of collections and other references for us. This is similar to using Kotlin, but mostly when using Kotlin code from Java. Because even if Kotlin list appears immutable it is just compiler syntax sugar, and your List will get compiled to normal mutable Java list type, and depending on how the list was created it might be mutable too.</p>
 <p>需要牢记的一点是，要保证一个对象整体不可变，所有引用的对象也都必须是不可变的。如果我们添加了一个List字段，那么就需要使用一些比如<code>ImmutableList</code>的构造或者保证构造函数中提供的列表是来自于一些不可变集合。这里常见的错误是过度相信<a href="https://projectlombok.org/features/Value" title="null">lombok</a>。添加一个<code>@Value</code>注解到我们的类上，并不会发生什么魔幻操作导致我们的集合（或者其他引用对象）不可变。使用Kotlin也有同样的问题，通常见于在Java中引用Kotlin代码。因为即便Kotlin的list是不可变的，那也只是编译器的语法糖，你的List对象依然会被编译成普通的Java list，并且根据这个list创建的场景，它也可能是可变的。</p>
 <p>Some languages provide more interesting constructs, for example <a href="https://dlang.org/spec/const3.html" title="null">D language</a>:</p>
 <p>一些编程语言提供了更有趣的构造，比如<a href="https://dlang.org/spec/const3.html" title="null">D语言</a>：</p>
-<pre><code class="language-d">class C {
-/* 默认可变 */          C mField;
-             const     C cField;
-             immutable C iField;
+<pre><code class="language-d"><span class="hljs-keyword">class</span> C {
+<span class="hljs-comment">/* 默认可变 */</span>          C mField;
+             <span class="hljs-keyword">const</span>     C cField;
+             <span class="hljs-keyword">immutable</span> C iField;
 }
-// 接下来
-    C c = new C();
-    c.mField = c; // 没问题
+<span class="hljs-comment">// 接下来</span>
+    C c = <span class="hljs-keyword">new</span> C();
+    c.mField = c; <span class="hljs-comment">// 没问题</span>
 
-    // 编译期错误，因为我们尝试去改变一个不可变字段`iField` ———— 注意它是间接被改变的，
-    // 实际上我们要去改变的是它内部的可变字段。
+    <span class="hljs-comment">// 编译期错误，因为我们尝试去改变一个不可变字段`iField` ———— 注意它是间接被改变的，</span>
+    <span class="hljs-comment">// 实际上我们要去改变的是它内部的可变字段。</span>
     c.iField.mField.mField = c;
 
-    immutable C c = new C();
-    c.mField = c; // 错误
+    <span class="hljs-keyword">immutable</span> C c = <span class="hljs-keyword">new</span> C();
+    c.mField = c; <span class="hljs-comment">// 错误</span>
 
-// 或者直接声明整个类型都是不可变的
-immutable class X {
-    int a;
+<span class="hljs-comment">// 或者直接声明整个类型都是不可变的</span>
+<span class="hljs-keyword">immutable</span> <span class="hljs-keyword">class</span> X {
+    <span class="hljs-keyword">int</span> a;
 }</code></pre>
 <p>Here we can define each field/parameter as either normal mutable variable, const/final one — so we can’t change the value of that variable, or to mark a field directly as immutable one. Then no matter what, we don’t need to worry about mutating anything in that variable, even if it is a reference that contains mutable fields inside them — we will not be able to mutate them using our immutable reference.</p>
 <p>这里我们可以定义每一个字段/参数作为常规的可变对象，或者是不可变对象————这样我们就无法改变这个对象的值了，或者直接标记整个类型都是不可变的。无论怎么标记，我们都不用担心会修改到这个对象的任何一个部分；甚至在这个对象内部包含可变字段的时候，我们也没办法通过一个不可变引用去修改到他们。</p>
 <p><a href="https://doc.rust-lang.org/1.29.0/book/first-edition/mutability.html" title="null">Rust</a> is another interesting example. Here by default everything is immutable but at the same time there is the <code>Cell</code> type that can be used to skip immutability, so</p>
 <p>另一个有趣的例子是<a href="https://doc.rust-lang.org/1.29.0/book/first-edition/mutability.html" title="null">Rust</a>。Rust中默认所有对象都是不可变的，但与此同时<code>Cell</code>类型可以用来跳过不可变性验证，所以：</p>
-<pre><code class="language-rust">struct Point {
-    x: i32,
-    y: i32,
+<pre><code class="language-rust"><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Point</span></span> {
+    x: <span class="hljs-built_in">i32</span>,
+    y: <span class="hljs-built_in">i32</span>,
 }
-let mut a = Point { x: 5, y: 6 };
-a.x = 10;
+<span class="hljs-keyword">let</span> <span class="hljs-keyword">mut</span> a = Point { x: <span class="hljs-number">5</span>, y: <span class="hljs-number">6</span> };
+a.x = <span class="hljs-number">10</span>;
 
-let b = Point { x: 5, y: 6 };
-b.x = 10; // 错误：不能给不可变字段 `b.x` 赋值。 
+<span class="hljs-keyword">let</span> b = Point { x: <span class="hljs-number">5</span>, y: <span class="hljs-number">6</span> };
+b.x = <span class="hljs-number">10</span>; <span class="hljs-comment">// 错误：不能给不可变字段 `b.x` 赋值。 </span>
 
-// 但是
-struct Point {
-    x: i32,
-    y: Cell&lt;i32&gt;,
+<span class="hljs-comment">// 但是</span>
+<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Point</span></span> {
+    x: <span class="hljs-built_in">i32</span>,
+    y: Cell&lt;<span class="hljs-built_in">i32</span>&gt;,
 }
-let point = Point { x: 5, y: Cell::new(6) };
+<span class="hljs-keyword">let</span> point = Point { x: <span class="hljs-number">5</span>, y: Cell::new(<span class="hljs-number">6</span>) };
 
-point.y.set(7); // 这样就可以了～</code></pre>
+point.y.set(<span class="hljs-number">7</span>); <span class="hljs-comment">// 这样就可以了～</span></code></pre>
 <p>So we can’t be sure that our reference is fully immutable either, but if it is, it was a fully conscious choice of the code’s author, so we probably don’t need to worry about it.</p>
 <p>因此这样我们也没法确定我们的对象是否完全不可变，但如果是可变的，那也完全是代码作者有意为之，我们就没必要担心了。</p>
 <p>My point is: Java has one of the worst ways of defining immutability and tools like Lombok and Kotlin often only hide this instead of helping. While immutability is promising to keep developers safe from many issues, it’s not that easy to keep immutable values safe from developers without better support from the language itself. But why is that? Was Java never designed to be used with immutable values?</p>
@@ -201,18 +208,18 @@ point.y.set(7); // 这样就可以了～</code></pre>
 <p>（至少我希望）大家都知道使用不可变对象的好处————大部分都是在多线程场景下，但你有想过这样做的代价是什么吗？大部分native编程语言，这样的不可变对象通常被高效地优化，省去了非常多的空间分配（allocation）过程，Java的情况却并非如此————确实能够省掉一些空间分配，但是情况十分有限。很多人从来没考虑过这个问题，你可以尝试分配大量对象/内存导致可感知地拖慢你应用的情况看一下。这个时候应用会在分配对象和GC（Garbage Collection，垃圾回收）的过程中清理这些对象上花费大量时间。要验证这个场景你需要在短时间内不断分配大量的对象，在一个常规的Web应用中并不太容易遇到这种情况。当真的出现的时候，你可以调整GC的设置或者扩展你的应用。</p>
 <p>Imagine a piece of game code where we want to invoke a function for generated positions in world:</p>
 <p>考虑下面这段游戏代码， 我们想要调用函数处理游戏世界中生成的位置信息：</p>
-<pre><code class="language-java">class Example {
-    void example(Supplier&lt;Position&gt; positionGenerator, World world) {
+<pre><code class="language-java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Example</span> </span>{
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">example</span><span class="hljs-params">(Supplier&lt;Position&gt; positionGenerator, World world)</span> </span>{
         Stream.generate(positionGenerator)
-            .limit(1000000)
+            .limit(<span class="hljs-number">1000000</span>)
             .forEach(pos -&gt; world.updateAt(pos));
     }
 }</code></pre>
 <p>This is what the update itself looks like:</p>
 <p>这是<code>updateAt</code>函数的结构：</p>
-<pre><code class="language-java">class World {
-    void updateAt(Position position) {
-        position.forAllNeighborsInRange(3, newPosition -&gt; spawnMonsterIfNotPresent(newPosition)); // cube 7x7x7
+<pre><code class="language-java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">World</span> </span>{
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">updateAt</span><span class="hljs-params">(Position position)</span> </span>{
+        position.forAllNeighborsInRange(<span class="hljs-number">3</span>, newPosition -&gt; spawnMonsterIfNotPresent(newPosition)); <span class="hljs-comment">// cube 7x7x7</span>
         spawnChestIfNotPresent(position);
     }
 }</code></pre>
@@ -220,67 +227,67 @@ point.y.set(7); // 这样就可以了～</code></pre>
 <p>这段代码可能是游戏循环的一部分，每秒运行数十次。可能并不一定是生成新的怪物等，但总有很多事情需要这样处理。</p>
 <p>We will use <a href="https://openjdk.java.net/projects/code-tools/jmh/" title="null">JMH</a> for benchmarking. Full benchmark code will be linked at the end of article.</p>
 <p>我们使用<a href="https://openjdk.java.net/projects/code-tools/jmh/" title="null">JMH</a>来做benchmark。文章后面会给出完整的benchmark代码。</p>
-<pre><code class="language-java">@Benchmark
-public void tick() throws Throwable {
+<pre><code class="language-java"><span class="hljs-meta">@Benchmark</span>
+<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">tick</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> Throwable </span>{
     Stream.generate(positionGenerator)
             .limit(ITERATIONS)
             .forEach(pos -&gt; world.updateAt(pos));
 }</code></pre>
 <p>Let’s just benchmark such code and see the results</p>
 <p>我们看一下benchmark的结果：</p>
-<pre><code>Benchmark       Score   Error  Units
-tick            68.875  0.088  ms/op
-tick:tick p0.99 71.620         ms/op</code></pre>
+<pre><code><span class="hljs-attribute">Benchmark</span>       Score   Error  Units
+<span class="hljs-attribute">tick</span>            <span class="hljs-number">68</span>.<span class="hljs-number">875</span>  <span class="hljs-number">0</span>.<span class="hljs-number">088</span>  ms/op
+<span class="hljs-attribute">tick</span>:tick p<span class="hljs-number">0</span>.<span class="hljs-number">99</span> <span class="hljs-number">71</span>.<span class="hljs-number">620</span>         ms/op</code></pre>
 <p>This already limits us to 14 (1000 ms / 71 ms ≈ 14) updates per second, but we probably want to do more than this. What if we removed all allocations here? Let’s make our Position mutable and just pass the same instance. We only use 1 thread here so we don’t need to worry about concurrency or other possible issues as long as position is not stored anywhere:</p>
-<pre><code>Benchmark                     Score   Error  Units
-tickNoAlloc                   30.817  0.019  ms/op
-tickNoAlloc:tickNoAlloc p0.99 31.130         ms/op</code></pre>
+<pre><code><span class="hljs-attribute">Benchmark</span>                     Score   Error  Units
+<span class="hljs-attribute">tickNoAlloc</span>                   <span class="hljs-number">30</span>.<span class="hljs-number">817</span>  <span class="hljs-number">0</span>.<span class="hljs-number">019</span>  ms/op
+<span class="hljs-attribute">tickNoAlloc</span>:tickNoAlloc p<span class="hljs-number">0</span>.<span class="hljs-number">99</span> <span class="hljs-number">31</span>.<span class="hljs-number">130</span>         ms/op</code></pre>
 <p>It’s twice as fast! We don’t do much in that code, so you might think that in general such optimization would not matter, but remember that we are talking about something running in a game loop, 35ms less means we can spin our game loop faster or add more features before our game will run too slow, and that’s a lot of time!</p>
 <p>In other languages people often try to connect benefits of immutable code and less allocation by allocating such values on the stack. Sadly Java once again does not have any tool for that (Java can get rid of allocations in some cases, but these are internal JIT optimizations that we can’t control or assume if/when they are used). The only alternative would be to use raw values directly, so instead of passing a Position object we can just pass 3 double values. In java we have no way to return 3 values at once (structures would solve this too), so our generator of positions must support generation of each value (x/y/z) separately.</p>
-<pre><code>Benchmark                   Score   Error  Units
-tickNoHeap                  23.562  0.012  ms/op
-tickNoHeap:tickNoHeap p0.99 23.839         ms/op</code></pre>
+<pre><code><span class="hljs-attribute">Benchmark</span>                   Score   Error  Units
+<span class="hljs-attribute">tickNoHeap</span>                  <span class="hljs-number">23</span>.<span class="hljs-number">562</span>  <span class="hljs-number">0</span>.<span class="hljs-number">012</span>  ms/op
+<span class="hljs-attribute">tickNoHeap</span>:tickNoHeap p<span class="hljs-number">0</span>.<span class="hljs-number">99</span> <span class="hljs-number">23</span>.<span class="hljs-number">839</span>         ms/op</code></pre>
 <p>And not only it does run faster now, but can also be used again in multithreaded way without any issues. The only issue is that we would not be able to do this with larger objects, and it already looks much more complicated and less readable, and all of this because Java lacks simple structures that can be allocated on stack (but maybe someday we will see some form of structures thanks to <a href="https://openjdk.java.net/projects/valhalla/" title="null">Valhalla</a> project). Note that using a struct would not always be better, it depends on size of our data. If we use large object then it would be better to use normal object/reference as copying it would cost more than cost of dereferencing it later.</p>
 <h2 id="stressing-gc">Stressing GC</h2>
 <p>Now let’s run this code using more threads and see what happens:</p>
-<pre><code class="language-java">@Benchmark
-@Threads(-1) // use all cores
-public void tick_threaded() throws Throwable {
+<pre><code class="language-java"><span class="hljs-meta">@Benchmark</span>
+<span class="hljs-meta">@Threads(-1)</span> <span class="hljs-comment">// use all cores</span>
+<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">tick_threaded</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> Throwable </span>{
     Stream.generate(positionGenerator)
             .limit(ITERATIONS)
             .forEach(pos -&gt; world.updateAt(pos));
 }
-@Benchmark
-@Threads(-1)
-public void tickNoHeap_threaded() throws Throwable {
-    IntStream.rangeClosed(0, ITERATIONS)
+<span class="hljs-meta">@Benchmark</span>
+<span class="hljs-meta">@Threads(-1)</span>
+<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">tickNoHeap_threaded</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> Throwable </span>{
+    IntStream.rangeClosed(<span class="hljs-number">0</span>, ITERATIONS)
             .forEach(pos -&gt; world.updateAt_NoHeap(noHeapPositionGenerator.nextX(), noHeapPositionGenerator.nextY(), noHeapPositionGenerator.nextZ()));
 }</code></pre>
 <p>And results:</p>
-<pre><code>Benchmark                                     Score   Error  Units
-tickNoHeap_threaded                            29.051 0.076  ms/op
-tickNoHeap_threaded:tickNoHeap_threaded p0.00  25.330        ms/op
-tickNoHeap_threaded:tickNoHeap_threaded p0.95  40.567        ms/op
-tickNoHeap_threaded:tickNoHeap_threaded p0.99  51.773        ms/op
-tick_threaded                                 189.682 0.849  ms/op
-tick_threaded:tick_threaded p0.00             101.712        ms/op
-tick_threaded:tick_threaded p0.95             231.224        ms/op
-tick_threaded:tick_threaded p0.99             256.379        ms/op</code></pre>
+<pre><code><span class="hljs-attribute">Benchmark</span>                                     Score   Error  Units
+<span class="hljs-attribute">tickNoHeap_threaded</span>                            <span class="hljs-number">29</span>.<span class="hljs-number">051</span> <span class="hljs-number">0</span>.<span class="hljs-number">076</span>  ms/op
+<span class="hljs-attribute">tickNoHeap_threaded</span>:tickNoHeap_threaded p<span class="hljs-number">0</span>.<span class="hljs-number">00</span>  <span class="hljs-number">25</span>.<span class="hljs-number">330</span>        ms/op
+<span class="hljs-attribute">tickNoHeap_threaded</span>:tickNoHeap_threaded p<span class="hljs-number">0</span>.<span class="hljs-number">95</span>  <span class="hljs-number">40</span>.<span class="hljs-number">567</span>        ms/op
+<span class="hljs-attribute">tickNoHeap_threaded</span>:tickNoHeap_threaded p<span class="hljs-number">0</span>.<span class="hljs-number">99</span>  <span class="hljs-number">51</span>.<span class="hljs-number">773</span>        ms/op
+<span class="hljs-attribute">tick_threaded</span>                                 <span class="hljs-number">189</span>.<span class="hljs-number">682</span> <span class="hljs-number">0</span>.<span class="hljs-number">849</span>  ms/op
+<span class="hljs-attribute">tick_threaded</span>:tick_threaded p<span class="hljs-number">0</span>.<span class="hljs-number">00</span>             <span class="hljs-number">101</span>.<span class="hljs-number">712</span>        ms/op
+<span class="hljs-attribute">tick_threaded</span>:tick_threaded p<span class="hljs-number">0</span>.<span class="hljs-number">95</span>             <span class="hljs-number">231</span>.<span class="hljs-number">224</span>        ms/op
+<span class="hljs-attribute">tick_threaded</span>:tick_threaded p<span class="hljs-number">0</span>.<span class="hljs-number">99</span>             <span class="hljs-number">256</span>.<span class="hljs-number">379</span>        ms/op</code></pre>
 <p>Now we can see this issue even more, as we are allocating a lot of objects that later need to be cleaned up.</p>
 <p>Another thing we can check is what will happen if we want to limit available memory. Currently all the code was running on 2GB of memory, that is quite a lot for code which does nothing. Let’s limit memory to 128MB and 20MB:</p>
-<pre><code>Benchmark                                             Score     Error  Units
-tickNoHeap_threaded128M                                26.313   0.104  ms/op
-tickNoHeap_threaded128M:tickNoHeap_threaded128M p0.00  24.674          ms/op
-tickNoHeap_threaded128M:tickNoHeap_threaded128M p0.99  45.200          ms/op
-tickNoHeap_threaded20M                                 26.292   0.093  ms/op
-tickNoHeap_threaded20M:tickNoHeap_threaded20M p0.00    24.707          ms/op
-tickNoHeap_threaded20M:tickNoHeap_threaded20M p0.99    41.484          ms/op
-tick_threaded128M                                     211.826   0.726  ms/op
-tick_threaded128M:tick_threaded128M p0.00             184.812          ms/op
-tick_threaded128M:tick_threaded128M p0.99             240.910          ms/op
-tick_threaded20M                                      427.533   1.430  ms/op
-tick_threaded20M:tick_threaded20M p0.00               411.042          ms/op
-tick_threaded20M:tick_threaded20M p0.99               478.224          ms/op</code></pre>
+<pre><code><span class="hljs-attribute">Benchmark</span>                                             Score     Error  Units
+<span class="hljs-attribute">tickNoHeap_threaded128M</span>                                <span class="hljs-number">26</span>.<span class="hljs-number">313</span>   <span class="hljs-number">0</span>.<span class="hljs-number">104</span>  ms/op
+<span class="hljs-attribute">tickNoHeap_threaded128M</span>:tickNoHeap_threaded<span class="hljs-number">128</span>M p<span class="hljs-number">0</span>.<span class="hljs-number">00</span>  <span class="hljs-number">24</span>.<span class="hljs-number">674</span>          ms/op
+<span class="hljs-attribute">tickNoHeap_threaded128M</span>:tickNoHeap_threaded<span class="hljs-number">128</span>M p<span class="hljs-number">0</span>.<span class="hljs-number">99</span>  <span class="hljs-number">45</span>.<span class="hljs-number">200</span>          ms/op
+<span class="hljs-attribute">tickNoHeap_threaded20M</span>                                 <span class="hljs-number">26</span>.<span class="hljs-number">292</span>   <span class="hljs-number">0</span>.<span class="hljs-number">093</span>  ms/op
+<span class="hljs-attribute">tickNoHeap_threaded20M</span>:tickNoHeap_threaded<span class="hljs-number">20</span>M p<span class="hljs-number">0</span>.<span class="hljs-number">00</span>    <span class="hljs-number">24</span>.<span class="hljs-number">707</span>          ms/op
+<span class="hljs-attribute">tickNoHeap_threaded20M</span>:tickNoHeap_threaded<span class="hljs-number">20</span>M p<span class="hljs-number">0</span>.<span class="hljs-number">99</span>    <span class="hljs-number">41</span>.<span class="hljs-number">484</span>          ms/op
+<span class="hljs-attribute">tick_threaded128M</span>                                     <span class="hljs-number">211</span>.<span class="hljs-number">826</span>   <span class="hljs-number">0</span>.<span class="hljs-number">726</span>  ms/op
+<span class="hljs-attribute">tick_threaded128M</span>:tick_threaded<span class="hljs-number">128</span>M p<span class="hljs-number">0</span>.<span class="hljs-number">00</span>             <span class="hljs-number">184</span>.<span class="hljs-number">812</span>          ms/op
+<span class="hljs-attribute">tick_threaded128M</span>:tick_threaded<span class="hljs-number">128</span>M p<span class="hljs-number">0</span>.<span class="hljs-number">99</span>             <span class="hljs-number">240</span>.<span class="hljs-number">910</span>          ms/op
+<span class="hljs-attribute">tick_threaded20M</span>                                      <span class="hljs-number">427</span>.<span class="hljs-number">533</span>   <span class="hljs-number">1</span>.<span class="hljs-number">430</span>  ms/op
+<span class="hljs-attribute">tick_threaded20M</span>:tick_threaded<span class="hljs-number">20</span>M p<span class="hljs-number">0</span>.<span class="hljs-number">00</span>               <span class="hljs-number">411</span>.<span class="hljs-number">042</span>          ms/op
+<span class="hljs-attribute">tick_threaded20M</span>:tick_threaded<span class="hljs-number">20</span>M p<span class="hljs-number">0</span>.<span class="hljs-number">99</span>               <span class="hljs-number">478</span>.<span class="hljs-number">224</span>          ms/op</code></pre>
 <p>New version with objects is struggling even more to maintain good performance, and this is actually something you might observe in your web application too, when more and more time goes for GC and allocation. Some of these issues can be sometimes solved (or make them less visible) by adjusting young gen size. Issue will still be there, but now it will occur at another point, and at the end you will finally hit a limit of how much you can scale your application vertically.</p>
 <h2 id="conclusion">Conclusion?</h2>
 <p>The point of this article was to show that while immutability gives us a lot of safety, Java does not give us enough tools to use immutable data in a performant way. While it’s still a good idea to write code using immutable values, we should sometimes also consider using other methods if we need much higher throughput and scaling horizontally is either impossible or just starting to get too expensive (with games you are often limited by performance of a single PC). As a wannabe game developer myself — I’m especially looking at other web developers interested in game development, as reading web influenced game code often hurts, not only the performance of the game, but also the people who will read that code later ;)</p>

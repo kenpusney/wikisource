@@ -12,6 +12,8 @@
     
     <title>论面向组合子程序设计方法 之一 创世纪</title>
     
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css">
     <style type="text/css">
         body {
             width: 60%;
@@ -24,6 +26,11 @@
                 "Roboto",
                 "Noto Sans CJK",
                 Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        pre {
+            max-width: 90%;
+            overflow-x: scroll;
         }
 
         a {
@@ -131,24 +138,24 @@
 <p>当然，大致的思路总归差不多的。因为我的neptune系统只需要一个logging的工具，而不关心这个logging工具是什么，这就是一个perfect的依赖注射的场合。 </p>
 <p>先定义接口Logger，然后从构造函数传递近来一个Logger实例，接着就直接调用Logger就是了。 </p>
 <p>java代码: </p>
-<pre><code class="language-java">public interface Logger{ 
-  void print(int level, String msg); 
-  void println(int level, String msg); 
-  void logException(Throwable e); 
+<pre><code class="language-java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">Logger</span></span>{ 
+  <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">print</span><span class="hljs-params">(<span class="hljs-keyword">int</span> level, String msg)</span></span>; 
+  <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">println</span><span class="hljs-params">(<span class="hljs-keyword">int</span> level, String msg)</span></span>; 
+  <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">logException</span><span class="hljs-params">(Throwable e)</span></span>; 
 }</code></pre>
 <p>print用来输出信息，但是不折行，println可以折行。 
 logException用来直接纪录异常。这样，对异常是直接printStackTrace，还是println(e.getMessage())就是由具体的Logger实现来决定，我的neptune只需要把遇到的异常报告给Logger就是了。 </p>
 <p>好。接下来我吭哧吭哧地把neptune完成了，剩下的就是从哪里找一个Logger实现了。 </p>
 <p>最简单的Logger实现自然就是直接往屏幕上打印了： </p>
 <p>java代码: </p>
-<pre><code class="language-java">class SimpleLogger implements Logger{ 
-  public void print(int lvl, String msg){ 
+<pre><code class="language-java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SimpleLogger</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Logger</span></span>{ 
+  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">print</span><span class="hljs-params">(<span class="hljs-keyword">int</span> lvl, String msg)</span></span>{ 
     System.out.print(msg); 
   } 
-  public void println(int lvl, String msg){ 
+  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">println</span><span class="hljs-params">(<span class="hljs-keyword">int</span> lvl, String msg)</span></span>{ 
     System.out.println(msg); 
   } 
-  public void printException(Throwable e){ 
+  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">printException</span><span class="hljs-params">(Throwable e)</span></span>{ 
     e.printStackTrace(); 
   } 
 }</code></pre>

@@ -12,6 +12,8 @@
     
     <title>JSONSpec: Build an enhanced service</title>
     
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css">
     <style type="text/css">
         body {
             width: 60%;
@@ -24,6 +26,11 @@
                 "Roboto",
                 "Noto Sans CJK",
                 Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        pre {
+            max-width: 90%;
+            overflow-x: scroll;
         }
 
         a {
@@ -127,25 +134,25 @@
 <p> 所以除了type spec之外我们还需要有对spec的spec。</p>
 <p>示例如下：</p>
 <pre><code class="language-json">{
-    &quot;name&quot;: &quot;JSONSpec&quot;,
-    &quot;version&quot;: &quot;draft0&quot;,
-    &quot;base&quot;: &quot;http://spec.kimleo.net/JSONSpec/draft0/&quot;,
-    &quot;published&quot;: [
+    <span class="hljs-attr">&quot;name&quot;</span>: <span class="hljs-string">&quot;JSONSpec&quot;</span>,
+    <span class="hljs-attr">&quot;version&quot;</span>: <span class="hljs-string">&quot;draft0&quot;</span>,
+    <span class="hljs-attr">&quot;base&quot;</span>: <span class="hljs-string">&quot;http://spec.kimleo.net/JSONSpec/draft0/&quot;</span>,
+    <span class="hljs-attr">&quot;published&quot;</span>: [
         {
-            &quot;path&quot;: &quot;/validate&quot;,
-            &quot;accept&quot;: &quot;JSONSpec&quot;,
-            &quot;type&quot;: &quot;ValidateResult&quot;
+            <span class="hljs-attr">&quot;path&quot;</span>: <span class="hljs-string">&quot;/validate&quot;</span>,
+            <span class="hljs-attr">&quot;accept&quot;</span>: <span class="hljs-string">&quot;JSONSpec&quot;</span>,
+            <span class="hljs-attr">&quot;type&quot;</span>: <span class="hljs-string">&quot;ValidateResult&quot;</span>
         }
     ],
-    &quot;type&quot;: [
+    <span class="hljs-attr">&quot;type&quot;</span>: [
         {
-            &quot;name&quot;: &quot;JSONSpec&quot;,
-            &quot;path&quot;: &quot;/type/JSONSpec.type.json&quot;
+            <span class="hljs-attr">&quot;name&quot;</span>: <span class="hljs-string">&quot;JSONSpec&quot;</span>,
+            <span class="hljs-attr">&quot;path&quot;</span>: <span class="hljs-string">&quot;/type/JSONSpec.type.json&quot;</span>
         },
         {
-            &quot;name&quot;: &quot;ValidateResult&quot;,
-            &quot;base&quot;: &quot;http://spec.kimleo.net/JSONSpec/draft0/common&quot;,
-            &quot;path&quot;: &quot;/type/ValidateResult.type.json&quot;
+            <span class="hljs-attr">&quot;name&quot;</span>: <span class="hljs-string">&quot;ValidateResult&quot;</span>,
+            <span class="hljs-attr">&quot;base&quot;</span>: <span class="hljs-string">&quot;http://spec.kimleo.net/JSONSpec/draft0/common&quot;</span>,
+            <span class="hljs-attr">&quot;path&quot;</span>: <span class="hljs-string">&quot;/type/ValidateResult.type.json&quot;</span>
         }
     ], 
     ... ...

@@ -12,6 +12,8 @@
     
     <title>JSONSpec: AST as a Service</title>
     
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css">
     <style type="text/css">
         body {
             width: 60%;
@@ -24,6 +26,11 @@
                 "Roboto",
                 "Noto Sans CJK",
                 Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        pre {
+            max-width: 90%;
+            overflow-x: scroll;
         }
 
         a {
@@ -124,29 +131,29 @@
 <p>然而问题究竟在哪儿呢？</p>
 <p>首先是关于是否有必要在请求的结果中描述逻辑的问题。</p>
 <p>比如：</p>
-<pre><code class="language-json">&quot;foo&quot;:true, 
+<pre><code class="language-json"><span class="hljs-string">&quot;foo&quot;</span>:<span class="hljs-literal">true</span>, 
 
-&quot;cities&quot;:[&quot;Montreal&quot;,&quot;Toronto&quot;], 
+<span class="hljs-string">&quot;cities&quot;</span>:[<span class="hljs-string">&quot;Montreal&quot;</span>,<span class="hljs-string">&quot;Toronto&quot;</span>], 
 
-&quot;city&quot;: {
-    &quot;_IF&quot;:&quot;{foo}&quot;,
-    &quot;_THEN&quot;:{
-        &quot;city&quot;:{&quot;_PATH&quot;:[&quot;cities&quot;,0]},
-        &quot;_RETURN&quot;:&quot;{city}&quot;
+<span class="hljs-string">&quot;city&quot;</span>: {
+    <span class="hljs-attr">&quot;_IF&quot;</span>:<span class="hljs-string">&quot;{foo}&quot;</span>,
+    <span class="hljs-attr">&quot;_THEN&quot;</span>:{
+        <span class="hljs-attr">&quot;city&quot;</span>:{<span class="hljs-attr">&quot;_PATH&quot;</span>:[<span class="hljs-string">&quot;cities&quot;</span>,<span class="hljs-number">0</span>]},
+        <span class="hljs-attr">&quot;_RETURN&quot;</span>:<span class="hljs-string">&quot;{city}&quot;</span>
     },
-    &quot;_ELSE&quot;:{&quot;_PATH&quot;:[&quot;cities&quot;,1]}
+    <span class="hljs-attr">&quot;_ELSE&quot;</span>:{<span class="hljs-attr">&quot;_PATH&quot;</span>:[<span class="hljs-string">&quot;cities&quot;</span>,<span class="hljs-number">1</span>]}
 }</code></pre>
 <p>大致相当于下面的JS代码：</p>
-<pre><code class="language-js">var foo=true, cities = [&quot;Montreal&quot;, &quot;Toronto&quot;], city;
+<pre><code class="language-js">var <span class="hljs-attr">foo=true,</span> <span class="hljs-attr">cities</span> = [<span class="hljs-string">&quot;Montreal&quot;</span>, <span class="hljs-string">&quot;Toronto&quot;</span>], city;
 
-if(foo) {
-    city = cities[0];
-} else {
-    city = cities[1];
+<span class="hljs-keyword">if</span>(foo) {
+    <span class="hljs-attr">city</span> = cities[<span class="hljs-number">0</span>];
+} <span class="hljs-keyword">else</span> {
+    <span class="hljs-attr">city</span> = cities[<span class="hljs-number">1</span>];
 }</code></pre>
 <p>但是，当这段代码逻辑出现的时候，其实就可以直接对其进行求值然后变成：</p>
 <pre><code class="language-json">{
-    &quot;city&quot;: &quot;Montreal&quot;
+    <span class="hljs-attr">&quot;city&quot;</span>: <span class="hljs-string">&quot;Montreal&quot;</span>
 }</code></pre>
 <p>简直节省了大量的带宽和客户端的业务量。</p>
 <p>当然，也有一个理由让客户端知道如何处理这样的业务逻辑。比如，要求Dynamic或者是Reactive时，客户端就可以直接对当前获得到的业务逻辑，自己就能进行处理了。</p>

@@ -12,6 +12,8 @@
     
     <title>论面向组合子程序设计方法 之四 燃烧的荆棘</title>
     
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css">
     <style type="text/css">
         body {
             width: 60%;
@@ -24,6 +26,11 @@
                 "Roboto",
                 "Noto Sans CJK",
                 Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        pre {
+            max-width: 90%;
+            overflow-x: scroll;
         }
 
         a {
@@ -131,8 +138,8 @@
 <p>比如，假如我的Logger接口定义的时候没有print函数而只有println，那么后面我们会发现在制造打印当前时间的组合子的时候会出现麻烦。不过，没关系，等到意识到我们需要一个print()函数的时候，回过头来refactor也是可以的。 </p>
 <p>为了说明这点，我们现在假设Logger接口是这样： </p>
 <p>java代码: </p>
-<pre><code class="language-java">interface Logger{ 
-  println(int level, String msg); 
+<pre><code class="language-java"><span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">Logger</span></span>{ 
+  println(<span class="hljs-keyword">int</span> level, String msg); 
   printException(Throwable e); 
 }</code></pre>
 <p>好，路漫漫而修远兮，我们就这样按照上帝的昭示上路吧，虽然前路云封雾锁。 </p>
@@ -142,19 +149,19 @@
 <p>有的。 </p>
 <p>0就是一个什么都不做的Logger。 </p>
 <p>java代码: </p>
-<pre><code class="language-java">class NopLogger implements Logger{ 
-  public void println(int level, String msg){} 
-  public void printException(Throwable e){} 
+<pre><code class="language-java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">NopLogger</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Logger</span></span>{ 
+  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">println</span><span class="hljs-params">(<span class="hljs-keyword">int</span> level, String msg)</span></span>{} 
+  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">printException</span><span class="hljs-params">(Throwable e)</span></span>{} 
 }</code></pre>
 <p>（注，不要小看这个什么都不做的Logger，它的作用大着呢。你能想象一个没有0的整数系统吗？） </p>
 <p>什么是1呢？一个直接向文件中打印信息的应该就是一个1了。 
 伪码如下： </p>
 <p>java代码: </p>
-<pre><code class="language-java">class FileLogger implements Logger{ 
-  public void println(int level, String msg){ 
+<pre><code class="language-java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">FileLogger</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Logger</span></span>{ 
+  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">println</span><span class="hljs-params">(<span class="hljs-keyword">int</span> level, String msg)</span></span>{ 
     write msg to log file. 
   } 
-  public void printException(Throwable e){ 
+  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">printException</span><span class="hljs-params">(Throwable e)</span></span>{ 
     write exceptioon to log file. 
   } 
 }</code></pre>
@@ -167,16 +174,16 @@
 “先天下之忧而忧”这种思想是最最要不得的。 </p>
 <p>于是，最简单的1应该是这样： </p>
 <p>java代码: </p>
-<pre><code class="language-java">class WriterLogger implements Logger{ 
-  private final PrintWriter writer; 
-  public void println(int level, String msg){ 
+<pre><code class="language-java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">WriterLogger</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Logger</span></span>{ 
+  <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> PrintWriter writer; 
+  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">println</span><span class="hljs-params">(<span class="hljs-keyword">int</span> level, String msg)</span></span>{ 
     writer.println(msg); 
   } 
-  public void printException(Throwable e){ 
+  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">printException</span><span class="hljs-params">(Throwable e)</span></span>{ 
     e.printStackTrace(writer); 
   } 
   WriterLogger(PrintWriter writer){ 
-     this.writer = writer; 
+     <span class="hljs-keyword">this</span>.writer = writer; 
   } 
 }</code></pre>
 <p>“哈！还说什么CO。你这不是剽窃ioc pattern吗？” 
@@ -186,51 +193,51 @@
 有一点作为thumb of rule需要注意的：每个组合规则尽量简单，并且只做一件事。 </p>
 <p>1。顺序。把若干个logger对象顺序写一遍，自然是一种组合方式。 </p>
 <p>java代码: </p>
-<pre><code class="language-java">class SequenceLogger implements Logger{ 
-  public void println(int level, String msg){ 
+<pre><code class="language-java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SequenceLogger</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Logger</span></span>{ 
+  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">println</span><span class="hljs-params">(<span class="hljs-keyword">int</span> level, String msg)</span></span>{ 
     foreach(l: loggers){ 
       l.println(level, msg); 
     } 
   } 
-  public void printException(Throwable e){ 
+  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">printException</span><span class="hljs-params">(Throwable e)</span></span>{ 
     foreach(l:loggers){ 
       l.printException(e); 
     } 
   } 
-  private final Logger[] loggers; 
+  <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> Logger[] loggers; 
   SequenceLogger(Logger[] ls){ 
-    this.loggers = ls; 
+    <span class="hljs-keyword">this</span>.loggers = ls; 
   } 
 }</code></pre>
 <p>2。逻辑分支。当消息的重要程度等于某一个级别的时候，写logger1，否则写logger2。 
 java代码: </p>
-<pre><code class="language-java">class FilteredLogger implements Logger{ 
-  private final Logger logger1; 
-  private final Logger logger2; 
-  private final int lvl; 
-  public void println(int level, String msg){ 
-    if(level==lvl)logger1.println(level, msg); 
-    else logger2.println(level, msg); 
+<pre><code class="language-java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">FilteredLogger</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Logger</span></span>{ 
+  <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> Logger logger1; 
+  <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> Logger logger2; 
+  <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> lvl; 
+  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">println</span><span class="hljs-params">(<span class="hljs-keyword">int</span> level, String msg)</span></span>{ 
+    <span class="hljs-keyword">if</span>(level==lvl)logger1.println(level, msg); 
+    <span class="hljs-keyword">else</span> logger2.println(level, msg); 
   } 
-  public void printException(Throwable e){ 
-    if(lvl==ERROR) logger1.printException(e); 
-    else logger2.printException(e); 
+  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">printException</span><span class="hljs-params">(Throwable e)</span></span>{ 
+    <span class="hljs-keyword">if</span>(lvl==ERROR) logger1.printException(e); 
+    <span class="hljs-keyword">else</span> logger2.printException(e); 
   } 
 }</code></pre>
 <p>为了简洁，下面的例子我就不写构造函数了。 </p>
 <p>3。忽略。当消息的重要程度大于等于某一个值的时候，我们写入logger1，否则写入logger2。 
 java代码: </p>
-<pre><code class="language-java">class IgnoringLogger implements Logger{ 
-  private final Logger logger1; 
-  private final Logger logger2; 
-  private final int lvl; 
-  public void println(int level, String msg){ 
-    if(level&gt;=lvl)logger1.println(level, msg); 
-    else logger2.println(level, msg); 
+<pre><code class="language-java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">IgnoringLogger</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Logger</span></span>{ 
+  <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> Logger logger1; 
+  <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> Logger logger2; 
+  <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> lvl; 
+  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">println</span><span class="hljs-params">(<span class="hljs-keyword">int</span> level, String msg)</span></span>{ 
+    <span class="hljs-keyword">if</span>(level&gt;=lvl)logger1.println(level, msg); 
+    <span class="hljs-keyword">else</span> logger2.println(level, msg); 
   } 
-  public void printException(Throwable e){ 
-    if(lvl&lt;=ERROR) logger1.printException(e); 
-    else logger2.printException(e); 
+  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">printException</span><span class="hljs-params">(Throwable e)</span></span>{ 
+    <span class="hljs-keyword">if</span>(lvl&lt;=ERROR) logger1.printException(e); 
+    <span class="hljs-keyword">else</span> logger2.printException(e); 
   } 
 }</code></pre>
 <p>其实，2和3本来可以统一成一个组合规则的，都是根据消息重要程度来判断logger走向的。如果我用的是一个函数式语言，我会毫不犹豫地用一个predicate函数来做这个抽象。 
@@ -241,59 +248,59 @@ CO确实不是一个以需求为中心的方法论。它有自己的组合系统
 只不过，在CO里面，这些需求不再影响系统架构，而是被实现为一个一个独立的组合子。同时，我们抛开需求之间复杂的逻辑关系，上来直奔主题而去就好了。 </p>
 <p>4。对exception直接打印getMessage()。 </p>
 <p>java代码: </p>
-<pre><code class="language-java">class ErrorMessageLogger implements Logger{ 
-  private final PrintWriter out; 
-  private final Logger logger; 
-  public void println(int level, String msg){ 
+<pre><code class="language-java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ErrorMessageLogger</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Logger</span></span>{ 
+  <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> PrintWriter out; 
+  <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> Logger logger; 
+  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">println</span><span class="hljs-params">(<span class="hljs-keyword">int</span> level, String msg)</span></span>{ 
      logger.println(level, msg); 
   } 
-  public void printException(Throwable e){ 
+  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">printException</span><span class="hljs-params">(Throwable e)</span></span>{ 
      out.println(e.getMessage()); 
   } 
 } </code></pre>
 <p>5。对了，该处理NeptuneException了。如果一个exception是NeptuneException，打印execution trace。 </p>
 <p>java代码: </p>
-<pre><code class="language-java">class NeptuneExceptionLogger implements Logger{ 
-  private final PrintWriter out; 
-  private final Logger logger; 
-  public void println(int level, String msg){ 
+<pre><code class="language-java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">NeptuneExceptionLogger</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Logger</span></span>{ 
+  <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> PrintWriter out; 
+  <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> Logger logger; 
+  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">println</span><span class="hljs-params">(<span class="hljs-keyword">int</span> level, String msg)</span></span>{ 
     logger.println(level, msg); 
   } 
-  public void printException(Throwable e){ 
-    if(e instanceof NeptuneException){ 
+  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">printException</span><span class="hljs-params">(Throwable e)</span></span>{ 
+    <span class="hljs-keyword">if</span>(e <span class="hljs-keyword">instanceof</span> NeptuneException){ 
       ((NeptuneException)e).printExecutionTrace(out); 
     } 
-    else{ 
+    <span class="hljs-keyword">else</span>{ 
       logger.printException(e); 
     } 
   } 
 } </code></pre>
 <p>6。对EvaluationException，照猫画虎。 
 java代码: </p>
-<pre><code class="language-java">class JaskellExceptionLogger implements Logger{ 
-  private final PrintWriter out; 
-  private final Logger logger; 
-  public void println(int level, String msg){ 
+<pre><code class="language-java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">JaskellExceptionLogger</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Logger</span></span>{ 
+  <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> PrintWriter out; 
+  <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> Logger logger; 
+  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">println</span><span class="hljs-params">(<span class="hljs-keyword">int</span> level, String msg)</span></span>{ 
     logger.println(level, msg); 
   } 
-  public void printException(Throwable e){ 
-    if(e instanceof EvaluationException){ 
+  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">printException</span><span class="hljs-params">(Throwable e)</span></span>{ 
+    <span class="hljs-keyword">if</span>(e <span class="hljs-keyword">instanceof</span> EvaluationException){ 
       ((EvaluationException)e).printEvaluationTrace(out); 
     } 
-    else{ 
+    <span class="hljs-keyword">else</span>{ 
       logger.printException(e); 
     } 
   } 
 } </code></pre>
 <p>7。在每行消息前打印系统时间。 
 java代码: </p>
-<pre><code class="language-java">class TimestampLogger implements Logger{ 
-  private final Logger logger; 
-  public void println(int level, String msg){ 
-    logger.println(level, new Date().toString()+&quot;: &quot; + msg); 
+<pre><code class="language-java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TimestampLogger</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Logger</span></span>{ 
+  <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> Logger logger; 
+  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">println</span><span class="hljs-params">(<span class="hljs-keyword">int</span> level, String msg)</span></span>{ 
+    logger.println(level, <span class="hljs-keyword">new</span> Date().toString()+<span class="hljs-string">&quot;: &quot;</span> + msg); 
   } 
-  public void printException(Throwable e){ 
-    logger.println(ERROR, new Date().toString()+&quot;: &quot;); 
+  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">printException</span><span class="hljs-params">(Throwable e)</span></span>{ 
+    logger.println(ERROR, <span class="hljs-keyword">new</span> Date().toString()+<span class="hljs-string">&quot;: &quot;</span>); 
     logger.printException(e); 
   } 
 }</code></pre>
@@ -302,47 +309,47 @@ java代码: </p>
 <p>这可不是我们想要的效果。我们本来是想让系统时间出现在同一行的。 
 怎么办？回头看看，如果Logger接口多一个print函数，一切就迎刃而解了。重构。 </p>
 <p>java代码: </p>
-<pre><code class="language-java">class TimestampLogger implements Logger{ 
-  private final Logger logger; 
-  private boolean freshline = true; 
-  private void printTimestamp(int level){ 
-    if(freshline){ 
-      logger.print(level, new Date().toString()+&quot;: &quot;); 
+<pre><code class="language-java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TimestampLogger</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Logger</span></span>{ 
+  <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> Logger logger; 
+  <span class="hljs-keyword">private</span> <span class="hljs-keyword">boolean</span> freshline = <span class="hljs-keyword">true</span>; 
+  <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">printTimestamp</span><span class="hljs-params">(<span class="hljs-keyword">int</span> level)</span></span>{ 
+    <span class="hljs-keyword">if</span>(freshline){ 
+      logger.print(level, <span class="hljs-keyword">new</span> Date().toString()+<span class="hljs-string">&quot;: &quot;</span>); 
     } 
   } 
-  public void print(int level, String msg){ 
+  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">print</span><span class="hljs-params">(<span class="hljs-keyword">int</span> level, String msg)</span></span>{ 
     printTimestamp(level); 
     logger.print(level, msg); 
-    freshline = false; 
+    freshline = <span class="hljs-keyword">false</span>; 
   } 
-  public void println(int level, String msg){ 
+  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">println</span><span class="hljs-params">(<span class="hljs-keyword">int</span> level, String msg)</span></span>{ 
     printTimestamp(level); 
     logger.println(msg); 
-    freshline = true; 
+    freshline = <span class="hljs-keyword">true</span>; 
   } 
-  public void printException(Throwable e){ 
+  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">printException</span><span class="hljs-params">(Throwable e)</span></span>{ 
     printTimestamp(ERROR); 
     logger.printException(e); 
-    freshline = true; 
+    freshline = <span class="hljs-keyword">true</span>; 
   } 
 }</code></pre>
 <p>当然，前面的一些组合子也都要增加这个print函数。相信这应该不难。就留给大家做个练习吧。 </p>
 <p>好啦。到现在，我们手里已经有两个基本组合子，7个组合规则。应该已经可以组合出来不少有意义没意义的东西了。 </p>
 <p>为了避免写一大堆的new和冗长的类名字，我们做一个facade类，来提供简短点的名字，节省我们一些键盘损耗。 </p>
 <p>java代码: </p>
-<pre><code class="language-java">class Loggers{ 
-  static Logger nop(){return new NopLogger();} 
-  static Logger writer(PrintWriter writer){ 
-    return new WriterLogger(writer); 
+<pre><code class="language-java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Loggers</span></span>{ 
+  <span class="hljs-function"><span class="hljs-keyword">static</span> Logger <span class="hljs-title">nop</span><span class="hljs-params">()</span></span>{<span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> NopLogger();} 
+  <span class="hljs-function"><span class="hljs-keyword">static</span> Logger <span class="hljs-title">writer</span><span class="hljs-params">(PrintWriter writer)</span></span>{ 
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> WriterLogger(writer); 
   } 
-  static Logger writer(OutputStream out){ 
-    return writer(new PrintWriter(out, true)); 
+  <span class="hljs-function"><span class="hljs-keyword">static</span> Logger <span class="hljs-title">writer</span><span class="hljs-params">(OutputStream out)</span></span>{ 
+    <span class="hljs-keyword">return</span> writer(<span class="hljs-keyword">new</span> PrintWriter(out, <span class="hljs-keyword">true</span>)); 
   } 
-  static Logger filter(int lvl, Logger l1, Logger l2){ 
-    return new FilteredLogger(lvl, l1, l2); 
+  <span class="hljs-function"><span class="hljs-keyword">static</span> Logger <span class="hljs-title">filter</span><span class="hljs-params">(<span class="hljs-keyword">int</span> lvl, Logger l1, Logger l2)</span></span>{ 
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> FilteredLogger(lvl, l1, l2); 
   } 
-  static Logger ignore(...){...} 
-  static Logger timestamp(...){...} 
+  <span class="hljs-function"><span class="hljs-keyword">static</span> Logger <span class="hljs-title">ignore</span><span class="hljs-params">(...)</span></span>{...} 
+  <span class="hljs-function"><span class="hljs-keyword">static</span> Logger <span class="hljs-title">timestamp</span><span class="hljs-params">(...)</span></span>{...} 
   ... 
 }</code></pre>
 <p>这样，在用这些组合子的时候大概代码能够好看一点吧。 </p>

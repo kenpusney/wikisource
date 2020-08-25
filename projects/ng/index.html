@@ -12,6 +12,8 @@
     
     <title>ng</title>
     
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css">
     <style type="text/css">
         body {
             width: 60%;
@@ -24,6 +26,11 @@
                 "Roboto",
                 "Noto Sans CJK",
                 Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        pre {
+            max-width: 90%;
+            overflow-x: scroll;
         }
 
         a {
@@ -155,17 +162,17 @@ which can support different type with fixed size. How could
 you represent this? I got <code>Array&lt;Int, 3&gt;</code> here.</p>
 <p>The Int and 3 in <code>Array&lt;Int, 3&gt;</code> are the parameters of this
 type. And for the prototype of array, should looks like</p>
-<pre><code class="language-ng">type Array&lt;&#39;t, &#39;arity: Num&gt; where &#39;arity &gt;= 0</code></pre>
+<pre><code class="language-ng"><span class="hljs-class"><span class="hljs-keyword">type</span> <span class="hljs-title">Array</span></span>&lt;<span class="hljs-symbol">&#x27;t</span>, <span class="hljs-symbol">&#x27;arity</span>: Num&gt; <span class="hljs-keyword">where</span> <span class="hljs-symbol">&#x27;arity</span> &gt;= <span class="hljs-number">0</span></code></pre>
 <p>The where clause is a constraints for &#39;arity parameter which
 indicates that field cannot be negative.</p>
 <p>Here is another syntax to do this checking</p>
-<pre><code class="language-ng">type NonNegative&lt;&#39;num: Num&gt; where &#39;num &gt;= 0
-
-type Array&lt;&#39;t, &#39;arity: NonNegative&gt;</code></pre>
+<pre><code class="language-ng">type NonNegative&lt;<span class="hljs-string">&#x27;num: Num&gt; where &#x27;</span>num &gt;= 0
+<span class="hljs-built_in">
+type </span>Array&lt;<span class="hljs-string">&#x27;t, &#x27;</span>arity: NonNegative&gt;</code></pre>
 <p>NonNegative is like typeclass / type traits / concepts in
 other languages such like Haskell/C++/D.</p>
 <p>Here is another constraint example in ng.</p>
-<pre><code class="language-ng">type ValueType&lt;&#39;t: * &#39;a&gt; = &#39;a</code></pre>
+<pre><code class="language-ng"><span class="hljs-class"><span class="hljs-keyword">type</span> <span class="hljs-title">ValueType</span></span>&lt;<span class="hljs-symbol">&#x27;t</span>: * <span class="hljs-symbol">&#x27;a</span>&gt; = <span class="hljs-symbol">&#x27;a</span></code></pre>
 <p>Here we can use ValueType<ref Int> to represent Int now.</p>
 
         
