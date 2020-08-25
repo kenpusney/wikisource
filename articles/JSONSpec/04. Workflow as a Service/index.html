@@ -4,6 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript">
+        if (location.href.endsWith("index.html")) {
+            location.href = location.href.substring(0, location.href.length - "index.html".length);
+        }
+    </script>
     
     <title>JSONSpec: Workflow as a Service</title>
     
