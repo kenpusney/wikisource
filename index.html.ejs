@@ -30,6 +30,10 @@
                 Tahoma, Geneva, Verdana, sans-serif;
         }
 
+        span.field {
+            display: inline-block;
+        }
+
         pre {
             max-width: 90%;
             overflow-x: scroll;
@@ -124,8 +128,9 @@
             </ul>
         </nav>
         <hr>
-        <span>Author: <a href="/about">KimmyLeo</a></span>
-        <span><%- locals.date ? date : "" %></span>
+        <span class="field">Author: <a href="/about">KimmyLeo</a></span>
+        <span class="field">创建时间：<%- date %></span>
+        <span class="field">最近更新时间：<%- updateDate %></span>
         <% if(locals.tags) { %>
         <div class="tags"><span>标签：</span>
             <ul>

@@ -75,7 +75,7 @@ function loadFileContent(file, registry) {
         if (content.attributes.date) {
             content.attributes.date = moment(content.attributes.date).format("YYYY-MM-DD");
         } else {
-            content.attributes.date = moment(stat.mtime).format("YYYY-MM-DD");
+            content.attributes.date = "#N/A";
         }
 
         registry[file] = {
@@ -86,6 +86,7 @@ function loadFileContent(file, registry) {
             file,
             visitPath,
             parentName,
+            updateDate: moment(stat.mtime).format("YYYY-MM-DD"),
         };
     }
     return registry[file];
