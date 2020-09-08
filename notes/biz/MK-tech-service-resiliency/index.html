@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript">
+        if (location.href.endsWith("index.html")) {
+            location.href = location.href.substring(0, location.href.length - "index.html".length);
+        }
+    </script>
+    
+    <title>McKinsey - Four ways to improve tech service resiliency</title>
+    
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
+        media="(prefers-color-scheme: light)">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/dracula.min.css"
+        media="(prefers-color-scheme: dark)">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
+        media="(prefers-color-scheme: no-preference)">
+    <style type="text/css">
+        body {
+            width: 60%;
+            margin: 0 auto;
+            padding: 2em;
+            font-family: 'Segoe UI',
+                "Microsoft Yahei Light",
+                "San Francisco",
+                "Ping Fang SC",
+                "Roboto",
+                "Noto Sans CJK",
+                Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        span.field {
+            display: inline-block;
+            font-weight: bolder;
+            font-size: smaller;
+        }
+
+        pre {
+            max-width: 90%;
+            overflow-x: scroll;
+            padding: 1em;
+            border-radius: 5px;
+        }
+
+        a {
+            text-decoration: none;
+            color: cornflowerblue;
+        }
+
+        a:visited {
+            color: cornflowerblue;
+        }
+
+        a:hover {
+            color: darkgray;
+        }
+
+        a.disabled-link {
+            color: lightcoral;
+            text-decoration: line-through;
+        }
+
+        nav,
+        nav ul {
+            display: inline-block;
+        }
+
+        .tags ul,
+        footer ul {
+            padding: 0;
+            display: inline;
+        }
+
+        header h1 {
+            display: inline-block;
+            min-width: 320px;
+            max-width: 50%;
+            width: 50%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            margin: auto;
+        }
+
+        @media screen and (max-width: 1200px) {
+            body {
+                width: 90%;
+                max-width: 720px;
+                padding: 0;
+                margin: 1em auto;
+            }
+
+            header h1 {
+                max-width: 90%;
+                width: 90%;
+            }
+        }
+
+        nav li,
+        .tags li,
+        footer li {
+            display: inline;
+            border-right: 1px solid darkgray;
+            padding: 0 1em;
+        }
+
+        nav li:last-child,
+        .tags li:last-child,
+        footer li:last-child {
+            border: none;
+        }
+
+        .post-list h3 {
+            margin: 0.3em 0;
+        }
+
+        blockquote {
+            margin: 0.5em;
+            border: 1px dotted darkgrey;
+            border-radius: 0.5em;
+            padding: 0 1em;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            body {
+                background-color: #090810;
+                color: floralwhite;
+                opacity: 0.83;
+            }
+
+            pre {
+                background-color: #282a36;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        
+        <h1 title="McKinsey - Four ways to improve tech service resiliency">McKinsey - Four ways to improve tech service resiliency</h1>
+        
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/articles">Articles</a></li>
+                <li><a href="/about">About</a></li>
+            </ul>
+        </nav>
+        <hr>
+        <span class="field">Author: <a href="/about">KimmyLeo</a></span>
+        
+    </header>
+    <article>
+        <p><a href="https://www.mckinsey.com/business-functions/mckinsey-digital/our-insights/four-ways-to-improve-technology-service-resiliency" title="undefined">https://www.mckinsey.com/business-functions/mckinsey-digital/our-insights/four-ways-to-improve-technology-service-resiliency</a></p>
+<blockquote>
+<p>Companies can significantly reduce technology system outages and other costly tech glitches by improving incident response and how they manage change.</p>
+</blockquote>
+<h2 id="问题">问题</h2>
+<ul>
+<li>某大型的零售商，在热购节日几个小时的系统宕机导致损失500万美元。</li>
+<li>某网络服务商因为系统故障营收下降8%。</li>
+<li>某银行因为宕机数日，直接损失数千万营收，并且面临一大波罚款。</li>
+<li>Ponemon Institute预估，意外的业务问题导致的损失，平均每分钟近9000美元（每小时54万美元）。</li>
+</ul>
+<p>单独看起来可能不算很大，但是通常一个公司每年都要面临数百次的弹性故障。</p>
+<h2 id="解析">解析</h2>
+<ul>
+<li>可用性 Availability 系统的对客户可用的时间（uptime）</li>
+<li>可靠性 Reliability 系统能够按照预期工作的概率</li>
+<li>回弹性 Resiliency 系统出错以后依然能够从客户角度提供服务的能力</li>
+</ul>
+<h2 id="四步">四步</h2>
+<h3 id="1-探寻事项发生的根源和模式">1. 探寻事项发生的根源和模式</h3>
+<p>深入分析可能存在的阶段，比如</p>
+<ul>
+<li>开发过程</li>
+<li>配置过程</li>
+<li>能力管理</li>
+<li>变更管理</li>
+<li>硬件故障</li>
+</ul>
+<p>等阶段。这种过程能够发现是否是某些流程导致的频繁错误。</p>
+<p>比如某公司在部署后通常只测试happy path，这样促使研发关注度也放在happy path上，可以很快的完成工作，待会带来很多的不稳定因素。而通过提升该测试团队的全回归和用例覆盖能力，把生产环境问题的数量降低了30%。</p>
+<h3 id="2-集成并自动预防和侦测问题">2. 集成并自动预防和侦测问题</h3>
+<p>某些流程可以自动化。某大型金融机构通过自动监控和跟踪其移动应用的完整用户旅程中的警告，这些警告关联着一个工单系统，会自动创建工单交由对应的人去处理。这样一个过程应用以后在六周以后减少了8%的问题数量。</p>
+<p>通常紧急的问题会跟着一些事务性（Routine）问题一起出现，而团队不得不靠自己来做优先级排序。通常一些团队在快速修复问题的时候会导致更高的变更失败率。除了要提升风险归类以外，还需要创建一个评分系统，通过变更量和应用质量对不同的开发团队分级。对于分值比较低的团队，需要限制生产环境变更；某金融机构采用了这套机制，高评分团队会获得绩效奖励，通过这种机制，团队的平均质量分提升了25~40个百分点，产品质量大大提升。</p>
+<p>长期来看这种变更过程都可以纳入自动化管理的流程。</p>
+<h3 id="3-开发工具和sme来加速问题响应">3. 开发工具和SME来加速问题响应</h3>
+<ul>
+<li>内建问题的知识仓库，提供问题的简报、对应处理的解决方案、相应的联系信息等</li>
+<li>跟踪问题记录和度量，监控MTTR（Mean Time To Resolve 平均解决时间）等关键指标</li>
+<li>提供便捷的协作工具和与SME沟通的工具</li>
+<li>保证关键的干系人得到适当的知会，需要危机沟通计划。及时、高效的跟客户告知问题，构建稳定的干系人关系</li>
+</ul>
+<p>有问题出现时，客户是理解的，但客户不买帐的事长时间的等待解决问题、没有及时告知以及因为问题导致的用户体验下降。</p>
+<h3 id="4-确保整个问题管理机制有组织、有行动、有顶层支持">4. 确保整个问题管理机制有组织、有行动、有顶层支持</h3>
+<p>通常问题管理团队会分析并给出解决方案来避免一些反复出现的问题，但这些方案很难落地，而因此导致更多问题继续出现。</p>
+<p>某金融机构大概要花费4周分析并给出问题方案，而需要在等待6周左右才能实现对应的解决方案。通常是因为他们的SLA（Service-Level Agreement 服务等级协议）没有定义清晰。</p>
+<p>领导层的支持也很重要。问题团队需要保持与CIO的紧密关系。某公司CIO会召开一个问题管理的状态评审周会，push某些方案执行，两个月后，方案落地时间从25天降低到8天。</p>
+<h2 id="再谈问题">再谈问题</h2>
+<p>需要思考的点：</p>
+<ul>
+<li>数字化落地以及提升变更速率以后，对IT的回弹性有何影响，并且COVID-19又带来了哪些方面的影响？</li>
+<li>贵司的问题响应跟同行相比、或者跟其他行业相比，其数量、严重程度和代价（成本）是什么样的？</li>
+<li>纵观全局业务，哪些情况会造成的问题数量最多，哪些用户和客户流程被影响最大？</li>
+<li>有多少百分比的IT问题是在生产环境首次发现的，花费了多少人时来分析和解决这些问题？有什么自动的流程可以更便宜更有效地替代吗？</li>
+</ul>
+
+        
+
+    </article>
+    <!-- <div>
+        <h5>See Also</h5>
+        <ul>
+            <li><a href="/about">About Me</a></li>
+        </ul>
+    </div> -->
+    <span class="field">创建时间：2020-09-07</span>
+    <span class="field">最近更新时间：2020-09-08</span>
+    <hr>
+    <footer>
+        <ul>
+            <li><a href="/about">关于我</a></li>
+            <li><a href="/sitemap.xml">站点地图</a></li>
+            <li><a href="/rss.xml">RSS</a></li>
+            <li>Copyright &copy; KimmyLeo</li>
+        </ul>
+    </footer>
+    <script type="text/javascript">
+        document.querySelectorAll(".disabled-link").forEach(el => el.addEventListener("click", (e) => {
+            alert("链接页面不存在！");
+            e.preventDefault();
+        }))
+    </script>
+</body>
+
+</html>
