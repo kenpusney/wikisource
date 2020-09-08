@@ -1,10 +1,12 @@
 ---
 title: 超级马里奥 35 周年
 date: 2020-08-11
-draft: true
 ---
 
 1985 年，任天堂在北美发售了 **NES**（任天堂娱乐系统，美版**红白机**），由于该地区尚处于 1983 年**游戏业大萧条**的余波中，可谓谈及色变。于是在北美地区的销售把其包装成为**家庭娱乐系统**，而非游戏主机（Game Console）。这也就有了 Nintendo Entertainment System 名字的由来。
+
+![NES](/images/game-consoles/NES.jpg)
+
 
 任天堂进入游戏行业开始于 1974 年，在看到雅达利（Atari）和美格福斯（Magnavox）的成功以后，开始代理 Odyssey（Magnavox 家的第一代家用主机）在日本的销售。随后，与三菱电机合作开发了自己的第一代家用主机 **Color TV-Game** 系列。
 
