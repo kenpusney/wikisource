@@ -23,7 +23,9 @@ function copyToPublic(file) {
 
     fs.mkdirSync(pathName, { recursive: true });
 
-    fs.copyFileSync(file, targetFileName);
+    if (!fs.statSync(file).isDirectory()) {
+        fs.copyFileSync(file, targetFileName);
+    }
 }
 
 function postsInFolder(category, allWikiItems) {
