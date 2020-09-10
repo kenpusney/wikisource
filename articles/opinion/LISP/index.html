@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript">
+        if (location.href.endsWith("index.html")) {
+            location.href = location.href.substring(0, location.href.length - "index.html".length);
+        }
+    </script>
+    
+    <title>LISP</title>
+    
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
+        media="(prefers-color-scheme: light)">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/dracula.min.css"
+        media="(prefers-color-scheme: dark)">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
+        media="(prefers-color-scheme: no-preference)">
+    <style type="text/css">
+        body {
+            width: 60%;
+            margin: 0 auto;
+            padding: 2em;
+            font-family: 'Segoe UI',
+                "Microsoft Yahei Light",
+                "San Francisco",
+                "Ping Fang SC",
+                "Roboto",
+                "Noto Sans CJK",
+                Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        span.field {
+            display: inline-block;
+            font-weight: bolder;
+            font-size: smaller;
+        }
+
+        pre {
+            max-width: 90%;
+            overflow-x: scroll;
+            padding: 1em;
+            border-radius: 5px;
+        }
+
+        a {
+            text-decoration: none;
+            color: cornflowerblue;
+        }
+
+        a:visited {
+            color: cornflowerblue;
+        }
+
+        a:hover {
+            color: darkgray;
+        }
+
+        a.disabled-link {
+            color: lightcoral;
+            text-decoration: line-through;
+        }
+
+        nav,
+        nav ul {
+            display: inline-block;
+        }
+
+        .tags ul,
+        footer ul {
+            padding: 0;
+            display: inline;
+        }
+
+        header h1 {
+            display: inline-block;
+            min-width: 320px;
+            max-width: 50%;
+            width: 50%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            margin: auto;
+        }
+
+        @media screen and (max-width: 1200px) {
+            body {
+                width: 90%;
+                max-width: 720px;
+                padding: 0;
+                margin: 1em auto;
+            }
+
+            header h1 {
+                max-width: 90%;
+                width: 90%;
+            }
+        }
+
+        nav li,
+        .tags li,
+        footer li {
+            display: inline;
+            border-right: 1px solid darkgray;
+            padding: 0 1em;
+        }
+
+        nav li:last-child,
+        .tags li:last-child,
+        footer li:last-child {
+            border: none;
+        }
+
+        .post-list h3 {
+            margin: 0.3em 0;
+        }
+
+        blockquote {
+            margin: 0.5em;
+            border: 1px dotted darkgrey;
+            border-radius: 0.5em;
+            padding: 0 1em;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            body {
+                background-color: #090810;
+                color: floralwhite;
+                opacity: 0.83;
+            }
+
+            pre {
+                background-color: #282a36;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        
+        <h1 title="LISP">LISP</h1>
+        
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/articles">Articles</a></li>
+                <li><a href="/about">About</a></li>
+            </ul>
+        </nav>
+        <hr>
+        <span class="field">Author: <a href="/about">KimmyLeo</a></span>
+        
+    </header>
+    <article>
+        <p>LISP是一门过时了的编程语言，其历史意义尤为重要，特别是lambda关键字引起的对于lambda演算的普及、对于函数式编程的推广。但这件事情LISP并不是那个出了最多力的人。</p>
+<p>现在学习LISP是可以的，而且也有非常现代的LISP方言Racket可以拿来了解一些新的编程语言知识，毕竟在改名之前，这个方言叫PLT-Scheme。但我不建议你去学习那些被overhyped的方言，特别是Clojure、Common Lisp。</p>
+<p>LISP除了编程范式之外的另外一个比较突出的特点是非常适合元编程，其语法结构就是其自身的数据结构，于是可以像处理数据一样处理程序。但现在是什么时代了，一个没有如此强元编程的语言完全不可能在当代存活下来。
+而且本身这种基于REPL的元编程也完全不能适用于生产的，就连LISP本身，也是发展出了宏元编程。前面不推荐Clojure和Common Lisp的一个原因就是他们是基于quote和gensym的<strong>脏宏</strong>，而非Scheme系基于语法闭包的<strong>卫生<del>巾</del>宏</strong>。
+现代的编程语言早就发展出来了更友好、更安全和易用的元编程模式，动态语言如Ruby可以用非常强大的对象模型来做内省，Python和JavaScript都有装饰器来动态修改行为，静态编程语言如Java，依然有运行时的反射以及编译时的注解处理器来更好的针对性的增加元编程能力。</p>
+<p>LISP的基础数据结构因为历史原因，设计成了单链表，也就是cons、car、cdr这一组算子，于是也就成就了LISP的名字，List Processing，但现在的数据结构远不止线性表这样一个基础的结构，函数式编程概念下，基于代数数据类型的复杂结构才是大部分要面临的场景。当然大部分实现都提供更多高级的数据结构的，但基于LISP的传统模式来设计和实现的这些结构对比现代编程语言没有任何优势。</p>
+<p>另说一个内容，对于编程范式的支持。绝大多数LISP方言和实现都是动态类型语言，这在逐渐静态类型化的今天已经是一个非常弱的点了，而在此之上80年代以后的LISP还要尝试加入面向对象的支持，于是就出现了CLOS这样一个怪物。把Object Orientation和LISP这两者给结合起来，双倍的overhype，导致的后果就是都不买账。</p>
+<p>对于元模型的思考，如果要基于特定的形式，可能就会误入歧途。大部分神棍级别的LISPer也是如此，他们会幻想S-Expression可以实现一切，那就等于我们把计算退回到了P0DP-7的时代了。Object Orientation也是如此，任何尝试本体论化这个理论的也都陷入到了无穷的深坑中去。基础知识不够的人总会在这方面走偏。</p>
+<p>吹LISP的人，要么是真牛人，然后把这个当半个玩笑来看，要么就真的能力不行，把老古董当神器供着。</p>
+<p>哦对了，By the way，SICP这本书是本好书，但是被LISP鼓吹者吹过头了。首先学习计算并不一定需要用Scheme，你看MIT自身就换成了Python，南洋理工也用JS改了这本书；其次，计算这东西，也不是只有这样一门教材来学习，虽然某种程度上它讲述的比较全面，但在细节上太晦涩，加上Scheme的神秘会导致整个过程并不通畅。</p>
+<h2 id="我的其他对于lisp的观点">我的其他对于LISP的观点</h2>
+<ul>
+<li><a href="https://zhuanlan.zhihu.com/p/27113046" title="null">大学应该学哪一种LISP</a></li>
+</ul>
+<blockquote>
+<p>这都好几个AI Winter了，哪儿还有LISP的事儿。</p>
+<p>人工智能火了不是一次了小哥，Marvin Minsky他们在Dartmouth开会应该是六十多年前的事儿了。LISP Machine失败都过去三四十年了。</p>
+<p>要真想用LISP，你可以用最新的方言ECMAScript 2020呀。</p>
+<p><a href="https://www.zhihu.com/question/365348415/answer/979831472" title="undefined">https://www.zhihu.com/question/365348415/answer/979831472</a></p>
+</blockquote>
+<blockquote>
+<p>LISP“反智”只是题主可能觉得不习惯吧。Polish Notation就像VSO语序一样，习惯了汉语表达方式的话感觉就是很怪。</p>
+<p>LISP的S-exp形式设计来更适合机器识别和解析，也影响了后来的TeX甚至xml的设计。还有LISP出现之后省了不少的goto。</p>
+<p>不知道题主因何事实得知LISP只能在小范围普及使用，还有至少要说清楚是哪种LISP吧。</p>
+<p><a href="https://www.zhihu.com/question/19879176/answer/40355266" title="undefined">https://www.zhihu.com/question/19879176/answer/40355266</a></p>
+</blockquote>
+<blockquote>
+<p>当然是Java啦。</p>
+<p>简单实用，而且从社区和业界的角度来看，肯定是名声响当当的啊。</p>
+<p>你也可以选择JavaScript，嘛，毕竟前端圈子越来越火而且作为Web时代的汇编语言，真的是很棒呢！</p>
+<p>但是如果你想研究的是怎么造一个LISP呢，建议去看一下233LISP。有群为证：</p>
+<p>为人不知233，遍懂LISP也枉然。</p>
+<p><a href="https://www.zhihu.com/question/26295498/answer/93714307" title="undefined">https://www.zhihu.com/question/26295498/answer/93714307</a></p>
+</blockquote>
+
+        
+
+    </article>
+    <!-- <div>
+        <h5>See Also</h5>
+        <ul>
+            <li><a href="/about">About Me</a></li>
+        </ul>
+    </div> -->
+    <span class="field">创建时间：2020-09-10</span>
+    <span class="field">最近更新时间：2020-09-10</span>
+    <hr>
+    <footer>
+        <ul>
+            <li><a href="/about">关于我</a></li>
+            <li><a href="/sitemap.xml">站点地图</a></li>
+            <li><a href="/rss.xml">RSS</a></li>
+            <li>Copyright &copy; KimmyLeo</li>
+        </ul>
+    </footer>
+    <script type="text/javascript">
+        document.querySelectorAll(".disabled-link").forEach(el => el.addEventListener("click", (e) => {
+            alert("链接页面不存在！");
+            e.preventDefault();
+        }))
+    </script>
+</body>
+
+</html>
