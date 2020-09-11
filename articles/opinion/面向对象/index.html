@@ -10,7 +10,7 @@
         }
     </script>
     
-    <title>Workflow of this wiki</title>
+    <title>Object Oriented Programming 面向对象编程</title>
     
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
@@ -143,7 +143,7 @@
 
     <header>
         
-        <h1 title="Workflow of this wiki">Workflow of this wiki</h1>
+        <h1 title="Object Oriented Programming 面向对象编程">Object Oriented Programming 面向对象编程</h1>
         
         <nav>
             <ul>
@@ -157,35 +157,10 @@
         
     </header>
     <article>
-        <p>The normal way of create a new wiki item is just add a new <a href="#" class="disabled-link">CNMD</a> page, and then publish,
-it will be accessible from anywhere of this wiki using the cross-notation reference.</p>
-<p>But for more complicated items, it may belongs to some specific category, like, an article, or
-a source code snippet. I use folders as categories, and then can using folder name as the namespace
-for all items in that category, and README.cn.md document under that folder will be the index of
-the category.</p>
-<p>Also I&#39;ve created a utility script to complete the workflow.</p>
-<p>e.g. if you want to create a new category:</p>
-<pre><code>./wiki <span class="hljs-keyword">new</span> <span class="hljs-type">category</span> entity</code></pre>
-<p>then you trying to add item into that category:</p>
-<pre><code>./wiki <span class="hljs-keyword">new</span> <span class="hljs-type">entity</span> <span class="hljs-string">&quot;Wiki Item&quot;</span></code></pre>
-<p>then go to <code>./cnmd/entity/Wiki Item.cn.md</code> edit the content.</p>
-<p>All detailed code is in <code>wiki</code> script of <a href="https://github.com/kenpusney/wiki" title="kenpusney/wiki">kenpusney/wiki</a> repository.</p>
-<h2 id="wiki-program-reference"><code>./wiki</code> program reference</h2>
-<ul>
-<li><code>./wiki new &lt;item&gt;</code>, create a new toplevel wiki item</li>
-<li><code>./wiki new category &lt;cat&gt;</code> create a new wiki category</li>
-<li><code>./wiki new &lt;cat&gt; &lt;item&gt;</code> create a new item under category</li>
-<li><code>./wiki index</code>, create search-engine index data, and write to <code>indexing.json</code></li>
-<li><code>./wiki hash</code>, create short url link for all wiki entries and add to <code>hashing.json</code></li>
-<li><code>./wiki serve</code>, start local http server for this wiki</li>
-</ul>
-<p>You can put following code into <code>.git/hooks/pre-commit</code> to automatially hasing and indexing:</p>
-<pre><code class="language-bash"><span class="hljs-meta">#!/usr/bin/env bash</span>
-
-./wiki index
-./wiki <span class="hljs-built_in">hash</span>
-
-git add *.json</code></pre>
+        <p>面向对象编程是个被overhyped的概念，无论是OOA还是OOD。这里特别要提一点的是，面向对象和结构化编程没有太大的诞生先后之分，甚至面向对象反倒是更早。所以随后把所谓的面向对象吹嘘成是比结构化编程更新更好的方式，实际是有问题的。</p>
+<p>关于更早这个点，一个证据就是，最早出现类、行为封装的是Simula 67，看名字就知道是1967年的事情，而引发结构化编程争议的Djikstra老爷子的那篇《Goto有害论》是1968年发布的。</p>
+<p>对于面向对象的三个特点，<del>面红、耳赤、心跳加速</del>封装、继承和多态。</p>
+<p>多态这个事儿才是真正最重要的一点，而面向对象所实现的子类型多态只是其中非常简陋的一种。至于封装，任何只暴露接口隐藏实现的方式都可以叫封装，这连最基本的C语言甚至是汇编（通过头文件暴露接口）都能做到。另外至于继承，就更不用说了，连面向对象社群自己都在提“组合优于封装”的说法了。</p>
 
         
 
@@ -196,7 +171,7 @@ git add *.json</code></pre>
             <li><a href="/about">About Me</a></li>
         </ul>
     </div> -->
-    <span class="field">创建时间：2017-01-17</span>
+    <span class="field">创建时间：2020-09-10</span>
     <span class="field">最近更新时间：2020-09-11</span>
     <hr>
     <footer>
