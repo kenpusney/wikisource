@@ -7,4 +7,4 @@ date: 2019-11-20
   - Trunk-based Development：https://trunkbaseddevelopment.com/
     - 单主干分支开发
     - Feature Toggle 控制功能发布：https://zhuanlan.zhihu.com/p/46919642
-  - 约定式提交：https://www.conventionalcommits.org/zh-cn
+  - 约定式提交：https://www.conventionalcommits.org/
