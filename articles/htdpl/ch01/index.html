@@ -10,7 +10,7 @@
         }
     </script>
     
-    <title>Complex</title>
+    <title>【新】如何设计编程语言</title>
     
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
@@ -143,7 +143,7 @@
 
     <header>
         
-        <h1 title="Complex">Complex</h1>
+        <h1 title="【新】如何设计编程语言">【新】如何设计编程语言</h1>
         
         <nav>
             <ul>
@@ -157,7 +157,24 @@
         
     </header>
     <article>
-        <p>规则永远是简单的，因为是有确定性的。人，和规模化，是导致复杂的根本原因。</p>
+        <p>首先明确一个点，设计一门编程语言的意义是什么？</p>
+<p>我在第一定律里提到过，编程语言都是领域特定的，也就是，为了解决特定的领域问题。</p>
+<p>不信的话我们拿上古的几个编程语言来看看就知道了：</p>
+<ul>
+<li>IPL: <strong>I</strong>nformation <strong>P</strong>rocessing <strong>L</strong>anguage 信息处理语言</li>
+<li>Fortran: <strong>FOR</strong>mula <strong>TRAN</strong>slation 公式翻译</li>
+<li>LISP: <strong>LIS</strong>t <strong>P</strong>rocessing 列表处理</li>
+<li>COBOL: <strong>CO</strong>mmon <strong>B</strong>usiness-<strong>O</strong>riented <strong>L</strong>anguage 通用业务语言</li>
+<li>Algol: <strong>ALGO</strong>rithm <strong>L</strong>anguage 算法语言</li>
+<li>SNOBOL: <strong>S</strong>tri<strong>N</strong>g <strong>O</strong>riented and sym<strong>BO</strong>lic <strong>L</strong>anguage</li>
+<li>Simula: <strong>SIMULA</strong>tion</li>
+<li>Modula: a langauge for <strong>MODULA</strong>r multiprogramming</li>
+<li>Perl: <strong>P</strong>ractical <strong>E</strong>xtraction and <strong>R</strong>eporting <strong>L</strong>anguage</li>
+<li>FP: <strong>F</strong>unctional <strong>P</strong>rogramming</li>
+</ul>
+<p>现代编程语言已经都是多范式（multi-paradigm）、多平台的编程语言了，但其实现以及某些特性会带来某种程度上的限制，这就导致了这些编程语言其实也是领域特定的。</p>
+<p>比如脚本语言诸如JavaScript，在应用扩展能力上是强项，但在服务的可靠性、性能方面是短板，于是通常会用做Web前端、或者程序扩展配置用的编程语言；而与其恰相反的如C++，构建模型复杂，缺少运行时动态性的支撑，但由于其与系统接口（通常是C语言）有着较好的兼容，同时本身积累的生态也相对稳定可靠，加上作为直接硬件映射的编程语言，其执行没有运行时overhead，效率要好得多，所以更容易作为系统级软件的选择。</p>
+<p>这种倾向，目前没有任何一个编程语言能够做到通吃。所以提到通吃的，基本上也是在痴人说梦。</p>
 
         
 
@@ -168,7 +185,7 @@
             <li><a href="/about">About Me</a></li>
         </ul>
     </div> -->
-    <span class="field">创建时间：2019-04-04</span>
+    <span class="field">创建时间：2020-09-11</span>
     <span class="field">最近更新时间：2020-09-12</span>
     <hr>
     <footer>
