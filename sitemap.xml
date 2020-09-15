@@ -851,6 +851,15 @@
     
 
     <url>
+        <loc>http://wiki.kimleo.net/collect/controversial-words/vendor-vs-supplier</loc>
+        <lastmod>2020-09-15</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>1.0</priority>
+    </url>
+
+    
+
+    <url>
         <loc>http://wiki.kimleo.net/collect/preferred-tech-practice</loc>
         <lastmod>2020-09-15</lastmod>
         <changefreq>weekly</changefreq>
