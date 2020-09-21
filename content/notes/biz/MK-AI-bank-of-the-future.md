@@ -74,5 +74,15 @@ AI战略可以提升银行的四项关键结果：
 
 ## How
 
+
+- 第一层：重新构思客户沟通层
+- 第二层：构建AI支撑的决策制定层
+- 第三层：增强核心技术和数据基础架构
+- 第四层：转变成平台运营模型
+
 ![](../../../static/images/notes/mk/ai-bank-of-the-future/how.png)
+
+### 核心技术和数据层
+
+![](../../../static/images/notes/mk/ai-bank-of-the-future/core-tech.png)
 
