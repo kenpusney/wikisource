@@ -1,7 +1,9 @@
 ---
-title: On Service Builder
+title: Service Builder
 date: 2019-05-10
 ---
+
+> 关于这个想法更详细的描述，参考我2019年12月份的文章：[:articles/On-Service-Builder]()
 
 ## 目录
 
