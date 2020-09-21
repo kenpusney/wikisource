@@ -94,6 +94,12 @@ function loadFileContent(file, registry) {
     return registry[file];
 }
 
+function fixRelativeHref(href) {
+    if (href.startsWith("../"))
+        return href.substring(href.search("static") + "static".length);
+    return href;
+}
+
 function render(wikiItem, posts) {
 
     let children = [];
@@ -113,6 +119,16 @@ function render(wikiItem, posts) {
         renderer: {
             link(href, title, text) {
                 return cnmdR.link(href, title, text);
+            },
+            image(href, title, text) {
+                if (href.startsWith("../")) {
+                    href = fixRelativeHref(href)
+                }
+                if (title) {
+                    return `<img src=${href} alt='${text}' title=${title}>`
+                }
+
+                return `<img src='${href}' alt='${text}'/>`
             }
         },
         highlight: function(code, lang) {
