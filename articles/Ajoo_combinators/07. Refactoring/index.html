@@ -131,6 +131,12 @@
             padding: 0 1em;
         }
 
+        div.image-description {
+            text-align: center;
+            color: gray;
+            font-size: smaller;
+        }
+
         @media (prefers-color-scheme: dark) {
             body {
                 background-color: #090810;
@@ -398,7 +404,7 @@ a_component = Components.ctor(A.class)
         document.querySelectorAll(".disabled-link").forEach(el => el.addEventListener("click", (e) => {
             alert("链接页面不存在！");
             e.preventDefault();
-        }))
+        }));
     </script>
 </body>
 

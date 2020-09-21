@@ -131,6 +131,12 @@
             padding: 0 1em;
         }
 
+        div.image-description {
+            text-align: center;
+            color: gray;
+            font-size: smaller;
+        }
+
         @media (prefers-color-scheme: dark) {
             body {
                 background-color: #090810;
@@ -232,7 +238,7 @@ is a community driven graphviz for GitHub <a href="https://github.com/TLmaK0/gra
         document.querySelectorAll(".disabled-link").forEach(el => el.addEventListener("click", (e) => {
             alert("链接页面不存在！");
             e.preventDefault();
-        }))
+        }));
     </script>
 </body>
 
