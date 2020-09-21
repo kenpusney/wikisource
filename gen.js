@@ -121,14 +121,22 @@ function render(wikiItem, posts) {
                 return cnmdR.link(href, title, text);
             },
             image(href, title, text) {
+                let el = "";
                 if (href.startsWith("../")) {
                     href = fixRelativeHref(href)
                 }
                 if (title) {
-                    return `<img src=${href} alt='${text}' title=${title}>`
+                    el = `<img src=${href} alt='${text}' title=${title}>`
+                } else {
+                    el = `<img src='${href}' alt='${text}'/>`
+
                 }
 
-                return `<img src='${href}' alt='${text}'/>`
+                if (text) {
+                    el += `<div class='image-description'>${text}</div>`
+                }
+
+                return el;
             }
         },
         highlight: function(code, lang) {
