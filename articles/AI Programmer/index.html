@@ -176,12 +176,12 @@
 <h2 id="ai-programmer">AI Programmer</h2>
 <p>今天我们要提的这个神奇的 AI programmer，也正是这个时代浪潮之巅的产物。
 这来自于 arxiv 上的一篇 CS 论文：<a href="https://arxiv.org/pdf/1709.05703.pdf" title="AI Programmer: Autonomously Creating Software Programs Using Genetic Algorithms">AI Programmer: Autonomously Creating Software Programs Using Genetic Algorithms</a>。文中讲述了一个利用机器学习来自动生成软件程序的系统，叫做 AI Programmer，这个 AI Programmer 的架构如下：</p>
-<p><img src='https://imgkr.cn-bj.ufileos.com/df391574-bed8-48bf-9dfb-0aba0cb1dd65.jpeg' alt='AI Programmer 架构'/><div class='image-description'>AI Programmer 架构</div></p>
+<p><img src='https://imgkr.cn-bj.ufileos.com/df391574-bed8-48bf-9dfb-0aba0cb1dd65.jpeg' alt='AI Programmer 架构'/><div class='image-description'><span>⬆️</span>AI Programmer 架构</div></p>
 <p>乍一看真的好神奇，又是 GA（Genetic Algorithm，遗传算法），又是 Embedded Interpreter，看上去似乎结合了很多深层次的计算机科学的内容，然而当我们细看这套所谓的解释器的指令时，我是惊呆的：</p>
-<p><img src='https://imgkr.cn-bj.ufileos.com/a0df3d59-1715-4b81-8806-b5d7031daa37.jpeg' alt='AI Programmer 指令集'/><div class='image-description'>AI Programmer 指令集</div></p>
+<p><img src='https://imgkr.cn-bj.ufileos.com/a0df3d59-1715-4b81-8806-b5d7031daa37.jpeg' alt='AI Programmer 指令集'/><div class='image-description'><span>⬆️</span>AI Programmer 指令集</div></p>
 <p>这……不就是 <a href="https://en.wikipedia.org/wiki/Brainfuck" title="Brainfuck">Brainfuck</a>？（可以参考我之前的文章<a href="https://mp.weixin.qq.com/s/oQY9yB2zkS3TWWm9CWJ3eQ" title="null">三十分钟七语言</a>，其中有对这个极简编程语言进行过介绍）。</p>
 <p>也就是说这个神奇的 AI Programmer 就只是一个使用遗传算法来验证和改进 Brainfuck 程序的框架。这种硬扯也能跟机器学习的概念沾边东西，直接被炒成了“<strong>AI 系统首次实现真正自主编程，完爆初级程序员</strong>”。</p>
-<p><img src='https://imgkr.cn-bj.ufileos.com/711999d3-71aa-4305-8c24-9e71d8335d59.png' alt='反正吹牛也不上税'/><div class='image-description'>反正吹牛也不上税</div></p>
+<p><img src='https://imgkr.cn-bj.ufileos.com/711999d3-71aa-4305-8c24-9e71d8335d59.png' alt='反正吹牛也不上税'/><div class='image-description'><span>⬆️</span>反正吹牛也不上税</div></p>
 <p>这种通过遗传算法改进程序的方法早就已经存在并被应用，这篇论文里面也不过是把复杂的编程语言逻辑替换成简单的 Brainfuck，这样一步简化也只是增加了具体编程的难度（毕竟 Brainfuck 的局限性决定了完成复杂的任务需要的指令数会异常的多）。至于是否完爆初级程序员，很简单，拿大学本科 C 语言作业题来考一下它就知道了（逃…</p>
 <h2 id="自动编程之路">自动编程之路</h2>
 <p>现在抛开这个炒概念的 AI Programmer，我们来看一下究竟人工智能实现自动编程有多困难。</p>
