@@ -133,7 +133,7 @@ function render(wikiItem, posts) {
                 }
 
                 if (text) {
-                    el += `<div class='image-description'>${text}</div>`
+                    el += `<div class='image-description'><span>⬆️</span>${text}</div>`
                 }
 
                 return el;
