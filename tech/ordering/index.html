@@ -10,7 +10,7 @@
         }
     </script>
     
-    <title>叉我</title>
+    <title>结合用户场景设计热度排序</title>
     
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
@@ -155,7 +155,7 @@
 
     <header>
         
-        <h1 title="叉我">叉我</h1>
+        <h1 title="结合用户场景设计热度排序">结合用户场景设计热度排序</h1>
         
         <nav>
             <ul>
@@ -169,14 +169,39 @@
         
     </header>
     <article>
-        <p><strong>WARNING: This page is deprecated and out of date</strong></p>
-<p>This is the guide for you to build another site like this.</p>
-<h3 id="get-the-code">Get the code</h3>
-<p>The code of this site is contains in it self, you can just fork <a href="https://github.com/kenpusney/wiki" title="kenpusney/wiki">kenpusney/wiki</a>, and run <code>./wiki init</code> to start your own one.</p>
-<p>If you want to know the notations of CNMD, see <a href="/meta/CNMD" title="CNMD 标记语法">CNMD 标记语法</a>.</p>
-<p>If you want to know the usage of workflow script, see <a href="/meta/Wiki workflow" title="Workflow of this wiki">Workflow of this wiki</a>.</p>
-<h3 id="if-you-need-help">If you need help</h3>
-<p>Please go to the repo <a href="https://github.com/kenpusney/wiki" title="kenpusney/wiki">kenpusney/wiki</a> and raise issue if you need help.</p>
+        <p>结合用户场景、热度排序分析，选取合适的字段，对其进行组合加工。</p>
+<p>从场景分析中可以得出结论——热度排序要围绕时效性和受欢迎度来进行设计。</p>
+<h3 id="1）定义一个简单的公式">1）定义一个简单的公式</h3>
+<p>$$
+H = \frac{W + I}{(T + 1)^G}
+$$</p>
+<ul>
+<li>H=内容的热度值；</li>
+<li>W=小说的阅读量、点赞量、评论量、加入书单量加权求和的数值；</li>
+<li>I=作者本身的影响因子，影响因子与作者本身的历史数据有关；</li>
+<li>G=一个衰减的重力参数；</li>
+<li>T=小说发布的时长；</li>
+</ul>
+<h3 id="2）公式特点">2）公式特点</h3>
+<ul>
+<li>时间T值越大，热度H值越低；</li>
+<li>对于不同的作者I，内容的初始热度是不同的，作者I值大则内容初始热度越大；</li>
+<li>面对不同的重力G，即使初始质量高，重力大时其热度衰减很快；</li>
+<li>一个内容的质量W越高，此内容热度高于新内容的时间越长。</li>
+</ul>
+<h3 id="3）不同问题下的参数调整">3）不同问题下的参数调整</h3>
+<p>新小说太多，近期热门的不足：</p>
+<ul>
+<li>降低初始数值I；</li>
+<li>降低衰减重力G；</li>
+</ul>
+<p>内容都是热门，新东西看不到：</p>
+<ul>
+<li>提高初始数值I；</li>
+<li>提高衰减重力G；</li>
+</ul>
+<p>一会是一个老的热门的，一会是一特别新的：G较小的同时，I过大。</p>
+<p>每一篇小说内容要按照以上公式进行计算，得出每一篇小说的热度权重，根据每条小说的热度权重进行降序排序；同时根据自身的业务类型确定热度排序列表的刷新频率，保证新内容产生的频率和列表刷新频率能够匹配，以打造一个相对公平的平台。</p>
 
         
 
@@ -187,7 +212,7 @@
             <li><a href="/about">About Me</a></li>
         </ul>
     </div> -->
-    <span class="field">创建时间：2017-07-04</span>
+    <span class="field">创建时间：2020-09-24</span>
     <span class="field">最近更新时间：2020-09-24</span>
     <hr>
     <footer>
