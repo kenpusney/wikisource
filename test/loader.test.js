@@ -1,23 +1,8 @@
 
-const gen = require("../gen");
-
-const fs = require('fs');
-const { highlightAuto } = require("highlight.js");
-
-test("should run test", () => {
-    expect(1 + 2).toBe(3);
-});
-
-test("copy file", () => {
-    fs.rmdirSync("public", { recursive: true });
-
-    gen.copyToPublic("static/CNAME");
-
-    expect(fs.existsSync("public/CNAME")).toBeTruthy();
-});
+const { parseFileName } = require("../src/loader");
 
 test("load README file content", () => {
-    const content = gen.loadFileContent("content/README.md", {});
+    const content = parseFileName("content/README.md", {});
 
 
     expect(content.isCategory).toBeTruthy();
@@ -27,7 +12,7 @@ test("load README file content", () => {
 });
 
 test("load plain file content", () => {
-    const content = gen.loadFileContent("content/about.md", {});
+    const content = parseFileName("content/about.md", {});
 
     expect(content.isCategory).toBeFalsy();
     expect(content.visitPath).toBe("about");
@@ -36,7 +21,7 @@ test("load plain file content", () => {
 });
 
 test("load second level README content", () => {
-    const content = gen.loadFileContent("content/articles/README.md", {});
+    const content = parseFileName("content/articles/README.md", {});
 
     expect(content.isCategory).toBeTruthy();
     expect(content.fileName).toBe("articles");
@@ -45,7 +30,7 @@ test("load second level README content", () => {
 });
 
 test("load second level file content", () => {
-    const content = gen.loadFileContent("content/articles/htlpl.md", {});
+    const content = parseFileName("content/articles/htlpl.md", {});
 
     expect(content.isCategory).toBeFalsy();
     expect(content.visitPath).toBe("articles/htlpl");
