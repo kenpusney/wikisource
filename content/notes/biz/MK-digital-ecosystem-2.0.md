@@ -1,7 +1,6 @@
 ---
 title: "McKinsey - Ecosystem 2.0: Climbing to the next level"
 date: 2020-09-12
-draft: true
 ---
 
 https://www.mckinsey.com/business-functions/mckinsey-digital/our-insights/ecosystem-2-point-0-climbing-to-the-next-level

@@ -35,6 +35,12 @@
                 Tahoma, Geneva, Verdana, sans-serif;
         }
 
+        p > img {
+            margin: 0 auto;
+            display: block;
+            max-width: 80%;
+        }
+
         span.field {
             display: inline-block;
             font-weight: bolder;
@@ -127,6 +133,12 @@
             padding: 0 1em;
         }
 
+        div.image-description {
+            text-align: center;
+            color: gray;
+            font-size: smaller;
+        }
+
         @media (prefers-color-scheme: dark) {
             body {
                 background-color: #090810;
@@ -205,8 +217,10 @@
         document.querySelectorAll(".disabled-link").forEach(el => el.addEventListener("click", (e) => {
             alert("链接页面不存在！");
             e.preventDefault();
-        }))
+        }));
     </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script
 </body>
 
 </html>

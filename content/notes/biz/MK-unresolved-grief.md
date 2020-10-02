@@ -1,7 +1,6 @@
 ---
 title: McKinsey - The Hidden perils of unresolved grief
 date: 2020-09-15
-draft: true
 ---
 
 > https://www.mckinsey.com/business-functions/organization/our-insights/the-hidden-perils-of-unresolved-grief
