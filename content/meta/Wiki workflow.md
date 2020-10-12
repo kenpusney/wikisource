@@ -4,6 +4,8 @@ date: 2017-01-17
 deprecated: true
 ---
 
+**WARNING: This page is deprecated and out of date**
+
 The normal way of create a new wiki item is just add a new [:CNMD]() page, and then publish,
 it will be accessible from anywhere of this wiki using the cross-notation reference.
 
