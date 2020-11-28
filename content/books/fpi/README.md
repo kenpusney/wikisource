@@ -2,18 +2,27 @@
 title: 你所需要知道的关于函数的一切
 date: 2020-07-17
 ---
+---
+title: 你所需要知道的关于函数的一切
+date: 2020-07-17
+---
 
-本文源自于我在 2012 ～ 2013 年写的 Meta Functions 系列文章，以及知乎专栏的《map 四种》。通过细致地讲解和练习函数相关的内容来让大家了解**函数**、**闭包**、**延迟计算**和**流**。你可以把它看成一个 SICP 前三章的超级简化版，不过这其中我不会讨论过多的细节。文中所有的代码都在浏览器控制台执行通过，你也可以简单地对着浏览器或者任意实现了 ES6 特性的 JavaScript REPL 试验其中的代码。
+> 本文源自于我在 2012 ～ 2013 年写的 Meta Functions 系列文章，以及知乎专栏的《map 四种》。通过细致地讲解和练习函数相关的内容来让大家了解**函数**、**闭包**、**延迟计算**和**流**。
+>
+> 你可以把它看成一个 SICP 前三章的超级简化版，不过这其中我不会讨论过多的细节。文中所有的代码都在浏览器控制台执行通过，你也可以简单地对着浏览器或者任意实现了 ES6 特性的 JavaScript REPL 试验其中的代码。
 
 # 函数
 
+这里的函数我比较倾向于集合论中的定义，即是两个集合之间的映射关系。也就是那种非常**纯**（pure）的函数。后文也会涉及一些带有状态的函数，不过绝大多数情况下我所期待的是对于一个函数 $f$ ，给定其参数 $x$ ，那么 $f(x)$ 的结果一定是**确定的**（deterministic）。
+
 我们先来实现一个简单的函数，比如**斐波那契（fibonacci）数列**的定义。
 
-```
-fib(n) = fib(n - 1) + fib(n - 2)
-fib(0) = 1
-fib(1) = 1
-```
+$$
+fib(0) = \begin{cases}
+    1, &x = 0, or &x = 1\cr
+    fib(n-1) + fib(n-2), &x \ge 2
+\end{cases}
+$$
 
 如果你熟悉递归，可以很容易根据上面的递归定义把 `fib` 函数实现了：
 
@@ -135,10 +144,12 @@ function fib(n, a = 1, b = 1) {
 
 - 请实现另外一个常用递归函数阶乘（factorial）的直接递归版和尾递归版。阶乘函数的定义如下：
 
-```
-factorial(n) = n * factorial(n - 1)
-factorial(0) = 1
-```
+$$
+n! = \begin{cases}
+  1, &n = 0 \cr
+  (n-1)!\times n, &n \gt 0
+\end{cases}
+$$
 
 # 函数进阶
 
@@ -480,6 +491,7 @@ take(10, counter(0)); //  [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
 可以看出来，这里的 `counter` 无非是在反复地应用 `+1` 这个操作，来持续的到结果。
 
 我们把 `+1` 操作变成函数，也即：
+
 ```js
 function inc(x) {
     return x + 1;
@@ -507,6 +519,7 @@ take(10, iterate(x => x * 2)(1)); // [1, 2, 4, 8, 16, 32, 64, 128, 256, 512]
 ```
 
 `iterate(fn)` 所产生的生成器对应的序列是：
+
 ```js
 start, fn(start), fn(fn(start)), fn(fn(fn(start))), ...
 ```
@@ -516,6 +529,7 @@ start, fn(start), fn(fn(start)), fn(fn(fn(start))), ...
 同样的，我们再来抽取一个变量。
 
 每次我们的 `generator` 都只是直接把对应的迭代结果返回，而如果在这个迭代结果上再做一些操作会如何呢？
+
 ```js
 function generate(gn, fn) {
     function generator(start = 0) {
@@ -529,6 +543,7 @@ take(10, generate(fib, inc)()); // [1, 1, 2, 3, 5, 8, 13, 21, 34, 55]
 ```
 
 同样，`generate(gn, fn)` 产生的生成器所对应生成的序列则是：
+
 ```js
 gn(start), gn(fn(start)), gn(fn(fn(start))), ...
 ```
@@ -597,3 +612,95 @@ take(10, generateBy((a, b) => [b, a + b])(1, 1));
 ### 练习
 
 - 请考虑为这些不可变迭代器加入倒带功能。
+
+# 附文：《[map 四种](https://zhuanlan.zhihu.com/p/28471507 "map 四种")》
+
+```js
+// * common functions
+inc = x => x + 1
+double = x => x + x
+square = x => x * x
+
+compose = (f, g) => x => f(g(x))
+
+flip = f => (x, y) => f(y, x)
+
+id = x => x
+
+force = f => f()
+
+// * cons, nil and list
+cons = (x, y) => f => f(x, y)
+
+car = cons => cons((x, y) => x)
+
+cdr = cons => cons((x, y) => y)
+
+nil = () => nil
+
+nilP = x => x == nil
+
+list = (a, ...args) => args.length ? cons(a, list.apply(null, args)) : cons(a, nil)
+
+// * helper
+printList = lst => nilP(lst) || (console.log(car(lst)), printList(cdr(lst)))
+
+tap = f => (...args) => (console.log(args), f.apply(null, args))
+
+// # map the traditional recursive way
+map = (fn, lst) => nilP(lst) ? nil : cons(fn(car(lst)), map(fn, cdr(lst)))
+
+Y = rec => (f => f(f))(f => rec(x => (f(f))(x)))
+
+reduce = Y(r => c => i => l => nilP(l) ? i : c(car(l), r(c)(i)(cdr(l))))
+// # map by reduce
+// map = (fn, l) => reduce((h, t) => cons(fn(h), t))(nil)(l)
+filter = p => reduce((h, t) => p(h) ? cons(h, t) : t)(nil)
+
+foldr = reduce
+
+// foldl :: (a -> b -> a) -> a -> [b] -> a
+foldl = Y(f => c => i => l => nilP(l) ? i : f(c)(c(i, car(l)))(cdr(l)))
+
+reverse = foldl(flip(cons))(nil)
+
+len = reduce((h, t) => t + 1)(0)
+
+// * streams
+// type Stream = () -> (a, Stream)
+zeroP = (x) => x === 0
+
+// zeros = () => cons(0, zeros)
+// 0, 0, 0, ...
+zeros = Y (z => () => cons(0, z))
+
+// o, o, o, ...
+cycle = o => Y(c => () => cons(o, c))
+
+ones = cycle(1)
+
+// take_lazy = n => l => n == 0 ? nil : cons(car(l), take_lazy(n-1)(force(cdr(l))))
+take_lazy = Y(t => n => l => zeroP(n) ? nil : cons(car(l), t(n - 1)(force(cdr(l)))))
+
+// n, n + 1, n + 1 + 1, ...
+ints = Y(i => n => cons(n, () => i(n + 1)))
+
+range = (off, from = 0) => take_lazy(off)(ints(from))
+
+// n, f(n), f(f(n)), ...
+iterate = f => Y(i => n => cons(n, () => i(f(n))))
+// ints = iterate(inc)
+
+// g(n), g(f(n)), g(f(f(n))), ...
+generate = (g, f) => Y(i => n => cons(g(n), () => i(f(n))))
+// iterates = generate(id)
+// ints = generate(id, inc)
+// # map by generate
+// map = (fn, l) => take_lazy(len(l))(generate(compose(fn, car), cdr)(l))
+
+squares = (from = 1) => generate(square, inc)(from)
+
+stream = Y(s => l => nilP(l) ? nil : cons(car(l), () => s(cdr(l))))
+// # map on streams
+map_lazy = (f, s) => generate(compose(f, car), compose(force, cdr))(s)
+```
