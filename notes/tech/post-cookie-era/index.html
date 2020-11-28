@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript">
+        if (location.href.endsWith("index.html")) {
+            location.href = location.href.substring(0, location.href.length - "index.html".length);
+        }
+    </script>
+    
+    <title>post third party cookie era</title>
+    
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
+        media="(prefers-color-scheme: light)">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/dracula.min.css"
+        media="(prefers-color-scheme: dark)">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
+        media="(prefers-color-scheme: no-preference)">
+    <style type="text/css">
+        body {
+            width: 60%;
+            margin: 0 auto;
+            padding: 2em;
+            font-family: 'Segoe UI',
+                "Microsoft Yahei Light",
+                "San Francisco",
+                "Ping Fang SC",
+                "Roboto",
+                "Noto Sans CJK",
+                Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        p > img {
+            margin: 0 auto;
+            display: block;
+            max-width: 80%;
+        }
+
+        span.field {
+            display: inline-block;
+            font-weight: bolder;
+            font-size: smaller;
+        }
+
+        pre {
+            max-width: 90%;
+            overflow-x: scroll;
+            padding: 1em;
+            border-radius: 5px;
+        }
+
+        a {
+            text-decoration: none;
+            color: cornflowerblue;
+        }
+
+        a:visited {
+            color: cornflowerblue;
+        }
+
+        a:hover {
+            color: darkgray;
+        }
+
+        a.disabled-link {
+            color: lightcoral;
+            text-decoration: line-through;
+        }
+
+        nav,
+        nav ul {
+            display: inline-block;
+        }
+
+        .tags ul,
+        footer ul {
+            padding: 0;
+            display: inline;
+        }
+
+        header h1 {
+            display: inline-block;
+            min-width: 320px;
+            max-width: 50%;
+            width: 50%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            margin: auto;
+        }
+
+        @media screen and (max-width: 1200px) {
+            body {
+                width: 90%;
+                max-width: 720px;
+                padding: 0;
+                margin: 1em auto;
+            }
+
+            header h1 {
+                max-width: 90%;
+                width: 90%;
+            }
+        }
+
+        nav li,
+        .tags li,
+        footer li {
+            display: inline;
+            border-right: 1px solid darkgray;
+            padding: 0 1em;
+        }
+
+        nav li:last-child,
+        .tags li:last-child,
+        footer li:last-child {
+            border: none;
+        }
+
+        .post-list h3 {
+            margin: 0.3em 0;
+        }
+
+        blockquote {
+            margin: 0.5em;
+            border: 1px dotted darkgrey;
+            border-radius: 0.5em;
+            padding: 0 1em;
+        }
+
+        div.image-description {
+            text-align: center;
+            color: gray;
+            font-size: smaller;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            body {
+                background-color: #090810;
+                color: floralwhite;
+                opacity: 0.83;
+            }
+
+            pre {
+                background-color: #282a36;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        
+        <h1 title="post third party cookie era">post third party cookie era</h1>
+        
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/articles">Articles</a></li>
+                <li><a href="/about">About</a></li>
+            </ul>
+        </nav>
+        <hr>
+        <span class="field">Author: <a href="/about">KimmyLeo</a></span>
+        
+    </header>
+    <article>
+        <blockquote>
+<p>DSP（Demand-Side Platform），就是需求方平台，以精准营销为核心理念。这一概念起源于欧美，是伴随互联网和广告业的飞速发展新兴起的网络广告领域。</p>
+</blockquote>
+<blockquote>
+<p>DMP(Data Management Platform) 数据管理平台，是把分散的多方数据进行整合纳入统一的技术平台，并对这些数据进行标准化和细分，让用户可以把这些细分结果推向现有的互动营销环境里的平台。</p>
+</blockquote>
+<h2 id="third-party-cookie-blocking">Third party Cookie Blocking</h2>
+<blockquote>
+<p>Mozilla Firefox:</p>
+<p><a href="https://blog.mozilla.org/blog/2019/09/03/todays-firefox-blocks-third-party-tracking-cookies-and-cryptomining-by-default/" title="undefined">https://blog.mozilla.org/blog/2019/09/03/todays-firefox-blocks-third-party-tracking-cookies-and-cryptomining-by-default/</a></p>
+<p>Safari:</p>
+<p><a href="https://www.zdnet.com/article/apple-blocks-third-party-cookies-in-safari/" title="undefined">https://www.zdnet.com/article/apple-blocks-third-party-cookies-in-safari/</a></p>
+<p>Google Chrome:</p>
+<p><a href="https://digiday.com/media/google-plans-kill-off-third-party-cookies-chrome-within-2-years/" title="undefined">https://digiday.com/media/google-plans-kill-off-third-party-cookies-chrome-within-2-years/</a></p>
+</blockquote>
+<h2 id="strategies">Strategies</h2>
+<ul>
+<li>Device Fingerprinting</li>
+<li>Redirected Tracking</li>
+<li>CNAME Cloaking</li>
+</ul>
+<h3 id="device-fingerprinting">Device Fingerprinting</h3>
+<p><a href="https://en.wikipedia.org/wiki/Device_fingerprint" title="undefined">https://en.wikipedia.org/wiki/Device_fingerprint</a></p>
+<p><a href="https://digiday.com/marketing/what-is-device-fingerprinting/" title="undefined">https://digiday.com/marketing/what-is-device-fingerprinting/</a></p>
+<h3 id="redirected-tracking">Redirected Tracking</h3>
+<p><a href="https://digiday.com/marketing/wtf-what-is-redirect-tracking/" title="undefined">https://digiday.com/marketing/wtf-what-is-redirect-tracking/</a></p>
+<p><a href="https://performancein.com/news/2020/08/25/the-death-of-redirect-tracking-what-is-the-threat-to-the-industry-in-this-era-of-blocking/" title="undefined">https://performancein.com/news/2020/08/25/the-death-of-redirect-tracking-what-is-the-threat-to-the-industry-in-this-era-of-blocking/</a></p>
+<h3 id="cname-cloaking">CNAME Cloaking</h3>
+<p>Introduction:</p>
+<p><a href="https://medium.com/nextdns/cname-cloaking-the-dangerous-disguise-of-third-party-trackers-195205dc522a" title="undefined">https://medium.com/nextdns/cname-cloaking-the-dangerous-disguise-of-third-party-trackers-195205dc522a</a></p>
+<p>Discussion:</p>
+<p><a href="https://news.ycombinator.com/item?id=21604825" title="undefined">https://news.ycombinator.com/item?id=21604825</a></p>
+<p><a href="https://blog.paranoidpenguin.net/2020/07/plausible-analytics-review-browser-fingerprinting-and-cname-cloaking/" title="undefined">https://blog.paranoidpenguin.net/2020/07/plausible-analytics-review-browser-fingerprinting-and-cname-cloaking/</a></p>
+<p><a href="https://tma.ifip.org/2020/wp-content/uploads/sites/9/2020/06/tma2020-camera-paper66.pdf" title="undefined">https://tma.ifip.org/2020/wp-content/uploads/sites/9/2020/06/tma2020-camera-paper66.pdf</a></p>
+
+        
+
+    </article>
+    <!-- <div>
+        <h5>See Also</h5>
+        <ul>
+            <li><a href="/about">About Me</a></li>
+        </ul>
+    </div> -->
+    <span class="field">创建时间：2020-09-17</span>
+    <span class="field">最近更新时间：2020-11-28</span>
+    <hr>
+    <footer>
+        <ul>
+            <li><a href="/about">关于我</a></li>
+            <li><a href="/sitemap.xml">站点地图</a></li>
+            <li><a href="/rss.xml">RSS</a></li>
+            <li>Copyright &copy; KimmyLeo</li>
+        </ul>
+    </footer>
+    <script type="text/javascript">
+        document.querySelectorAll(".disabled-link").forEach(el => el.addEventListener("click", (e) => {
+            alert("链接页面不存在！");
+            e.preventDefault();
+        }));
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script
+</body>
+
+</html>

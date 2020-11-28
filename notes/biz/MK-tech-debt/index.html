@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript">
+        if (location.href.endsWith("index.html")) {
+            location.href = location.href.substring(0, location.href.length - "index.html".length);
+        }
+    </script>
+    
+    <title>McKinsey - Tech debt: Reclaiming tech equity</title>
+    
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
+        media="(prefers-color-scheme: light)">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/dracula.min.css"
+        media="(prefers-color-scheme: dark)">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
+        media="(prefers-color-scheme: no-preference)">
+    <style type="text/css">
+        body {
+            width: 60%;
+            margin: 0 auto;
+            padding: 2em;
+            font-family: 'Segoe UI',
+                "Microsoft Yahei Light",
+                "San Francisco",
+                "Ping Fang SC",
+                "Roboto",
+                "Noto Sans CJK",
+                Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        p > img {
+            margin: 0 auto;
+            display: block;
+            max-width: 80%;
+        }
+
+        span.field {
+            display: inline-block;
+            font-weight: bolder;
+            font-size: smaller;
+        }
+
+        pre {
+            max-width: 90%;
+            overflow-x: scroll;
+            padding: 1em;
+            border-radius: 5px;
+        }
+
+        a {
+            text-decoration: none;
+            color: cornflowerblue;
+        }
+
+        a:visited {
+            color: cornflowerblue;
+        }
+
+        a:hover {
+            color: darkgray;
+        }
+
+        a.disabled-link {
+            color: lightcoral;
+            text-decoration: line-through;
+        }
+
+        nav,
+        nav ul {
+            display: inline-block;
+        }
+
+        .tags ul,
+        footer ul {
+            padding: 0;
+            display: inline;
+        }
+
+        header h1 {
+            display: inline-block;
+            min-width: 320px;
+            max-width: 50%;
+            width: 50%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            margin: auto;
+        }
+
+        @media screen and (max-width: 1200px) {
+            body {
+                width: 90%;
+                max-width: 720px;
+                padding: 0;
+                margin: 1em auto;
+            }
+
+            header h1 {
+                max-width: 90%;
+                width: 90%;
+            }
+        }
+
+        nav li,
+        .tags li,
+        footer li {
+            display: inline;
+            border-right: 1px solid darkgray;
+            padding: 0 1em;
+        }
+
+        nav li:last-child,
+        .tags li:last-child,
+        footer li:last-child {
+            border: none;
+        }
+
+        .post-list h3 {
+            margin: 0.3em 0;
+        }
+
+        blockquote {
+            margin: 0.5em;
+            border: 1px dotted darkgrey;
+            border-radius: 0.5em;
+            padding: 0 1em;
+        }
+
+        div.image-description {
+            text-align: center;
+            color: gray;
+            font-size: smaller;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            body {
+                background-color: #090810;
+                color: floralwhite;
+                opacity: 0.83;
+            }
+
+            pre {
+                background-color: #282a36;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        
+        <h1 title="McKinsey - Tech debt: Reclaiming tech equity">McKinsey - Tech debt: Reclaiming tech equity</h1>
+        
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/articles">Articles</a></li>
+                <li><a href="/about">About</a></li>
+            </ul>
+        </nav>
+        <hr>
+        <span class="field">Author: <a href="/about">KimmyLeo</a></span>
+        
+    </header>
+    <article>
+        <blockquote>
+<p><strong>“By reinventing our debt management, we went from 75 percent of engineer time paying the [tech debt] ‘tax’ to 25 percent. It allowed us to be who we are today.”</strong> 
+—— Former CIO, major cloud provider</p>
+</blockquote>
+<p><img src='/images/notes/mk/tech-debt/tech-debt-trends.png' alt='Tech Debt Trends'/><div class='image-description'><span>⬆️</span>Tech Debt Trends</div></p>
+<h2 id="what-is-tech-debt">What is tech debt</h2>
+<ul>
+<li>The <strong>principal</strong>（本金） is all the work that must be done to modernize the entire technology stack.<ul>
+<li>deferred maintenance or upgrades below the app layer,</li>
+<li>modifications to comply with data standards,</li>
+<li>and bespoke packaged software</li>
+</ul>
+</li>
+<li>The <strong>interest</strong>（利息） is the complexity tax that every project pays today.<ul>
+<li>work through fragile point-to-point or batch data integrations,</li>
+<li>harmonize nonstandard data,</li>
+<li>and create workarounds to confront risk and meet business needs.</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>Tech-debt principal accounts for up to 40 percent of IT balance sheets, while most companies pay more than 10 percent interest on projects.</p>
+</blockquote>
+<h2 id="what-derives-tech-dept">What derives tech dept</h2>
+<ul>
+<li>Strategy<ul>
+<li>failure to clarity overall strategy</li>
+<li>poor alignment between IT and strategy</li>
+<li>mismatch between funding and strategy</li>
+<li>underprovisioned tech integration during M&amp;A(Merger &amp; Acquisition)</li>
+<li>Excessive complexity in products, processes or applications</li>
+</ul>
+</li>
+<li>Architecture<ul>
+<li>legacy issue</li>
+<li>failure to update hosting environments</li>
+<li>inflexible software design</li>
+<li>insufficient use of system-integration approaches</li>
+<li>failure to agree on a consistent data model</li>
+</ul>
+</li>
+<li>Talent<ul>
+<li>internal and external skill gap</li>
+<li>failure to align incentives</li>
+</ul>
+</li>
+<li>Process<ul>
+<li>poor prioritization</li>
+<li>weak management of development and maintenance processes</li>
+<li>unstable IT operations</li>
+</ul>
+</li>
+</ul>
+<h2 id="how-to-tackle-tech-debt">How to tackle tech debt</h2>
+<ol>
+<li>Start with a shared definition of tech debt</li>
+<li>Treat tech debt as a business issue, not a technology problem</li>
+<li>Create transparency to value the debt position</li>
+<li>Formalize the decision-making process</li>
+<li>Dedicate resources to tackling tech debt</li>
+<li>Avoid a big-bang approach to writing down all tech debt</li>
+<li>Determine which area are &quot;bankrupt&quot; and explore shifting them to a greenfield stack</li>
+</ol>
+
+        
+
+    </article>
+    <!-- <div>
+        <h5>See Also</h5>
+        <ul>
+            <li><a href="/about">About Me</a></li>
+        </ul>
+    </div> -->
+    <span class="field">创建时间：2020-10-13</span>
+    <span class="field">最近更新时间：2020-11-28</span>
+    <hr>
+    <footer>
+        <ul>
+            <li><a href="/about">关于我</a></li>
+            <li><a href="/sitemap.xml">站点地图</a></li>
+            <li><a href="/rss.xml">RSS</a></li>
+            <li>Copyright &copy; KimmyLeo</li>
+        </ul>
+    </footer>
+    <script type="text/javascript">
+        document.querySelectorAll(".disabled-link").forEach(el => el.addEventListener("click", (e) => {
+            alert("链接页面不存在！");
+            e.preventDefault();
+        }));
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script
+</body>
+
+</html>

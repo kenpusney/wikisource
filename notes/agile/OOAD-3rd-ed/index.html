@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript">
+        if (location.href.endsWith("index.html")) {
+            location.href = location.href.substring(0, location.href.length - "index.html".length);
+        }
+    </script>
+    
+    <title>面向对象分析与设计（第三版）笔记</title>
+    
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
+        media="(prefers-color-scheme: light)">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/dracula.min.css"
+        media="(prefers-color-scheme: dark)">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
+        media="(prefers-color-scheme: no-preference)">
+    <style type="text/css">
+        body {
+            width: 60%;
+            margin: 0 auto;
+            padding: 2em;
+            font-family: 'Segoe UI',
+                "Microsoft Yahei Light",
+                "San Francisco",
+                "Ping Fang SC",
+                "Roboto",
+                "Noto Sans CJK",
+                Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        p > img {
+            margin: 0 auto;
+            display: block;
+            max-width: 80%;
+        }
+
+        span.field {
+            display: inline-block;
+            font-weight: bolder;
+            font-size: smaller;
+        }
+
+        pre {
+            max-width: 90%;
+            overflow-x: scroll;
+            padding: 1em;
+            border-radius: 5px;
+        }
+
+        a {
+            text-decoration: none;
+            color: cornflowerblue;
+        }
+
+        a:visited {
+            color: cornflowerblue;
+        }
+
+        a:hover {
+            color: darkgray;
+        }
+
+        a.disabled-link {
+            color: lightcoral;
+            text-decoration: line-through;
+        }
+
+        nav,
+        nav ul {
+            display: inline-block;
+        }
+
+        .tags ul,
+        footer ul {
+            padding: 0;
+            display: inline;
+        }
+
+        header h1 {
+            display: inline-block;
+            min-width: 320px;
+            max-width: 50%;
+            width: 50%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            margin: auto;
+        }
+
+        @media screen and (max-width: 1200px) {
+            body {
+                width: 90%;
+                max-width: 720px;
+                padding: 0;
+                margin: 1em auto;
+            }
+
+            header h1 {
+                max-width: 90%;
+                width: 90%;
+            }
+        }
+
+        nav li,
+        .tags li,
+        footer li {
+            display: inline;
+            border-right: 1px solid darkgray;
+            padding: 0 1em;
+        }
+
+        nav li:last-child,
+        .tags li:last-child,
+        footer li:last-child {
+            border: none;
+        }
+
+        .post-list h3 {
+            margin: 0.3em 0;
+        }
+
+        blockquote {
+            margin: 0.5em;
+            border: 1px dotted darkgrey;
+            border-radius: 0.5em;
+            padding: 0 1em;
+        }
+
+        div.image-description {
+            text-align: center;
+            color: gray;
+            font-size: smaller;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            body {
+                background-color: #090810;
+                color: floralwhite;
+                opacity: 0.83;
+            }
+
+            pre {
+                background-color: #282a36;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        
+        <h1 title="面向对象分析与设计（第三版）笔记">面向对象分析与设计（第三版）笔记</h1>
+        
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/articles">Articles</a></li>
+                <li><a href="/about">About</a></li>
+            </ul>
+        </nav>
+        <hr>
+        <span class="field">Author: <a href="/about">KimmyLeo</a></span>
+        
+    </header>
+    <article>
+        <p>作者 Grady Booch，UML三剑客（Three Amigos）。另外两位是James Rumbaugh和Ivar Jacobson。</p>
+<h1 id="第一篇-概念">第一篇 概念</h1>
+<h1 id="第一章-复杂性">第一章 复杂性</h1>
+<blockquote>
+<p>“系统越复杂，就越容易全面崩溃”</p>
+</blockquote>
+<h2 id="11-复杂的系统结构">1.1 复杂的系统结构</h2>
+<h3 id="111-个人计算机的结构">1.1.1 个人计算机的结构</h3>
+<ul>
+<li>层次化</li>
+<li>每层代表不同的抽象</li>
+</ul>
+<h3 id="112-植物和动物的结构">1.1.2 植物和动物的结构</h3>
+<ul>
+<li>层次化</li>
+<li>同一层的抽象之间以某种良定义的方式进行交互</li>
+<li>抽象层的内外之间总有清晰的边界</li>
+<li>每一部分都对许多高层的功能做出贡献。“整体行为大于部分之和”</li>
+</ul>
+<h2 id="12-软件固有的复杂性">1.2 软件固有的复杂性</h2>
+<blockquote>
+<p>“爱因斯坦认为自然界必定存在着简单的解释，因为上帝不是反复无常或者随心所欲地。软件工程师没有这样的信仰来提供安慰。许多必须控制的复杂性是随心所欲的复杂性。” —— Brooks</p>
+</blockquote>
+<h3 id="121-定义软件复杂性">1.2.1 定义软件复杂性</h3>
+<p>某些软件系统并不复杂，是由一个人提出、构建、维护和是使用的。通常是编程新手或者独立工作的专业开发人员。目的通常有限，而且生命周期很短，所以可以扔掉他们、用全新的软件代替他们，不必尝试复用、修复或者扩展它们的功能。</p>
+<p>工业级软件：</p>
+<ul>
+<li>表现出丰富的行为</li>
+<li>存在于反馈式系统中，</li>
+<li>由真实世界的事件驱动或者发出驱动事件</li>
+</ul>
+<p>工业级软件的特征是：单个开发者要理解其设计的所有方面非常困难，是几乎不可能的。武断地说，这些系统的复杂性超出了人类智能的范围。但几乎是所有大型系统的基本特征。</p>
+<p>复杂性可以掌握，但不经消除。</p>
+<h3 id="122-为什么软件在本质上是复杂的">1.2.2 为什么软件在本质上是复杂的</h3>
+<blockquote>
+<p>“软件的复杂性是一个基本特征，而不是偶然如此” —— Brooks</p>
+</blockquote>
+<ul>
+<li>问题域的复杂性</li>
+<li>管理开发过程的困难性</li>
+<li>通过软件可能实现的灵活性</li>
+<li>刻画离散系统行为</li>
+</ul>
+<h4 id="问题域的复杂性">问题域的复杂性</h4>
+<p>试图解决的问题会存在无数竞争性需求甚至是相反的需求。</p>
+<p>常常源自于系统用户和系统开发者之间的“沟通困难”：很难用开发者能够理解的形式对他们的需求给出准确地描述：</p>
+<ul>
+<li>想法不清楚</li>
+<li>对问题本质有不同看法</li>
+<li>没有好的方法准确记录需求</li>
+<li>对文档可能有不同的解读</li>
+</ul>
+<p>软件开发过程中经常发生需求变更。</p>
+<p>系统维护：</p>
+<ul>
+<li>修正错误 —— 维护</li>
+<li>应对改变的需求 —— 演化</li>
+<li>保持古老和陈腐的软件继续工作 —— 保护</li>
+</ul>
+<p>相当于部分软件开发资源被用在了保护上。</p>
+<h4 id="管理开发过程的困难性">管理开发过程的困难性</h4>
+<p>软件开发团队的基本任务是创造简单的假象，让用户与大量的、通常是任意的外部复杂性隔离开。</p>
+<p>软件规模逐渐变大，就需要团队开发。团队越小越好，但无论团队规模有多大，总会存在沟通挑战。</p>
+<h4 id="通过软件可能实现的灵活性">通过软件可能实现的灵活性</h4>
+<p>建筑行业对于原材料品质有着统一的编码和标准，但软件行业很少有这种标准。结果软件行业还是劳动密集型产业。</p>
+<h4 id="描述离散系统行为的问题">描述离散系统行为的问题</h4>
+<p>离散系统的不同状态组合导致无限可能的结果。</p>
+<p>外部的事件可能破坏系统的状态的任何部分。</p>
+<h2 id="13-复杂系统的5个属性">1.3 复杂系统的5个属性</h2>
+<h3 id="131-层次结构">1.3.1 层次结构</h3>
+<blockquote>
+<p>“复杂性常常以层次结构的形式存在，复杂的系统由一些相关的子系统构成，这些子系统又有自己的子系统，如此下去，直到到达某种最低层次的基本组件”。</p>
+</blockquote>
+<h3 id="132-相对本原">1.3.2 相对本原</h3>
+<blockquote>
+<p>“选择哪些作为系统的基础组件相对来说比较随意，这很大程度上取决于系统观察者的判断”</p>
+</blockquote>
+<h3 id="133-关注点分离">1.3.3 关注点分离</h3>
+<p>层次系统是可分解的。</p>
+<p>组件内部的联系通常比组件间更强。这一事实将组件中的高频率动作（组件内部）和低频率动作（组件间）分解开来。</p>
+<p>这样我们可以以相对隔离的方式来研究每个部分。</p>
+<h3 id="134-共同模式">1.3.4 共同模式</h3>
+<h3 id="135-稳定的中间形式">1.3.5 稳定的中间形式</h3>
+<p>“复杂系统毫无疑问都是从能工作的简单系统演变而来……从头设计的复杂系统根本不可能工作，也不可能从打补丁的方式使其工作。必须从头开始，从能工作的简单系统开始。”</p>
+<h2 id="14-有组织和无组织的复杂性">1.4 有组织和无组织的复杂性</h2>
+<p>发现共同的抽象和机制能够极大地促进我们对复杂系统的理解。</p>
+<h3 id="141-复杂系统的规范形式">1.4.1 复杂系统的规范形式</h3>
+<ul>
+<li>part-of</li>
+<li>is-a</li>
+</ul>
+<p>类结构和对象结构的概念与复杂系统的五种属性结合起来，基本所有的复杂系统都有规范的形式。系统的类结构和对象结构统称为他的架构。</p>
+<h1 id="142-人在处理复杂性时的能力局限">1.4.2 人在处理复杂性时的能力局限</h1>
+<ul>
+<li>一个人能够同时理解的最大信息数是7个，上下浮动两个</li>
+<li>大脑需要大约5秒才能接受一组新的信息</li>
+</ul>
+<h2 id="15-从混沌到有序">1.5 从混沌到有序</h2>
+<p>必须通过一些训练有素的方法来控制复杂性。</p>
+<h3 id="151-分解的作用">1.5.1 分解的作用</h3>
+<p>“分而治之”</p>
+<ul>
+<li>算法分解</li>
+<li>面向对象的分解</li>
+</ul>
+<p>没办法同时使用两种方法，因为他们完全正交。</p>
+<h3 id="152-抽象的作用">1.5.2 抽象的作用</h3>
+<p>如果不能够全面掌握一个复杂的对象，我们选择忽略其非本质的细节，转而处理这个对象的一般化、理想化的模型。</p>
+<h3 id="153-层次结构的作用">1.5.3 层次结构的作用</h3>
+<h2 id="16-复杂系统的设计">1.6 复杂系统的设计</h2>
+<h3 id="221-面向对象编程">2.2.1 面向对象编程</h3>
+<blockquote>
+<p>⾯向对象编程是⼀种实现的⽅法，在这种⽅法中，程序被组织成许多组相互协作的对象，每个对象代表某个类的⼀个实例，⽽类则属于⼀个通过继承关系形成的层次结构。</p>
+</blockquote>
+<ul>
+<li>（1）利⽤对象作为⾯向对象编程的基本逻辑构建块，⽽不是利⽤算法；</li>
+<li>（2）每个对象都是某个类的⼀个实例；</li>
+<li>（3）类与类之间可以通过继承关系联系在⼀起</li>
+</ul>
+<h3 id="222-面向对象设计">2.2.2 面向对象设计</h3>
+<blockquote>
+<p>⾯向对象设计是⼀种设计⽅法，包括⾯向对象分解的过程和⼀种表⽰法，这种表⽰法⽤于展现被设计系统的逻辑模型和物理模型、静态模型和动态模型</p>
+</blockquote>
+<ul>
+<li>（1）⾯向对象设计导致了⾯向对象分解；</li>
+<li>（2）⾯向对象设计使⽤了不同的表⽰法，来表达系统逻辑设计（类和对象结构）和物理设计（模块和处理架构）的不同模型，以及系统的静态和动态特征</li>
+</ul>
+<h3 id="223-面向对象分析">2.2.3 面向对象分析</h3>
+<blockquote>
+<p>⾯向对象分析是⼀种分析⽅法，这种⽅法利⽤从问题域的词汇表中找到的类和对象来分析需求</p>
+</blockquote>
+<h2 id="23-对象模型要素">2.3 对象模型要素</h2>
+<ul>
+<li>（1）⾯向过程 算法；</li>
+<li>（2）⾯向对象 类和对象；</li>
+<li>（3）⾯向逻辑 ⽬标，通常以谓词演算的⽅式表⽰；</li>
+<li>（4）⾯向规则 如果-那么规则；</li>
+<li>（5）⾯向约束 不变的关系。</li>
+</ul>
+<h3 id="主要要素">主要要素</h3>
+<ul>
+<li>（1）抽象；</li>
+<li>（2）封装；</li>
+<li>（3）模块化；</li>
+<li>（4）层次结构。</li>
+</ul>
+<h3 id="次要要素">次要要素</h3>
+<ul>
+<li>（1）类型；</li>
+<li>（2）并发；</li>
+<li>（3）持久。</li>
+</ul>
+<blockquote>
+<p>抽象描述了⼀个对象的基本特征，可以将这个对象与所有其他类型的对象区分开来，因此提供了清晰定义的概念边界，它与观察者的视⾓有关</p>
+</blockquote>
+<blockquote>
+<p>从那些准确地为问题域实体建模的对象到那些实际上没有什么理由存在的对象，存在着⼀系列的抽象。按最有⽤到最没有⽤的次序，这些抽象是：</p>
+<ul>
+<li>实体抽象：⼀个对象，代表了问题域或解决⽅案域实体的⼀个有⽤的模型；</li>
+<li>动作抽象：⼀个对象，提供了⼀组通⽤的操作，所有这些操作都执⾏同类的功能；</li>
+<li>虚拟机抽象：⼀个对象，集中了某种⾼层控制要⽤到的所有操作，或者这些操作将利⽤某种更低层的操作集；</li>
+<li>偶然抽象：⼀个对象，封装了⼀组相互间没有关系的操作。</li>
+</ul>
+</blockquote>
+<h3 id="311">3.1.1</h3>
+<blockquote>
+<p>对象是⼀个具有状态、⾏为和标识符的实体。结构和⾏为类似的对象定义在它们共同的类中。‘实例’和‘对象’这两个术语可以互换使⽤</p>
+</blockquote>
+
+        
+
+    </article>
+    <!-- <div>
+        <h5>See Also</h5>
+        <ul>
+            <li><a href="/about">About Me</a></li>
+        </ul>
+    </div> -->
+    <span class="field">创建时间：2020-10-19</span>
+    <span class="field">最近更新时间：2020-11-28</span>
+    <hr>
+    <footer>
+        <ul>
+            <li><a href="/about">关于我</a></li>
+            <li><a href="/sitemap.xml">站点地图</a></li>
+            <li><a href="/rss.xml">RSS</a></li>
+            <li>Copyright &copy; KimmyLeo</li>
+        </ul>
+    </footer>
+    <script type="text/javascript">
+        document.querySelectorAll(".disabled-link").forEach(el => el.addEventListener("click", (e) => {
+            alert("链接页面不存在！");
+            e.preventDefault();
+        }));
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script
+</body>
+
+</html>

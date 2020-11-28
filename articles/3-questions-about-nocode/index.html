@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript">
+        if (location.href.endsWith("index.html")) {
+            location.href = location.href.substring(0, location.href.length - "index.html".length);
+        }
+    </script>
+    
+    <title>low-code 三问</title>
+    
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
+        media="(prefers-color-scheme: light)">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/dracula.min.css"
+        media="(prefers-color-scheme: dark)">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
+        media="(prefers-color-scheme: no-preference)">
+    <style type="text/css">
+        body {
+            width: 60%;
+            margin: 0 auto;
+            padding: 2em;
+            font-family: 'Segoe UI',
+                "Microsoft Yahei Light",
+                "San Francisco",
+                "Ping Fang SC",
+                "Roboto",
+                "Noto Sans CJK",
+                Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        p > img {
+            margin: 0 auto;
+            display: block;
+            max-width: 80%;
+        }
+
+        span.field {
+            display: inline-block;
+            font-weight: bolder;
+            font-size: smaller;
+        }
+
+        pre {
+            max-width: 90%;
+            overflow-x: scroll;
+            padding: 1em;
+            border-radius: 5px;
+        }
+
+        a {
+            text-decoration: none;
+            color: cornflowerblue;
+        }
+
+        a:visited {
+            color: cornflowerblue;
+        }
+
+        a:hover {
+            color: darkgray;
+        }
+
+        a.disabled-link {
+            color: lightcoral;
+            text-decoration: line-through;
+        }
+
+        nav,
+        nav ul {
+            display: inline-block;
+        }
+
+        .tags ul,
+        footer ul {
+            padding: 0;
+            display: inline;
+        }
+
+        header h1 {
+            display: inline-block;
+            min-width: 320px;
+            max-width: 50%;
+            width: 50%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            margin: auto;
+        }
+
+        @media screen and (max-width: 1200px) {
+            body {
+                width: 90%;
+                max-width: 720px;
+                padding: 0;
+                margin: 1em auto;
+            }
+
+            header h1 {
+                max-width: 90%;
+                width: 90%;
+            }
+        }
+
+        nav li,
+        .tags li,
+        footer li {
+            display: inline;
+            border-right: 1px solid darkgray;
+            padding: 0 1em;
+        }
+
+        nav li:last-child,
+        .tags li:last-child,
+        footer li:last-child {
+            border: none;
+        }
+
+        .post-list h3 {
+            margin: 0.3em 0;
+        }
+
+        blockquote {
+            margin: 0.5em;
+            border: 1px dotted darkgrey;
+            border-radius: 0.5em;
+            padding: 0 1em;
+        }
+
+        div.image-description {
+            text-align: center;
+            color: gray;
+            font-size: smaller;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            body {
+                background-color: #090810;
+                color: floralwhite;
+                opacity: 0.83;
+            }
+
+            pre {
+                background-color: #282a36;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        
+        <h1 title="low-code 三问">low-code 三问</h1>
+        
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/articles">Articles</a></li>
+                <li><a href="/about">About</a></li>
+            </ul>
+        </nav>
+        <hr>
+        <span class="field">Author: <a href="/about">KimmyLeo</a></span>
+        
+    </header>
+    <article>
+        <p>今年 <strong>low-code</strong> 平台有些逐渐要火起来的苗头了，但大部分的人还是在<strong>套概念蹭热度</strong>，少有人能想清楚这其中的逻辑。在我看来大部分 low-code 平台所吹的内容要么<strong>过于复杂</strong>是在重复<strong>造一个新的编程平台</strong>，要么就是在用另外一种方式<strong>重新发明 SaaS</strong>。</p>
+<p>有些人也会拿已经成熟的诸如 <strong>Microsoft PowerApps</strong> 这种产品来说事儿，没错确实微软也是把它当作 low-code 来宣传的，但不要忘了有个非常坚实的 SaaS 平台 <strong>Microsoft 365</strong> 作为基础在那儿。</p>
+<p>我这里整理了三个问题，可以用来针对性的检验下一个 low-code 平台是否靠谱。</p>
+<p>一、可以确定 low-code 平台的出现是为了<strong>提升效率</strong>。而提升效率则意味着要么某些动作被<strong>自动化</strong>了，要么就是某些功能被<strong>复用</strong>了。low-code 通过<strong>模型定义</strong>和<strong>组合操作</strong>来实现最终的业务，那么，</p>
+<ul>
+<li><strong>所被自动化和被复用的是哪些东西</strong>？</li>
+<li><strong>为什么这些东西必须使用 low-code 平台才能实现自动化或者复用</strong>？</li>
+</ul>
+<p>二、low-code 平台一个重要的点是可以以<strong>一种非代码的方式呈现业务流程</strong>，并且可以进行<strong>动态的改进</strong>。而改进的点无非是<strong>模型变动</strong>或者<strong>业务逻辑变动</strong>。那么，</p>
+<ul>
+<li><strong>如何反映这些变动</strong>？</li>
+<li><strong>如何进行模型变动的迁移</strong>？</li>
+<li><strong>如何验证业务逻辑变动的正确性</strong>？</li>
+<li>也即，<strong>low-code 平台是如何进行配置管理和持续集成的</strong>？</li>
+</ul>
+<p>三、low-code 平台能够让<strong>不了解代码</strong>的人也能做到<strong>实现</strong>和<strong>定制业务流程</strong>。那么根据康威定律，</p>
+<ul>
+<li><strong>适用于 low-code 平台的组织架构是什么样子的</strong>？</li>
+<li><strong>业务人员、IT 运维和研发人员是什么样的配比</strong>？</li>
+<li>以及<strong>业务、IT 和研发人员三者之间以什么样的工作方式协同</strong>？</li>
+</ul>
+
+        
+
+    </article>
+    <!-- <div>
+        <h5>See Also</h5>
+        <ul>
+            <li><a href="/about">About Me</a></li>
+        </ul>
+    </div> -->
+    <span class="field">创建时间：2020-10-16</span>
+    <span class="field">最近更新时间：2020-11-28</span>
+    <hr>
+    <footer>
+        <ul>
+            <li><a href="/about">关于我</a></li>
+            <li><a href="/sitemap.xml">站点地图</a></li>
+            <li><a href="/rss.xml">RSS</a></li>
+            <li>Copyright &copy; KimmyLeo</li>
+        </ul>
+    </footer>
+    <script type="text/javascript">
+        document.querySelectorAll(".disabled-link").forEach(el => el.addEventListener("click", (e) => {
+            alert("链接页面不存在！");
+            e.preventDefault();
+        }));
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script
+</body>
+
+</html>

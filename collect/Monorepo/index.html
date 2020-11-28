@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript">
+        if (location.href.endsWith("index.html")) {
+            location.href = location.href.substring(0, location.href.length - "index.html".length);
+        }
+    </script>
+    
+    <title>Monorepo</title>
+    
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
+        media="(prefers-color-scheme: light)">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/dracula.min.css"
+        media="(prefers-color-scheme: dark)">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
+        media="(prefers-color-scheme: no-preference)">
+    <style type="text/css">
+        body {
+            width: 60%;
+            margin: 0 auto;
+            padding: 2em;
+            font-family: 'Segoe UI',
+                "Microsoft Yahei Light",
+                "San Francisco",
+                "Ping Fang SC",
+                "Roboto",
+                "Noto Sans CJK",
+                Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        p > img {
+            margin: 0 auto;
+            display: block;
+            max-width: 80%;
+        }
+
+        span.field {
+            display: inline-block;
+            font-weight: bolder;
+            font-size: smaller;
+        }
+
+        pre {
+            max-width: 90%;
+            overflow-x: scroll;
+            padding: 1em;
+            border-radius: 5px;
+        }
+
+        a {
+            text-decoration: none;
+            color: cornflowerblue;
+        }
+
+        a:visited {
+            color: cornflowerblue;
+        }
+
+        a:hover {
+            color: darkgray;
+        }
+
+        a.disabled-link {
+            color: lightcoral;
+            text-decoration: line-through;
+        }
+
+        nav,
+        nav ul {
+            display: inline-block;
+        }
+
+        .tags ul,
+        footer ul {
+            padding: 0;
+            display: inline;
+        }
+
+        header h1 {
+            display: inline-block;
+            min-width: 320px;
+            max-width: 50%;
+            width: 50%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            margin: auto;
+        }
+
+        @media screen and (max-width: 1200px) {
+            body {
+                width: 90%;
+                max-width: 720px;
+                padding: 0;
+                margin: 1em auto;
+            }
+
+            header h1 {
+                max-width: 90%;
+                width: 90%;
+            }
+        }
+
+        nav li,
+        .tags li,
+        footer li {
+            display: inline;
+            border-right: 1px solid darkgray;
+            padding: 0 1em;
+        }
+
+        nav li:last-child,
+        .tags li:last-child,
+        footer li:last-child {
+            border: none;
+        }
+
+        .post-list h3 {
+            margin: 0.3em 0;
+        }
+
+        blockquote {
+            margin: 0.5em;
+            border: 1px dotted darkgrey;
+            border-radius: 0.5em;
+            padding: 0 1em;
+        }
+
+        div.image-description {
+            text-align: center;
+            color: gray;
+            font-size: smaller;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            body {
+                background-color: #090810;
+                color: floralwhite;
+                opacity: 0.83;
+            }
+
+            pre {
+                background-color: #282a36;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        
+        <h1 title="Monorepo">Monorepo</h1>
+        
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/articles">Articles</a></li>
+                <li><a href="/about">About</a></li>
+            </ul>
+        </nav>
+        <hr>
+        <span class="field">Author: <a href="/about">KimmyLeo</a></span>
+        
+    </header>
+    <article>
+        <hr>
+<p>title: Monorepo
+date: 2020-10-10</p>
+<hr>
+<p>&quot;Every code commit essentially becomes a release with monorepo!&quot; （<a href="https://itsvit.com/blog/monorepo-google-way-ci-cd/）" title="undefined">https://itsvit.com/blog/monorepo-google-way-ci-cd/）</a></p>
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/Monorepo" title="undefined">https://en.wikipedia.org/wiki/Monorepo</a></li>
+</ul>
+<h2 id="advantages">Advantages</h2>
+<ul>
+<li><strong>Ease of code reuse</strong> – Similar functionality or communication protocols can be abstracted into shared libraries and directly included by projects, without the need of a dependency package manager.</li>
+<li><strong>Simplified dependency management</strong> – In a multiple repository environment where multiple projects depend on a third-party dependency, that dependency might be downloaded or built multiple times. In a monorepo the build can be easily optimized, as referenced dependencies all exist in the same codebase.</li>
+<li><strong>Atomic commits</strong> – When projects that work together are contained in separate repositories, releases need to sync which versions of one project work with the other. And in large enough projects, managing compatible versions between dependencies can become dependency hell. In a monorepo this problem can be negated, since developers may change multiple projects atomically.</li>
+<li><strong>Large-scale code refactoring</strong> – Since developers have access to the entire project, refactors can ensure that every piece of the project continues to function after a refactor.</li>
+<li><strong>Collaboration across teams</strong> – In a monorepo that uses source dependencies (dependencies that are compiled from source), teams can improve projects being worked on by other teams. This leads to flexible code ownership.</li>
+</ul>
+<h2 id="disadvantages">Disadvantages</h2>
+<ul>
+<li><strong>Loss of version information</strong> – Although not required, some monorepo builds use one version number across all projects in the repository. This leads to a loss of per-project semantic versioning.</li>
+<li><strong>Lack of per-project access control</strong> – With split repositories, access to a repository can be granted based upon need. A monorepo allows read access to all software in the project, possibly presenting new security issues.</li>
+</ul>
+<p>其他参考资料：</p>
+<ul>
+<li><a href="https://www.sohu.com/a/165037119_575744" title="undefined">https://www.sohu.com/a/165037119_575744</a></li>
+</ul>
+<p>Google:</p>
+<ul>
+<li><a href="https://cacm.acm.org/magazines/2016/7/204032-why-google-stores-billions-of-lines-of-code-in-a-single-repository/fulltext" title="undefined">https://cacm.acm.org/magazines/2016/7/204032-why-google-stores-billions-of-lines-of-code-in-a-single-repository/fulltext</a></li>
+<li><a href="https://itsvit.com/blog/monorepo-google-way-ci-cd/" title="undefined">https://itsvit.com/blog/monorepo-google-way-ci-cd/</a></li>
+<li></li>
+</ul>
+<p>Facebook:</p>
+<ul>
+<li><a href="https://engineering.fb.com/core-data/scaling-mercurial-at-facebook/" title="undefined">https://engineering.fb.com/core-data/scaling-mercurial-at-facebook/</a></li>
+<li><a href="https://www.infoq.com/news/2014/01/facebook-scaling-hg/" title="undefined">https://www.infoq.com/news/2014/01/facebook-scaling-hg/</a></li>
+<li><a href="https://www.theregister.com/2016/10/18/facebook_mercurial_devs_forget_git/" title="undefined">https://www.theregister.com/2016/10/18/facebook_mercurial_devs_forget_git/</a></li>
+</ul>
+<p>Others:</p>
+<ul>
+<li>Coinbase: <a href="https://blog.coinbase.com/bootstrapping-the-coinbase-monorepo-575cf981c859" title="undefined">https://blog.coinbase.com/bootstrapping-the-coinbase-monorepo-575cf981c859</a></li>
+<li><a href="https://www.fourtheorem.com/blog/monorepo" title="undefined">https://www.fourtheorem.com/blog/monorepo</a></li>
+<li><a href="https://blog.nrwl.io/misconceptions-about-monorepos-monorepo-monolith-df1250d4b03c" title="undefined">https://blog.nrwl.io/misconceptions-about-monorepos-monorepo-monolith-df1250d4b03c</a></li>
+<li><a href="https://www.squash.io/the-issue-with-monorepos/" title="undefined">https://www.squash.io/the-issue-with-monorepos/</a></li>
+<li><a href="https://blog.nrwl.io/misconceptions-about-monorepos-monorepo-monolith-df1250d4b03c" title="undefined">https://blog.nrwl.io/misconceptions-about-monorepos-monorepo-monolith-df1250d4b03c</a></li>
+</ul>
+
+        
+
+    </article>
+    <!-- <div>
+        <h5>See Also</h5>
+        <ul>
+            <li><a href="/about">About Me</a></li>
+        </ul>
+    </div> -->
+    <span class="field">创建时间：#N/A</span>
+    <span class="field">最近更新时间：2020-11-28</span>
+    <hr>
+    <footer>
+        <ul>
+            <li><a href="/about">关于我</a></li>
+            <li><a href="/sitemap.xml">站点地图</a></li>
+            <li><a href="/rss.xml">RSS</a></li>
+            <li>Copyright &copy; KimmyLeo</li>
+        </ul>
+    </footer>
+    <script type="text/javascript">
+        document.querySelectorAll(".disabled-link").forEach(el => el.addEventListener("click", (e) => {
+            alert("链接页面不存在！");
+            e.preventDefault();
+        }));
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script
+</body>
+
+</html>

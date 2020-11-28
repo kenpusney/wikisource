@@ -10,7 +10,7 @@
         }
     </script>
     
-    <title>关于函数的一切</title>
+    <title>你所需要知道的关于函数的一切</title>
     
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
@@ -155,7 +155,7 @@
 
     <header>
         
-        <h1 title="关于函数的一切">关于函数的一切</h1>
+        <h1 title="你所需要知道的关于函数的一切">你所需要知道的关于函数的一切</h1>
         
         <nav>
             <ul>
@@ -169,38 +169,43 @@
         
     </header>
     <article>
-        <p>本文源自于我在2012～2013年写的 Meta Functions 系列文章，以及知乎专栏的《map四种》。通过细致地讲解和练习函数相关的内容来让大家更细致地认识函数、闭包、延迟计算、流和解释器。</p>
-<p>后期根据情况看是否会加入类型检查和模式匹配相关的内容。</p>
-<h2 id="函数">函数</h2>
-<p>我们先来实现一个简单的函数，比如斐波那契数列的定义。</p>
-<pre><code><span class="hljs-function"><span class="hljs-title">fib</span><span class="hljs-params">(n)</span></span> = fib(n - <span class="hljs-number">1</span>) + fib(n - <span class="hljs-number">2</span>)
-<span class="hljs-function"><span class="hljs-title">fib</span><span class="hljs-params">(<span class="hljs-number">0</span>)</span></span> = <span class="hljs-number">1</span>
-<span class="hljs-function"><span class="hljs-title">fib</span><span class="hljs-params">(<span class="hljs-number">1</span>)</span></span> = <span class="hljs-number">1</span></code></pre>
-<p>如果你熟悉递归，可以很容易根据上面的递归定义把fib函数实现了（code 1-1）：</p>
+        <blockquote>
+<p>本文源自于我在 2012 ～ 2013 年写的 Meta Functions 系列文章，以及知乎专栏的《map 四种》。通过细致地讲解和练习函数相关的内容来让大家了解<strong>函数</strong>、<strong>闭包</strong>、<strong>延迟计算</strong>和<strong>流</strong>。</p>
+<p>你可以把它看成一个 SICP 前三章的超级简化版，不过这其中我不会讨论过多的细节。文中所有的代码都在浏览器控制台执行通过，你也可以简单地对着浏览器或者任意实现了 ES6 特性的 JavaScript REPL 试验其中的代码。</p>
+</blockquote>
+<h1 id="函数">函数</h1>
+<p>这里的函数我比较倾向于集合论中的定义，即是两个集合之间的映射关系。也就是那种非常<strong>纯</strong>（pure）的函数。后文也会涉及一些带有状态的函数，不过绝大多数情况下我所期待的是对于一个函数 $f$ ，给定其参数 $x$ ，那么 $f(x)$ 的结果一定是<strong>确定的</strong>（deterministic）。</p>
+<p>我们先来实现一个简单的函数，比如<strong>斐波那契（fibonacci）数列</strong>的定义。</p>
+<p>$$
+fib(0) = \begin{cases}
+    1, &amp;x = 0, or &amp;x = 1\cr
+    fib(n-1) + fib(n-2), &amp;x \ge 2
+\end{cases}
+$$</p>
+<p>如果你熟悉递归，可以很容易根据上面的递归定义把 <code>fib</code> 函数实现了：</p>
 <pre><code class="language-js"><span class="hljs-keyword">function</span> <span class="hljs-title">fib</span>(n) {
     if (n === 0 || n === 1) {
         <span class="hljs-keyword">return</span> <span class="hljs-type">1</span>;
     }
     <span class="hljs-keyword">return</span> fib(n - <span class="hljs-number">1</span>) + fib(n - <span class="hljs-number">2</span>);
 }</code></pre>
-<p>我们来看求fib(10)的时候的展开图：</p>
+<p>我们来看求 <code>fib(10)</code> 的时候的展开图：</p>
 <pre><code>fib(<span class="hljs-number">10</span>) =&gt;
 fib(<span class="hljs-number">9</span>) + fib(<span class="hljs-number">8</span>) =&gt;
 fib(<span class="hljs-number">8</span>) + fib(<span class="hljs-number">7</span>) + fib(<span class="hljs-number">7</span>) + fib(<span class="hljs-number">6</span>) =&gt;
 fib(<span class="hljs-number">7</span>) + fib(<span class="hljs-number">6</span>) + fib(<span class="hljs-number">6</span>) + fib(<span class="hljs-number">5</span>) + fib(<span class="hljs-number">6</span>) + fib(<span class="hljs-number">5</span>) + fib(<span class="hljs-number">5</span>) + fib(<span class="hljs-number">4</span>) =&gt;
 .....</code></pre>
-<p>最后展开会是一个深度为10节点非常多的递归树。</p>
-<p>在我的电脑上，计算fib(30)已经需要等待一段时间，明显感觉到延迟了。</p>
-<h3 id="尾递归">尾递归</h3>
-<p>对于这个操作，实际可以用另外一个办法来简化，就是通过尾递归，把计算的操作合并到尾调用的参数求值中去。
-（code 1-2）</p>
+<p>最后展开会是一个深度为 10 节点非常多的<strong>递归树</strong>。</p>
+<p>在我的电脑上，计算 <code>fib(30)</code> 已经需要等待一段时间，明显感觉到延迟了。</p>
+<h2 id="尾递归">尾递归</h2>
+<p>对于这个操作，实际可以用另外一个办法来简化，就是通过<strong>尾递归</strong>，把计算的操作合并到尾调用的参数求值中去。</p>
 <pre><code class="language-js"><span class="hljs-keyword">function</span> <span class="hljs-title">fib</span>(n, a = 1, b = 1) {
     if (n == 0) {
         <span class="hljs-keyword">return</span> <span class="hljs-type">a</span>;
     }
     <span class="hljs-keyword">return</span> fib(n-<span class="hljs-number">1</span>, b, a + b);
 }</code></pre>
-<p>这个时候的fib(10)的展开：</p>
+<p>这个时候的 <code>fib(10)</code> 的展开：</p>
 <pre><code><span class="hljs-function"><span class="hljs-title">fib</span><span class="hljs-params">(<span class="hljs-number">10</span>)</span></span> =&gt;
 <span class="hljs-function"><span class="hljs-title">fib</span><span class="hljs-params">(<span class="hljs-number">9</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>)</span></span> =&gt;
 <span class="hljs-function"><span class="hljs-title">fib</span><span class="hljs-params">(<span class="hljs-number">8</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>)</span></span> =&gt;
@@ -213,9 +218,8 @@ fib(<span class="hljs-number">7</span>) + fib(<span class="hljs-number">6</span>
 <span class="hljs-function"><span class="hljs-title">fib</span><span class="hljs-params">(<span class="hljs-number">1</span>, <span class="hljs-number">55</span>, <span class="hljs-number">89</span>)</span></span> =&gt;
 <span class="hljs-function"><span class="hljs-title">fib</span><span class="hljs-params">(<span class="hljs-number">0</span>, <span class="hljs-number">89</span>, <span class="hljs-number">144</span>)</span></span> =&gt;
 <span class="hljs-number">89</span></code></pre>
-<p>所有的计算通过两个额外的参数来累加，而不是通过反复的递归调用展开，这个时候只有递归层次的深度，就连计算fib(100)也都只需要递归调用100次就好，能够立即返回结果。</p>
-<p>如果你曾经用循环的方式实现过斐波那契，那要想导出这个尾递归版本其实并不困难：
-（code 1-3）</p>
+<p>所有的计算通过两个额外的参数来累加，而不是通过反复的递归调用展开，这个时候只有递归层次的深度，就连计算 <code>fib(100)</code> 也都只需要递归调用 100 次就好，能够立即返回结果。</p>
+<p>如果你曾经用<strong>循环</strong>的方式实现过斐波那契，那要想导出这个尾递归版本其实并不困难：</p>
 <pre><code class="language-js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">fib</span>(<span class="hljs-params">n</span>) </span>{
     <span class="hljs-keyword">let</span> a = <span class="hljs-number">1</span>;
     <span class="hljs-keyword">let</span> b = <span class="hljs-number">1</span>;
@@ -224,8 +228,7 @@ fib(<span class="hljs-number">7</span>) + fib(<span class="hljs-number">6</span>
     }
     <span class="hljs-keyword">return</span> a;
 }</code></pre>
-<p>好的，首先我们把循环倒过来写：
-（code 1-4）</p>
+<p>好的，首先我们把循环倒过来写：</p>
 <pre><code class="language-js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">fib</span>(<span class="hljs-params">n</span>) </span>{
     <span class="hljs-keyword">let</span> a = <span class="hljs-number">1</span>;
     <span class="hljs-keyword">let</span> b = <span class="hljs-number">1</span>;
@@ -234,8 +237,7 @@ fib(<span class="hljs-number">7</span>) + fib(<span class="hljs-number">6</span>
     }
     <span class="hljs-keyword">return</span> a;
 }</code></pre>
-<p>把for改成死循环：
-（code 1-5）</p>
+<p>把 <code>for</code> 改成死循环：</p>
 <pre><code class="language-js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">fib</span>(<span class="hljs-params">n</span>) </span>{
     <span class="hljs-keyword">let</span> a = <span class="hljs-number">1</span>;
     <span class="hljs-keyword">let</span> b = <span class="hljs-number">1</span>;
@@ -247,8 +249,7 @@ fib(<span class="hljs-number">7</span>) + fib(<span class="hljs-number">6</span>
         [i, a, b] = [i<span class="hljs-number">-1</span>, b, a+b];
     }
 }</code></pre>
-<p>改一下参数和变量名：
-（code 1-6）</p>
+<p>改一下参数和变量名：</p>
 <pre><code class="language-js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">fib</span><span class="hljs-params">(n, a = 1, b = 1)</span> </span>{
     <span class="hljs-keyword">while</span>(<span class="hljs-literal">true</span>) {
         <span class="hljs-keyword">if</span> (n === <span class="hljs-number">0</span>) {
@@ -257,18 +258,24 @@ fib(<span class="hljs-number">7</span>) + fib(<span class="hljs-number">6</span>
         [n, a, b] = [n<span class="hljs-number">-1</span>, b, a+b];
     }
 }</code></pre>
-<p>while(true) 里面的内容，跟为递归版的结构几乎一模一样，而这里直接改到参数的赋值，就可以一步替换为尾递归。</p>
-<p>你可以对比code 1-2和code 1-6的内容。现实其实通常是反过来的，就是会通常是我们通过尾递归的方式写成1-2的样子，然后再由编译器优化成1-6。这样的结果是能够省掉函数传参和压栈的过程，算是一步提效明显的优化，对时间（额外的压栈和传参操作）和空间（调用栈）的开销都能节省很多，还能避免不必要的爆栈（Stack Overflow）风险。</p>
+<p><code>while(true)</code> 里面的内容，跟尾递归版的结构几乎一模一样，而这里直接改到参数的赋值，就可以一步替换为尾递归。</p>
+<p>你可以对比尾递归形式和最后这个循环实现的内容。现实其实通常是反过来的，就是会通常是我们<strong>写成尾递归的样子</strong>，然后再由编译器<strong>优化成循环</strong>。这样的结果是能够省掉函数传参和压栈的过程，算是一步提效明显的优化，对时间（额外的压栈和传参操作）和空间（调用栈）的开销都能节省很多，还能避免不必要的<strong>爆栈</strong>（Stack Overflow）风险。</p>
 <h3 id="练习">练习</h3>
-<p>请实现另外一个常用递归函数阶乘（factorial）的直接递归版和尾递归版。阶乘函数的定义如下：</p>
-<pre><code>factorial(<span class="hljs-name">n</span>) = n * factorial(<span class="hljs-name">n</span> - <span class="hljs-number">1</span>)
-factorial(<span class="hljs-number">0</span>) = <span class="hljs-number">1</span></code></pre>
-<h2 id="函数进阶">函数进阶</h2>
+<ul>
+<li>请实现另外一个常用递归函数阶乘（factorial）的直接递归版和尾递归版。阶乘函数的定义如下：</li>
+</ul>
+<p>$$
+n! = \begin{cases}
+  1, &amp;n = 0 \cr
+  (n-1)!\times n, &amp;n \gt 0
+\end{cases}
+$$</p>
+<h1 id="函数进阶">函数进阶</h1>
 <p>我们上一节简单实现了一个函数，那么现在来认真地回顾考虑这么一个问题，函数到底是什么？</p>
 <p>其实很简单，函数就是这么一个结构，你给他一个输入，他返回给你一个输出。而其由输入得到输出的过程，是你可以定义的。</p>
 <p>这其实是一个非常广义的抽象，可以拿来类比各种东西，比如一个生产流水线也可以这么抽象地看，原材料作为输入，产品作为输出；而这个流水线的每一个节点又都是有自己的输入和输出。</p>
 <p>于是我们可以看到函数的另外一个特征：可组合（Composable）。</p>
-<h3 id="可组合性">可组合性</h3>
+<h2 id="可组合性">可组合性</h2>
 <p>比如我们定义一个函数，去求一个数组排序后的结果：</p>
 <pre><code class="language-js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">sorted</span>(<span class="hljs-params"><span class="hljs-keyword">array</span></span>) </span>{
     <span class="hljs-keyword">return</span> <span class="hljs-keyword">array</span>.slice().sort();
@@ -280,10 +287,10 @@ factorial(<span class="hljs-number">0</span>) = <span class="hljs-number">1</spa
 <p>那如果我们要求一个数组的降序排序的结果，就直接组合这两个调用就好：</p>
 <pre><code class="language-js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">sort_reversed</span>(<span class="hljs-params"><span class="hljs-keyword">array</span></span>) </span>{
     <span class="hljs-keyword">return</span> reversed(sorted(<span class="hljs-keyword">array</span>));
-} </code></pre>
+}</code></pre>
 <p>正式函数的这种可组合性，让我们能通过定义有限的正交算子，来组合出无限的操作。</p>
 <blockquote>
-<p>有些人可能会说，这个直接做成Array的方法，也是能够做成链式调用来组合的：</p>
+<p>有些人可能会说，这个直接做成 Array 的方法，也是能够做成链式调用来组合的：</p>
 <pre><code class="language-javascript"><span class="hljs-built_in">Array</span>.prototype.sorted = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
     <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.slice().sort();
 }
@@ -291,25 +298,25 @@ factorial(<span class="hljs-number">0</span>) = <span class="hljs-number">1</spa
 <span class="hljs-built_in">Array</span>.prototype.reversed() = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
     <span class="hljs-keyword">return</span> <span class="hljs-built_in">this</span>.slice().reverse();
 }</code></pre>
-<p>实际这两种做法本质上是同一件事情。有些编程语言（比如D语言）中，<code>x.f(y)</code> 与 <code>f(x, y)</code> 是等价操作，实现的这种转换叫做<strong>统一函数调用语法</strong>（Uniform Function Call Syntax）。</p>
+<p>实际这两种做法本质上是同一件事情。有些编程语言（比如 D 语言）中，<code>x.f(y)</code> 与 <code>f(x, y)</code> 是等价操作，实现的这种转换叫做<strong>统一函数调用语法</strong>（Uniform Function Call Syntax）。</p>
 </blockquote>
-<h3 id="函数对象">函数对象</h3>
+<h2 id="函数对象">函数对象</h2>
 <p>回到上面的排序函数。</p>
-<p>JavaScript有一个问题，就是排序默认是用的文本序，对数字也是如此，也就是说，111是会排在12前面的，而JavaScript的Array.prototype.sort函数会让我们传递一个匿名函数进去来作为排序的比较器（Comparator），达到对数值做排序的目的。</p>
+<p>JavaScript 有一个问题，就是排序默认是用的文本序，对数字也是如此，也就是说，111 是会排在 12 前面的，而 JavaScript 的 <code>Array.prototype.sort</code> 函数会让我们传递一个匿名函数进去来作为排序的比较器（Comparator），达到对数值做排序的目的。</p>
 <p>这个比较器就是一个函数对象。</p>
 <pre><code class="language-js">[<span class="hljs-number">1</span>, <span class="hljs-number">111</span>, <span class="hljs-number">12</span>]<span class="hljs-string">.sort((x,</span> <span class="hljs-string">y)</span> <span class="hljs-string">=&gt;</span> <span class="hljs-string">x</span> <span class="hljs-bullet">-</span> <span class="hljs-string">y)</span>
 <span class="hljs-string">//</span> <span class="hljs-string">=&gt;</span> [<span class="hljs-number">1</span>, <span class="hljs-number">12</span>, <span class="hljs-number">111</span>]</code></pre>
-<p>函数对象，又叫匿名函数，在某些语境下面也叫lambda表达式（因其源自于lambda演算）。一个函数对象是可以赋值给某个变量、作为参数传递的；或者说，函数对象，是第一类值（first class value）。</p>
+<p><strong>函数对象</strong>，又叫<strong>匿名函数</strong>，在某些语境下面也叫 lambda 表达式（因其源自于 lambda 演算）。一个函数对象是可以赋值给某个变量、作为参数传递的；或者说，函数对象，是<strong>第一类值</strong>（first class value）。</p>
 <p>比如上文中的 <code>(x, y) =&gt; x - y</code>。</p>
-<h3 id="闭包">闭包</h3>
-<p>既然函数是第一类值，那么我们也就能有方式来构造他了。</p>
-<p>通常一个函数在传递过程中不只是作为一个独立的单位存在，还会包括一些上下文，这样组合起来的一个结构就叫闭包。</p>
+<h2 id="闭包">闭包</h2>
+<p>既然函数是<strong>第一类值</strong>，那么我们也就能有方式来构造他了。</p>
+<p>通常一个函数在传递过程中不只是作为一个独立的单位存在，还会包括一些<strong>上下文</strong>，这样组合起来的一个结构就叫闭包。</p>
 <p>比如，我们定义以下函数，会返回一个函数对象，而这个函数对象每次调用都会累加一次，行为表现像是一个计数器：</p>
 <pre><code class="language-js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">makeCounter</span>(<span class="hljs-params"></span>) </span>{
     let count = <span class="hljs-number">0</span>;
     <span class="hljs-keyword">return</span> <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> count ++;
 }</code></pre>
-<p>这里返回的函数对象，其实就捕获了makeCounter函数中的变量count，并一直持有。在任何时候我们操作这个函数，都会改变这个变量的值。这个时候的变量可以被成为upvalue（因为是上层（upper）函数中的值（value））。</p>
+<p>这里返回的函数对象，其实就捕获了 <code>makeCounter</code> 函数中的变量 <code>count</code>，并一直持有。在任何时候我们操作这个函数，都会改变这个变量的值。这个时候的变量可以被称为 <strong>upvalue</strong>（因为是<strong>上层</strong>（upper）函数中的<strong>值</strong>（value））。</p>
 <p>这样看起来似乎毫无意义。</p>
 <p>我们来看一个深入的结构：</p>
 <pre><code class="language-js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">pair</span><span class="hljs-params">(left, right)</span> </span>{
@@ -328,17 +335,17 @@ factorial(<span class="hljs-number">0</span>) = <span class="hljs-number">1</spa
 
 p(left) <span class="hljs-comment">// =&gt; 1;</span>
 p(right) <span class="hljs-comment">// =&gt; 2;</span></code></pre>
-<p>pair给我们构造了一个对象（这个时候已经不仅仅限于函数对象了），然后我们通过另外定义的两个函数来去访问这个对象的内部结构，而这个实际的内部结构并没有直接暴露给我们。</p>
+<p><code>pair</code> 给我们构造了一个对象（这个时候已经不仅仅限于函数对象了），然后我们通过另外定义的两个函数来去访问这个对象的内部结构，而这个实际的内部结构并没有直接暴露给我们。</p>
 <p>上面这段话你看到了哪些关键的东西？</p>
 <ul>
-<li><strong>对象</strong>：pair构造了一个有序对，这个对象可以由我们后续定义的方法来操作和访问</li>
-<li><strong>方法</strong>：left和right两个函数本身并没有实际的意义，与pair对象绑定以后，可以利用pair中的数据来实现预期的行为</li>
-<li><strong>封装</strong>：pair的内部结构在构造时确定，无法在外部获取和改变内部结构，只能通过定义pair的方法来处理</li>
+<li><strong>对象</strong>：<code>pair</code> 构造了一个有序对，这个对象可以由我们后续定义的方法来操作和访问</li>
+<li><strong>方法</strong>：<code>left</code> 和 <code>right</code> 两个函数本身并没有实际的意义，与 <code>pair</code> 对象绑定以后，可以利用 <code>pair</code> 中的数据来实现预期的行为</li>
+<li><strong>封装</strong>：<code>pair</code> 的内部结构在构造时确定，无法在外部获取和改变内部结构，只能通过定义 <code>pair</code> 的方法来处理</li>
 </ul>
-<p>在只有“函数”这个构造的情况下我们也能做这些事情。甚至在一些编程语言（比如Java/C++）里面，函数对象就是通过结构/类+特定的方法来实现的，也就只有这样他们才能做捕获形成闭包。</p>
-<h2 id="数据抽象">数据抽象</h2>
-<h3 id="可变性">可变性</h3>
-<p>我们知道OO的一个特色是可变性来描述状态，闭包在这里也完全可以实现。当然需要借助一些额外的结构。</p>
+<p>在只有“函数”这个构造的情况下我们也能做这些事情。甚至在一些编程语言（比如 Java/C++）里面，函数对象就是通过<strong>结构/类</strong>加上特定的<strong>函数/方法</strong>来实现的，也就只有这样他们才能做捕获形成闭包。</p>
+<h1 id="数据抽象">数据抽象</h1>
+<h2 id="可变性">可变性</h2>
+<p>我们知道 OO 的一个特色是可变性来描述状态，闭包在这里也完全可以实现。当然需要借助一些额外的结构。</p>
 <pre><code class="language-js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">mutablePair</span>(<span class="hljs-params">a, b</span>) </span>{
     <span class="hljs-keyword">return</span> <span class="hljs-function">(<span class="hljs-params">fn</span>) =&gt;</span> {
         <span class="hljs-keyword">let</span> x;
@@ -369,24 +376,22 @@ mp(getLeft); <span class="hljs-comment">// 1</span>
 mp(getRight); <span class="hljs-comment">// 2</span>
 mp(setLeft(<span class="hljs-number">5</span>)); <span class="hljs-comment">// 1</span>
 mp(getLeft); <span class="hljs-comment">// 5</span></code></pre>
-<p>其实可以看到，mp接受的每个函数都是(a, b) =&gt; [a, b, x] 这种形式。这样就是能够给传递函数充分地信息来获取结构，然后生成充分足够地信息来更新mp闭包的内部。如果我们再简化一点，把a和b作为一个对象比如this或者self来看，mp接受的每个函数变成了 (self) =&gt; result。其中对self的改变也包括在内。</p>
-<p>这其实就是大部分编程语言的面向对象的“方法”的实现机制，都会给这些方法绑定一个this或者self变量，让方法内部可控制。</p>
+<p>其实可以看到，<code>mp</code> 接受的每个函数都是 <code>(a, b) =&gt; [a, b, x]</code> 这种形式。这样就是能够给传递函数充分地信息来获取结构，然后生成充分足够地信息来更新 <code>mp</code> 闭包的内部。如果我们再简化一点，把 <code>a</code> 和 <code>b</code> 作为一个对象比如 <code>this</code> 或者 <code>self</code> 来看，<code>mp</code> 接受的每个函数变成了 <code>(self) =&gt; result</code>。其中对 <code>self</code> 的改变也包括在内。</p>
+<p>这其实就是大部分编程语言的面向对象的“方法”的实现机制，都会给这些方法绑定一个 <code>this</code> 或者 <code>self</code> 变量，让方法内部可控制。</p>
 <p>你看，就这么简单。</p>
 <h3 id="练习-1">练习</h3>
 <ol>
-<li><p>给mutablePair实现一个方法，可以交换pair左右两边的值。</p>
-</li>
-<li><p>有没有更简单地只用函数来实现mutablePair的方式？</p>
-</li>
+<li>给 mutablePair 实现一个方法，可以交换 pair 左右两边的值。</li>
+<li>有没有更简单地只用函数来实现 mutablePair 的方式？</li>
 </ol>
-<h3 id="生成器">生成器</h3>
+<h2 id="生成器">生成器</h2>
 <p>我们回想一下上一个场景中的计数器，其实是一个非常有用的结构。</p>
 <p>比如我们希望得到斐波那契数列，但又不希望提前获取这所有内容的时候：</p>
 <pre><code class="language-js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">fibGenerator</span>(<span class="hljs-params"></span>) </span>{
     let n = <span class="hljs-number">0</span>;
     <span class="hljs-keyword">return</span> <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> fib(n++)
 }</code></pre>
-<p>实际，你看，进一步地我们可以抽象出来这样一个结构，就叫生成器，根据你提供的函数再来求一个结果：</p>
+<p>进一步地我们可以抽象出来这样一个结构，就叫生成器，根据你提供的函数再来求一个结果：</p>
 <pre><code class="language-js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">generator</span>(<span class="hljs-params">fn</span>) </span>{
     let n = <span class="hljs-number">0</span>;
     <span class="hljs-keyword">return</span> () =&gt; <span class="hljs-function"><span class="hljs-keyword">fn</span>(<span class="hljs-params">n++</span>)</span>;
@@ -429,8 +434,248 @@ bg(backward); <span class="hljs-comment">// 5</span>
 bg(backward); <span class="hljs-comment">// 3</span>
 bg(forward); <span class="hljs-comment">// 5</span>
 bg(forward); <span class="hljs-comment">// 8</span></code></pre>
+<p>思路与 <code>mutablePair</code> 类似，我们构造一个特定结构作为这个对象的<code>this</code>，所有的操作都是围绕这里所谓的 <code>this</code> 来进行操作。</p>
 <h3 id="练习-2">练习</h3>
-<p>给generator加上范围限制。</p>
+<ul>
+<li>给 <code>generator</code> 加上范围限制，实现 <code>boundedGenerator</code>。</li>
+</ul>
+<h2 id="不可变性">不可变性</h2>
+<p>前面的生成器中，有一个很关键的问题就是我们<strong>改变了 <code>generator</code> 的内部状态</strong>，才得以每次获取都拿到不同的结果。这种情况实际违背了函数其执行的<strong>确定性</strong>。通常我们很少会用这种繁杂的方式实现对象和状态，而是用另外一些更加直观的形式。这个话题我们以后在涉及对象的时候再去讨论。</p>
+<p>继续看，如果我们不去改变生成器的内部状态，如何实现一个类似的结构。</p>
+<p>一个生成器会产生一系列的值，形成一个序列结构。我们先定义一个序列结构，可以依照前面的定义来：</p>
+<pre><code class="language-js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">cons</span>(<span class="hljs-params">x, y</span>) </span>{
+    <span class="hljs-keyword">return</span> <span class="hljs-function">(<span class="hljs-params">f</span>) =&gt;</span> f(x, y);
+}
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">head</span>(<span class="hljs-params">cons</span>) </span>{
+    <span class="hljs-keyword">return</span> cons(<span class="hljs-function">(<span class="hljs-params">x, y</span>) =&gt;</span> x);
+}
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">tail</span>(<span class="hljs-params">cons</span>) </span>{
+    <span class="hljs-keyword">return</span> cons(<span class="hljs-function">(<span class="hljs-params">x, y</span>) =&gt;</span> y);
+}
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">nil</span>(<span class="hljs-params"></span>) </span>{
+    <span class="hljs-keyword">return</span> <span class="hljs-function">(<span class="hljs-params">f</span>) =&gt;</span> f(nil(), nil(), <span class="hljs-literal">true</span>);
+}
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">isNil</span>(<span class="hljs-params">s</span>) </span>{
+    <span class="hljs-keyword">return</span> s(<span class="hljs-function">(<span class="hljs-params">x, y, z</span>) =&gt;</span> z === <span class="hljs-literal">true</span>);
+}</code></pre>
+<p>这样一个结构中，序列的每一个节点所对应的下一个都是另外一个节点（<code>cons</code> 或者 <code>nil</code>），这样连续递归组合起来的结构就是个单链表序列，也是大多数数据结构的基础。</p>
+<p>一个包含了前 5 个自然数的序列，可以表示成以下形式：</p>
+<pre><code class="language-js">const seq_first_5_nats = cons(<span class="hljs-number">0</span>, cons(<span class="hljs-number">1</span>, cons(<span class="hljs-number">2</span>, cons(<span class="hljs-number">3</span>, (<span class="hljs-name">cons</span>(<span class="hljs-number">4</span>, <span class="hljs-literal">nil</span>()))))))<span class="hljs-comment">;</span>
+
+head(<span class="hljs-name">seq_first_5_nats</span>)<span class="hljs-comment">; // 0</span>
+head(<span class="hljs-name">tail</span>(<span class="hljs-name">tail</span>(<span class="hljs-name">tail</span>(<span class="hljs-name">seq_first_5_nats</span>))))<span class="hljs-comment">; // 3</span></code></pre>
+<p>而生成器每次除了给我们一个值以外，还会产生一个新的状态（因为这里不能再用可变状态了，所以这个新状态肯定是新生成的）。这样一个新的状态也正是跟原本的生成器一致的结构。这有点类似上面的序列，但由于生成器是会持续构造下去的，我们不得不采用一种方式来阻断这个构造的执行。</p>
+<p>我们可以先从重复产生同一个状态开始构造这个结构：</p>
+<pre><code class="language-js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">zeros</span><span class="hljs-params">()</span> {</span>
+    <span class="hljs-keyword">return</span> cons(<span class="hljs-number">0</span>, () =&gt; <span class="hljs-built_in">zeros</span>()); <span class="hljs-comment">// 而不是 cons(0, zeros())</span>
+}
+
+head(<span class="hljs-built_in">zeros</span>()); <span class="hljs-comment">// 0</span>
+
+head(tail(tail(<span class="hljs-built_in">zeros</span>())())()); <span class="hljs-comment">// 0</span></code></pre>
+<p>这里的 <code>zeros</code> 就是一个生成器，在这里 <code>cons</code> 所对应的 <code>tail</code> 部分不再是一个 <code>cons</code> 或者 <code>nil</code>，而变成了一个函数。这里比较明显的就是，只要你不去对一个函数尝试进行求值，那么他可以作为一个仅有的对象保持该状态，这样就暂时阻断了生成器的持续构造。而当我们需要生成器继续执行的时候，只要对其进行一次强制求值就好了。</p>
+<p>可以看到我们每次调用 <code>tail</code> 以后都会尝试对它重新求值一次，这正是从一个状态转换到另一个状态的过程。</p>
+<p>为了方便从生成器中取出对应的值，我们预定义一个方便的功能函数 <code>take</code>：</p>
+<pre><code class="language-js"><span class="hljs-string">function</span> <span class="hljs-string">take(n,</span> <span class="hljs-string">gen)</span> {
+    <span class="hljs-string">if</span> <span class="hljs-string">(n</span> <span class="hljs-string">==</span> <span class="hljs-number">1</span><span class="hljs-string">)</span> {
+        <span class="hljs-string">return</span> [<span class="hljs-string">head(gen)</span>]<span class="hljs-string">;</span>
+    }
+    <span class="hljs-string">return</span> [<span class="hljs-string">head(gen)</span>, <span class="hljs-string">...take(n</span> <span class="hljs-bullet">-</span> <span class="hljs-number">1</span>, <span class="hljs-string">tail(gen)())</span>]<span class="hljs-string">;</span>
+}
+
+<span class="hljs-string">take(10,</span> <span class="hljs-string">zeros());</span> <span class="hljs-string">//</span> [<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>]</code></pre>
+<h3 id="练习-3">练习</h3>
+<ol>
+<li>实现 <code>take</code> 函数的非生成器（即由 <code>cons</code>/<code>nil</code> 组合而成的链表）版本。</li>
+<li>通常与 <code>take</code> 配套的函数时 <code>drop</code>，即舍去掉 <code>take</code> 所获取的的那部分结果，直接把生成器快进到某个状态。请实现 <code>drop</code> 函数。</li>
+</ol>
+<p>同样的方式你也可以定义连续产生特定数字的序列：</p>
+<pre><code class="language-js"><span class="hljs-string">function</span> <span class="hljs-string">repeat(n)</span> {
+    <span class="hljs-string">return</span> <span class="hljs-string">cons(n</span>, <span class="hljs-string">()</span> <span class="hljs-string">=&gt;</span> <span class="hljs-string">repeat(n));</span>
+}
+
+<span class="hljs-string">take(10,</span> <span class="hljs-string">repeat(10));</span> <span class="hljs-string">//</span> [<span class="hljs-number">10</span>, <span class="hljs-number">10</span>, <span class="hljs-number">10</span>, <span class="hljs-number">10</span>, <span class="hljs-number">10</span>, <span class="hljs-number">10</span>, <span class="hljs-number">10</span>, <span class="hljs-number">10</span>, <span class="hljs-number">10</span>, <span class="hljs-number">10</span>]</code></pre>
+<p>以及，持续递增的生成器：</p>
+<pre><code class="language-js"><span class="hljs-string">function</span> <span class="hljs-string">counter(start</span> <span class="hljs-string">=</span> <span class="hljs-number">0</span><span class="hljs-string">)</span> {
+    <span class="hljs-string">return</span> <span class="hljs-string">cons(start</span>, <span class="hljs-string">()</span> <span class="hljs-string">=&gt;</span> <span class="hljs-string">counter(start</span> <span class="hljs-string">+</span> <span class="hljs-number">1</span><span class="hljs-string">));</span>
+}
+
+<span class="hljs-string">take(10,</span> <span class="hljs-string">counter(0));</span> <span class="hljs-string">//</span>  [<span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <span class="hljs-number">6</span>, <span class="hljs-number">7</span>, <span class="hljs-number">8</span>, <span class="hljs-number">9</span>]</code></pre>
+<p>可以看出来，这里的 <code>counter</code> 无非是在反复地应用 <code>+1</code> 这个操作，来持续的到结果。</p>
+<p>我们把 <code>+1</code> 操作变成函数，也即：</p>
+<pre><code class="language-js"><span class="hljs-keyword">function</span> <span class="hljs-title">inc</span>(x) {
+    <span class="hljs-keyword">return</span> <span class="hljs-type">x</span> + <span class="hljs-number">1</span>;
+}
+
+<span class="hljs-keyword">function</span> <span class="hljs-title">counter</span>(start = 0) {
+    <span class="hljs-keyword">return</span> <span class="hljs-type">cons(start,</span> () =&gt; counter(inc(start)))
+}</code></pre>
+<p>这时候我们可以考虑把这个函数作为参数抽取出来:</p>
+<pre><code class="language-js"><span class="hljs-string">function</span> <span class="hljs-string">iterate(fn)</span> {
+    <span class="hljs-string">function</span> <span class="hljs-string">generator(start</span> <span class="hljs-string">=</span> <span class="hljs-number">0</span><span class="hljs-string">)</span> {
+        <span class="hljs-string">return</span> <span class="hljs-string">cons(start</span>, <span class="hljs-string">()</span> <span class="hljs-string">=&gt;</span> <span class="hljs-string">generator(fn(start)));</span>
+    }
+
+    <span class="hljs-string">return</span> <span class="hljs-string">generator;</span>
+}
+
+<span class="hljs-string">take(10,</span> <span class="hljs-string">iterate(inc)(0));</span> <span class="hljs-string">//</span> [<span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <span class="hljs-number">6</span>, <span class="hljs-number">7</span>, <span class="hljs-number">8</span>, <span class="hljs-number">9</span>]
+
+<span class="hljs-string">take(10,</span> <span class="hljs-string">iterate(x</span> <span class="hljs-string">=&gt;</span> <span class="hljs-string">x</span> <span class="hljs-string">*</span> <span class="hljs-number">2</span><span class="hljs-string">)(1));</span> <span class="hljs-string">//</span> [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">4</span>, <span class="hljs-number">8</span>, <span class="hljs-number">16</span>, <span class="hljs-number">32</span>, <span class="hljs-number">64</span>, <span class="hljs-number">128</span>, <span class="hljs-number">256</span>, <span class="hljs-number">512</span>]</code></pre>
+<p><code>iterate(fn)</code> 所产生的生成器对应的序列是：</p>
+<pre><code class="language-js">start, <span class="hljs-function"><span class="hljs-keyword">fn</span></span>(start), <span class="hljs-function"><span class="hljs-keyword">fn</span></span>(<span class="hljs-function"><span class="hljs-keyword">fn</span></span>(start)), <span class="hljs-function"><span class="hljs-keyword">fn</span></span>(<span class="hljs-function"><span class="hljs-keyword">fn</span></span>(<span class="hljs-function"><span class="hljs-keyword">fn</span></span>(start))), ...</code></pre>
+<p>但是这毕竟还是只能单项地产生结果，怎么能像前面一样生成一个 fibonacci 序列呢？</p>
+<p>同样的，我们再来抽取一个变量。</p>
+<p>每次我们的 <code>generator</code> 都只是直接把对应的迭代结果返回，而如果在这个迭代结果上再做一些操作会如何呢？</p>
+<pre><code class="language-js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">generate</span>(<span class="hljs-params">gn, fn</span>) </span>{
+    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">generator</span>(<span class="hljs-params">start = <span class="hljs-number">0</span></span>) </span>{
+        <span class="hljs-keyword">return</span> cons(gn(start), () =&gt; <span class="hljs-built_in">generator</span>(<span class="hljs-function"><span class="hljs-keyword">fn</span>(<span class="hljs-params">start</span>)))</span>;
+    }
+
+    <span class="hljs-keyword">return</span> <span class="hljs-built_in">generator</span>;
+}
+
+take(<span class="hljs-number">10</span>, generate(fib, inc)()); <span class="hljs-comment">// [1, 1, 2, 3, 5, 8, 13, 21, 34, 55]</span></code></pre>
+<p>同样，<code>generate(gn, fn)</code> 产生的生成器所对应生成的序列则是：</p>
+<pre><code class="language-js"><span class="hljs-built_in">gn</span>(start), <span class="hljs-built_in">gn</span>(<span class="hljs-keyword">fn</span>(start)), <span class="hljs-built_in">gn</span>(<span class="hljs-keyword">fn</span>(<span class="hljs-keyword">fn</span>(start))), ...</code></pre>
+<p>请思考前面<code>generate(fib, inc)</code>所实现的 fibonacci 序列生成器，获取其前 10 项时所完整展开的结构以及对 <code>fib</code> 函数的调用次数。</p>
+<p>你会发现，<code>generate</code> 这种方式对于需要复杂迭代运算的 <code>gn</code> 并不友好。</p>
+<h2 id="通用生成器">通用生成器</h2>
+<p>其实根据 fibonacci 序列的递归定义，我们可以写出更合适的生成器。</p>
+<pre><code class="language-js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">generateFib</span>(<span class="hljs-params"></span>) </span>{
+    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">generator</span>(<span class="hljs-params">a = <span class="hljs-number">1</span>, b = <span class="hljs-number">1</span></span>) </span>{
+        <span class="hljs-keyword">return</span> cons(a, () =&gt; <span class="hljs-built_in">generator</span>(b, a + b));
+    }
+
+    <span class="hljs-keyword">return</span> <span class="hljs-built_in">generator</span>;
+}
+
+take(<span class="hljs-number">10</span>, generateFib()()); <span class="hljs-comment">// [1, 1, 2, 3, 5, 8, 13, 21, 34, 55]</span></code></pre>
+<p>这样得到的就是一个每取一步进行<strong>一步计算</strong>的 fibonacci 序列生成器，比起来前面每一次都要<strong>重新计算</strong>一遍的要更容易很多。</p>
+<p>其实这样我们仍然能够进行更进一步的抽取：</p>
+<p>可以看到的是，<code>generateFib</code> 里的 <code>generator</code> 函数的参数是有一个相对固定的<strong>映射关系</strong>的，也就是我们前面推出来的迭代式 fibonacci 的映射关系，而只要把这组<strong>映射关系</strong>表示出来，那就可以进一步的抽象了：</p>
+<pre><code class="language-js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">generateBy</span><span class="hljs-params">(fn)</span> </span>{
+    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">generator</span><span class="hljs-params">(arg, <span class="hljs-rest_arg">...args</span>)</span> </span>{
+        <span class="hljs-keyword">return</span> cons(arg, () =&gt; generator(...fn(arg, ...args)));
+    }
+
+    <span class="hljs-keyword">return</span> (...initials) =&gt; generator(...initials);
+}
+
+take(<span class="hljs-number">10</span>, generateBy((a, b) =&gt; [b, a + b])(<span class="hljs-number">1</span>, <span class="hljs-number">1</span>));
+<span class="hljs-comment">// [1, 1, 2, 3, 5, 8, 13, 21, 34, 55]</span></code></pre>
+<h3 id="练习-4">练习</h3>
+<ul>
+<li>编写与 <code>generateFib</code> 类似的阶乘函数(factorial)所对应的版本，并用 <code>generateBy</code> 进行改写。</li>
+<li>把前面的 <code>zeros</code>、<code>repeat</code> 和 <code>counter</code> 用 <code>generateBy</code> 进行改写</li>
+</ul>
+<h3 id="发生了什么？">发生了什么？</h3>
+<p>生成器这种构造，最主要的优势是利用函数在构造过程中捕获并保留其上下文的特性，来保持执行状态。这样每次在我们对生成器进行求值的时候，随即创建一个新的保持下一次状态的函数，就能够拿到下一个状态的生成器。</p>
+<p>而如何生成下一个状态，存在两种场景：</p>
+<ul>
+<li>第一，根据<strong>反复应用特定函数</strong>的结果转换得到，即我们的 <code>generate</code> 函数</li>
+<li>第二，根据前面几个<strong>状态组合</strong>得到，即我们的 <code>generateBy</code> 函数</li>
+</ul>
+<p>这两种场景也自然对应了许多对于实际应用场景中对于数据的复合操作。</p>
+<p>同样，由我们导出两种类型生成器的过程可以看到，程序的演进过程就是一整个的<strong>抽象</strong>与<strong>组合</strong>的过程。每一次我们得到一个<strong>相对直观的结果</strong>以后，都可以进一步对其再<strong>抽象</strong>，获得一个<strong>更加通用</strong>的方案。</p>
+<p>反过来，如果我们有一些简单函数（像 <code>inc</code>）可以做到<strong>预期</strong>的操作，与其他函数<strong>组合</strong>所构成的结构将可以解决几乎任意复杂度的问题。</p>
+<p>你所需要知道的与函数相关的一切，绝对不会超出这两个过程的范围。</p>
+<h3 id="练习-5">练习</h3>
+<ul>
+<li>请考虑为这些不可变迭代器加入倒带功能。</li>
+</ul>
+<h1 id="附文：《map-四种》">附文：《<a href="https://zhuanlan.zhihu.com/p/28471507" title="map 四种">map 四种</a>》</h1>
+<pre><code class="language-js"><span class="hljs-comment">// * common functions</span>
+inc = <span class="hljs-function"><span class="hljs-params">x</span> =&gt;</span> x + <span class="hljs-number">1</span>
+double = <span class="hljs-function"><span class="hljs-params">x</span> =&gt;</span> x + x
+square = <span class="hljs-function"><span class="hljs-params">x</span> =&gt;</span> x * x
+
+compose = <span class="hljs-function">(<span class="hljs-params">f, g</span>) =&gt;</span> <span class="hljs-function"><span class="hljs-params">x</span> =&gt;</span> f(g(x))
+
+flip = <span class="hljs-function"><span class="hljs-params">f</span> =&gt;</span> <span class="hljs-function">(<span class="hljs-params">x, y</span>) =&gt;</span> f(y, x)
+
+id = <span class="hljs-function"><span class="hljs-params">x</span> =&gt;</span> x
+
+force = <span class="hljs-function"><span class="hljs-params">f</span> =&gt;</span> f()
+
+<span class="hljs-comment">// * cons, nil and list</span>
+cons = <span class="hljs-function">(<span class="hljs-params">x, y</span>) =&gt;</span> <span class="hljs-function"><span class="hljs-params">f</span> =&gt;</span> f(x, y)
+
+car = <span class="hljs-function"><span class="hljs-params">cons</span> =&gt;</span> cons(<span class="hljs-function">(<span class="hljs-params">x, y</span>) =&gt;</span> x)
+
+cdr = <span class="hljs-function"><span class="hljs-params">cons</span> =&gt;</span> cons(<span class="hljs-function">(<span class="hljs-params">x, y</span>) =&gt;</span> y)
+
+nil = <span class="hljs-function">() =&gt;</span> nil
+
+nilP = <span class="hljs-function"><span class="hljs-params">x</span> =&gt;</span> x == nil
+
+list = <span class="hljs-function">(<span class="hljs-params">a, ...args</span>) =&gt;</span> args.length ? cons(a, list.apply(<span class="hljs-literal">null</span>, args)) : cons(a, nil)
+
+<span class="hljs-comment">// * helper</span>
+printList = <span class="hljs-function"><span class="hljs-params">lst</span> =&gt;</span> nilP(lst) || (<span class="hljs-built_in">console</span>.log(car(lst)), printList(cdr(lst)))
+
+tap = <span class="hljs-function"><span class="hljs-params">f</span> =&gt;</span> <span class="hljs-function">(<span class="hljs-params">...args</span>) =&gt;</span> (<span class="hljs-built_in">console</span>.log(args), f.apply(<span class="hljs-literal">null</span>, args))
+
+<span class="hljs-comment">// # map the traditional recursive way</span>
+map = <span class="hljs-function">(<span class="hljs-params">fn, lst</span>) =&gt;</span> nilP(lst) ? nil : cons(fn(car(lst)), map(fn, cdr(lst)))
+
+Y = <span class="hljs-function"><span class="hljs-params">rec</span> =&gt;</span> (<span class="hljs-function"><span class="hljs-params">f</span> =&gt;</span> f(f))(<span class="hljs-function"><span class="hljs-params">f</span> =&gt;</span> rec(<span class="hljs-function"><span class="hljs-params">x</span> =&gt;</span> (f(f))(x)))
+
+reduce = Y(<span class="hljs-function"><span class="hljs-params">r</span> =&gt;</span> <span class="hljs-function"><span class="hljs-params">c</span> =&gt;</span> <span class="hljs-function"><span class="hljs-params">i</span> =&gt;</span> <span class="hljs-function"><span class="hljs-params">l</span> =&gt;</span> nilP(l) ? i : c(car(l), r(c)(i)(cdr(l))))
+<span class="hljs-comment">// # map by reduce</span>
+<span class="hljs-comment">// map = (fn, l) =&gt; reduce((h, t) =&gt; cons(fn(h), t))(nil)(l)</span>
+filter = <span class="hljs-function"><span class="hljs-params">p</span> =&gt;</span> reduce(<span class="hljs-function">(<span class="hljs-params">h, t</span>) =&gt;</span> p(h) ? cons(h, t) : t)(nil)
+
+foldr = reduce
+
+<span class="hljs-comment">// foldl :: (a -&gt; b -&gt; a) -&gt; a -&gt; [b] -&gt; a</span>
+foldl = Y(<span class="hljs-function"><span class="hljs-params">f</span> =&gt;</span> <span class="hljs-function"><span class="hljs-params">c</span> =&gt;</span> <span class="hljs-function"><span class="hljs-params">i</span> =&gt;</span> <span class="hljs-function"><span class="hljs-params">l</span> =&gt;</span> nilP(l) ? i : f(c)(c(i, car(l)))(cdr(l)))
+
+reverse = foldl(flip(cons))(nil)
+
+len = reduce(<span class="hljs-function">(<span class="hljs-params">h, t</span>) =&gt;</span> t + <span class="hljs-number">1</span>)(<span class="hljs-number">0</span>)
+
+<span class="hljs-comment">// * streams</span>
+<span class="hljs-comment">// type Stream = () -&gt; (a, Stream)</span>
+zeroP = <span class="hljs-function">(<span class="hljs-params">x</span>) =&gt;</span> x === <span class="hljs-number">0</span>
+
+<span class="hljs-comment">// zeros = () =&gt; cons(0, zeros)</span>
+<span class="hljs-comment">// 0, 0, 0, ...</span>
+zeros = Y (<span class="hljs-function"><span class="hljs-params">z</span> =&gt;</span> <span class="hljs-function">() =&gt;</span> cons(<span class="hljs-number">0</span>, z))
+
+<span class="hljs-comment">// o, o, o, ...</span>
+cycle = <span class="hljs-function"><span class="hljs-params">o</span> =&gt;</span> Y(<span class="hljs-function"><span class="hljs-params">c</span> =&gt;</span> <span class="hljs-function">() =&gt;</span> cons(o, c))
+
+ones = cycle(<span class="hljs-number">1</span>)
+
+<span class="hljs-comment">// take_lazy = n =&gt; l =&gt; n == 0 ? nil : cons(car(l), take_lazy(n-1)(force(cdr(l))))</span>
+take_lazy = Y(<span class="hljs-function"><span class="hljs-params">t</span> =&gt;</span> <span class="hljs-function"><span class="hljs-params">n</span> =&gt;</span> <span class="hljs-function"><span class="hljs-params">l</span> =&gt;</span> zeroP(n) ? nil : cons(car(l), t(n - <span class="hljs-number">1</span>)(force(cdr(l)))))
+
+<span class="hljs-comment">// n, n + 1, n + 1 + 1, ...</span>
+ints = Y(<span class="hljs-function"><span class="hljs-params">i</span> =&gt;</span> <span class="hljs-function"><span class="hljs-params">n</span> =&gt;</span> cons(n, <span class="hljs-function">() =&gt;</span> i(n + <span class="hljs-number">1</span>)))
+
+range = <span class="hljs-function">(<span class="hljs-params">off, <span class="hljs-keyword">from</span> = <span class="hljs-number">0</span></span>) =&gt;</span> take_lazy(off)(ints(<span class="hljs-keyword">from</span>))
+
+<span class="hljs-comment">// n, f(n), f(f(n)), ...</span>
+iterate = <span class="hljs-function"><span class="hljs-params">f</span> =&gt;</span> Y(<span class="hljs-function"><span class="hljs-params">i</span> =&gt;</span> <span class="hljs-function"><span class="hljs-params">n</span> =&gt;</span> cons(n, <span class="hljs-function">() =&gt;</span> i(f(n))))
+<span class="hljs-comment">// ints = iterate(inc)</span>
+
+<span class="hljs-comment">// g(n), g(f(n)), g(f(f(n))), ...</span>
+generate = <span class="hljs-function">(<span class="hljs-params">g, f</span>) =&gt;</span> Y(<span class="hljs-function"><span class="hljs-params">i</span> =&gt;</span> <span class="hljs-function"><span class="hljs-params">n</span> =&gt;</span> cons(g(n), <span class="hljs-function">() =&gt;</span> i(f(n))))
+<span class="hljs-comment">// iterates = generate(id)</span>
+<span class="hljs-comment">// ints = generate(id, inc)</span>
+<span class="hljs-comment">// # map by generate</span>
+<span class="hljs-comment">// map = (fn, l) =&gt; take_lazy(len(l))(generate(compose(fn, car), cdr)(l))</span>
+
+squares = <span class="hljs-function">(<span class="hljs-params"><span class="hljs-keyword">from</span> = <span class="hljs-number">1</span></span>) =&gt;</span> generate(square, inc)(<span class="hljs-keyword">from</span>)
+
+stream = Y(<span class="hljs-function"><span class="hljs-params">s</span> =&gt;</span> <span class="hljs-function"><span class="hljs-params">l</span> =&gt;</span> nilP(l) ? nil : cons(car(l), <span class="hljs-function">() =&gt;</span> s(cdr(l))))
+<span class="hljs-comment">// # map on streams</span>
+map_lazy = <span class="hljs-function">(<span class="hljs-params">f, s</span>) =&gt;</span> generate(compose(f, car), compose(force, cdr))(s)</code></pre>
 
         
 
@@ -442,7 +687,7 @@ bg(forward); <span class="hljs-comment">// 8</span></code></pre>
         </ul>
     </div> -->
     <span class="field">创建时间：2020-07-17</span>
-    <span class="field">最近更新时间：2020-09-24</span>
+    <span class="field">最近更新时间：2020-11-28</span>
     <hr>
     <footer>
         <ul>

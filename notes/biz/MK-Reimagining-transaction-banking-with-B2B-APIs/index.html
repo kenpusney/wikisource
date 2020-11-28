@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript">
+        if (location.href.endsWith("index.html")) {
+            location.href = location.href.substring(0, location.href.length - "index.html".length);
+        }
+    </script>
+    
+    <title>McKinsey - Reimagining transaction banking with B2B APIs</title>
+    
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
+        media="(prefers-color-scheme: light)">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/dracula.min.css"
+        media="(prefers-color-scheme: dark)">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
+        media="(prefers-color-scheme: no-preference)">
+    <style type="text/css">
+        body {
+            width: 60%;
+            margin: 0 auto;
+            padding: 2em;
+            font-family: 'Segoe UI',
+                "Microsoft Yahei Light",
+                "San Francisco",
+                "Ping Fang SC",
+                "Roboto",
+                "Noto Sans CJK",
+                Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        p > img {
+            margin: 0 auto;
+            display: block;
+            max-width: 80%;
+        }
+
+        span.field {
+            display: inline-block;
+            font-weight: bolder;
+            font-size: smaller;
+        }
+
+        pre {
+            max-width: 90%;
+            overflow-x: scroll;
+            padding: 1em;
+            border-radius: 5px;
+        }
+
+        a {
+            text-decoration: none;
+            color: cornflowerblue;
+        }
+
+        a:visited {
+            color: cornflowerblue;
+        }
+
+        a:hover {
+            color: darkgray;
+        }
+
+        a.disabled-link {
+            color: lightcoral;
+            text-decoration: line-through;
+        }
+
+        nav,
+        nav ul {
+            display: inline-block;
+        }
+
+        .tags ul,
+        footer ul {
+            padding: 0;
+            display: inline;
+        }
+
+        header h1 {
+            display: inline-block;
+            min-width: 320px;
+            max-width: 50%;
+            width: 50%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            margin: auto;
+        }
+
+        @media screen and (max-width: 1200px) {
+            body {
+                width: 90%;
+                max-width: 720px;
+                padding: 0;
+                margin: 1em auto;
+            }
+
+            header h1 {
+                max-width: 90%;
+                width: 90%;
+            }
+        }
+
+        nav li,
+        .tags li,
+        footer li {
+            display: inline;
+            border-right: 1px solid darkgray;
+            padding: 0 1em;
+        }
+
+        nav li:last-child,
+        .tags li:last-child,
+        footer li:last-child {
+            border: none;
+        }
+
+        .post-list h3 {
+            margin: 0.3em 0;
+        }
+
+        blockquote {
+            margin: 0.5em;
+            border: 1px dotted darkgrey;
+            border-radius: 0.5em;
+            padding: 0 1em;
+        }
+
+        div.image-description {
+            text-align: center;
+            color: gray;
+            font-size: smaller;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            body {
+                background-color: #090810;
+                color: floralwhite;
+                opacity: 0.83;
+            }
+
+            pre {
+                background-color: #282a36;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        
+        <h1 title="McKinsey - Reimagining transaction banking with B2B APIs">McKinsey - Reimagining transaction banking with B2B APIs</h1>
+        
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/articles">Articles</a></li>
+                <li><a href="/about">About</a></li>
+            </ul>
+        </nav>
+        <hr>
+        <span class="field">Author: <a href="/about">KimmyLeo</a></span>
+        
+    </header>
+    <article>
+        <blockquote>
+<p><a href="https://www.mckinsey.com/industries/financial-services/our-insights/banking-matters/reimagining-transaction-banking-with-b2b-apis" title="undefined">https://www.mckinsey.com/industries/financial-services/our-insights/banking-matters/reimagining-transaction-banking-with-b2b-apis</a></p>
+</blockquote>
+<blockquote>
+<p>APIs can help global transaction banks move closer in the value chain to their clients amid rising competition.</p>
+</blockquote>
+<h2 id="b2b-integration-the-state-of-play">B2B integration: The state of play</h2>
+<p>We see six major challenges around file-based integration:</p>
+<ul>
+<li>limited exception handling on format mismatches</li>
+<li>manual failure recovery following network or system outages</li>
+<li>weak controls for file tampering and man-in-the-middle breaches</li>
+<li>long customer onboarding times—as much as four to six months</li>
+<li>bulky file formats for enterprise resource planning (ERP) integration, requiring customization for each corporate</li>
+<li>higher operating cost to run and maintain the specialized software needed</li>
+</ul>
+<h2 id="building-a-b2b-api-platform-five-success-factors">Building a B2B API platform: Five success factors</h2>
+<ol>
+<li>Embrace a product development mindset<ul>
+<li>Design for process control and orchestration</li>
+<li>Weigh tradeoffs between a channel and product approach</li>
+</ul>
+</li>
+<li>Set up a modern API lifecycle management platform<ul>
+<li>API gateway</li>
+<li>API publisher</li>
+<li>API store and development portal</li>
+<li>API analytics</li>
+</ul>
+</li>
+<li>Extend risk management and optional controls to API-based offerings<ul>
+<li>Align security and regulatory controls</li>
+<li>Amend client undertakings and legal contracts</li>
+</ul>
+</li>
+<li>Leverage partnerships and self-service solution for customer acquisition<ul>
+<li>Form partnership with software-as-a-service finance companies</li>
+<li>Simplify customer onboarding</li>
+</ul>
+</li>
+<li>Define an API taxonomy to accurately access system readiness, avoid proliferation of incompatible APIs, and prioritize for business value<ul>
+<li>Experience APIs</li>
+<li>Process APIs</li>
+<li>System APIs</li>
+<li>Experience APIs should be owned by channel teams and process APIs by business owners. System APIs should be controlled by application owners. </li>
+</ul>
+</li>
+</ol>
+
+        
+
+    </article>
+    <!-- <div>
+        <h5>See Also</h5>
+        <ul>
+            <li><a href="/about">About Me</a></li>
+        </ul>
+    </div> -->
+    <span class="field">创建时间：2020-10-12</span>
+    <span class="field">最近更新时间：2020-11-28</span>
+    <hr>
+    <footer>
+        <ul>
+            <li><a href="/about">关于我</a></li>
+            <li><a href="/sitemap.xml">站点地图</a></li>
+            <li><a href="/rss.xml">RSS</a></li>
+            <li>Copyright &copy; KimmyLeo</li>
+        </ul>
+    </footer>
+    <script type="text/javascript">
+        document.querySelectorAll(".disabled-link").forEach(el => el.addEventListener("click", (e) => {
+            alert("链接页面不存在！");
+            e.preventDefault();
+        }));
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script
+</body>
+
+</html>
