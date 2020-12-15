@@ -10,7 +10,7 @@
         }
     </script>
     
-    <title>Import Model</title>
+    <title>Import Model 导入模型</title>
     
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
@@ -155,7 +155,7 @@
 
     <header>
         
-        <h1 title="Import Model">Import Model</h1>
+        <h1 title="Import Model 导入模型">Import Model 导入模型</h1>
         
         <nav>
             <ul>
@@ -169,7 +169,17 @@
         
     </header>
     <article>
-        <p>Import model is about how a component collaborate with another depending on 
+        <p>这是我三四年前就在规划写的一篇文章，关于编程语言里面非常重要的一个问题，就是模块和符号的定义、导入和导出。</p>
+<p>这个表面上看好像没那么复杂，但其实自底向上关乎着应用的每一个层级：从源码级的依赖、到构建、编译、链接，到模块和依赖管理，到运行时的加载和符号查找，到分布式系统的命名查找、服务发现和负载均衡，都是直接相关的。</p>
+<h2 id="概览">概览</h2>
+<p>符号定义、导入和导出贯穿了程序的整个生命周期，从源码层不同编译单元和模块间的依赖到运行时的符号和服务之间的关联。我们按照这样一个过程来看一下大致有哪些种操作。</p>
+<p>早期的程序是没有分开编译单元的。当然更早的则是按照打孔卡的执行顺序排列好依次执行。FORTRAN的一个程序就需要完整的书写完全套的代码，用于执行。早期的BASIC也沿袭了这种设计。后来的一些编程语言中出现了“导入”（包含）动作，允许一个文件包含另外文件中的代码，把整体代码放在一起进行编译，这样增加了代码的复用度。经典的C语言一直沿袭这样的编译模型，所有的符号都是要求在当前编译单元中是已经定义的，于是大部分符号的定义被放入了以.h结尾的头文件中，通过包含头文件来完善定义，进行编译单元的编译动作。在一些没有或者并明显的“编译”过程的编程语言场景中，直接的文件包含也是常见的导入模式，但与C语言用于查找编译时的符号定义不同，其更多是用于运行时的符号依赖。后起之秀NodeJS所遵循的CommonJS标准就是使用的这种导入模型。当然随着ECMAScript日益复杂，导入这个动作已经远非直接文件包含这么简单，但其模型上仍然以此为基础。</p>
+<p>C语言的编译模型更多的是源于其为了节省资源占用而采用的一遍（one pass）编译方式，这种情况要求所有的符号必须在使用前定义，于是（对于定义的）源码级包含是非常关键的。但随着系统性能的提升，变成语言设计者便不再拘泥于一遍 编译这种复杂的编译模式，于是基于编译单元的元信息的导入和导出模式成为主流。</p>
+<p>说一下编译单元，即由编译器所能成功编译的最小单位。对于C语言来说，是一个.c文件，对于Java语言来说，是一个包含同名类的.java文件。对于C来说，为了保证向前兼容，依然需要基于文件包含的导入，但是对于Java来说，想要通过编译，即便在没有源码级定义的情况下，只要有编译生成的类文件，依然能够完成对应的编译过程。</p>
+<p>这里的类文件就是由Java编译器生成的程序（jvm bytecode）和元信息（class metadata）组成，其中包含了类的描述和类上方法（Java程序结构的最小单元）的描述组成，于是在编译过程中，所需要做的类型检查信息都可以通过类文件的这些描述信息获取到。</p>
+<p>与此同时进一步变化的还有编译依赖查找的方式。C语言中允许存在相对路径的编译依赖查找，而Java中的相对路径只允许同一个package下的情况存在，其他情况下，都必须经由classpath来进行带package的全名查找。当然相对来说Java允许一些快捷方式，即整体引入一个package下面所有的符号，如“import java.util.*;”。这样做虽然相对方便了很多，但实际弊大于利。一方面不可避免地存在一些重名冲突的问题，另一方面，因为这种全量的导入也一定程度上增加了编译器的负担。这在Java语言中虽然不常见的，但另外一个与Java同源的编程语言Scala，深受此影响，因为符号查找效率导致编译效率极低。</p>
+<p>但是能够做到Java这种形式的编译和导入其要求相对是比较高的，首先是有一套比较通用的二进制分发格式。这将直接影响运行时的设计，因为这种二进制格式如何保证其正确性和多平台兼容性，是非常难保证的。Java和其他一些平台一样直接选择将其作为基础的二进制分发格式，而在之上实现了一个完善但是笨重的运行时，这样的结果就是，所有的行为和效果都受其运行时所约束，同样也因为运行时只需要。</p>
+<p>Import model is about how a component collaborate with another depending on 
 it. On example is in a specific <a href="#" class="disabled-link">tech/Programming Language</a> how it import third
 party module to the main program.</p>
 <h2 id="import-levels">Import levels</h2>
@@ -194,7 +204,7 @@ party module to the main program.</p>
         </ul>
     </div> -->
     <span class="field">创建时间：2017-01-17</span>
-    <span class="field">最近更新时间：2020-11-28</span>
+    <span class="field">最近更新时间：2020-12-15</span>
     <hr>
     <footer>
         <ul>

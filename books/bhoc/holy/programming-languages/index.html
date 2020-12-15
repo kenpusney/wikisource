@@ -289,6 +289,19 @@ CB?<span class="hljs-number">11</span></code></pre>
 <p>COBOL在目前的使用越来越少，基本上完全变成了只进行维护的状态。而这种“失败”的境地一定程度上也是说明了更贴近自然语言语法的编程语言的不可行性。一个丧失了结构的编程语言也许可以比较自然的吸引一部分人上手，但长期来看维护和发展都将成为问题。</p>
 <p>甚至也正是因为COBOL所谓的“面向业务”和其“更像英语”的一些特点，这门编程语言没有吸引到任何学术界的人参与设计。设计委员会的人基本上是政商界人士。这也进一步地限制了其在学术圈（包括大学课堂）上的出场和宣传，更难得到来自这边的反馈和改进。所以直到COBOL 2002，才出现了自定义函数、递归和面向对象等在计算机科学界已经非常常见的特性。</p>
 <p>COBOL早期有一些神奇的特性，对后来的影响也比较大。比如<code>ALTER</code>语句，允许你在运行过程中修改代码，能够在混用<code>GO TO</code> 的上下文中改变跳转的目标。这种操作异常危险，因为出现ALTER了以后整个执行流是随着运行时状态改变的，所以理解其执行结果和内容会非常困难。然而仍然不能改变的一点是，这可以看成是早期非常不安全的一种元编程操作，在陆续发展了几十年后成为了各种动态语言的必备特性。</p>
+<p>从今年一月份的<a href="https://mp.weixin.qq.com/s/ug80K3-zgJyCTavLkiE0-w" title="null">第一篇文章</a>开始，到现在的 12 个月以来，《圣战简史》——也就是现在的《计算机简史》——已经写（shui）了这是第 19 篇了。在第一篇里我就直接说起来了这个关键的点，所谓的<strong>圣战</strong>能够存在，就是由于程序员这个群体的<strong>宗教性</strong>。在各种宗教观点的支持之下没有什么是不会引起冲突的。而从近期的 Rust 社区的很多表现来看，依然如此。</p>
+<p>这些人将 <a href="https://mp.weixin.qq.com/s/MyFFSHgp8z5odaoUJGsxYA" title="null">Alan Perlis 的忠告</a>置若罔闻。王垠在他的文章《程序员的心理疾病》中也提到了这一问题。线下跟一位朋友聊天也提及了一些观点：国外社区的一些知名人物，特别如 <strong>RMS</strong>、<strong>ESR</strong>、<strong>Larry Wall</strong> 等几个老炮，也都是擅长喊口号的传教士。</p>
+<p>用口号吸引人上船，如果能拖得住，就勉强能修得一个正果；如果拖不住，可能就没了。2010 年<strong>编程语言文艺复兴</strong>以来已经出现过不少例子了：Red Hat 的 <strong>Ceylon</strong>（2011），CRAY 的 <strong>Chapel</strong>（2009），专注做 Web Application 的 <strong>Opa</strong>（2011）、<strong>Amber</strong>（2011）和 <strong>Elm</strong>（2012），还有在 ES6 没正式成为标准之前的各种 AltJS，<strong>Julia</strong>（2012）、<strong>Nim</strong>（2008）、以及后期的 <strong>Zig</strong>（2016）和 <strong>V</strong>（2019），甚至还出现了专门用于 Cloud Native 的 <strong>Ballerina</strong>（2017）。</p>
+<p>形成这一现象的原因有两点，首先 Web/JS 作为一个主要的应用平台兴起，而 JS 作为 Web 时代的汇编语言（甚至后面直接出现了 WebAssembly）成为了一个非常<strong>简便</strong>并且<strong>热门</strong>的目标平台；其次各种编译工具和平台如 antlr、llvm 等逐渐<strong>拉低造轮子的门槛</strong>，让很多人能够相对容易地获得制造一门编程语言的机会：你甚至完全不必了解编译原理是什么——而且本来也不用。</p>
+<p>提及这些编程语言不是为了让大家去非得了解他们或者如何，只是想说，这些前仆后继的程序员重新发明轮子方面是不遗余力的。因为一旦这个轮子形成了一个成规模的集体，就可以<strong>成为教宗</strong>，来<strong>主导这个群体</strong>。一旦<a href="https://mp.weixin.qq.com/s/gaKD76YNEDa9Jj5xEo6W9Q" title="null">稍微理性地分析一下某个编程语言的问题</a>，就容易被贴上“争论”、“黑”的标签。</p>
+<p>本身对编程语言理论和编译技术有所研究，因此我并没有主观上对于这些语言的偏爱。我在没工作之前，就对经常在痛斥 Java 的一些<a href="https://mp.weixin.qq.com/s/F-_vBBgOSMGtz21O66NyBQ" title="null">设计上的问题</a>，但工作依然使用 Java 作为主要的技术栈。因为很简单，从团队协作的角度而言，Java 之外的那些编程语言问题更明显。</p>
+<p>编程语言领域的绝大部分问题早就在这 60 年内给解决完了。按照业界的一些 PLT 大佬讲，现在工业界应用的无非是七八十年代的研究成果。而众所讨论的各种编程范式也早就在那个时期早已成型。<strong>现代的绝大多数编程语言都是多范式的</strong>，这一层就不是个值得探讨的问题了。不过依然能够看到很多人在吵 FP 比 OO 好，OO 比过程式（Procedural）好。有函数（子程序、过程）定义就是<strong>过程式编程</strong>、支持多态的消息传递（message passing）就是<strong>面向对象编程</strong>、有分支和循环就是<strong>结构化编程</strong>、<a href="https://mp.weixin.qq.com/s/-ApGvl21ff9SDuf-TxZ_YQ" title="null">能够用高阶函数就是<strong>函数式编程</strong></a>：这些都在 1960 年以后的那段时间就成型并沉淀了下来，本来就是<strong>各取所需</strong>，没有优劣。</p>
+<p>同时，我们看五十年代这段蛮荒的探索时代，也依然给我们留下了不少的教训。比如<strong>自然语言编程</strong>这种探索，遗留下的是 <a href="https://mp.weixin.qq.com/s/U9O1fEiMChfuLsMmhhXogA" title="null">COBOL</a> 这个已经没有多少专业人员支持的负担；比如<strong>中文编程</strong>，所看到的也是一个<a href="https://mp.weixin.qq.com/s/kTI3TUh6o5zJuXSRjUcufw" title="null">基于关键字翻译后的原型</a>。现在所有的“自然语言”和“中文编程”，<strong>都没办法跳出这个圈儿</strong>。</p>
+<p>如果你能正确认知历史的话就会发现，现在的编程语言无非是组合了其核心开发者的个人口味之后形成的<strong>缝合怪</strong>：一段时间以后，<strong>初期所有不按照历史发展规律的设定所带来的后果，都要在花费巨大的代价来补偿</strong>（<a href="https://mp.weixin.qq.com/s/Qz20xvxgtJNR7490jgAsjQ" title="null">这篇文章</a>中最后提到的问题就是一个例子）。即便是一些社区有非常严格和正规的流程，具体操作下来得到的却也是一个<strong>口味极其挑剔的社区</strong>。<a href="https://mp.weixin.qq.com/s/PjTvjLhqRTlGW9kEtu-t4Q" title="null">年初的 actix-web 事件</a>中，可见一斑。</p>
+<p>这倒让我开始思考为什么要写历史来。因为回头看历史通常有这么几个目的：一是从新时代的角度给过去的时间一个评价；二是总结历史经验教训；三则是因为当前发展不顺意，只能<a href="https://mp.weixin.qq.com/s/OU1bzBgP_L95r5rqB4pYtA" title="null">靠怀念历史来找自己的存在感</a>。</p>
+<p>但首先，现在也<a href="https://mp.weixin.qq.com/s/ocAeFjSM1V1NaLSDY-Q8jA" title="null">没有什么突破性的进展</a>，能够让我们进到编程语言和编译技术的新时代，我也没有资格来“评价”什么，所以第一个目的肯定不是了。总结历史经验教训，可能是有一些，但也许现在也没几个人会觉得这是什么重要的事情了：毕竟<strong>只要喊口号就有人跟</strong>，这个事情做起来太容易，也没人去考虑<a href="https://mp.weixin.qq.com/s/F-_vBBgOSMGtz21O66NyBQ" title="null">历史经验能够怎么指导现有的工作</a>了。所以<strong>到最后可能也就剩怀古了</strong>。</p>
+<p>1950 年代的几门代表性的编程语言我们已经聊完了，也重点提及了对后面影响比较深的 <a href="https://mp.weixin.qq.com/s/MerQPInZKb4f8o_CdTbJkw" title="null">LISP</a> 和 <a href="https://mp.weixin.qq.com/s/kTI3TUh6o5zJuXSRjUcufw" title="null">ALGOL</a>。六十年代和七十年代正式确立了编程语言的基础范式，这段时间也是计算机科学发展的<strong>黄金时代</strong>，无数风云人物在这段时间你方唱罢我登场，奠定了后续这门学科和相关行业坚实的基础。</p>
+<p>第二季见。</p>
 
         
 
@@ -300,7 +313,7 @@ CB?<span class="hljs-number">11</span></code></pre>
         </ul>
     </div> -->
     <span class="field">创建时间：2020-09-14</span>
-    <span class="field">最近更新时间：2020-11-28</span>
+    <span class="field">最近更新时间：2020-12-15</span>
     <hr>
     <footer>
         <ul>
