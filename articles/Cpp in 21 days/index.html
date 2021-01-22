@@ -209,10 +209,10 @@
 <p>嗯，没错，我们也是走的同样的一条路：用C++模版最后写出一个类Scheme语言的解释器。</p>
 <p>好的我们开始吧。</p>
 <p>首先是构造整个世界，要从如何数数开始。</p>
-<pre><code class="language-c++"><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">zero</span></span>{};
+<pre><code class="language-c++"><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">zero</span>{</span>};
 
-template&lt;class Nat&gt;
-<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">succ</span></span>{};</code></pre>
+<span class="hljs-keyword">template</span>&lt;<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Nat</span>&gt;</span>
+<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">succ</span>{</span>};</code></pre>
 <p>很简单嘛，我们就把整个自然数系统给构建出来了。</p>
 <p>为什么要这么说？因为皮埃诺公理说明我们是正确的。</p>
 <p>于是<code>zero</code>表示自然数0，<code>succ&lt;zero&gt;</code>就可以表示自然数1，<code>succ&lt;n&gt;</code>就可以表示自然数n+1。</p>
@@ -220,8 +220,8 @@ template&lt;class Nat&gt;
 <p>这里的定义是，如果<code>succ&lt;x&gt; = n</code>，那么，<code>x = pred&lt;n&gt;</code>。</p>
 <p>但是目前如何表示这个关系呢？</p>
 <p>我们试着把<code>succ</code>修改一下：</p>
-<pre><code class="language-c++">template&lt;class Nat&gt;
-struct succ{ using pred =<span class="hljs-built_in"> Nat; </span>};</code></pre>
+<pre><code class="language-c++"><span class="hljs-keyword">template</span>&lt;<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Nat</span>&gt;</span>
+<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">succ</span>{</span> <span class="hljs-keyword">using</span> pred = Nat; };</code></pre>
 <p>很简单了，succ<n>::pred = n。</p>
 <p>任何时候都能够这样使用我们在代码中定义的这些结构，比如作为形式参数（如Nat），作为实际参数（succ<n>中的n），作为属性值（succ<n>::pred中的pred）。</p>
 <p>话说，怎么知道succ<n>::pred = n就一定是正确的呢？</p>
@@ -237,13 +237,13 @@ template&lt;<span class="hljs-keyword">class</span> <span class="hljs-symbol">T<
 <span class="hljs-symbol">struct</span> <span class="hljs-symbol">equal</span>&lt;<span class="hljs-symbol">T,<span class="hljs-symbol">T</span></span>&gt;{ using value = $<span class="hljs-literal">true</span>; };</code></pre>
 <p>没错，这就是相等性的玩法。当然这也是一个小技巧，当<code>equal</code>遇到他的两个参数都是同一个的时候，属性<code>value</code>就是<code>$true</code>。至于<code>$true</code>和<code>$false</code>代表的是什么，就看我们自己的约定啦。</p>
 <p>然后是弄一个辅助测试的结构，来帮助我们进行每一次过程中的测试：</p>
-<pre><code class="language-c++"><span class="hljs-keyword">template</span>&lt;<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Result</span>&gt;
-<span class="hljs-title">struct</span> <span class="hljs-title">Assert</span>{</span>
+<pre><code class="language-c++"><span class="hljs-keyword">template</span>&lt;<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Result</span>&gt;</span>
+<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Assert</span>{</span>
     Assert() {<span class="hljs-keyword">throw</span> <span class="hljs-number">0</span>;}
 };
 
 <span class="hljs-keyword">template</span>&lt;&gt;
-<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Assert</span>&lt;$true&gt;{</span>
+<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Assert</span>&lt;</span>$<span class="hljs-literal">true</span>&gt;{
     Assert() {}
 };</code></pre>
 <p>然后我们只需要在测试代码中这样写就好了：</p>
@@ -252,59 +252,59 @@ template&lt;<span class="hljs-keyword">class</span> <span class="hljs-symbol">T<
 <p>意图很明显，当我们测试用例的结果不为<code>$true</code>的时候，直接throw一个exception出来中止测试就好。</p>
 <p>可以看出我们在定义<code>equal</code>和<code>Assert</code>的时候分别定义了多次，这其实是C++模版的一个很重要的东西，叫做模版（偏）特化。因为这个特性的存在，我们就可以让编译器按照我们设定好的参数模式去匹配相应的定义。嗯，没错这就是模式匹配。</p>
 <p>比如，pred也可以这样子定义：</p>
-<pre><code class="language-c++">struct undefined {};
+<pre><code class="language-c++"><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">undefined</span> {</span>};
 
-template&lt;<span class="hljs-keyword">class</span> <span class="hljs-symbol">T</span>&gt;
-<span class="hljs-symbol">struct</span> <span class="hljs-symbol">pred</span>{ using value=undefined; };
+<span class="hljs-keyword">template</span>&lt;<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">T</span>&gt;</span>
+<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">pred</span>{</span> <span class="hljs-keyword">using</span> value=undefined; };
 
-template&lt;<span class="hljs-keyword">class</span> <span class="hljs-symbol">T</span>&gt;
-<span class="hljs-symbol">struct</span> <span class="hljs-symbol">pred</span>&lt;<span class="hljs-symbol">succ</span>&lt;<span class="hljs-symbol">T</span>&gt;&gt; 
-{ using value=T; };</code></pre>
+<span class="hljs-keyword">template</span>&lt;<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">T</span>&gt;</span>
+<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">pred</span>&lt;</span>succ&lt;T&gt;&gt; 
+{ <span class="hljs-keyword">using</span> value=T; };</code></pre>
 <p>完全按照pred的定义来。并且如果可以的话我们还能够继续加上一条：</p>
 <pre><code class="language-c++"><span class="hljs-keyword">template</span>&lt;&gt;
-<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">pred</span>&lt;zero&gt; {</span> <span class="hljs-keyword">using</span> value=zero; };</code></pre>
+<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">pred</span>&lt;</span>zero&gt; { <span class="hljs-keyword">using</span> value=zero; };</code></pre>
 <p>0的前驱也默认为0，防止后面出现某些错误情况。</p>
 <p>但是到这里是否大家也发现了一个问题：</p>
 <p>我们既可以使用<code>succ&lt;zero&gt;</code>，也可以使用<code>succ&lt;$false&gt;</code>，甚至是<code>succ&lt;undefined&gt;</code>，也就是说，模版带给我们方便的类型系统的同时，并没有很细致的告诉我们，哪些操作是错误的。而同时我们又需要避免这个错误。</p>
 <p>但还好可以写出以下这种样子的代码：</p>
-<pre><code class="language-c++"><span class="hljs-keyword">template</span>&lt;<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Nat</span>&gt;
-<span class="hljs-title">struct</span> <span class="hljs-title">succ</span>;</span>
+<pre><code class="language-c++"><span class="hljs-keyword">template</span>&lt;<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Nat</span>&gt;</span>
+<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">succ</span>;</span>
 
 <span class="hljs-keyword">template</span>&lt;&gt;
-<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">succ</span>&lt;zero&gt; {</span>};
+<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">succ</span>&lt;</span>zero&gt; {};
 
-<span class="hljs-keyword">template</span>&lt;<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Nat</span>&gt;
-<span class="hljs-title">truct</span> <span class="hljs-title">succ</span>&lt;succ&lt;Nat&gt;&gt; {</span>};</code></pre>
+<span class="hljs-keyword">template</span>&lt;<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Nat</span>&gt;</span>
+truct succ&lt;succ&lt;Nat&gt;&gt; {};</code></pre>
 <p>当我们去<code>succ</code>除了<code>zero</code>和<code>succ&lt;...&gt;</code>之外的任何结构的时候，都会造成一次失败的展开。</p>
 <p>好的，有了这些东西我们就可以自在地数数了。但是可能用来表示一个大数还是很困难，比如6就要这样子表示：</p>
-<pre><code class="language-c++">succ<span class="hljs-attribute">&lt;succ&lt;succ&lt;succ&lt;succ&lt;succ&lt;zero&gt;</span>&gt;&gt;&gt;&gt;&gt;</code></pre>
+<pre><code class="language-c++">succ&lt;succ&lt;succ&lt;succ&lt;succ&lt;succ<span class="hljs-tag">&lt;<span class="hljs-name">zero</span>&gt;</span>&gt;&gt;&gt;&gt;&gt;</code></pre>
 <p>当然这么做的话就太失败了。其实我们只要把加法和乘法定义出来，就能够做到简单的来表示一些比较大的数字了。</p>
-<pre><code class="language-c++"><span class="hljs-keyword">template</span>&lt;<span class="hljs-keyword">class</span> Num1, <span class="hljs-keyword">class</span> Num2&gt;
-struct <span class="hljs-keyword">add</span>;
+<pre><code class="language-c++"><span class="hljs-keyword">template</span>&lt;<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Num1</span>, <span class="hljs-keyword">class</span> <span class="hljs-title">Num2</span>&gt;</span>
+<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">add</span>;</span>
 
-<span class="hljs-keyword">template</span>&lt;<span class="hljs-keyword">class</span> Num1&gt;
-struct <span class="hljs-keyword">add</span>&lt;zero, Num1&gt;
-{ <span class="hljs-keyword">using</span> <span class="hljs-keyword">value</span> = Num1; };
+<span class="hljs-keyword">template</span>&lt;<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Num1</span>&gt;</span>
+<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">add</span>&lt;</span>zero, Num1&gt;
+{ <span class="hljs-keyword">using</span> value = Num1; };
 
-<span class="hljs-keyword">template</span>&lt;<span class="hljs-keyword">class</span> Num1, <span class="hljs-keyword">class</span> Num2&gt;
-struct <span class="hljs-keyword">add</span>&lt;succ&lt;Num1&gt;, Num2&gt;
-{ <span class="hljs-keyword">using</span> <span class="hljs-keyword">value</span> = typename <span class="hljs-keyword">add</span>&lt;Num1, succ&lt;Num2&gt;&gt;::<span class="hljs-keyword">value</span>; };</code></pre>
+<span class="hljs-keyword">template</span>&lt;<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Num1</span>, <span class="hljs-keyword">class</span> <span class="hljs-title">Num2</span>&gt;</span>
+<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">add</span>&lt;</span>succ&lt;Num1&gt;, Num2&gt;
+{ <span class="hljs-keyword">using</span> value = <span class="hljs-keyword">typename</span> add&lt;Num1, succ&lt;Num2&gt;&gt;::value; };</code></pre>
 <p>对应到Haskell-like的代码如下：</p>
 <pre><code class="language-haskell"><span class="hljs-title">add</span> :: nat -&gt; nat -&gt; nat
 <span class="hljs-title">add</span> <span class="hljs-number">0</span> n = n
 <span class="hljs-title">add</span> (succ m) n = add m (succ n) </code></pre>
 <p>递归就是这么简单;)。</p>
 <p>然后我们看乘法：</p>
-<pre><code class="language-c++"><span class="hljs-keyword">template</span>&lt;<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Num1</span>, <span class="hljs-title">class</span> <span class="hljs-title">Num2</span>&gt;
-<span class="hljs-title">struct</span> <span class="hljs-title">mul</span>;</span>
+<pre><code class="language-c++"><span class="hljs-keyword">template</span>&lt;<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Num1</span>, <span class="hljs-keyword">class</span> <span class="hljs-title">Num2</span>&gt;</span>
+<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">mul</span>;</span>
 
-<span class="hljs-keyword">template</span>&lt;<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Num1</span>&gt;
-<span class="hljs-title">struct</span> <span class="hljs-title">mul</span>&lt;zero, Num1&gt;
-{</span> <span class="hljs-keyword">using</span> value = zero; };
+<span class="hljs-keyword">template</span>&lt;<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Num1</span>&gt;</span>
+<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">mul</span>&lt;</span>zero, Num1&gt;
+{ <span class="hljs-keyword">using</span> value = zero; };
 
-<span class="hljs-keyword">template</span>&lt;<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Num1</span>, <span class="hljs-title">class</span> <span class="hljs-title">Num2</span>&gt;
-<span class="hljs-title">struct</span> <span class="hljs-title">mul</span>&lt;succ&lt;Num1&gt;, Num2&gt;
-{</span> <span class="hljs-keyword">using</span> value = <span class="hljs-keyword">typename</span> add&lt;Num2, 
+<span class="hljs-keyword">template</span>&lt;<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Num1</span>, <span class="hljs-keyword">class</span> <span class="hljs-title">Num2</span>&gt;</span>
+<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">mul</span>&lt;</span>succ&lt;Num1&gt;, Num2&gt;
+{ <span class="hljs-keyword">using</span> value = <span class="hljs-keyword">typename</span> add&lt;Num2, 
                         <span class="hljs-keyword">typename</span> mul&lt;Num1, 
                                 Num2&gt;::value&gt;::value; };</code></pre>
 <p>只是一个更复杂的递归。</p>
@@ -319,41 +319,41 @@ struct <span class="hljs-keyword">add</span>&lt;succ&lt;Num1&gt;, Num2&gt;
 <span class="hljs-keyword">using</span> i4 = <span class="hljs-keyword">type</span>name add&lt;i2, i2&gt;::value;
 // blablabla</code></pre>
 <p>然后我们可以定义一个更加容易的定义数据的方式：</p>
-<pre><code class="language-c++"><span class="hljs-keyword">template</span>&lt;<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Num</span>, <span class="hljs-title">class</span>... <span class="hljs-title">Nums</span>&gt;
-<span class="hljs-title">struct</span> <span class="hljs-title">decimal</span>
+<pre><code class="language-c++"><span class="hljs-keyword">template</span>&lt;<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Num</span>, <span class="hljs-title">class</span>... <span class="hljs-title">Nums</span>&gt;</span>
+<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">decimal</span>
 {</span> <span class="hljs-keyword">using</span> value = <span class="hljs-keyword">typename</span> add&lt;<span class="hljs-keyword">typename</span> mul&lt;i10, Num&gt;::value,
                             <span class="hljs-keyword">typename</span> decimal&lt;Nums...&gt;::value&gt;::value; };
 
-<span class="hljs-keyword">template</span>&lt;<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Num</span>&gt;
-<span class="hljs-title">struct</span> <span class="hljs-title">decimal</span>&lt;Num&gt;
-{</span> <span class="hljs-keyword">using</span> value = Num; };</code></pre>
+<span class="hljs-keyword">template</span>&lt;<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Num</span>&gt;</span>
+<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">decimal</span>&lt;</span>Num&gt;
+{ <span class="hljs-keyword">using</span> value = Num; };</code></pre>
 <blockquote>
 <p>练习：请根据以下声明来定义用于布尔类型的操作。
 （Hint：模式匹配）</p>
-<pre><code class="language-c++"><span class="hljs-keyword">template</span>&lt;<span class="hljs-keyword">class</span> Bool1, <span class="hljs-keyword">class</span> Bool2&gt;
-<span class="hljs-keyword">struct</span> $and;
+<pre><code class="language-c++"><span class="hljs-keyword">template</span>&lt;<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Bool1</span>, <span class="hljs-keyword">class</span> <span class="hljs-title">Bool2</span>&gt;</span>
+<span class="hljs-class"><span class="hljs-keyword">struct</span> $<span class="hljs-title">and</span>;</span>
 
-<span class="hljs-keyword">template</span>&lt;<span class="hljs-keyword">class</span> Bool1, <span class="hljs-keyword">class</span> Bool2&gt;
-<span class="hljs-keyword">struct</span> $or;
+<span class="hljs-keyword">template</span>&lt;<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Bool1</span>, <span class="hljs-keyword">class</span> <span class="hljs-title">Bool2</span>&gt;</span>
+<span class="hljs-class"><span class="hljs-keyword">struct</span> $<span class="hljs-title">or</span>;</span>
 
-<span class="hljs-keyword">template</span>&lt;<span class="hljs-keyword">class</span> Bool, <span class="hljs-keyword">class</span> Op1, <span class="hljs-keyword">class</span> Op2&gt;
-<span class="hljs-keyword">struct</span> $<span class="hljs-keyword">if</span>;</code></pre>
+<span class="hljs-keyword">template</span>&lt;<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Bool</span>, <span class="hljs-keyword">class</span> <span class="hljs-title">Op1</span>, <span class="hljs-keyword">class</span> <span class="hljs-title">Op2</span>&gt;</span>
+<span class="hljs-class"><span class="hljs-keyword">struct</span> $<span class="hljs-title">if</span>;</span></code></pre>
 </blockquote>
 <p>接下来我们看另外一个重要的结构，列表。</p>
-<pre><code class="language-c++">struct nil { using length = zero; };
+<pre><code class="language-c++"><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">nil</span> {</span> <span class="hljs-keyword">using</span> length = zero; };
 
-template&lt;<span class="hljs-keyword">class</span> <span class="hljs-symbol">First, <span class="hljs-symbol">class</span></span> <span class="hljs-symbol">Rest</span>&gt;
-<span class="hljs-symbol">struct</span> <span class="hljs-symbol">pair</span>
-{ using length = succ&lt;typename Rest::length&gt;; };</code></pre>
+<span class="hljs-keyword">template</span>&lt;<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">First</span>, <span class="hljs-keyword">class</span> <span class="hljs-title">Rest</span>&gt;</span>
+<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">pair</span>
+{</span> <span class="hljs-keyword">using</span> length = succ&lt;<span class="hljs-keyword">typename</span> Rest::length&gt;; };</code></pre>
 <p>对应来一个创建列表的构造：</p>
-<pre><code class="language-c++"><span class="hljs-keyword">template</span>&lt;<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Head</span>, <span class="hljs-title">class</span>... <span class="hljs-title">Tail</span>&gt;
-<span class="hljs-title">struct</span> <span class="hljs-title">list</span> {</span>
+<pre><code class="language-c++"><span class="hljs-keyword">template</span>&lt;<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Head</span>, <span class="hljs-title">class</span>... <span class="hljs-title">Tail</span>&gt;</span>
+<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">list</span> {</span>
     <span class="hljs-keyword">using</span> value = <span class="hljs-built_in">pair</span>&lt;Head, <span class="hljs-keyword">typename</span> <span class="hljs-built_in">list</span>&lt;Tail...&gt;::value&gt;;
     <span class="hljs-keyword">using</span> length = <span class="hljs-keyword">typename</span> value::length;
 };
 
-<span class="hljs-keyword">template</span>&lt;<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Head</span>&gt;
-<span class="hljs-title">struct</span> <span class="hljs-title">list</span>&lt;Head&gt; {</span>
+<span class="hljs-keyword">template</span>&lt;<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Head</span>&gt;</span>
+<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">list</span>&lt;</span>Head&gt; {
     <span class="hljs-keyword">using</span> value = <span class="hljs-built_in">pair</span>&lt;Head, nil&gt;;
     <span class="hljs-keyword">using</span> length = i1;
 };</code></pre>
@@ -361,25 +361,25 @@ template&lt;<span class="hljs-keyword">class</span> <span class="hljs-symbol">Fi
 <p>如<code>list&lt;Elems...&gt;</code>构造的样子，列表本身就是一个递归的结构，所以，对于大多数列表的处理，我们都可以通过使用递归来实现。</p>
 </blockquote>
 <p>比如：</p>
-<pre><code class="language-c++"><span class="hljs-keyword">template</span>&lt;<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Num</span>, <span class="hljs-title">class</span> <span class="hljs-title">List</span>&gt;
-<span class="hljs-title">struct</span> <span class="hljs-title">take</span>;</span>
+<pre><code class="language-c++"><span class="hljs-keyword">template</span>&lt;<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Num</span>, <span class="hljs-keyword">class</span> <span class="hljs-title">List</span>&gt;</span>
+<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">take</span>;</span>
 
-<span class="hljs-keyword">template</span>&lt;<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Head</span>, <span class="hljs-title">class</span> <span class="hljs-title">Tail</span>, <span class="hljs-title">class</span> <span class="hljs-title">Num</span>&gt;
-<span class="hljs-title">struct</span> <span class="hljs-title">take</span>&lt;succ&lt;Num&gt;, pair&lt;Head, Tail&gt;&gt;
-{</span> <span class="hljs-keyword">using</span> value = <span class="hljs-built_in">pair</span>&lt;Head, <span class="hljs-keyword">typename</span> take&lt;Tail, Num&gt;::value&gt;; };
+<span class="hljs-keyword">template</span>&lt;<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Head</span>, <span class="hljs-keyword">class</span> <span class="hljs-title">Tail</span>, <span class="hljs-keyword">class</span> <span class="hljs-title">Num</span>&gt;</span>
+<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">take</span>&lt;</span>succ&lt;Num&gt;, <span class="hljs-built_in">pair</span>&lt;Head, Tail&gt;&gt;
+{ <span class="hljs-keyword">using</span> value = <span class="hljs-built_in">pair</span>&lt;Head, <span class="hljs-keyword">typename</span> take&lt;Tail, Num&gt;::value&gt;; };
 
-<span class="hljs-keyword">template</span>&lt;<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Num</span>&gt;
-<span class="hljs-title">struct</span> <span class="hljs-title">take</span>&lt;Num, nil&gt; {</span> <span class="hljs-keyword">using</span> value = nil; };
+<span class="hljs-keyword">template</span>&lt;<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Num</span>&gt;</span>
+<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">take</span>&lt;</span>Num, nil&gt; { <span class="hljs-keyword">using</span> value = nil; };
 
-<span class="hljs-keyword">template</span>&lt;<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">List</span>&gt;
-<span class="hljs-title">struct</span> <span class="hljs-title">take</span>&lt;zero, List&gt; {</span> <span class="hljs-keyword">using</span> value = nil; };</code></pre>
+<span class="hljs-keyword">template</span>&lt;<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">List</span>&gt;</span>
+<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">take</span>&lt;</span>zero, List&gt; { <span class="hljs-keyword">using</span> value = nil; };</code></pre>
 <p>同理：</p>
 <blockquote>
 <p>练习：实现<code>drop :: nat -&gt; [x] -&gt; [x]</code>和<code>concat :: [x] -&gt; [x] -&gt; [x]</code>函数；前者用于返回去掉指定个数元素的列表，后者用于连接两个列表。</p>
 </blockquote>
 <p>于是，我们有了对列表的一些基本构造法。同样的利用这些构造法，我们就能够做更多地操作。比如，<code>map :: (a -&gt; b) -&gt; [a] -&gt; [b]</code>：</p>
-<pre><code class="language-c++"><span class="hljs-keyword">template</span>&lt;<span class="hljs-keyword">template</span>&lt;<span class="hljs-keyword">class</span> A&gt; <span class="hljs-keyword">class</span> Fn, <span class="hljs-keyword">class</span> ListA&gt;
-<span class="hljs-keyword">struct</span> map;</code></pre>
+<pre><code class="language-c++"><span class="hljs-keyword">template</span>&lt;<span class="hljs-keyword">template</span>&lt;<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">A</span>&gt;</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Fn</span>, <span class="hljs-keyword">class</span> <span class="hljs-title">ListA</span>&gt;</span>
+<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">map</span>;</span></code></pre>
 <p>map接受一个从A到B的变换，然后接受一个A类型元素的列表，把该变换对应到列表的每一个元素，然后产生一个新的B类型元素的列表。</p>
 <pre><code class="language-c++">template&lt;template&lt;<span class="hljs-keyword">class</span> <span class="hljs-symbol">A</span>&gt; <span class="hljs-symbol">class</span> <span class="hljs-symbol">Fn, <span class="hljs-symbol">class</span></span> <span class="hljs-symbol">Head, <span class="hljs-symbol">class</span></span> <span class="hljs-symbol">Tail</span>&gt;
 <span class="hljs-symbol">struct</span> <span class="hljs-symbol">map</span>&lt;<span class="hljs-symbol">Fn, <span class="hljs-symbol">pair</span></span>&lt;<span class="hljs-symbol">Head, <span class="hljs-symbol">Tail</span></span>&gt;&gt;{
@@ -399,21 +399,21 @@ template&lt;template&lt;<span class="hljs-keyword">class</span> <span class="hlj
 <pre><code class="language-c++">template&lt;class... Elems&gt;
 struct<span class="hljs-built_in"> array </span>{};</code></pre>
 <p>我们定义一个新的函数叫做<code>index :: num -&gt; array of a -&gt; a</code>：</p>
-<pre><code class="language-c++"><span class="hljs-keyword">template</span>&lt;<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Num</span>, <span class="hljs-title">class</span> <span class="hljs-title">Array</span>&gt;
-<span class="hljs-title">struct</span> <span class="hljs-title">index</span>;</span>
+<pre><code class="language-c++"><span class="hljs-keyword">template</span>&lt;<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Num</span>, <span class="hljs-keyword">class</span> <span class="hljs-title">Array</span>&gt;</span>
+<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">index</span>;</span>
 
-<span class="hljs-keyword">template</span>&lt;<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Num</span>, <span class="hljs-title">class</span> <span class="hljs-title">Elem</span>, <span class="hljs-title">class</span>... <span class="hljs-title">Elems</span>&gt;
-<span class="hljs-title">struct</span> <span class="hljs-title">index</span>&lt;succ&lt;Num&gt;, array&lt;Elem, Elems...&gt;&gt;{</span>
+<span class="hljs-keyword">template</span>&lt;<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Num</span>, <span class="hljs-keyword">class</span> <span class="hljs-title">Elem</span>, <span class="hljs-title">class</span>... <span class="hljs-title">Elems</span>&gt;</span>
+<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">index</span>&lt;</span>succ&lt;Num&gt;, <span class="hljs-built_in">array</span>&lt;Elem, Elems...&gt;&gt;{
     <span class="hljs-keyword">using</span> value = <span class="hljs-keyword">typename</span> index&lt;Num, <span class="hljs-built_in">array</span>&lt;Elems...&gt;&gt;::value;
 };
 
-<span class="hljs-keyword">template</span>&lt;<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Elem</span>, <span class="hljs-title">class</span>... <span class="hljs-title">Elems</span>&gt;
-<span class="hljs-title">struct</span> <span class="hljs-title">index</span>&lt;zero, array&lt;Elem, Elems...&gt;&gt; {</span>
+<span class="hljs-keyword">template</span>&lt;<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Elem</span>, <span class="hljs-title">class</span>... <span class="hljs-title">Elems</span>&gt;</span>
+<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">index</span>&lt;</span>zero, <span class="hljs-built_in">array</span>&lt;Elem, Elems...&gt;&gt; {
     <span class="hljs-keyword">using</span> value = Elem;
 };</code></pre>
 <p>因为跟<code>list</code>有着类似的形式：表示形式上的线性和处理形式上的递归性，所以我们似乎可以考虑把对于<code>list</code>的某些操作转换到<code>array</code>上，比如：</p>
-<pre><code class="language-c++"><span class="hljs-keyword">template</span>&lt;<span class="hljs-keyword">template</span>&lt;<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">A</span>&gt; <span class="hljs-title">class</span> <span class="hljs-title">Fn</span>, <span class="hljs-title">class</span>... <span class="hljs-title">Elems</span>&gt;
-<span class="hljs-title">struct</span> <span class="hljs-title">map</span>&lt;Fn, array&lt;Elems...&gt;&gt; {</span>
+<pre><code class="language-c++"><span class="hljs-keyword">template</span>&lt;<span class="hljs-keyword">template</span>&lt;<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">A</span>&gt;</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Fn</span>, <span class="hljs-title">class</span>... <span class="hljs-title">Elems</span>&gt;</span>
+<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">map</span>&lt;</span>Fn, <span class="hljs-built_in">array</span>&lt;Elems...&gt;&gt; {
     <span class="hljs-keyword">using</span> value = <span class="hljs-built_in">array</span>&lt;<span class="hljs-keyword">typename</span> Fn&lt;Elems&gt;::value...&gt;;
 };</code></pre>
 <p>毫无违和感。C++模版给我们提供的parameter pack成功的帮我们简化了操作。同样，依赖着partial specialization技术，这样子对map进行扩展也没有什么异样。</p>
@@ -423,42 +423,42 @@ struct<span class="hljs-built_in"> array </span>{};</code></pre>
 <p>模版给了我们自由创造构造和添加扩展的能力，一方面用于组合数据，另一方面用于提供抽象操作。而根据我之前的论证，这两点足以让我们组合出更复杂的程序。</p>
 <p>所以接下来我们就来写一个简单的逻辑求值器。</p>
 <p>首先是各项的表示：（Hint：为了避免名字冲突问题，请尽量把前面表示布尔和逻辑关系的一些项与本节内容放在不同空间内（本节假设为boolean）。</p>
-<pre><code class="language-c++">struct <span class="hljs-variable">$false</span> {};
+<pre><code class="language-c++"><span class="hljs-class"><span class="hljs-keyword">struct</span> $<span class="hljs-title">false</span> {</span>};
 
-template&lt;<span class="hljs-keyword">class</span> T&gt;
-struct <span class="hljs-variable">$var</span> {};
+<span class="hljs-keyword">template</span>&lt;<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">T</span>&gt;</span>
+<span class="hljs-class"><span class="hljs-keyword">struct</span> $<span class="hljs-title">var</span> {</span>};
 
-using <span class="hljs-variable">$undefined</span> = <span class="hljs-variable">$var</span>&lt;<span class="hljs-variable">$false</span>&gt;;
+<span class="hljs-keyword">using</span> $undefined = $var&lt;$<span class="hljs-literal">false</span>&gt;;
 
-template &lt;<span class="hljs-keyword">class</span> Prop1, <span class="hljs-keyword">class</span> Prop2&gt;
-struct <span class="hljs-variable">$and</span> {};
+<span class="hljs-keyword">template</span> &lt;<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Prop1</span>, <span class="hljs-keyword">class</span> <span class="hljs-title">Prop2</span>&gt;</span>
+<span class="hljs-class"><span class="hljs-keyword">struct</span> $<span class="hljs-title">and</span> {</span>};
 
-template&lt;<span class="hljs-keyword">class</span> T&gt;
-struct <span class="hljs-variable">$not</span> {};
+<span class="hljs-keyword">template</span>&lt;<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">T</span>&gt;</span>
+<span class="hljs-class"><span class="hljs-keyword">struct</span> $<span class="hljs-title">not</span> {</span>};
 
-using <span class="hljs-variable">$true</span> = <span class="hljs-variable">$not</span>&lt;<span class="hljs-variable">$false</span>&gt;;
+<span class="hljs-keyword">using</span> $<span class="hljs-literal">true</span> = $<span class="hljs-keyword">not</span>&lt;$<span class="hljs-literal">false</span>&gt;;
 
-template&lt;<span class="hljs-keyword">class</span> <span class="hljs-keyword">Var</span>, <span class="hljs-keyword">class</span> <span class="hljs-keyword">Prop</span>&gt;
-struct <span class="hljs-variable">$exists</span> {};
+<span class="hljs-keyword">template</span>&lt;<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Var</span>, <span class="hljs-keyword">class</span> <span class="hljs-title">Prop</span>&gt;</span>
+<span class="hljs-class"><span class="hljs-keyword">struct</span> $<span class="hljs-title">exists</span> {</span>};
 
-template &lt;<span class="hljs-keyword">class</span> Prop1, <span class="hljs-keyword">class</span> Prop2&gt;
-using <span class="hljs-variable">$or</span> = <span class="hljs-variable">$not</span>&lt;<span class="hljs-variable">$and</span>&lt;<span class="hljs-variable">$not</span>&lt;Prop1&gt;, <span class="hljs-variable">$not</span>&lt;Prop2&gt;&gt;&gt;;
+<span class="hljs-keyword">template</span> &lt;<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Prop1</span>, <span class="hljs-keyword">class</span> <span class="hljs-title">Prop2</span>&gt;</span>
+<span class="hljs-keyword">using</span> $<span class="hljs-keyword">or</span> = $<span class="hljs-keyword">not</span>&lt;$<span class="hljs-keyword">and</span>&lt;$<span class="hljs-keyword">not</span>&lt;Prop1&gt;, $<span class="hljs-keyword">not</span>&lt;Prop2&gt;&gt;&gt;;
 
-template &lt;<span class="hljs-keyword">class</span> Prop1, <span class="hljs-keyword">class</span> Prop2&gt;
-using <span class="hljs-variable">$iff</span> = <span class="hljs-variable">$or</span>&lt;<span class="hljs-variable">$and</span>&lt;Prop1, Prop2&gt;, <span class="hljs-variable">$and</span>&lt;<span class="hljs-variable">$not</span>&lt;Prop1&gt;, <span class="hljs-variable">$not</span>&lt;Prop2&gt;&gt;&gt;;
+<span class="hljs-keyword">template</span> &lt;<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Prop1</span>, <span class="hljs-keyword">class</span> <span class="hljs-title">Prop2</span>&gt;</span>
+<span class="hljs-keyword">using</span> $iff = $<span class="hljs-keyword">or</span>&lt;$<span class="hljs-keyword">and</span>&lt;Prop1, Prop2&gt;, $<span class="hljs-keyword">and</span>&lt;$<span class="hljs-keyword">not</span>&lt;Prop1&gt;, $<span class="hljs-keyword">not</span>&lt;Prop2&gt;&gt;&gt;;
 
-template &lt;<span class="hljs-keyword">class</span> Prop1, <span class="hljs-keyword">class</span> Prop2&gt;
-using <span class="hljs-variable">$implies</span> = <span class="hljs-variable">$or</span>&lt;<span class="hljs-variable">$not</span>&lt;Prop1&gt;, Prop2&gt;;
+<span class="hljs-keyword">template</span> &lt;<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Prop1</span>, <span class="hljs-keyword">class</span> <span class="hljs-title">Prop2</span>&gt;</span>
+<span class="hljs-keyword">using</span> $implies = $<span class="hljs-keyword">or</span>&lt;$<span class="hljs-keyword">not</span>&lt;Prop1&gt;, Prop2&gt;;
 
-template &lt;<span class="hljs-keyword">class</span> <span class="hljs-keyword">Var</span>, <span class="hljs-keyword">class</span> <span class="hljs-keyword">Prop</span>&gt;
-using <span class="hljs-variable">$forall</span> = <span class="hljs-variable">$not</span>&lt;<span class="hljs-variable">$exists</span>&lt;<span class="hljs-keyword">Var</span>, <span class="hljs-variable">$not</span>&lt;<span class="hljs-keyword">Prop</span>&gt;&gt;&gt;;</code></pre>
+<span class="hljs-keyword">template</span> &lt;<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Var</span>, <span class="hljs-keyword">class</span> <span class="hljs-title">Prop</span>&gt;</span>
+<span class="hljs-keyword">using</span> $forall = $<span class="hljs-keyword">not</span>&lt;$<span class="hljs-built_in">exists</span>&lt;Var, $<span class="hljs-keyword">not</span>&lt;Prop&gt;&gt;&gt;;</code></pre>
 <p>有了这些，我们就有了一套清晰的结构来表达任意复杂的命题逻辑了。</p>
 <p>比如：</p>
 <pre><code class="language-c++"><span class="hljs-variable">$exists</span><span class="hljs-variable">&lt;$var&lt;A&gt;</span>, <span class="hljs-variable">$forall</span><span class="hljs-variable">&lt;$var&lt;B&gt;</span>, <span class="hljs-variable">$implies</span><span class="hljs-variable">&lt;B, A&gt;</span>&gt;&gt;</code></pre>
 <p>每个表达式，要么是一个基本构造（比如<code>$false</code>， <code>$not</code>），要么是能通过一个等价变换转换成基本构造（比如<code>$forall</code>、<code>$implies</code>）。所以这样子就能让这些表达式反复组合，从简单到变到复杂；而同样的一个任意复杂的表达式也可以一层一层的展开成最简单的基本构造。展开后的结果大致上是一个树形，一般称为AST。</p>
 <p>于是对一个命题逻辑表达式求值为的过程就是对其进行一步步的展开然后再一步步的归约成最终结果的过程。</p>
 <p>于是我们可以把这个求值器抽象成这个样子：</p>
-<pre><code class="language-c++">template&lt;<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Env</span>, <span class="hljs-title">class</span> <span class="hljs-title">Prop</span>&gt;</span>
+<pre><code class="language-c++"><span class="hljs-keyword">template</span>&lt;<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Env</span>, <span class="hljs-keyword">class</span> <span class="hljs-title">Prop</span>&gt;</span>
 <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">eval</span>;</span></code></pre>
 <p>在指定环境中对指定表达式进行求值。</p>
 <p>比如：</p>
@@ -483,26 +483,26 @@ template&lt;<span class="hljs-keyword">class</span> <span class="hljs-symbol">En
 };</code></pre>
 <p>当然这里处理起来很简单，我们只需要按照表达式的结构对其递归求值即可。不过当引入量化（exists、forall）和变量的时候，就需要考虑一下深层的问题了。</p>
 <p>首先要考虑的是如何构建和查询求值环境：</p>
-<pre><code class="language-c++">template&lt;<span class="hljs-keyword">class</span> <span class="hljs-symbol">A, <span class="hljs-symbol">class</span></span> <span class="hljs-symbol">B</span>&gt;
-<span class="hljs-symbol">struct</span> $<span class="hljs-symbol">entry</span> {
-    using first = A;
-    using next = B;
+<pre><code class="language-c++"><span class="hljs-keyword">template</span>&lt;<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">A</span>, <span class="hljs-keyword">class</span> <span class="hljs-title">B</span>&gt;</span>
+<span class="hljs-class"><span class="hljs-keyword">struct</span> $<span class="hljs-title">entry</span> {</span>
+    <span class="hljs-keyword">using</span> first = A;
+    <span class="hljs-keyword">using</span> next = B;
 };
 
-template&lt;<span class="hljs-keyword">class</span> <span class="hljs-symbol">Var</span> = $<span class="hljs-symbol">undefined, 
-                    <span class="hljs-symbol">class</span></span> <span class="hljs-symbol">Val</span> = $<span class="hljs-symbol">false, 
-                    <span class="hljs-symbol">class</span></span> <span class="hljs-symbol">List</span> = <span class="hljs-symbol">list::<span class="hljs-symbol">nil</span></span>&gt;
-<span class="hljs-symbol">struct</span> $<span class="hljs-symbol">env</span> {
-    using value = typename list::pair&lt;$entry&lt;Var,Val&gt;, List&gt;;
+<span class="hljs-keyword">template</span>&lt;<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Var</span> =</span> $undefined, 
+                    <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Val</span> =</span> $<span class="hljs-literal">false</span>, 
+                    <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">List</span> =</span> <span class="hljs-built_in">list</span>::nil&gt;
+<span class="hljs-class"><span class="hljs-keyword">struct</span> $<span class="hljs-title">env</span> {</span>
+    <span class="hljs-keyword">using</span> value = <span class="hljs-keyword">typename</span> <span class="hljs-built_in">list</span>::<span class="hljs-built_in">pair</span>&lt;$entry&lt;Var,Val&gt;, List&gt;;
 };
 
-template&lt;<span class="hljs-keyword">class</span> <span class="hljs-symbol">Env,<span class="hljs-symbol">class</span></span> <span class="hljs-symbol">Val</span>&gt;
-<span class="hljs-symbol">struct</span> $<span class="hljs-symbol">env_lookup</span> {
-    template&lt;<span class="hljs-keyword">class</span> <span class="hljs-symbol">Var</span>&gt;
-    <span class="hljs-symbol">struct</span> <span class="hljs-symbol">helper</span> {
-        using value = typename <span class="hljs-built_in">bool</span>ean::same&lt;Val, typename Var::first&gt;::value;
+<span class="hljs-keyword">template</span>&lt;<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Env</span>,<span class="hljs-keyword">class</span> <span class="hljs-title">Val</span>&gt;</span>
+<span class="hljs-class"><span class="hljs-keyword">struct</span> $<span class="hljs-title">env_lookup</span> {</span>
+    <span class="hljs-keyword">template</span>&lt;<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Var</span>&gt;</span>
+    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">helper</span> {</span>
+        <span class="hljs-keyword">using</span> value = <span class="hljs-keyword">typename</span> <span class="hljs-keyword">boolean</span>::same&lt;Val, <span class="hljs-keyword">typename</span> Var::first&gt;::value;
     };
-    using value = typename list::iter::find&lt;helper, typename Env::value&gt;::value::next;
+    <span class="hljs-keyword">using</span> value = <span class="hljs-keyword">typename</span> <span class="hljs-built_in">list</span>::iter::<span class="hljs-built_in">find</span>&lt;helper, <span class="hljs-keyword">typename</span> Env::value&gt;::value::next;
 };</code></pre>
 <p>解释起来很简单，env其实就是用list来实现的，然后我们利用<code>list::iter::find</code>（ <code>(a -&gt; bool) -&gt; [a] -&gt; a</code>，返回列表中第一个符合条件的元素）实现了查找env中的变量的值。</p>
 <p>嗯，有了这两样东西，我们就可以完整的实现eval了：</p>
@@ -556,7 +556,7 @@ template &lt;<span class="hljs-keyword">class</span> <span class="hljs-symbol">E
         </ul>
     </div> -->
     <span class="field">创建时间：2014-12-31</span>
-    <span class="field">最近更新时间：2020-12-30</span>
+    <span class="field">最近更新时间：2021-01-22</span>
     <hr>
     <footer>
         <ul>

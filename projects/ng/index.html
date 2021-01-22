@@ -212,9 +212,9 @@ type. And for the prototype of array, should looks like</p>
 <p>The where clause is a constraints for &#39;arity parameter which
 indicates that field cannot be negative.</p>
 <p>Here is another syntax to do this checking</p>
-<pre><code class="language-ng">type NonNegative&lt;<span class="hljs-string">&#x27;num: Num&gt; where &#x27;</span>num &gt;= 0
-<span class="hljs-built_in">
-type </span>Array&lt;<span class="hljs-string">&#x27;t, &#x27;</span>arity: NonNegative&gt;</code></pre>
+<pre><code class="language-ng"><span class="hljs-class"><span class="hljs-keyword">type</span> <span class="hljs-title">NonNegative</span></span>&lt;<span class="hljs-symbol">&#x27;num</span>: Num&gt; <span class="hljs-keyword">where</span> <span class="hljs-symbol">&#x27;num</span> &gt;= <span class="hljs-number">0</span>
+
+<span class="hljs-class"><span class="hljs-keyword">type</span> <span class="hljs-title">Array</span></span>&lt;<span class="hljs-symbol">&#x27;t</span>, <span class="hljs-symbol">&#x27;arity</span>: NonNegative&gt;</code></pre>
 <p>NonNegative is like typeclass / type traits / concepts in
 other languages such like Haskell/C++/D.</p>
 <p>Here is another constraint example in ng.</p>
@@ -231,7 +231,7 @@ other languages such like Haskell/C++/D.</p>
         </ul>
     </div> -->
     <span class="field">创建时间：2016-05-05</span>
-    <span class="field">最近更新时间：2020-12-30</span>
+    <span class="field">最近更新时间：2021-01-22</span>
     <hr>
     <footer>
         <ul>

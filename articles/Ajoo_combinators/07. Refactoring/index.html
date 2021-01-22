@@ -346,7 +346,7 @@ container.registerComponentImplementation(Girl.class); </code></pre>
 pico的对应代码： </p>
 <p>java代码: </p>
 <pre><code class="language-java">container.registerComponent(<span class="hljs-string">&quot;b&quot;</span> <span class="hljs-keyword">new</span> CachingComponentAdapter(<span class="hljs-keyword">new</span> ConstructorInjectionComponentAdapter(B.class))); 
-container.registerComponent(&quot;a&quot;, <span class="hljs-keyword">new</span> ConstructorInjectionComponentAdapter(A.class));</code></pre>
+container.registerComponent(<span class="hljs-string">&quot;a&quot;</span>, <span class="hljs-keyword">new</span> ConstructorInjectionComponentAdapter(A.class));</code></pre>
 <p>这里，为了对应上面java代码中的两个参数公用一个b的实例的要求，必须把a登记成一个singleton。 CachingComponentAdapter负责singleton化某个组件，而 ConstructorInjectionComponentAdapter就是一个调用构造函数的组建匹配器。 </p>
 <p>当然，这样做其实还是有麻烦的，当container不把a登记成singleton的时候（pico缺省都登记成singleton，但是你可以换缺省不用singleton的container。），麻烦就来了。 </p>
 <p>大家可以看到，上面的createA()函数如果调用两次，会创建两个A对象，两个B对象，而用这段pico代码，调用两次getComponentInstance(&quot;a&quot;)，会生成两个A对象，但是却只有一个B对象！因为b被被迫登记为singleton了。 </p>
@@ -390,7 +390,7 @@ a_component = Components.ctor(A.class)
         </ul>
     </div> -->
     <span class="field">创建时间：2006-01-13</span>
-    <span class="field">最近更新时间：2020-12-30</span>
+    <span class="field">最近更新时间：2021-01-22</span>
     <hr>
     <footer>
         <ul>

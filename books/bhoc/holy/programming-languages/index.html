@@ -198,19 +198,19 @@
 </blockquote>
 <p>熟悉编程的人很容易看懂这个笑话的梗，而也正是这个笑话明显能看出作为“指令”和“执行”这两部分之间沟通的重要性：与人沟通尚且如此，与机器沟通自然也就需要更明确的指令。中国人发明了算盘，可以拿来做计算，但去操作的依然是操纵算盘的人。直到19世纪Charles Babbage在提花机的基础之上进一步设计了<strong>分析机</strong>（Analytical Engine），才有了可以通过指令自动解决问题的“机器”，与之一起出现的，是第一位程序员Ada Lovelace和最早的“计算机程序”。</p>
 <p>当然了，在Babbage的时代，完全没有指令集的概念，所以他给出的是一些操作性的示例。而根据John Walker提供的模拟器的还原，提供了一系列标准的符号化指令用于简化程序的设计，这些指令是跟Babbage的打孔卡相对应的。如下是一段求阶乘的程序：</p>
-<pre><code>N0 <span class="hljs-number">6</span>
-N1 <span class="hljs-number">1</span>
-N2 <span class="hljs-number">1</span>
+<pre><code><span class="hljs-symbol">N0</span> <span class="hljs-number">6</span>
+<span class="hljs-symbol">N1</span> <span class="hljs-number">1</span>
+<span class="hljs-symbol">N2</span> <span class="hljs-number">1</span>
 ×
-L1
-L0
-S1
+L<span class="hljs-number">1</span>
+L<span class="hljs-number">0</span>
+S<span class="hljs-number">1</span>
 –
-L0
-L2
-S0
-L2
-L0
+L<span class="hljs-number">0</span>
+L<span class="hljs-number">2</span>
+S<span class="hljs-number">0</span>
+L<span class="hljs-number">2</span>
+L<span class="hljs-number">0</span>
 CB?<span class="hljs-number">11</span></code></pre>
 <p><code>CB</code>在这里指的是Conditional Branching，是巴比奇的一大创新。有了这个操作整个分析机就可以进行重复和分支执行代码。</p>
 <p>遗憾的分析机和更早的差分机都没能在巴比奇的有生之年被建造出来。而且因为一些原因，早期的电子计算机如Havard Mark I和ENIAC（埃尼阿克）并没有直接继承巴比奇的设计，而是重复踩了很多坑。</p>
@@ -313,7 +313,7 @@ CB?<span class="hljs-number">11</span></code></pre>
         </ul>
     </div> -->
     <span class="field">创建时间：2020-09-14</span>
-    <span class="field">最近更新时间：2020-12-30</span>
+    <span class="field">最近更新时间：2021-01-22</span>
     <hr>
     <footer>
         <ul>

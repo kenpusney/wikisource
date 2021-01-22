@@ -191,7 +191,7 @@
 <p>然后我们尝试用 TypeScript 编译器（<code>tsc</code>）编译下面这段代码：</p>
 <pre><code class="language-typescript">fnTakesString(fnRetrunsString());
 fnTakesString(fnDoesNothing());
-fnTakesString(fnAcceptsNumberReturnsEitherNumberOrString(<span class="hljs-number">-1</span>));</code></pre>
+fnTakesString(fnAcceptsNumberReturnsEitherNumberOrString(-<span class="hljs-number">1</span>));</code></pre>
 <p>各位可以简单动手试一下，或者细想一下会发生的事情再继续阅读。这里到底 TypeScript 到底会对这段代码怎么处理，又回报什么错误。</p>
 <p>我们插个话题，渐进式类型（Gradual Typing）。</p>
 <h3 id="渐进式类型-gradual-typing">渐进式类型 Gradual Typing</h3>
@@ -242,7 +242,7 @@ BaseObject.prototype.defineMethod = <span class="hljs-function"><span class="hlj
 <p>我们回到前面提到的三行代码：</p>
 <pre><code class="language-typescript">fnTakesString(fnRetrunsString());
 fnTakesString(fnDoesNothing());
-fnTakesString(fnAcceptsNumberReturnsEitherNumberOrString(<span class="hljs-number">-1</span>));</code></pre>
+fnTakesString(fnAcceptsNumberReturnsEitherNumberOrString(-<span class="hljs-number">1</span>));</code></pre>
 <ul>
 <li>第一行是类型安全的，TypeScript 也不会向你抱怨什么。</li>
 <li>第二行就开始出问题了：<code>void</code>不是<code>string</code>。</li>
@@ -336,7 +336,7 @@ Party.declval();</code></pre>
         </ul>
     </div> -->
     <span class="field">创建时间：2020-03-17</span>
-    <span class="field">最近更新时间：2020-12-30</span>
+    <span class="field">最近更新时间：2021-01-22</span>
     <hr>
     <footer>
         <ul>

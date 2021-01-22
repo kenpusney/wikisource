@@ -335,7 +335,7 @@ exclusive(rule1, rule2, rule3)，而不用关心rule1, rule2, rule3到底都是�
 java代码: </p>
 <pre><code class="language-java">Rule single = married.not(); 
 Rule young = age &lt; <span class="hljs-number">18</span>; 
-Rule good = breast &gt; <span class="hljs-number">32</span>C; 
+Rule good = breast &gt; 32C; 
 Rule boss_likes = and(single, young, good); 
 Rule boss_pays = and(boss_likes, 大功告成able); 
 Rule paid_by_boss = boss_pays.then(<span class="hljs-number">120</span>); 
@@ -560,7 +560,7 @@ jaskell代码: </p>
         </ul>
     </div> -->
     <span class="field">创建时间：2006-01-13</span>
-    <span class="field">最近更新时间：2020-12-30</span>
+    <span class="field">最近更新时间：2021-01-22</span>
     <hr>
     <footer>
         <ul>

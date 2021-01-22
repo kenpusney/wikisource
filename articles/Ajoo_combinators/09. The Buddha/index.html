@@ -236,7 +236,7 @@ cc.value(obj)。舒服些了吧？ </p>
 <p>这里，所有的省略号都代表可能需要从容器解析的参数。使用高阶Component对象而不是直接调用createX()函数的一个原因，就是我们想要把依赖解析隐藏起来并且集中灵活地配置和管理。 </p>
 <p>对此，我们可以写成： 
 java代码: </p>
-<pre><code class="language-java">Component a_component = Components.static_method(A.class, &quot;instance&quot;); 
+<pre><code class="language-java">Component a_component = Components.static_method(A.class, <span class="hljs-string">&quot;instance&quot;</span>); 
 <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> BoundComponent(a_component, <span class="hljs-keyword">new</span> Binder(){ 
   <span class="hljs-function"><span class="hljs-keyword">public</span> Component <span class="hljs-title">bind</span><span class="hljs-params">(<span class="hljs-keyword">final</span> Object a)</span></span>{ 
     <span class="hljs-keyword">final</span> Component isx_component = Components.method(a, <span class="hljs-string">&quot;isX&quot;</span>); 
@@ -304,7 +304,7 @@ java代码: </p>
 <p>但是，从实际效果考虑，我发现它损失的架构上的美感，远远比不上它带来的编码上的方便程度。谁让我们用的是java呢，世上没有十全十美的事情，就凑合吧。 </p>
 <p>经过这个改动，上面的对应createX的高阶代码变成： </p>
 <p>java代码: </p>
-<pre><code class="language-java">Component a_component = Components.static_method(A.class, &quot;instance&quot;); 
+<pre><code class="language-java">Component a_component = Components.static_method(A.class, <span class="hljs-string">&quot;instance&quot;</span>); 
 <span class="hljs-keyword">return</span> a_component.bind(<span class="hljs-keyword">new</span> Binder(){ 
   <span class="hljs-function"><span class="hljs-keyword">public</span> Component <span class="hljs-title">bind</span><span class="hljs-params">(<span class="hljs-keyword">final</span> Object a)</span></span>{ 
     <span class="hljs-keyword">final</span> Component isx_component = Components.method(a, <span class="hljs-string">&quot;isX&quot;</span>); 
@@ -330,7 +330,7 @@ java代码: </p>
 }</code></pre>
 <p>高阶代码会变成： 
 java代码: </p>
-<pre><code class="language-java">Component a_component = Components.static_method(A.class, &quot;instance&quot;); 
+<pre><code class="language-java">Component a_component = Components.static_method(A.class, <span class="hljs-string">&quot;instance&quot;</span>); 
 <span class="hljs-keyword">return</span> a_component.method(<span class="hljs-string">&quot;isX&quot;</span>).ifelse( 
     Components.ctor(X.class), 
     Components.ctor(Y.class) 
@@ -389,7 +389,7 @@ java代码: </p>
         </ul>
     </div> -->
     <span class="field">创建时间：2006-01-13</span>
-    <span class="field">最近更新时间：2020-12-30</span>
+    <span class="field">最近更新时间：2021-01-22</span>
     <hr>
     <footer>
         <ul>
