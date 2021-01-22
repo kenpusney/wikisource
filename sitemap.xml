@@ -255,6 +255,13 @@
     </url>
     
     <url>
+        <loc>http://wiki.kimleo.net/articles/Golang-prehistory</loc>
+        <lastmod>2021-01-22</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>1.0</priority>
+    </url>
+    
+    <url>
         <loc>http://wiki.kimleo.net/articles/GW-BASIC open source</loc>
         <lastmod>2021-01-22</lastmod>
         <changefreq>weekly</changefreq>
@@ -836,7 +843,21 @@
     </url>
     
     <url>
+        <loc>http://wiki.kimleo.net/notes/arch/AZ-304</loc>
+        <lastmod>2021-01-22</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>1.0</priority>
+    </url>
+    
+    <url>
         <loc>http://wiki.kimleo.net/notes/arch</loc>
+        <lastmod>2021-01-22</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>1.0</priority>
+    </url>
+    
+    <url>
+        <loc>http://wiki.kimleo.net/notes/biz/Consulting-Tools</loc>
         <lastmod>2021-01-22</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
