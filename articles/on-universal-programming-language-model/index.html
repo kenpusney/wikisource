@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript">
+        if (location.href.endsWith("index.html")) {
+            location.href = location.href.substring(0, location.href.length - "index.html".length);
+        }
+    </script>
+    
+    <title>通用语言模型</title>
+    
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
+        media="(prefers-color-scheme: light)">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/dracula.min.css"
+        media="(prefers-color-scheme: dark)">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
+        media="(prefers-color-scheme: no-preference)">
+    <style type="text/css">
+        body {
+            width: 60%;
+            margin: 0 auto;
+            padding: 2em;
+            font-family: 'Segoe UI',
+                "Microsoft Yahei Light",
+                "San Francisco",
+                "Ping Fang SC",
+                "Roboto",
+                "Noto Sans CJK",
+                Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        p > img {
+            margin: 0 auto;
+            display: block;
+            max-width: 80%;
+        }
+
+        span.field {
+            display: inline-block;
+            font-weight: bolder;
+            font-size: smaller;
+        }
+
+        pre {
+            max-width: 90%;
+            overflow-x: scroll;
+            padding: 1em;
+            border-radius: 5px;
+        }
+
+        a {
+            text-decoration: none;
+            color: cornflowerblue;
+        }
+
+        a:visited {
+            color: cornflowerblue;
+        }
+
+        a:hover {
+            color: darkgray;
+        }
+
+        a.disabled-link {
+            color: lightcoral;
+            text-decoration: line-through;
+        }
+
+        nav,
+        nav ul {
+            display: inline-block;
+        }
+
+        .tags ul,
+        footer ul {
+            padding: 0;
+            display: inline;
+        }
+
+        header h1 {
+            display: inline-block;
+            min-width: 320px;
+            max-width: 50%;
+            width: 50%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            margin: auto;
+        }
+
+        @media screen and (max-width: 1200px) {
+            body {
+                width: 90%;
+                max-width: 720px;
+                padding: 0;
+                margin: 1em auto;
+            }
+
+            header h1 {
+                max-width: 90%;
+                width: 90%;
+            }
+        }
+
+        nav li,
+        .tags li,
+        footer li {
+            display: inline;
+            border-right: 1px solid darkgray;
+            padding: 0 1em;
+        }
+
+        nav li:last-child,
+        .tags li:last-child,
+        footer li:last-child {
+            border: none;
+        }
+
+        .post-list h3 {
+            margin: 0.3em 0;
+        }
+
+        blockquote {
+            margin: 0.5em;
+            border: 1px dotted darkgrey;
+            border-radius: 0.5em;
+            padding: 0 1em;
+        }
+
+        div.image-description {
+            text-align: center;
+            color: gray;
+            font-size: smaller;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            body {
+                background-color: #090810;
+                color: floralwhite;
+                opacity: 0.83;
+            }
+
+            pre {
+                background-color: #282a36;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        
+        <h1 title="通用语言模型">通用语言模型</h1>
+        
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/articles">Articles</a></li>
+                <li><a href="/about">About</a></li>
+            </ul>
+        </nav>
+        <hr>
+        <span class="field">Author: <a href="/about">KimmyLeo</a></span>
+        
+    </header>
+    <article>
+        <p>如果使用过超过一种编程语言（我觉得大部分人应该都有这种经验），那多少也都知道，编程语言在某些方面存在一些共性。这是很正常的，毕竟作为演化了几十年已经成为标准工具的编程语言，都是源于几个基础的模型。基于共同的模型找共性，那自然不是问题。</p>
+<p>问题出在想要用这种共性做些手脚上。比如能不能找一个统一的模型，可以把大部分（先不说所有）的编程语言都统一起来，有一个公共的AST和IR，然后通过这个公共AST可以转换为不同语言的表示，并且还能做到同步。</p>
+<p>这不是什么异想天开，乍一想之下还是感觉能够行得通。我在2014/2015年的时候也想到过类似东西，并且实践了下。毕竟，微软还有Common Language Runtime，JVM上还能跑那么多种不同范式的编程语言，LLVM就是个为了不同语言打造的公共后端，甚至不说这种底层运行时，JavaScript在早几年还是各种AltJS的target。</p>
+<p>但这只是因为乍一看是能行得通的。各种AltJS之间简直就是生殖隔离，唯一的共性就是都能编译到JS；F#为了能够成功编译到CLR，一些典型的构造（比如，模式匹配）都得换成奇怪的手法实现；Java和Scala的互调用也全是血泪屎，所以知名的Scala并发库Akka不得不提供针对Java的API。</p>
+<p>因为很简单，前面提到的所有的“公共”或者“通用”的部分，都是“运行时”。LLVM虽然是IR，但也到了一个非常贴近运行时模型的结构了，这些结构本身是很难还原其上层的表达结构。简单举个例子，同样是循环，我可以使用for、也可以使用while，而最终所编译出来的结果可能是几个一摸一样的条件跳转。</p>
+<p>对于任何一个编程语言，我们假设他的代码结构是A、其AST的模型是B、对应IR的模型是C，最终运行时呈现的结构是D。A、B、C、D这样一个单向的流程，就是编译、链接、加载和运行的过程，但如果要逆向这个过程，就需要携带足够多的信息（比如Java class文件中的符号表，比如msvc的pdb文件）。</p>
+<p>造成target到同一平台的不同编程语言生殖隔离的问题就在于此。绝大多数运行时平台所采用的结构，都是其主要对应的编程语言语法的线性序列化。比如JVM的Bytecode对应到Java的代码、比如汇编指令对应到C的代码。而任何在这之上添加的更加复杂的模型，就需要绕过像C/Java本身，直接对自身模型的逻辑进行单独的构造。比如早期的Cfront（第一个C++编译器）就是编译到C语言，但后面还是选择放弃了。Scala/Kotlin虽然也直接编译成了Java类，但其生成的代码有些甚至是Java都没办法表达的。</p>
+<p>我们跳出单个的编程语言或者平台，来做一下横向的对比。</p>
+<p>首先对编程语言做一下简单的分类。考虑两种分类方式：第一，语言的动态性，既编程语言在编译时或者运行时动态操纵代码逻辑的能力；第二，语言的复杂度，即编程语言特性的丰富程度。比如Ruby、Smalltalk这种随时可以在运行时动态修改执行环境的语言，其动态性就更强；再比如D语言这种可以通过模板来编译时生成代码、有UFCS、CTFE等编译时特性，其复杂度就更高。</p>
+<p>由此我们可以把编程语言分成下面四个象限（各象限里面的排序比较主观，请不要过度纠结，我们还是更多看象限的划分）。</p>
+<ul>
+<li>左上角，动态性较强，偏动态，语言复杂度低，相对简单。</li>
+<li>左下角，动态性较弱，偏静态，语言复杂度高，相对简单。</li>
+<li>右下角，动态性较弱，偏静态，语言复杂度高，相对复杂。</li>
+<li>右上角，动态性较强，偏动态，语言复杂度高，相对复杂。</li>
+</ul>
+<p>这样划分以后，能够有非常明显的区分：</p>
+<ul>
+<li>从左到右，因为语言逐渐变复杂，是可以转换过去，但转换回来就成了问题。典型的例子就是，C++可以直接编译大部分C语言的代码，D语言能支持几乎所有的Java的特性，但反过来不行。</li>
+<li>从下到上，因为语言逐渐动态，也是可以转换过去的，但转换回来就成了问题，因为既不正支持动态性所要达到的要求，又丢失了静态类型语言所需要的约束。比如Ruby可以随时拿到Eigenclass在上面胡乱做操作，但放到下面两个象限的编程语言里，先不说是否支持，类型检查可能都不会通过。</li>
+</ul>
+<p>由此可以举出来数不胜数的例子。C++的template parameter pack目前只有D中有类似的结构，对应到了C#，可能一个类模板要变成几十几百个泛型类；这个时候如果C#中更改了其中一个泛型类的实现，C++侧就炸了，只能按照C#的模型生成几十几百个特化。Ruby的method_missing在静态语言中也只有D有opDispatch对应支持，换成其编程语言只能干看着了。</p>
+<p>如果我们把这种上对于下和右对于左的关系用高阶和低阶来指代（仅仅表达其对应关系，并不是说确实有高低贵贱之分），那高阶语言所能够表达的结构，在低阶语言里对应就变成了难以正常理解和维护的存在，那这样的对应关系即使使用通用模型可以表达，也没办法作为交流的媒介。</p>
+<p>再次强调一下这里的高阶和低阶，只适用于本文中是否可以由低向高转换的概念，并不是在说语言的高低。毕竟很早之前我就有了一个自诩为“几米第一定律”的结论，任何编程语言都是领域特定的。</p>
+<p>我们并不否认，甚至还要感激通用语言运行时的抽象给大家带来的好处。但不同的编程语言是用来表达的工具，运行时只是他们最终呈现的效果。如同不同的媒介和文体一样，必然有着其本质的区别和适用的领域。可以选择用他们来表达同一件事情，但非要有一个统一的模型来去组合和转换，就有点过于强行了。</p>
+
+        
+
+    </article>
+    <!-- <div>
+        <h5>See Also</h5>
+        <ul>
+            <li><a href="/about">About Me</a></li>
+        </ul>
+    </div> -->
+    <span class="field">创建时间：2021-01-30</span>
+    <span class="field">最近更新时间：2021-02-02</span>
+    <hr>
+    <footer>
+        <ul>
+            <li><a href="/about">关于我</a></li>
+            <li><a href="/sitemap.xml">站点地图</a></li>
+            <li><a href="/rss.xml">RSS</a></li>
+            <li>Copyright &copy; KimmyLeo</li>
+        </ul>
+    </footer>
+    <script type="text/javascript">
+        document.querySelectorAll(".disabled-link").forEach(el => el.addEventListener("click", (e) => {
+            alert("链接页面不存在！");
+            e.preventDefault();
+        }));
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script
+</body>
+
+</html>

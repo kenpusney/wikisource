@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript">
+        if (location.href.endsWith("index.html")) {
+            location.href = location.href.substring(0, location.href.length - "index.html".length);
+        }
+    </script>
+    
+    <title>注释</title>
+    
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
+        media="(prefers-color-scheme: light)">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/dracula.min.css"
+        media="(prefers-color-scheme: dark)">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
+        media="(prefers-color-scheme: no-preference)">
+    <style type="text/css">
+        body {
+            width: 60%;
+            margin: 0 auto;
+            padding: 2em;
+            font-family: 'Segoe UI',
+                "Microsoft Yahei Light",
+                "San Francisco",
+                "Ping Fang SC",
+                "Roboto",
+                "Noto Sans CJK",
+                Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        p > img {
+            margin: 0 auto;
+            display: block;
+            max-width: 80%;
+        }
+
+        span.field {
+            display: inline-block;
+            font-weight: bolder;
+            font-size: smaller;
+        }
+
+        pre {
+            max-width: 90%;
+            overflow-x: scroll;
+            padding: 1em;
+            border-radius: 5px;
+        }
+
+        a {
+            text-decoration: none;
+            color: cornflowerblue;
+        }
+
+        a:visited {
+            color: cornflowerblue;
+        }
+
+        a:hover {
+            color: darkgray;
+        }
+
+        a.disabled-link {
+            color: lightcoral;
+            text-decoration: line-through;
+        }
+
+        nav,
+        nav ul {
+            display: inline-block;
+        }
+
+        .tags ul,
+        footer ul {
+            padding: 0;
+            display: inline;
+        }
+
+        header h1 {
+            display: inline-block;
+            min-width: 320px;
+            max-width: 50%;
+            width: 50%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            margin: auto;
+        }
+
+        @media screen and (max-width: 1200px) {
+            body {
+                width: 90%;
+                max-width: 720px;
+                padding: 0;
+                margin: 1em auto;
+            }
+
+            header h1 {
+                max-width: 90%;
+                width: 90%;
+            }
+        }
+
+        nav li,
+        .tags li,
+        footer li {
+            display: inline;
+            border-right: 1px solid darkgray;
+            padding: 0 1em;
+        }
+
+        nav li:last-child,
+        .tags li:last-child,
+        footer li:last-child {
+            border: none;
+        }
+
+        .post-list h3 {
+            margin: 0.3em 0;
+        }
+
+        blockquote {
+            margin: 0.5em;
+            border: 1px dotted darkgrey;
+            border-radius: 0.5em;
+            padding: 0 1em;
+        }
+
+        div.image-description {
+            text-align: center;
+            color: gray;
+            font-size: smaller;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            body {
+                background-color: #090810;
+                color: floralwhite;
+                opacity: 0.83;
+            }
+
+            pre {
+                background-color: #282a36;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        
+        <h1 title="注释">注释</h1>
+        
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/articles">Articles</a></li>
+                <li><a href="/about">About</a></li>
+            </ul>
+        </nav>
+        <hr>
+        <span class="field">Author: <a href="/about">KimmyLeo</a></span>
+        
+    </header>
+    <article>
+        <blockquote>
+<p>⚠个人观点较多，请谨慎阅读</p>
+</blockquote>
+<h2 id="注释有哪些问题">注释有哪些问题</h2>
+<p>我遇到过很多人在强调注释很重要了，因为觉得注释是对代码的说明，可以概要性地解释其所标注的那部分代码的功能，方便人理解。</p>
+<p>但实际上这个作用仅仅存在于远古时代，在标识符还没能摆脱几个符号限制，没办法充分用命名来提升可读性的时代。或者说在汇编语言代码中，因为绝大多数情况下不存在符号信息，只有指令、位置和寄存器。这两种情况下的代码几乎是不可读的，只能靠注释来解释某位置的某段代码其目的是什么。而如果你要去修改被注释的这些代码，还是需要去硬啃他的逻辑才行。</p>
+<p>但是在现代软件开发，或者说至少应用软件开发场景下几乎不存在类似的问题了。优秀的编译器早就可以承受超长的符号串，而这些符号串也不再是直接影响程序运行效率的东西，所以，能够给出足够的空间来让人给出准确的命名。不需要再用nLines这种缩写，可以直接numberOfLines。</p>
+<p>于是注释在这种时候就成了一种明显的多余，并且给一些人提供了放弃良好命名风格的空间与机会。因为有了注释，他们就能够用注释来解释做什么，然后转而写上古时代风格的代码了。于是就会在代码中到处存在<code>a, b, c</code>、<code>x, y, z</code>、<code>temp, test, str</code>、<code>foo, bar, baz</code>、<code>fuck, shit, hell</code>和其他一切你能想到用来破坏代码可读性的行为。</p>
+<p>这个注释是给谁看的呢？要么是以后来修改这段代码的自己，要么是下一个来修改这段代码的人。因为显然，除了要修改他，没人会关注一坨乱七八糟的代码到底能做什么事儿。而神奇的事情就发生了，无论是他自己还是别人，这段注释都很难充分解释下面的代码到底在干什么，除非每行都有一行注释来说明：这显然又增加了之前的工作量，毕竟还不如当时直接老老实实的写好点代码。</p>
+<p>于是开始改代码了。这个时候显然注释的第二个问题就出现了：注释的存在没有强制性，换句话说，如果你注释说的是事情A，你的代码完全可以实现另外一个完全不一样的事情B：编译器不会告诉你哪儿错了，比编译器更智能的IDE也不会，甚至是有非常强的靠机器学习实现提示功能的智能提示工具也没有那个能力提醒这一点。</p>
+<p>这一问题甚至会进化。同样是在在改代码的时候，顺利的改完了实现逻辑，但是忘记修改注释反映出来最新的变动，这个时候的注释就成了一个误导人的邪恶存在。</p>
+<p>总之这个东西是非常反智的。在所有人顶着要快速赶完代码而靠着注释来解释到底在做什么的时候，就已经走上了歧途。因为接下来他们在赶代码的时候，要花费更多的时间在跟注释斗智斗勇上：不依赖它，许多事情解释不清楚，需要读代码；依赖了它，没办法获得足够全面和正确的信息，也还是需要读代码。但是因为要赶代码，还是没有时间来做些简单的重命名和抽取函数操作来整理下刚刚读完的代码逻辑。</p>
+<blockquote>
+<p>题外话，总有些人在说自己读过哪些代码，似乎有种在炫耀的感觉。但以我的经验来看，读代码是学习效率最低的一种方式。所以除非你出现了某种动机（工作要求、修复bug等）要去改对方代码了，否则尽量别尝试去读。因为在读代码的过程中，你不仅要无端给自己添加大量的细节，还要让对方在过去牵着自己未来的鼻子走，这简直是一种耻辱。</p>
+</blockquote>
+<h2 id="该怎么做">该怎么做</h2>
+<p>软件开发是一种团队协作的社会活动。对团队提出合理的要求，是能够让整个团队协作进行的更顺畅的。当在团队协作中留下像注释这种容易让人钻空子的漏洞的时候，整个团队协作也都会因为这个洞破开一个大的缺口。如果你是靠注释来跟团队的人沟通，那也不免会遇到对方用注释跟你沟通，结果就是大家在相互牵制下浪费时间，让加班赶工变成自然。</p>
+<p>所以，以“团队成员能力低做不到写出可读性的代码”为理由来推广注释，是非常严重的错误。阴谋论一点，就是你制造了阻碍别人发展的陷阱，在这个如此强调发展的行业面前，无异于谋财害命。</p>
+<p>注释这种事情显然是要进行团队级别的强制约束。但单单是不加注释也不行，因为还是不能解决上古时代风格代码的遗留问题：这段逻辑我看不懂怎么办？</p>
+<h3 id="把代码写短点">把代码写短点</h3>
+<p>第一件事儿就是限制下程序单元的代码行数。比如每个函数最多只允许10行，并且只允许最多有3层缩进。这样你一言就能瞄清楚这个函数的主体结构和流程，真的要关注细节的时候再去对应的调用中去找。</p>
+<h3 id="把代码写清楚点">把代码写清楚点</h3>
+<p>第二件事儿，当然是要好好写清楚标识符，某个函数到底是干什么的。英语不好你甚至可以用中文，毕竟目前的大部分编程语言都支持中文标识符。当你想去用一行注释解释清楚某块代码的时候，不如选择直接抽取成一个函数，把这个函数用你刚才注释的内容命名：既作了说明，又能减少当前函数内的逻辑复杂度，让结构更清晰。</p>
+<h3 id="用例子来解释代码">用例子来解释代码</h3>
+<p>如果觉得靠标识符写清楚还不够（毕竟也没办法做语义检查），可以通过单元测试来给出实际用例，帮助解释代码。准备工作确保了输入和状态，断言确保了输出和行为，在given-when-then的三段式结构下，没有什么是不能解释清楚的。</p>
+<p>而更重要的是，当你的逻辑有改动，也可以通过增加单元测试用例来覆盖，并且这个时候的单元测试相比于注释，要可靠太多了：只要你的逻辑有break change，并且有测试覆盖的话，一定会靠出错来提示你是不是忘记了什么。</p>
+<h2 id="注释与文档">注释与文档</h2>
+<p>也有人尝试辩解说，注释一定要有，不然别人调用你代码的时候看不到注释，会问候你的。</p>
+<p>又一个本末倒置的行为。</p>
+<p>作为一个provider，要提供的应该是详尽和准确的接口调用文档，而不是简单的寥寥几句的注释。像Javadoc这种把注释用作文档生成源的工具，其最终的目的还是产生文档，方便文档和代码的集中管理，而非在强行告诉你：就应该拿注释作为文档。</p>
+<p>毕竟也没有几个consumer在调用一些开放接口（比如 api.github.com）的时候，非得扒开人家的代码看注释才知道该怎么用。</p>
+
+        
+
+    </article>
+    <!-- <div>
+        <h5>See Also</h5>
+        <ul>
+            <li><a href="/about">About Me</a></li>
+        </ul>
+    </div> -->
+    <span class="field">创建时间：2020-12-25</span>
+    <span class="field">最近更新时间：2021-02-02</span>
+    <hr>
+    <footer>
+        <ul>
+            <li><a href="/about">关于我</a></li>
+            <li><a href="/sitemap.xml">站点地图</a></li>
+            <li><a href="/rss.xml">RSS</a></li>
+            <li>Copyright &copy; KimmyLeo</li>
+        </ul>
+    </footer>
+    <script type="text/javascript">
+        document.querySelectorAll(".disabled-link").forEach(el => el.addEventListener("click", (e) => {
+            alert("链接页面不存在！");
+            e.preventDefault();
+        }));
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script
+</body>
+
+</html>
