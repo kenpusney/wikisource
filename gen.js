@@ -10,26 +10,26 @@ const Wiki = require("./src/wiki")
 
 
 function generate() {
-    const wikiAlt = new Wiki();
-    
-    glob("content/**/*.md", function (err, data) {
+  const wikiAlt = new Wiki();
 
-        loadWikiData(data, wikiAlt).forEach(item => {
-            render(item, wikiAlt).then(result => {
-                save(item.target, result);
-            });
-        })
+  glob("content/**/*.md", function (err, data) {
 
-        ejs.renderFile("template/sitemap.xml.ejs", { posts: Object.values(wikiAlt.posts) }).then(result => {
-            save("public/sitemap.xml", result);
-        })
-    });
+    loadWikiData(data, wikiAlt).forEach(item => {
+      render(item, wikiAlt).then(result => {
+        save(item.target, result);
+      });
+    })
 
-    glob("static/**/*", function (err, data) {
-        data.forEach(file => copyToPublic(file))
-    });
+    ejs.renderFile("template/sitemap.xml.ejs", { posts: Object.values(wikiAlt.posts) }).then(result => {
+      save("public/sitemap.xml", result);
+    })
+  });
+
+  glob("static/**/*", function (err, data) {
+    data.forEach(file => copyToPublic(file))
+  });
 }
 
 if (require.main === module) {
-    generate()
+  generate()
 }
