@@ -188,7 +188,8 @@
     <span class="hljs-attr">&quot;author&quot;</span>: [ <span class="hljs-string">&quot;Douglas Adam&quot;</span> ],
     <span class="hljs-attr">&quot;isbn&quot;</span>: <span class="hljs-string">&quot;....&quot;</span>
     ....
-}</code></pre>
+}
+</code></pre>
 <p>对于这条数据，我们怎么来定义他的spec如下：</p>
 <pre><code class="language-json"><span class="hljs-comment">//file: Book.type.json</span>
 {
@@ -196,7 +197,8 @@
     <span class="hljs-attr">&quot;subtitle?&quot;</span>: <span class="hljs-string">&quot;string&quot;</span>,
     <span class="hljs-attr">&quot;author&quot;</span>: <span class="hljs-string">&quot;[Person | string]&quot;</span>,
     <span class="hljs-attr">&quot;isbn&quot;</span>: <span class="hljs-string">&quot;ISBN&quot;</span>
-}</code></pre>
+}
+</code></pre>
 <p>我们逐行解读这条信息：</p>
 <p>首先，我们就定义了title这个属性，对应的值是string，其实这就是spec的格式：属性，和属性对应的类型。因为对于data-type这种spec我们依然作为JSON来处理，所以对应的类型也以字符串的方式保存。所以，对于这一项我们可以简单的理解为：title属性的类型是string。</p>
 <p>然后就是subtitle这个属性，属性名后面有一个问号，表示这项属性是可选的，同样的，其类型也是string。</p>
@@ -212,7 +214,8 @@
 }
 
 <span class="hljs-comment">//file ISBN.type.json</span>
-<span class="hljs-string">&quot;string &amp; /[0-9]{10}[0-9]{3}?/&quot;</span></code></pre>
+<span class="hljs-string">&quot;string &amp; /[0-9]{10}[0-9]{3}?/&quot;</span>
+</code></pre>
 <p>也即：Person是另外一个JSON Object, 更丰富的属性和内容，用来表示一个人（Person）。而，ISBN则非常的简单，就是一个string，只是用了一个正则表达式来做数据格式上的约束：10位或者13位数字。</p>
 <p>于是我们就可以很详细的表示我们要用到的数据究竟长成什么样子的了。</p>
 <p>同样地，我们还可以把这些格式映射到具体的编程语言里面，比如一个type spec可能就表示一个Java POJO或者一个.Net POCO，这样只要对应的语言提供了序列化和反序列化的服务和约束检查，那么就可以很轻松地把JSONSpec应用到服务的设计和构建中去了。</p>

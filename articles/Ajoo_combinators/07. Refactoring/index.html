@@ -209,7 +209,8 @@
     logger.printException(lvl, e); 
     freshline = <span class="hljs-keyword">true</span>; 
   } 
-}</code></pre>
+}
+</code></pre>
 <p>这里，Factory接口用来抽象往行首打印的前缀。这个地方之所以不是一个String，是因为考虑到生成这个前缀可能是比较昂贵的（比如打印行号，这需要创建一个临时异常对象）</p>
 <p>另外，真正的Logger接口，会负责打印所有的原始类型和Object类型，例子中我们简化了这个接口，为了演示方便。 </p>
 <p>然后，先重构timestamp: </p>
@@ -219,7 +220,8 @@
   <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">create</span><span class="hljs-params">()</span></span>{ 
     <span class="hljs-keyword">return</span> fmt.format(<span class="hljs-keyword">new</span> Date()); 
   } 
-}</code></pre>
+}
+</code></pre>
 <p>这样，就把timestamp和“行首打印”解耦了出来。 </p>
 <p>下面添加TraceBackFactory，负责打印当前行号等源代码相关信息。 
 java代码: </p>
@@ -244,7 +246,8 @@ java代码: </p>
     } 
     <span class="hljs-keyword">return</span> <span class="hljs-keyword">null</span>; 
   } 
-}</code></pre>
+}
+</code></pre>
 <p>具体的SourceLocationFormat的实现我就不写了。 </p>
 <p>注意，到现在为止，这个重构都是经典的oo的思路，划分责任，按照责任定义Factory, SourceLocationFormat等等接口，依赖注入等。完全没有co的影子。 </p>
 <p>这也说明，在co里面，我们不是不能采用oo，就象在oo里面，我们也可以围绕某个接口按照co来提供一整套的实现一样，就象在oo里面，我们也可以在函数内部用po的方法来实现某个具体功能一样。 </p>
@@ -254,7 +257,8 @@ java代码: </p>
 <pre><code class="language-java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ReturnFactory</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Factory</span></span>{ 
   <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> String s; 
   <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">create</span><span class="hljs-params">()</span></span>{<span class="hljs-keyword">return</span> s;} 
-}</code></pre>
+}
+</code></pre>
 <p>然后是两个factory的串联， </p>
 <p>java代码: </p>
 <pre><code class="language-java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ConcatFactory</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Factory</span></span>{ 
@@ -266,7 +270,8 @@ java代码: </p>
     } 
     <span class="hljs-keyword">return</span> buf.toString(); 
   } 
-}</code></pre>
+}
+</code></pre>
 <p>最后，我们把这几个零件组合在一起： </p>
 <p>java代码: </p>
 <pre><code class="language-java"><span class="hljs-function">Logger <span class="hljs-title">myprefix</span><span class="hljs-params">(Logger l)</span></span>{ 
@@ -279,7 +284,8 @@ java代码: </p>
     <span class="hljs-keyword">new</span> ReturnFactory(<span class="hljs-string">&quot; : &quot;</span>) 
   ); 
   <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> PrefixLogger(both, l); 
-}</code></pre>
+}
+</code></pre>
 <p>如此，基本上，在行首添加东西的需求就差不多了，我们甚至也可以在行尾添加东西，还可以重用这些factory的组合子。 </p>
 <p>另一点我想说明的是：这种重构是相当局部的，仅仅影响几个组合子，而并不影响整个组合子框架。 </p>
 <p>真正影响组合子框架的，是Logger接口本身的变化。假设，readonly提出了一个非常好的意见：printException应该也接受level，因为我们应该也可以选择一个exception的重要程度。 </p>
@@ -316,7 +322,8 @@ java代码: </p>
     <span class="hljs-keyword">this</span>.girl = g; 
   } 
 ... 
-}</code></pre>
+}
+</code></pre>
 <p>我们自然可以new Boy(new Girl()); </p>
 <p>没什么不好的。 </p>
 <p>但是，如果这种需要组装的类太多，那么这个组装就变成一件累人的活了。 </p>
@@ -324,11 +331,13 @@ java代码: </p>
 java代码: </p>
 <pre><code class="language-java">picocontainer container = <span class="hljs-keyword">new</span> DefaultContainer(); 
 container.registerComponentImplementation(Boy.class); 
-container.registerComponentImplementation(Girl.class); </code></pre>
+container.registerComponentImplementation(Girl.class); 
+</code></pre>
 <p>这个代码，很可能不是直接写在程序里面，而是先读取配置文件或者什么东西，然后动态地调用这段代码。 </p>
 <p>最后，使用下面的方法来取得对象： </p>
 <p>java代码: </p>
-<pre><code class="language-java">Object obj = container.getComponentInstance(Boy.class);</code></pre>
+<pre><code class="language-java">Object obj = container.getComponentInstance(Boy.class);
+</code></pre>
 <p>注意，这个container.getXXX，本身是违反ioc的设计模式的，它主动地去寻找某个组件了。所以，组件本身是忌讳调用这种api的。如果你在组件级别的代码直接依赖ioc容器的api，那么，恭喜你，你终于成功地化神奇为腐朽了。 Laughing </p>
 <p>这段代码，实际上应该出现在系统的最外围的组装程序中。 </p>
 <p>当然，这是题外话。 </p>
@@ -341,12 +350,14 @@ container.registerComponentImplementation(Girl.class); </code></pre>
 <pre><code class="language-java"><span class="hljs-function"><span class="hljs-keyword">void</span> A <span class="hljs-title">createA</span><span class="hljs-params">()</span></span>{ 
   B b = <span class="hljs-keyword">new</span> B(); 
   <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> A(b,b); 
-}</code></pre>
+}
+</code></pre>
 <p>我们只需要把b作为一个局部变量，构造完A，b就扔掉了。然而，pico里面这不成，b必须被登记在这个容器中。这就相当于你必须要把b定义成一个全局变量一样。 
 pico的对应代码： </p>
 <p>java代码: </p>
 <pre><code class="language-java">container.registerComponent(<span class="hljs-string">&quot;b&quot;</span> <span class="hljs-keyword">new</span> CachingComponentAdapter(<span class="hljs-keyword">new</span> ConstructorInjectionComponentAdapter(B.class))); 
-container.registerComponent(<span class="hljs-string">&quot;a&quot;</span>, <span class="hljs-keyword">new</span> ConstructorInjectionComponentAdapter(A.class));</code></pre>
+container.registerComponent(<span class="hljs-string">&quot;a&quot;</span>, <span class="hljs-keyword">new</span> ConstructorInjectionComponentAdapter(A.class));
+</code></pre>
 <p>这里，为了对应上面java代码中的两个参数公用一个b的实例的要求，必须把a登记成一个singleton。 CachingComponentAdapter负责singleton化某个组件，而 ConstructorInjectionComponentAdapter就是一个调用构造函数的组建匹配器。 </p>
 <p>当然，这样做其实还是有麻烦的，当container不把a登记成singleton的时候（pico缺省都登记成singleton，但是你可以换缺省不用singleton的container。），麻烦就来了。 </p>
 <p>大家可以看到，上面的createA()函数如果调用两次，会创建两个A对象，两个B对象，而用这段pico代码，调用两次getComponentInstance(&quot;a&quot;)，会生成两个A对象，但是却只有一个B对象！因为b被被迫登记为singleton了。 </p>
@@ -356,7 +367,8 @@ container.registerComponent(<span class="hljs-string">&quot;a&quot;</span>, <spa
 <pre><code class="language-java"><span class="hljs-function">A <span class="hljs-title">createA</span><span class="hljs-params">()</span></span>{ 
   B b = <span class="hljs-keyword">new</span> B(); 
   <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> A(b, b.createC(x_component)); 
-}</code></pre>
+}
+</code></pre>
 <p>现在，我们要在b组件上面调用createC()来生成一个C对象。完了，我们要的既不是构造函数，也不是工厂方法，而是在某个临时组件的基础上调用一个函数。 </p>
 <p>缺省提供的几个ComponentAdapter这时就不够用了，我们被告知要自己实现ComponentAdapter。 </p>
 <p>实际上，pico对很多灵活性的要求的回答都是：自己实现ComponentAdapter。 </p>
@@ -374,7 +386,8 @@ container.registerComponent(<span class="hljs-string">&quot;a&quot;</span>, <spa
 <pre><code class="language-java">b_component = Components.ctor(B.class).singleton(); 
 a_component = Components.ctor(A.class) 
   .withArgument(<span class="hljs-number">0</span>, b_component) 
-  .withArgument(<span class="hljs-number">1</span>, b_component.method(<span class="hljs-string">&quot;createC&quot;</span>));</code></pre>
+  .withArgument(<span class="hljs-number">1</span>, b_component.method(<span class="hljs-string">&quot;createC&quot;</span>));
+</code></pre>
 <p>b_component不需要登记在容器中，它作为局部component存在。 
 是不是非常declarative呢？ </p>
 <p>下一节，你会发现，用面向组合子的方法，ioc容器这种东西真的不难。我们不需要仔细分析各种需求，精心分配责任。让我们再次体验一下吊儿郎当不知不觉间就天下大治的感觉吧。 </p>

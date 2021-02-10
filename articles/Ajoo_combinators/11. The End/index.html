@@ -197,27 +197,27 @@ Member member = Members.GetMemberByID(id);
         <span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">public</span> Member <span class="hljs-title">GetMemberByID</span><span class="hljs-params">(string id)</span> 
         </span>{ 
                 string type = GetMemberTypeByID(id); 
-
+                
                 <span class="hljs-keyword">switch</span>(type) 
                 { 
                         <span class="hljs-keyword">case</span> <span class="hljs-string">&quot;金卡&quot;</span>: 
                                 <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> GoldenMember(); 
-
+                        
                         <span class="hljs-keyword">case</span> <span class="hljs-string">&quot;银卡&quot;</span> 
                                 <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> SilverMember(); 
                 } 
-
+                
                 <span class="hljs-keyword">return</span> <span class="hljs-keyword">null</span>; 
         } 
-
+        
         <span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">protected</span> string <span class="hljs-title">GetMemberTypeByID</span><span class="hljs-params">(id)</span> 
         </span>{ 
                 string type; 
-
+        
                 <span class="hljs-comment">// get type by id </span>
                 ... 
-
-
+        
+        
                 <span class="hljs-keyword">return</span> type;        
         } 
 } 
@@ -227,12 +227,12 @@ Member member = Members.GetMemberByID(id);
         <span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-title">Member</span><span class="hljs-params">()</span> 
         </span>{ 
         } 
-
+        
         <span class="hljs-function">virtual <span class="hljs-keyword">public</span> <span class="hljs-title">GetDiscount</span><span class="hljs-params">()</span> 
         </span>{ 
                 <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>; 
         } 
-
+        
         <span class="hljs-function">virtual <span class="hljs-keyword">public</span> <span class="hljs-title">GetReturnPoint</span><span class="hljs-params">()</span> 
         </span>{ 
                 <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>; 
@@ -245,7 +245,7 @@ Member member = Members.GetMemberByID(id);
         </span>{ 
                 <span class="hljs-keyword">return</span> <span class="hljs-number">10</span>; 
         } 
-
+        
         <span class="hljs-function">override <span class="hljs-keyword">public</span> <span class="hljs-title">GetReturnPoint</span><span class="hljs-params">()</span> 
         </span>{ 
                 <span class="hljs-keyword">return</span> <span class="hljs-number">1.5</span>; 
@@ -258,12 +258,13 @@ Member member = Members.GetMemberByID(id);
         </span>{ 
                 <span class="hljs-keyword">return</span> <span class="hljs-number">5</span>; 
         } 
-
+        
         <span class="hljs-function">override <span class="hljs-keyword">public</span> <span class="hljs-title">GetReturnPoint</span><span class="hljs-params">()</span> 
         </span>{ 
                 <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>; 
         } 
-} </code></pre>
+} 
+</code></pre>
 <p>也就是说，你不是说不同级别的客户有不同的折扣策略吗？策略模式啊。老子design pattern白学了？哈哈。 </p>
 <p>这个方案其实不错。简明易懂。可以轻易扩展出白金卡，钻石卡，九天十地菩萨摇头怕怕霹雳金刚雷电卡等等。 </p>
 <p>不过，age0同学开始憋坏了。他不知道跟老板进了什么谗言，老板愣插进来乱七八糟地提了一大堆新的需求。比如： 
@@ -291,7 +292,7 @@ java代码: </p>
 <pre><code class="language-java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">BeanShellDiscountStrategy</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">DiscountStrategy</span> </span>{ 
     <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> String DISCOUNT_BY_POINT = <span class="hljs-string">&quot;if(member.point &gt; 5) return 0.05; else return 0.02;&quot;</span>; 
     <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> String DISCOUNT_BY_GENDER = <span class="hljs-string">&quot;if(member.gender == 0) return 0.01; else return 0.03;&quot;</span>; 
-
+    
     <span class="hljs-keyword">private</span> Interpreter i = <span class="hljs-keyword">new</span> Interpreter(); 
     <span class="hljs-keyword">private</span> String discountScript; 
 
@@ -320,7 +321,8 @@ java代码: </p>
     <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setDiscountScript</span><span class="hljs-params">(String discountScript)</span> </span>{ 
         <span class="hljs-keyword">this</span>.discountScript = discountScript; 
     } 
-}</code></pre>
+}
+</code></pre>
 <p>这个方法，把多变的业务逻辑转移到bean shell脚本中，一定程度地减少了工作量。我们可以用ioc，把不同的脚本注射进去来得到不同的行为。 </p>
 <p>然而，这个方法对复杂的业务逻辑并没有提供什么本质性的解决方案。它没有提供把简单的规则组合成复杂规则的方法。比如前面age0给我们提出的“排他 性”。三个规则，如果第一个成功了，就用第一个，否则顺序执行第二个，第三个，直到某一个规则成功。这种逻辑，实际上已经不是在操作具体折扣，而是在操作 规则本身。 </p>
 <p>我们希望能够写： 
@@ -340,7 +342,8 @@ Rule boss_likes = and(single, young, good);
 Rule boss_pays = and(boss_likes, 大功告成able); 
 Rule paid_by_boss = boss_pays.then(<span class="hljs-number">120</span>); 
 Rule big_discount = boss_likes.then(<span class="hljs-number">50</span>); 
-Rule boss_afair = exclusive(paid_by_boss, big_discount); </code></pre>
+Rule boss_afair = exclusive(paid_by_boss, big_discount); 
+</code></pre>
 <p>哈，老板啊，您的代号为“选美”的折扣计划搞定了。 </p>
 <p>嗯。yy结束。理想是真美好啊。那么，怎么变成现实呢？熟读经典yy文学（武侠小说，比如说）的我们，一定知道被狗屎运缠身所烦恼的主角的成功方 法，那就是：夏梦————对不起，是“瞎蒙”，拼音输入给搞错了。（传说yy大师金老先生从前的yy情人就叫夏梦还是“瞎蒙”来着？小生八卦功力浅薄，也 不知是否和老先生的作品yy风格有不可说的联系？） </p>
 <p>就是说，管你东邪吸毒多狠，管你大轮明王多拽，老子我一不用研究你的武功招式，二不用找领导给你穿小鞋，闭着眼睛，乱走一气凌波微步你也拿我没辙。咱就是运气好，你咬我？ </p>
@@ -353,7 +356,8 @@ Rule boss_afair = exclusive(paid_by_boss, big_discount); </code></pre>
 <p>java代码: </p>
 <pre><code class="language-java"><span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">Rule</span></span>{ 
   <span class="hljs-function"><span class="hljs-keyword">boolean</span> <span class="hljs-title">apply</span><span class="hljs-params">(RuleContext facts, Variant result)</span></span>; 
-}</code></pre>
+}
+</code></pre>
 <p>返回的boolean值表现这个rule是否可用。 
 那个Variant类型的result是一个placeholder，用来接收rule生成的结果。 
 RuleContext给rule提供所有需要的信息。 </p>
@@ -370,7 +374,8 @@ ExclusiveRule用来实现排他性组合： </p>
     } 
     <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>; 
   } 
-}</code></pre>
+}
+</code></pre>
 <p>java代码: </p>
 <p>IfElseRule用来实现简单的if-else逻辑：</p>
 <pre><code class="language-java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">IfElseRule</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Rule</span></span>{ 
@@ -388,7 +393,8 @@ ExclusiveRule用来实现排他性组合： </p>
       <span class="hljs-keyword">return</span> alternative.apply(facts, result); 
     } 
   } 
-}</code></pre>
+}
+</code></pre>
 <p>NotRule用来把一个rule的bool返回值取反： 
 java代码: </p>
 <pre><code class="language-java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">NotRule</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Rule</span></span>{ 
@@ -397,7 +403,8 @@ java代码: </p>
     <span class="hljs-keyword">if</span>(!rule.apply(facts, result)) <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>; 
     result.setBoolean(!result.getBoolean()); 
   } 
-}</code></pre>
+}
+</code></pre>
 <p>AndRule用来把两个rule的bool值进行逻辑与： 
 java代码: </p>
 <pre><code class="language-java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">AndRule</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Rule</span></span>{ 
@@ -416,7 +423,8 @@ java代码: </p>
     result.setBoolean(<span class="hljs-keyword">true</span>); 
     <span class="hljs-keyword">return</span> <span class="hljs-keyword">true</span>; 
   } 
-}</code></pre>
+}
+</code></pre>
 <p>类似地，OrRule用来进行逻辑或。 </p>
 <p>其他的加减乘除，取最大值，都可以用类似的方法实现。我就不赘述了。 </p>
 <p>另外一点需要注意的，是我们实现了ifelse，但是前面所述的组合逻辑中我们只是说如果mm漂漂就如何，没有说不漂漂如何。不能简单地认为不漂漂就不给折扣，在排它性组合中，一个规则是否被应用了决定后续其它规则是否有机会被执行。 </p>
@@ -426,7 +434,8 @@ java代码: </p>
   <span class="hljs-function"><span class="hljs-keyword">boolean</span> <span class="hljs-title">apply</span><span class="hljs-params">(RuleContext facts, Variant result)</span></span>{ 
     <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>; 
   } 
-} </code></pre>
+} 
+</code></pre>
 <p>这样，new IfElseRule(ppmm_rule, big_discount_rule, new NilRule());就是一个仅仅对ppmm有效的rule。 </p>
 <p>上面的这些Rule的基本组合实现，还是有一些重构的空间的。不过目前的实现更加简单，也足以表达CO的思想，所以，进一步的重构我就不做了。 </p>
 <p>在前面YY时，我们用了rule1.then(...), rule.not()这种东西。而现在的Rule接口只有一个apply()，要做rule.not()必须写&quot;new NotRule(rule)&quot;，语法上相对繁琐一些。 </p>
@@ -442,14 +451,16 @@ java代码: </p>
     <span class="hljs-keyword">return</span> <span class="hljs-keyword">true</span>; 
   } 
   <span class="hljs-function"><span class="hljs-keyword">abstract</span> Object <span class="hljs-title">run</span><span class="hljs-params">(RuleContext facts)</span></span>; 
-}</code></pre>
+}
+</code></pre>
 <p>对取得性别这个原子规则，我们就可以这样写： 
 java代码: </p>
 <pre><code class="language-java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">GenderRule</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">SimpleRule</span></span>{ 
   <span class="hljs-function">Object <span class="hljs-title">run</span><span class="hljs-params">(RuleContext facts)</span></span>{ 
     <span class="hljs-keyword">return</span> facts.getGender(); 
   } 
-} </code></pre>
+} 
+</code></pre>
 <p>这些原子规则可能不多，也可能不少。不过，总之是比把所有逻辑都实现在一起要简单多了。而且，如果使用一些脚本语言来包装这些规则的话，这些原子规则往往可以很简单地从closure中直接构造出来，不用每次单独写一个java类。 </p>
 <p>实际上，当你发现你需要在一个Rule实现里面放很多代码的时候，往往可以停下来想一想了，很有可能这个Rule本身可以有若干个小规则组合而成，不用费劲写了。 </p>
 <p>最后，让我们精彩回放段呆子凌波微步戏鸠摩智的片断（一个应用我们这个mini rule engine的测试代码）： </p>
@@ -474,23 +485,23 @@ java代码: </p>
     <span class="hljs-keyword">final</span> Rule platinum_member = MyRules.discountByMember(<span class="hljs-string">&quot;platinum&quot;</span>, <span class="hljs-number">0.2</span>); 
     <span class="hljs-keyword">final</span> Rule by_member = MyRules.any(<span class="hljs-keyword">new</span> Rule[]{platinum_member, 
         gold_member, silver_member}); 
-
-
-
+    
+    
+    
     <span class="hljs-keyword">final</span> Rule is_female = MyRules.isGender(<span class="hljs-string">&quot;female&quot;</span>); 
     <span class="hljs-keyword">final</span> Rule is_female_day = MyRules.isMonth(Calendar.MARCH) 
         .and(MyRules.isDay(<span class="hljs-number">8</span>)); 
     <span class="hljs-keyword">final</span> Rule female_discount = is_female.and(is_female_day) 
         .then(MyRules.discount(<span class="hljs-number">0.05</span>)); 
-
-
-
+    
+    
+    
     <span class="hljs-keyword">final</span> Rule tvspeaker = MyRules.purchased(<span class="hljs-keyword">new</span> String[]{<span class="hljs-string">&quot;tv&quot;</span>,<span class="hljs-string">&quot;speaker&quot;</span>}) 
         .then(MyRules.discount(<span class="hljs-number">0.05</span>)); 
     <span class="hljs-keyword">final</span> Rule tvspeakerdvd = MyRules.purchased(<span class="hljs-keyword">new</span> String[]{<span class="hljs-string">&quot;tv&quot;</span>,<span class="hljs-string">&quot;speaker&quot;</span>,<span class="hljs-string">&quot;dvd&quot;</span>}) 
         .then(MyRules.discount(<span class="hljs-number">0.07</span>)); 
     <span class="hljs-keyword">final</span> Rule by_purchase = MyRules.any(<span class="hljs-keyword">new</span> Rule[]{tvspeakerdvd, tvspeaker}); 
-
+    
     <span class="hljs-keyword">final</span> Rule final_discount = MyRules.productDouble(<span class="hljs-keyword">new</span> Rule[]{ 
       by_member, female_discount, by_purchase 
     }); 
@@ -516,7 +527,8 @@ java代码: </p>
     assertTrue(getRule().apply(mrc, result)); 
     assertEquals(<span class="hljs-number">0.837</span>*<span class="hljs-number">0.95d</span>, result.getDouble()); 
   } 
-}</code></pre>
+}
+</code></pre>
 <p>以上是直接用java来使用这个库。更爽一点的，是用脚本语言做一个dsl出来，我用jaskell做了一个，长成这个样子：</p>
 <p>我刚刚完成了用jaskell给我的这个rule combinator包装的外壳，结果程序如下： 
 jaskell代码: </p>
@@ -543,7 +555,8 @@ jaskell代码: </p>
   tvspeakerdvd = discount <span class="hljs-number">0.07</span> `when purchased_all[<span class="hljs-string">&quot;tv&quot;</span>, <span class="hljs-string">&quot;speaker&quot;</span>, <span class="hljs-string">&quot;dvd&quot;</span>]; 
   by_purchase = cre.any[tvspeakerdvd, tvspeaker]; 
   final_discount = cre.fold (*) <span class="hljs-number">1</span> [by_member, female_discount, by_purchase]; 
-<span class="hljs-title">end</span></code></pre>
+<span class="hljs-title">end</span>
+</code></pre>
 <p>那个&quot;do{product=purchased} $&quot;对应的就是&quot;do product&lt;-purchased&quot;。 </p>
 <p>这个Rulet库的api文档可以在这里看到：</p>
 <p>Rulet API</p>

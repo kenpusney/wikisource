@@ -187,7 +187,8 @@
 <pre><code class="language-java"><span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">Logger</span></span>{ 
   println(<span class="hljs-keyword">int</span> level, String msg); 
   printException(Throwable e); 
-}</code></pre>
+}
+</code></pre>
 <p>好，路漫漫而修远兮，我们就这样按照上帝的昭示上路吧，虽然前路云封雾锁。 </p>
 <p>首先，任何组合子系统的建立，都起步于最最基本最最简单的组合子。然后再一步步组合。 </p>
 <p>比如，布尔代数必然起步于true和false；自然数起步于0，1，然后就可以推演出整个系统。 </p>
@@ -198,7 +199,8 @@
 <pre><code class="language-java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">NopLogger</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Logger</span></span>{ 
   <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">println</span><span class="hljs-params">(<span class="hljs-keyword">int</span> level, String msg)</span></span>{} 
   <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">printException</span><span class="hljs-params">(Throwable e)</span></span>{} 
-}</code></pre>
+}
+</code></pre>
 <p>（注，不要小看这个什么都不做的Logger，它的作用大着呢。你能想象一个没有0的整数系统吗？） </p>
 <p>什么是1呢？一个直接向文件中打印信息的应该就是一个1了。 
 伪码如下： </p>
@@ -210,7 +212,8 @@
   <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">printException</span><span class="hljs-params">(Throwable e)</span></span>{ 
     write exceptioon to log file. 
   } 
-}</code></pre>
+}
+</code></pre>
 <p>那么，怎么实现这个类呢？ </p>
 <p>这里，我们遇到一个东西要抉择，文件打开是要关闭的。那么谁负责打开文件？谁负责关闭？是否要在构造函数中new FileOutputStream()？，然后再提供一个close()函数来close这个stream？ </p>
 <p>答案是：不要。 </p>
@@ -231,7 +234,8 @@
   WriterLogger(PrintWriter writer){ 
      <span class="hljs-keyword">this</span>.writer = writer; 
   } 
-}</code></pre>
+}
+</code></pre>
 <p>“哈！还说什么CO。你这不是剽窃ioc pattern吗？” 
 完了，被抓个现形。还真是ioc pattern。其实，世界上本来没有什么新东西，所谓“方法论”，本来是一种思考方法，而不是说形式上必然和别人不同。不过，说我剽窃，我就剽窃吧。 </p>
 <p>好。最简单的原子写出来了。希望到现在，你还是会觉得：“介，介有什么呀？” </p>
@@ -254,7 +258,8 @@
   SequenceLogger(Logger[] ls){ 
     <span class="hljs-keyword">this</span>.loggers = ls; 
   } 
-}</code></pre>
+}
+</code></pre>
 <p>2。逻辑分支。当消息的重要程度等于某一个级别的时候，写logger1，否则写logger2。 
 java代码: </p>
 <pre><code class="language-java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">FilteredLogger</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Logger</span></span>{ 
@@ -269,7 +274,8 @@ java代码: </p>
     <span class="hljs-keyword">if</span>(lvl==ERROR) logger1.printException(e); 
     <span class="hljs-keyword">else</span> logger2.printException(e); 
   } 
-}</code></pre>
+}
+</code></pre>
 <p>为了简洁，下面的例子我就不写构造函数了。 </p>
 <p>3。忽略。当消息的重要程度大于等于某一个值的时候，我们写入logger1，否则写入logger2。 
 java代码: </p>
@@ -285,7 +291,8 @@ java代码: </p>
     <span class="hljs-keyword">if</span>(lvl&lt;=ERROR) logger1.printException(e); 
     <span class="hljs-keyword">else</span> logger2.printException(e); 
   } 
-}</code></pre>
+}
+</code></pre>
 <p>其实，2和3本来可以统一成一个组合规则的，都是根据消息重要程度来判断logger走向的。如果我用的是一个函数式语言，我会毫不犹豫地用一个predicate函数来做这个抽象。 
 可惜，java中如果我要这么做，就要引入一个额外的interface，还要多做两个adapter来处理ignore和filter，就为了节省一个类和几行代码，这样做感觉不是很值得，所以就keep it stupid了。 </p>
 <p>对了。我说“CO不看需求”了么？如果说了，对不起，我撒谎了。 
@@ -303,7 +310,8 @@ CO确实不是一个以需求为中心的方法论。它有自己的组合系统
   <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">printException</span><span class="hljs-params">(Throwable e)</span></span>{ 
      out.println(e.getMessage()); 
   } 
-} </code></pre>
+} 
+</code></pre>
 <p>5。对了，该处理NeptuneException了。如果一个exception是NeptuneException，打印execution trace。 </p>
 <p>java代码: </p>
 <pre><code class="language-java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">NeptuneExceptionLogger</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Logger</span></span>{ 
@@ -320,7 +328,8 @@ CO确实不是一个以需求为中心的方法论。它有自己的组合系统
       logger.printException(e); 
     } 
   } 
-} </code></pre>
+} 
+</code></pre>
 <p>6。对EvaluationException，照猫画虎。 
 java代码: </p>
 <pre><code class="language-java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">JaskellExceptionLogger</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Logger</span></span>{ 
@@ -337,7 +346,8 @@ java代码: </p>
       logger.printException(e); 
     } 
   } 
-} </code></pre>
+} 
+</code></pre>
 <p>7。在每行消息前打印系统时间。 
 java代码: </p>
 <pre><code class="language-java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TimestampLogger</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Logger</span></span>{ 
@@ -349,7 +359,8 @@ java代码: </p>
     logger.println(ERROR, <span class="hljs-keyword">new</span> Date().toString()+<span class="hljs-string">&quot;: &quot;</span>); 
     logger.printException(e); 
   } 
-}</code></pre>
+}
+</code></pre>
 <p>这个类其实可以再注射近来一个DateFormat来控制日期格式。但是这不是重点，我们忽略掉了它。 
 可是，这个类有一个很别扭的地方，在printException中，我们必须要把系统时间单独打印在一行，然后再打印异常信息。 </p>
 <p>这可不是我们想要的效果。我们本来是想让系统时间出现在同一行的。 
@@ -378,7 +389,8 @@ java代码: </p>
     logger.printException(e); 
     freshline = <span class="hljs-keyword">true</span>; 
   } 
-}</code></pre>
+}
+</code></pre>
 <p>当然，前面的一些组合子也都要增加这个print函数。相信这应该不难。就留给大家做个练习吧。 </p>
 <p>好啦。到现在，我们手里已经有两个基本组合子，7个组合规则。应该已经可以组合出来不少有意义没意义的东西了。 </p>
 <p>为了避免写一大堆的new和冗长的类名字，我们做一个facade类，来提供简短点的名字，节省我们一些键盘损耗。 </p>
@@ -397,7 +409,8 @@ java代码: </p>
   <span class="hljs-function"><span class="hljs-keyword">static</span> Logger <span class="hljs-title">ignore</span><span class="hljs-params">(...)</span></span>{...} 
   <span class="hljs-function"><span class="hljs-keyword">static</span> Logger <span class="hljs-title">timestamp</span><span class="hljs-params">(...)</span></span>{...} 
   ... 
-}</code></pre>
+}
+</code></pre>
 <p>这样，在用这些组合子的时候大概代码能够好看一点吧。 </p>
 <p>好了，走了这么远，（虽然很多人可能还是觉得根本没看见什么激动人心的东西吧？都是简单得不能再简单的小类，有什么了不起的呢？）。让我们停下脚步，看看这么信马由缰把我们带到了哪里吧。 </p>
 <p>下一回，我们会试着用这些组合子和组合规则来看看能不能对付前面提出的那些乱七八糟的需求。</p>

@@ -187,11 +187,13 @@
 
 <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">fnTakesString</span>(<span class="hljs-params">s: <span class="hljs-built_in">string</span></span>) </span>{
     <span class="hljs-keyword">return</span> s;
-}</code></pre>
+}
+</code></pre>
 <p>然后我们尝试用 TypeScript 编译器（<code>tsc</code>）编译下面这段代码：</p>
 <pre><code class="language-typescript">fnTakesString(fnRetrunsString());
 fnTakesString(fnDoesNothing());
-fnTakesString(fnAcceptsNumberReturnsEitherNumberOrString(-<span class="hljs-number">1</span>));</code></pre>
+fnTakesString(fnAcceptsNumberReturnsEitherNumberOrString(-<span class="hljs-number">1</span>));
+</code></pre>
 <p>各位可以简单动手试一下，或者细想一下会发生的事情再继续阅读。这里到底 TypeScript 到底会对这段代码怎么处理，又回报什么错误。</p>
 <p>我们插个话题，渐进式类型（Gradual Typing）。</p>
 <h3 id="渐进式类型-gradual-typing">渐进式类型 Gradual Typing</h3>
@@ -216,12 +218,14 @@ fnTakesString(fnAcceptsNumberReturnsEitherNumberOrString(-<span class="hljs-numb
     }
 
     <span class="hljs-comment">// more IFs ...</span>
-}</code></pre>
+}
+</code></pre>
 <p>因为 JavaScript 是动态类型语言，我们没办法在写代码的时候就知道参数<code>param</code>的值，于是只好写大量的<strong>守卫（guard）代码</strong>来对类型进行判断和检查。而往往这个时候就非常需要一个特性，让这个编程语言能够给你在这一部分做个限制。</p>
 <p>比如同样的场景放在 Java 里面，就会是这样子的：</p>
 <pre><code class="language-java"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">doSomethingBasedOnTypeOfParam</span><span class="hljs-params">(String param)</span> </span>{
     <span class="hljs-comment">// do with string</span>
-}</code></pre>
+}
+</code></pre>
 <p>同样的调用代码<code>doSomethingBasedOnTypeOfParam(0)</code>，在 Java 里面就会造成<strong>编译错误</strong>。</p>
 <p>这就是静态类型存在的场景。这样做的好处是提前暴露调用方的错误操作，并且减轻接口提供方的负担。在这种情况下约定的接口保持一致，就不会破坏整个前后协作上的一致性。做到了这种程度，我们就可以说这样的程序是<strong>类型安全</strong>的（type safe）。</p>
 <p>静态类型语言就会有一个这种<strong>类型安全检查</strong>（type checking）的过程，确保程序中所有的代码复合类型安全性要求。但是这个过程都是在编译时完成的，没办法做到运行时的保障。换句话说当你尝试绕过静态类型检查，在运行时取到函数入口，随便塞些什么作为参数调用的时候，该出错的还是会出错；或者适用类型降级的方式，比如参数入口用<code>Map&lt;String, Object&gt;</code>，给自己制造麻烦。</p>
@@ -235,14 +239,16 @@ fnTakesString(fnAcceptsNumberReturnsEitherNumberOrString(-<span class="hljs-numb
 
 BaseObject.prototype.defineMethod = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">name, fn</span>) </span>{
     BaseObject.prototype[name] = fn;
-};</code></pre>
+};
+</code></pre>
 <p>你永远都不知道 <code>BaseObject</code> 的对象会在运行时多出什么诡异的方法来，而这也正是很多基础框架会做的事情：读到一些模版或者配置，编译处理之后在 JavaScript 运行时生成一些对象。这个时候只能靠框架设计者自觉地提供合理靠谱的<code>.d.ts</code>来确保类型检查了。</p>
 <p>但撇开这些坑人的框架，剩下的部分 TypeScript 可以充分胜任。</p>
 <h3 id="类型检查和推导">类型检查和推导</h3>
 <p>我们回到前面提到的三行代码：</p>
 <pre><code class="language-typescript">fnTakesString(fnRetrunsString());
 fnTakesString(fnDoesNothing());
-fnTakesString(fnAcceptsNumberReturnsEitherNumberOrString(-<span class="hljs-number">1</span>));</code></pre>
+fnTakesString(fnAcceptsNumberReturnsEitherNumberOrString(-<span class="hljs-number">1</span>));
+</code></pre>
 <ul>
 <li>第一行是类型安全的，TypeScript 也不会向你抱怨什么。</li>
 <li>第二行就开始出问题了：<code>void</code>不是<code>string</code>。</li>
@@ -253,10 +259,12 @@ fnTakesString(fnAcceptsNumberReturnsEitherNumberOrString(-<span class="hljs-numb
 <pre><code class="language-typescript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">fnRetrunsString</span>(<span class="hljs-params"></span>): <span class="hljs-title">string</span>
 <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">fnDoesNothing</span>(<span class="hljs-params"></span>): <span class="hljs-title">void</span>
 <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">fnAcceptsNumberReturnsEitherNumberOrString</span>(<span class="hljs-params">s: <span class="hljs-built_in">number</span></span>): <span class="hljs-title">string</span> | <span class="hljs-title">number</span>
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">fnTakesString</span>(<span class="hljs-params">s: <span class="hljs-built_in">string</span></span>): <span class="hljs-title">string</span></span></span></span></span></code></pre>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">fnTakesString</span>(<span class="hljs-params">s: <span class="hljs-built_in">string</span></span>): <span class="hljs-title">string</span></span></span></span></span>
+</code></pre>
 <p>这四个类型签名基本上跟代码和我们希望表达的逻辑是一致的。</p>
 <p>而如果你尝试把 <code>fnDoesNothing</code> 的定义修改成：</p>
-<pre><code class="language-typescript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">fnDoesNothing</span>(<span class="hljs-params"></span>): <span class="hljs-title">any</span> </span>{}</code></pre>
+<pre><code class="language-typescript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">fnDoesNothing</span>(<span class="hljs-params"></span>): <span class="hljs-title">any</span> </span>{}
+</code></pre>
 <p>会发现<code>fnTakesString(fnDoesNothing())</code>的错误提示不存在了。这个操作就是在错误的引导 TypeScript 的类型检查，因为 any 就是来摆脱强制类型检查用的，加上了 any 反倒是回产生错误的结果。</p>
 <p>那假设你真的需要一个通用类型，又不想破坏调用方的类型契约。使用并类型（即前面出现的<code>string | number</code>或者会参与强制检查的<code>Object</code>类型会更好。</p>
 <p>这个例子中，对于 <code>fnDoesNothing</code>，就可以变为：</p>
@@ -264,7 +272,8 @@ fnTakesString(fnAcceptsNumberReturnsEitherNumberOrString(-<span class="hljs-numb
 <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">fnDoesNothing</span>(<span class="hljs-params"></span>): <span class="hljs-title">Object</span> | <span class="hljs-title">void</span> </span>{}
 
 <span class="hljs-comment">// 也可以选择对这个类型做一个alias</span>
-<span class="hljs-keyword">type</span> SafeAny = <span class="hljs-built_in">Object</span> | <span class="hljs-built_in">void</span>;</code></pre>
+<span class="hljs-keyword">type</span> SafeAny = <span class="hljs-built_in">Object</span> | <span class="hljs-built_in">void</span>;
+</code></pre>
 <p>于是<code>fnTakesString(fnDoesNothing())</code>调用中的错误提示又回来了。</p>
 <h3 id="typescript-不能干什么">TypeScript 不能干什么</h3>
 <p>前面已经说了，TypeScript 只能用于编译时的类型检查，所有超越了编译时的过程都很难通过 TypeScript 来做限制了。</p>
@@ -307,7 +316,8 @@ fnTakesString(fnAcceptsNumberReturnsEitherNumberOrString(-<span class="hljs-numb
 Party.validate(party);
 
 <span class="hljs-comment">// 生成示例数据</span>
-Party.declval();</code></pre>
+Party.declval();
+</code></pre>
 <h2 id="typescript-最佳实践">TypeScript 最佳实践</h2>
 <p>很明显即便是静态类型检查，TypeScript 也还是能阻止很多愚蠢的错误的。所以如果团队成员能够广泛接受静态类型所带来的思维转变，引入 TypeScript 是一个百利无一害的事情。这里就针对本文讨论的一些话题，聊一聊 TypeScript 的最佳实践。</p>
 <h3 id="不要使用-any">不要使用 any</h3>

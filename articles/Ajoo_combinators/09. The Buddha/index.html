@@ -187,7 +187,8 @@ java代码: </p>
     <span class="hljs-keyword">if</span>(val!=<span class="hljs-keyword">null</span>) <span class="hljs-keyword">return</span> val.getClass(); 
     <span class="hljs-keyword">else</span> <span class="hljs-keyword">return</span> c.verify(dep); 
   } 
-}</code></pre>
+}
+</code></pre>
 <p>代码没什么可说的，就是最简单的singleton模式。 </p>
 <p>用这个组合子，我们可以对任意的Component做singleton。 </p>
 <p>下面接着说monad。 </p>
@@ -197,7 +198,8 @@ java代码: </p>
 <pre><code class="language-java"><span class="hljs-function"><span class="hljs-keyword">void</span> A <span class="hljs-title">createA</span><span class="hljs-params">()</span></span>{ 
   B b = <span class="hljs-keyword">new</span> B(...); 
   <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> A(b,b, ...); 
-}</code></pre>
+}
+</code></pre>
 <p>用bind，我们的思路可以是这样： 
 1。用B的构造函数生成一个Component。 
 2。这个Component生成一个对象， 
@@ -211,7 +213,8 @@ java代码: </p>
       <span class="hljs-keyword">new</span> WithArgument(a, <span class="hljs-number">0</span>, arg), 
     <span class="hljs-number">1</span>, arg); 
   } 
-}); </code></pre>
+}); 
+</code></pre>
 <p>Components.value(Object)是我们写的一个对ValueComponent的封装静态函数。 
 为了避免总写冗长的new SomeComponent(...)，我们把一些常用的基本Component都写成名字较短的静态函数，放在Components类里面。 </p>
 <p>这样，我们可以写Components.value(obj)，而不是new ValueComponent(obj)。 
@@ -232,7 +235,8 @@ cc.value(obj)。舒服些了吧？ </p>
   <span class="hljs-keyword">else</span>{ 
     <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> Y(a, ...).getX(...); 
   } 
-}</code></pre>
+}
+</code></pre>
 <p>这里，所有的省略号都代表可能需要从容器解析的参数。使用高阶Component对象而不是直接调用createX()函数的一个原因，就是我们想要把依赖解析隐藏起来并且集中灵活地配置和管理。 </p>
 <p>对此，我们可以写成： 
 java代码: </p>
@@ -255,12 +259,13 @@ java代码: </p>
               <span class="hljs-keyword">return</span> Components.method(y, <span class="hljs-string">&quot;getX&quot;</span>); 
             } 
           }); 
-
+          
         } 
       } 
     }); 
   } 
-});</code></pre>
+});
+</code></pre>
 <p>稍微有点绕，如果你到此有点糊涂的话，请重温一下前面的简单的bind的例子，只要体会了bind的具体意义，上面的代码不过是几层bind的嵌套。 </p>
 <p>好，如果你理解了bind，那么应该能够看懂上面的这段代码了。它其实就是那个createX函数的严格翻译。 </p>
 <p>功能确实很强大了，就是这代码写起来这个烦啊！对比一下createX和这个高阶版本吧。我发现如果我多看几眼这个所谓的&quot;co&quot;的代码，我简直都要吐！如果说createX这个函数的代码是正常人说话，那么这个高阶代码就是唐僧念经：“南无阿弥陀佛，南无阿弥陀佛，南无阿弥陀佛...”，天啊！ </p>
@@ -282,10 +287,12 @@ java代码: </p>
   <span class="hljs-function"><span class="hljs-keyword">public</span> Component <span class="hljs-title">bind</span><span class="hljs-params">(Object obj)</span></span>{ 
     <span class="hljs-keyword">return</span> Components.method(obj, <span class="hljs-string">&quot;method&quot;</span>); 
   } 
-});</code></pre>
+});
+</code></pre>
 <p>而写成： 
 java代码: </p>
-<pre><code class="language-java">c1.method(<span class="hljs-string">&quot;method&quot;</span>);</code></pre>
+<pre><code class="language-java">c1.method(<span class="hljs-string">&quot;method&quot;</span>);
+</code></pre>
 <p>可以避免写： 
 java代码: </p>
 <pre><code class="language-java"><span class="hljs-keyword">new</span> BoundComponent(c1, <span class="hljs-keyword">new</span> Binder(){ 
@@ -295,10 +302,12 @@ java代码: </p>
     } 
     <span class="hljs-keyword">else</span> <span class="hljs-keyword">return</span> b; 
   } 
-});</code></pre>
+});
+</code></pre>
 <p>而写成： 
 java代码: </p>
-<pre><code class="language-java">c1.ifelse(a,b);</code></pre>
+<pre><code class="language-java">c1.ifelse(a,b);
+</code></pre>
 <p>等等等等。 </p>
 <p>这样做，从架构上确实有点损害，我们牺牲了“围绕接口”的原则，而改为围绕抽象类了。 </p>
 <p>但是，从实际效果考虑，我发现它损失的架构上的美感，远远比不上它带来的编码上的方便程度。谁让我们用的是java呢，世上没有十全十美的事情，就凑合吧。 </p>
@@ -315,7 +324,8 @@ java代码: </p>
         .method(<span class="hljs-string">&quot;getX&quot;</span>) 
     ); 
   } 
-});</code></pre>
+});
+</code></pre>
 <p>稍微好些了。而如果我们不需要给Y的构造函数指定参数，那么效果还会更好。 
 比如对 
 java代码: </p>
@@ -327,7 +337,8 @@ java代码: </p>
   <span class="hljs-keyword">else</span>{ 
     <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> Y(...).getX(...); 
   } 
-}</code></pre>
+}
+</code></pre>
 <p>高阶代码会变成： 
 java代码: </p>
 <pre><code class="language-java">Component a_component = Components.static_method(A.class, <span class="hljs-string">&quot;instance&quot;</span>); 
@@ -336,7 +347,8 @@ java代码: </p>
     Components.ctor(Y.class) 
       .withArgument(<span class="hljs-number">0</span>, Components.value(a)) 
       .method(<span class="hljs-string">&quot;getX&quot;</span>) 
-); </code></pre>
+); 
+</code></pre>
 <p>又简洁了不少。 </p>
 <p>当然，说实话，如果我们把情况任意复杂化，比如： </p>
 <p>java代码: </p>
@@ -345,7 +357,8 @@ java代码: </p>
   b = B.createB(a, ...); 
   c = C.createC(a,b,...); 
   <span class="hljs-keyword">return</span> Y.create(a,b,c,...); 
-}</code></pre>
+}
+</code></pre>
 <p>要对createY写出高阶对应版本，这bind要嵌套三层，代码无论如何不可能好看了。对此，我们只能耸耸肩说：无能为力了。因为我们这里已经接触到了java语言的底线。 </p>
 <p>值得欣慰的是，至少： 
 1。对简单需求，比如pico能够处理的那些，我们的语法并不比pico麻烦。 
@@ -363,7 +376,8 @@ java代码: </p>
     .withArgument(<span class="hljs-number">0</span>, a).withArgument(<span class="hljs-number">1</span>, b); 
   return (static_method(<span class="hljs-type">Y</span>.<span class="hljs-keyword">class</span>, <span class="hljs-string">&quot;create&quot;</span>) 
     .withArgument(<span class="hljs-number">0</span>,a).withArgument(<span class="hljs-number">1</span>,b).withArgument(<span class="hljs-number">2</span>,c); 
-  ) </code></pre>
+  ) 
+</code></pre>
 <p>所有的Binder匿名类会被自动生成。 
 这叫&quot;do-notation&quot;，是haskell里面用来方便处理monad组合子的利器。 </p>
 <p>在我开发的jaskell语言里面，对do-notation有类似的支持。 </p>
@@ -373,10 +387,12 @@ java代码: </p>
 即使我不能写 </p>
 <p>java代码: </p>
 <pre><code class="language-haskell"><span class="hljs-title">a</span> &lt;- createA 
-<span class="hljs-title">b</span> &lt;- createB a </code></pre>
+<span class="hljs-title">b</span> &lt;- createB a 
+</code></pre>
 <p>也要能够写成： </p>
 <p>java代码: </p>
-<pre><code class="language-haskell"><span class="hljs-title">createA</span> &gt;&gt;= \a-&gt;createB a</code></pre>
+<pre><code class="language-haskell"><span class="hljs-title">createA</span> &gt;&gt;= \a-&gt;createB a
+</code></pre>
 <p>组合并不仅仅是几个简单的decorator套起来。真正复杂的co里，不同组合子之间是需要通过bind来通信的。而组合子之间的通信能力才是co强大的根源。</p>
 
         

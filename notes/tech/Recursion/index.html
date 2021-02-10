@@ -189,7 +189,8 @@
 <span class="hljs-keyword">function</span> <span class="hljs-title">fact</span>(n) {
     if (n == 0) <span class="hljs-keyword">return</span> <span class="hljs-type">1</span>;
     <span class="hljs-keyword">return</span> n * fact(n - <span class="hljs-number">1</span>);
-};</code></pre>
+};
+</code></pre>
 <h2 id="尾递归">尾递归</h2>
 <p>尾递归指的是函数以尾调用的形式递归调用自己。</p>
 <p>同样以阶乘函数 fact 为例，实现如下：</p>
@@ -200,7 +201,8 @@
 
 <span class="hljs-keyword">function</span> <span class="hljs-title">fact</span>(n) {
     <span class="hljs-keyword">return</span> <span class="hljs-type">fact(n,</span> <span class="hljs-number">1</span>);
-}</code></pre>
+}
+</code></pre>
 
         
 

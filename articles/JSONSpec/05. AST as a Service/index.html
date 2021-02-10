@@ -188,7 +188,8 @@
         <span class="hljs-attr">&quot;_RETURN&quot;</span>:<span class="hljs-string">&quot;{city}&quot;</span>
     },
     <span class="hljs-attr">&quot;_ELSE&quot;</span>:{<span class="hljs-attr">&quot;_PATH&quot;</span>:[<span class="hljs-string">&quot;cities&quot;</span>,<span class="hljs-number">1</span>]}
-}</code></pre>
+}
+</code></pre>
 <p>大致相当于下面的JS代码：</p>
 <pre><code class="language-js">var <span class="hljs-attr">foo=true,</span> <span class="hljs-attr">cities</span> = [<span class="hljs-string">&quot;Montreal&quot;</span>, <span class="hljs-string">&quot;Toronto&quot;</span>], city;
 
@@ -196,11 +197,13 @@
     <span class="hljs-attr">city</span> = cities[<span class="hljs-number">0</span>];
 } <span class="hljs-keyword">else</span> {
     <span class="hljs-attr">city</span> = cities[<span class="hljs-number">1</span>];
-}</code></pre>
+}
+</code></pre>
 <p>但是，当这段代码逻辑出现的时候，其实就可以直接对其进行求值然后变成：</p>
 <pre><code class="language-json">{
     <span class="hljs-attr">&quot;city&quot;</span>: <span class="hljs-string">&quot;Montreal&quot;</span>
-}</code></pre>
+}
+</code></pre>
 <p>简直节省了大量的带宽和客户端的业务量。</p>
 <p>当然，也有一个理由让客户端知道如何处理这样的业务逻辑。比如，要求Dynamic或者是Reactive时，客户端就可以直接对当前获得到的业务逻辑，自己就能进行处理了。</p>
 <p>那么问题来了，究竟什么时候去更新这套业务逻辑，或者是数据呢？</p>

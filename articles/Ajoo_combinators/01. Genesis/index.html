@@ -188,7 +188,8 @@
   <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">print</span><span class="hljs-params">(<span class="hljs-keyword">int</span> level, String msg)</span></span>; 
   <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">println</span><span class="hljs-params">(<span class="hljs-keyword">int</span> level, String msg)</span></span>; 
   <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">logException</span><span class="hljs-params">(Throwable e)</span></span>; 
-}</code></pre>
+}
+</code></pre>
 <p>print用来输出信息，但是不折行，println可以折行。 
 logException用来直接纪录异常。这样，对异常是直接printStackTrace，还是println(e.getMessage())就是由具体的Logger实现来决定，我的neptune只需要把遇到的异常报告给Logger就是了。 </p>
 <p>好。接下来我吭哧吭哧地把neptune完成了，剩下的就是从哪里找一个Logger实现了。 </p>
@@ -204,7 +205,8 @@ logException用来直接纪录异常。这样，对异常是直接printStackTrac
   <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">printException</span><span class="hljs-params">(Throwable e)</span></span>{ 
     e.printStackTrace(); 
   } 
-}</code></pre>
+}
+</code></pre>
 <p>直接把这个SimpleLogger注射进我的neptune，整个系统就可以工作了。 
 no big deal，对么？ </p>
 <p>好了，下面我们开始真正实现完整的logging系统了。经过分析，我们大致有以下的需要： </p>

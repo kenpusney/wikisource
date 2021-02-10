@@ -188,37 +188,42 @@ and ones with <code>ref</code>, is reference type, and on ref semantics.</p>
 <p>Let me explain you what is this about in following details.</p>
 <p>Simple type:</p>
 <ul>
-<li>Primitives:<ul>
+<li><p>Primitives:</p>
+<ul>
 <li>Num (what? float?? sorry, make it yourself!)</li>
 <li>Bool</li>
 <li>Char</li>
 <li>Unit</li>
 </ul>
 </li>
-<li>Composites:<ul>
+<li><p>Composites:</p>
+<ul>
 <li>Tuples (a.k.a. Product types)</li>
 <li>Records</li>
 <li>Sum types</li>
 </ul>
+<p>Parameterized type:</p>
 </li>
 </ul>
-<p>Parameterized type:</p>
 <p>Let&#39;s say we want build a thing that may useful like an array.
 which can support different type with fixed size. How could 
 you represent this? I got <code>Array&lt;Int, 3&gt;</code> here.</p>
 <p>The Int and 3 in <code>Array&lt;Int, 3&gt;</code> are the parameters of this
 type. And for the prototype of array, should looks like</p>
-<pre><code class="language-ng"><span class="hljs-class"><span class="hljs-keyword">type</span> <span class="hljs-title">Array</span></span>&lt;<span class="hljs-symbol">&#x27;t</span>, <span class="hljs-symbol">&#x27;arity</span>: Num&gt; <span class="hljs-keyword">where</span> <span class="hljs-symbol">&#x27;arity</span> &gt;= <span class="hljs-number">0</span></code></pre>
+<pre><code class="language-ng"><span class="hljs-class"><span class="hljs-keyword">type</span> <span class="hljs-title">Array</span></span>&lt;<span class="hljs-symbol">&#x27;t</span>, <span class="hljs-symbol">&#x27;arity</span>: Num&gt; <span class="hljs-keyword">where</span> <span class="hljs-symbol">&#x27;arity</span> &gt;= <span class="hljs-number">0</span>
+</code></pre>
 <p>The where clause is a constraints for &#39;arity parameter which
 indicates that field cannot be negative.</p>
 <p>Here is another syntax to do this checking</p>
 <pre><code class="language-ng"><span class="hljs-class"><span class="hljs-keyword">type</span> <span class="hljs-title">NonNegative</span></span>&lt;<span class="hljs-symbol">&#x27;num</span>: Num&gt; <span class="hljs-keyword">where</span> <span class="hljs-symbol">&#x27;num</span> &gt;= <span class="hljs-number">0</span>
 
-<span class="hljs-class"><span class="hljs-keyword">type</span> <span class="hljs-title">Array</span></span>&lt;<span class="hljs-symbol">&#x27;t</span>, <span class="hljs-symbol">&#x27;arity</span>: NonNegative&gt;</code></pre>
+<span class="hljs-class"><span class="hljs-keyword">type</span> <span class="hljs-title">Array</span></span>&lt;<span class="hljs-symbol">&#x27;t</span>, <span class="hljs-symbol">&#x27;arity</span>: NonNegative&gt;
+</code></pre>
 <p>NonNegative is like typeclass / type traits / concepts in
 other languages such like Haskell/C++/D.</p>
 <p>Here is another constraint example in ng.</p>
-<pre><code class="language-ng"><span class="hljs-class"><span class="hljs-keyword">type</span> <span class="hljs-title">ValueType</span></span>&lt;<span class="hljs-symbol">&#x27;t</span>: * <span class="hljs-symbol">&#x27;a</span>&gt; = <span class="hljs-symbol">&#x27;a</span></code></pre>
+<pre><code class="language-ng"><span class="hljs-class"><span class="hljs-keyword">type</span> <span class="hljs-title">ValueType</span></span>&lt;<span class="hljs-symbol">&#x27;t</span>: * <span class="hljs-symbol">&#x27;a</span>&gt; = <span class="hljs-symbol">&#x27;a</span>
+</code></pre>
 <p>Here we can use ValueType<ref Int> to represent Int now.</p>
 
         
