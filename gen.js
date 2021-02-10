@@ -8,8 +8,8 @@ const { save, copyToPublic } = require("./src/file_ops");
 
 const Wiki = require("./src/wiki")
 
-if (require.main === module) {
 
+function generate() {
     const wikiAlt = new Wiki();
     
     glob("content/**/*.md", function (err, data) {
@@ -28,4 +28,8 @@ if (require.main === module) {
     glob("static/**/*", function (err, data) {
         data.forEach(file => copyToPublic(file))
     });
+}
+
+if (require.main === module) {
+    generate()
 }
