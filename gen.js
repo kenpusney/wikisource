@@ -1,35 +1,31 @@
 
-const glob = require("glob");
-const ejs = require("ejs");
+const Wiki = require("./src/wiki");
 
-const { loadWikiData } = require("./src/loader");
-const { render } = require("./src/render");
-const { save, copyToPublic } = require("./src/file_ops");
+// TODO: tokenize && analyse
+const { scan, read, markup, render, save, staticPublish, sitemap } = require("./src");
 
-const Wiki = require("./src/wiki")
+const config = require("./config")
 
-
-function generate() {
+async function generate() {
   const wiki = new Wiki();
 
-  glob("content/**/*.md", function (err, data) {
+  const files = await scan(config);
 
-    loadWikiData(data, wiki).forEach(item => {
-      render(item, wiki).then(result => {
-        save(item.target, result);
-      });
-    })
+  for (let file of files) {
+    const item = await render(await markup(await read(file, wiki), wiki))
 
-    ejs.renderFile("template/sitemap.xml.ejs", { posts: Object.values(wiki.posts) }).then(result => {
-      save("public/sitemap.xml", result);
-    })
-  });
+    save(item.target, item.rendered)
+  }
 
-  glob("static/**/*", function (err, data) {
-    data.forEach(file => copyToPublic(file))
-  });
+  save("public/sitemap.xml", await sitemap(wiki));
+
+  for (let file of await scan({patterns: "static/**/*"})) {
+    staticPublish(file)
+  }
 }
 
 if (require.main === module) {
-  generate()
+  generate().then(() => {
+    console.log("Generated successfully")
+  });
 }

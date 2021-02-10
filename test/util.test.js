@@ -1,5 +1,5 @@
 
-const { parseFileName } = require("../src/loader");
+const { parseFileName } = require("../src/util");
 
 test("load README file content", () => {
     const content = parseFileName("content/README.md", {});
