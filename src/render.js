@@ -6,12 +6,6 @@ const hljs = require("highlight.js");
 
 const _ = require('lodash');
 
-function postsInFolder(category, allWikiItems) {
-  return _.reverse(_.sortBy(allWikiItems.filter(item => {
-    return item.parentName === category && !(item.draft === true);
-  }), item => item.date));
-}
-
 function fixRelativeHref(href) {
   if (href.startsWith("../"))
     return href.substring(href.search("static") + "static".length);

@@ -10,17 +10,17 @@ const Wiki = require("./src/wiki")
 
 
 function generate() {
-  const wikiAlt = new Wiki();
+  const wiki = new Wiki();
 
   glob("content/**/*.md", function (err, data) {
 
-    loadWikiData(data, wikiAlt).forEach(item => {
-      render(item, wikiAlt).then(result => {
+    loadWikiData(data, wiki).forEach(item => {
+      render(item, wiki).then(result => {
         save(item.target, result);
       });
     })
 
-    ejs.renderFile("template/sitemap.xml.ejs", { posts: Object.values(wikiAlt.posts) }).then(result => {
+    ejs.renderFile("template/sitemap.xml.ejs", { posts: Object.values(wiki.posts) }).then(result => {
       save("public/sitemap.xml", result);
     })
   });

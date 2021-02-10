@@ -39,7 +39,7 @@ function parseFileName(file) {
 }
 
 function load(file, wiki) {
-  if (!wiki.registered()) {
+  if (!wiki.registered(file)) {
     const text = fs.readFileSync(file, { encoding: "utf-8" });
     const stat = fs.statSync(file);
 
