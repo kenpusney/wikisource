@@ -8,7 +8,7 @@ const moment = require("moment");
 const { parseFileName } = require("./util");
 
 async function read(file, wiki) {
-  const fileNameDetail = parseFileName(file);
+  const fileNameDetail = parseFileName(file, wiki.config.sourceDir);
 
   const { visitPath } = fileNameDetail;
 
@@ -21,7 +21,7 @@ async function read(file, wiki) {
   const content = fm(text)
 
   if (content.attributes.date) {
-    content.attributes.date = moment(content.attributes.date).format("YYYY-MM-DD");
+    content.attributes.date = moment(content.attributes.date).format(wiki.config.dateFormat);
   } else {
     content.attributes.date = "#N/A";
   }
@@ -34,8 +34,8 @@ async function read(file, wiki) {
     ...fileNameDetail,
     file,
     source: content.file,
-    target: `public/${fileNameDetail.visitPath}/index.html`,
-    updateDate: moment(stat.mtime).format("YYYY-MM-DD")
+    target: `${wiki.config.targetDir}/${fileNameDetail.visitPath}/index.html`,
+    updateDate: moment(stat.mtime).format(wiki.config.dateFormat)
   });
 }
 

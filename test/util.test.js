@@ -2,7 +2,7 @@
 const { parseFileName } = require("../src/util");
 
 test("load README file content", () => {
-    const content = parseFileName("content/README.md", {});
+    const content = parseFileName("content/README.md", "content");
 
 
     expect(content.isCategory).toBeTruthy();
@@ -12,7 +12,7 @@ test("load README file content", () => {
 });
 
 test("load plain file content", () => {
-    const content = parseFileName("content/about.md", {});
+    const content = parseFileName("content/about.md", "content");
 
     expect(content.isCategory).toBeFalsy();
     expect(content.visitPath).toBe("about");
@@ -21,7 +21,7 @@ test("load plain file content", () => {
 });
 
 test("load second level README content", () => {
-    const content = parseFileName("content/articles/README.md", {});
+    const content = parseFileName("content/articles/README.md", "content");
 
     expect(content.isCategory).toBeTruthy();
     expect(content.fileName).toBe("articles");
@@ -30,7 +30,7 @@ test("load second level README content", () => {
 });
 
 test("load second level file content", () => {
-    const content = parseFileName("content/articles/htlpl.md", {});
+    const content = parseFileName("content/articles/htlpl.md", "content");
 
     expect(content.isCategory).toBeFalsy();
     expect(content.visitPath).toBe("articles/htlpl");

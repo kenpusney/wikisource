@@ -3,7 +3,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <% posts.forEach(post => { %>
     <url>
-        <loc>http://wiki.kimleo.net/<%- post.visitPath %></loc>
+        <loc><%- config.site.baseUrl %><%- post.visitPath %></loc>
         <lastmod><%- post.updateDate %></lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>

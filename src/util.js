@@ -2,8 +2,8 @@
 const path = require('path').posix;
 
 
-function parseFileName(file) {
-  const visitPathStartsAt = "content/".length;
+function parseFileName(file, prefix) {
+  const visitPathStartsAt = `${prefix}/`.length;
   const relativePath = file.substring(visitPathStartsAt);
 
   const ext = path.extname(relativePath);

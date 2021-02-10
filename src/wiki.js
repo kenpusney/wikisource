@@ -3,9 +3,11 @@ const _ = require("lodash")
 
 module.exports = class {
   posts = {};
+  config = {};
 
   constructor(data = {}) {
     this.posts = data.posts || {};
+    this.config = data.config
   }
 
   addPost(id, post) {
