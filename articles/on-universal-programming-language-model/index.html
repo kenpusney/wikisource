@@ -2,86 +2,88 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script type="text/javascript">
-        if (location.href.endsWith("index.html")) {
-            location.href = location.href.substring(0, location.href.length - "index.html".length);
-        }
-    </script>
-    
-    <title>通用语言模型</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script type="text/javascript">
+    if (location.href.endsWith("index.html")) {
+      location.href = location.href.substring(0, location.href.length - "index.html".length);
+    }
+  </script>
+  
+    <title>
+      通用语言模型
+    </title>
     
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
-        media="(prefers-color-scheme: light)">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/dracula.min.css"
-        media="(prefers-color-scheme: dark)">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
-        media="(prefers-color-scheme: no-preference)">
-    <style type="text/css">
-        body {
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
+          media="(prefers-color-scheme: light)">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/dracula.min.css"
+          media="(prefers-color-scheme: dark)">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
+          media="(prefers-color-scheme: no-preference)">
+        <style type="text/css">
+          body {
             width: 60%;
             margin: 0 auto;
             padding: 2em;
             font-family: 'Segoe UI',
-                "Microsoft Yahei Light",
-                "San Francisco",
-                "Ping Fang SC",
-                "Roboto",
-                "Noto Sans CJK",
-                Tahoma, Geneva, Verdana, sans-serif;
-        }
+              "Microsoft Yahei Light",
+              "San Francisco",
+              "Ping Fang SC",
+              "Roboto",
+              "Noto Sans CJK",
+              Tahoma, Geneva, Verdana, sans-serif;
+          }
 
-        p > img {
+          p>img {
             margin: 0 auto;
             display: block;
             max-width: 80%;
-        }
+          }
 
-        span.field {
+          span.field {
             display: inline-block;
             font-weight: bolder;
             font-size: smaller;
-        }
+          }
 
-        pre {
+          pre {
             max-width: 90%;
             overflow-x: scroll;
             padding: 1em;
             border-radius: 5px;
-        }
+          }
 
-        a {
+          a {
             text-decoration: none;
             color: cornflowerblue;
-        }
+          }
 
-        a:visited {
+          a:visited {
             color: cornflowerblue;
-        }
+          }
 
-        a:hover {
+          a:hover {
             color: darkgray;
-        }
+          }
 
-        a.disabled-link {
+          a.disabled-link {
             color: lightcoral;
             text-decoration: line-through;
-        }
+          }
 
-        nav,
-        nav ul {
+          nav,
+          nav ul {
             display: inline-block;
-        }
+          }
 
-        .tags ul,
-        footer ul {
+          .tags ul,
+          footer ul {
             padding: 0;
             display: inline;
-        }
+          }
 
-        header h1 {
+          header h1 {
             display: inline-block;
             min-width: 320px;
             max-width: 50%;
@@ -90,86 +92,88 @@
             text-overflow: ellipsis;
             white-space: nowrap;
             margin: auto;
-        }
+          }
 
-        @media screen and (max-width: 1200px) {
+          @media screen and (max-width: 1200px) {
             body {
-                width: 90%;
-                max-width: 720px;
-                padding: 0;
-                margin: 1em auto;
+              width: 90%;
+              max-width: 720px;
+              padding: 0;
+              margin: 1em auto;
             }
 
             header h1 {
-                max-width: 90%;
-                width: 90%;
+              max-width: 90%;
+              width: 90%;
             }
-        }
+          }
 
-        nav li,
-        .tags li,
-        footer li {
+          nav li,
+          .tags li,
+          footer li {
             display: inline;
             border-right: 1px solid darkgray;
             padding: 0 1em;
-        }
+          }
 
-        nav li:last-child,
-        .tags li:last-child,
-        footer li:last-child {
+          nav li:last-child,
+          .tags li:last-child,
+          footer li:last-child {
             border: none;
-        }
+          }
 
-        .post-list h3 {
+          .post-list h3 {
             margin: 0.3em 0;
-        }
+          }
 
-        blockquote {
+          blockquote {
             margin: 0.5em;
             border: 1px dotted darkgrey;
             border-radius: 0.5em;
             padding: 0 1em;
-        }
+          }
 
-        div.image-description {
+          div.image-description {
             text-align: center;
             color: gray;
             font-size: smaller;
-        }
+          }
 
-        @media (prefers-color-scheme: dark) {
+          @media (prefers-color-scheme: dark) {
             body {
-                background-color: #090810;
-                color: floralwhite;
-                opacity: 0.83;
+              background-color: #090810;
+              color: floralwhite;
+              opacity: 0.83;
             }
 
             pre {
-                background-color: #282a36;
+              background-color: #282a36;
             }
-        }
-    </style>
+          }
+        </style>
 </head>
 
 <body>
 
-    <header>
-        
-        <h1 title="通用语言模型">通用语言模型</h1>
-        
-        <nav>
+  <header>
+    
+      <h1 title="通用语言模型">
+        通用语言模型
+      </h1>
+      
+          <nav>
             <ul>
-                <li><a href="/">Home</a></li>
-                <li><a href="/articles">Articles</a></li>
-                <li><a href="/about">About</a></li>
+              <li><a href="/">Home</a></li>
+              <li><a href="/articles">Articles</a></li>
+              <li><a href="/about">About</a></li>
             </ul>
-        </nav>
-        <hr>
-        <span class="field">Author: <a href="/about">KimmyLeo</a></span>
-        
-    </header>
-    <article>
-        <p>如果使用过超过一种编程语言（我觉得大部分人应该都有这种经验），那多少也都知道，编程语言在某些方面存在一些共性。这是很正常的，毕竟作为演化了几十年已经成为标准工具的编程语言，都是源于几个基础的模型。基于共同的模型找共性，那自然不是问题。</p>
+          </nav>
+          <hr>
+          <span class="field">Author: <a href="/about">KimmyLeo</a></span>
+          
+  </header>
+  <article>
+    <p>如果使用过超过一种编程语言（我觉得大部分人应该都有这种经验），那多少也都知道，编程语言在某些方面存在一些共性。这是很正常的，毕竟作为演化了几十年已经成为标准工具的编程语言，都是源于几个基础的模型。基于共同的模型找共性，那自然不是问题。</p>
 <p>问题出在想要用这种共性做些手脚上。比如能不能找一个统一的模型，可以把大部分（先不说所有）的编程语言都统一起来，有一个公共的AST和IR，然后通过这个公共AST可以转换为不同语言的表示，并且还能做到同步。</p>
 <p>这不是什么异想天开，乍一想之下还是感觉能够行得通。我在2014/2015年的时候也想到过类似东西，并且实践了下。毕竟，微软还有Common Language Runtime，JVM上还能跑那么多种不同范式的编程语言，LLVM就是个为了不同语言打造的公共后端，甚至不说这种底层运行时，JavaScript在早几年还是各种AltJS的target。</p>
 <p>但这只是因为乍一看是能行得通的。各种AltJS之间简直就是生殖隔离，唯一的共性就是都能编译到JS；F#为了能够成功编译到CLR，一些典型的构造（比如，模式匹配）都得换成奇怪的手法实现；Java和Scala的互调用也全是血泪屎，所以知名的Scala并发库Akka不得不提供针对Java的API。</p>
@@ -195,34 +199,34 @@
 <p>再次强调一下这里的高阶和低阶，只适用于本文中是否可以由低向高转换的概念，并不是在说语言的高低。毕竟很早之前我就有了一个自诩为“几米第一定律”的结论，任何编程语言都是领域特定的。</p>
 <p>我们并不否认，甚至还要感激通用语言运行时的抽象给大家带来的好处。但不同的编程语言是用来表达的工具，运行时只是他们最终呈现的效果。如同不同的媒介和文体一样，必然有着其本质的区别和适用的领域。可以选择用他们来表达同一件事情，但非要有一个统一的模型来去组合和转换，就有点过于强行了。</p>
 
-        
+      
 
-    </article>
-    <!-- <div>
+  </article>
+  <!-- <div>
         <h5>See Also</h5>
         <ul>
             <li><a href="/about">About Me</a></li>
         </ul>
     </div> -->
-    <span class="field">创建时间：2021-01-30</span>
-    <span class="field">最近更新时间：2021-02-10</span>
-    <hr>
-    <footer>
-        <ul>
-            <li><a href="/about">关于我</a></li>
-            <li><a href="/sitemap.xml">站点地图</a></li>
-            <li><a href="/rss.xml">RSS</a></li>
-            <li>Copyright &copy; KimmyLeo</li>
-        </ul>
-    </footer>
-    <script type="text/javascript">
-        document.querySelectorAll(".disabled-link").forEach(el => el.addEventListener("click", (e) => {
-            alert("链接页面不存在！");
-            e.preventDefault();
-        }));
-    </script>
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script
+  <span class="field">创建时间：2021-01-30</span>
+  <span class="field">最近更新时间：2021-02-10</span>
+  <hr>
+  <footer>
+    <ul>
+      <li><a href="/about">关于我</a></li>
+      <li><a href="/sitemap.xml">站点地图</a></li>
+      <li><a href="/rss.xml">RSS</a></li>
+      <li>Copyright &copy; KimmyLeo</li>
+    </ul>
+  </footer>
+  <script type="text/javascript">
+    document.querySelectorAll(".disabled-link").forEach(el => el.addEventListener("click", (e) => {
+      alert("链接页面不存在！");
+      e.preventDefault();
+    }));
+  </script>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script
 </body>
 
 </html>

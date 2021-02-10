@@ -2,86 +2,88 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script type="text/javascript">
-        if (location.href.endsWith("index.html")) {
-            location.href = location.href.substring(0, location.href.length - "index.html".length);
-        }
-    </script>
-    
-    <title>关于我</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script type="text/javascript">
+    if (location.href.endsWith("index.html")) {
+      location.href = location.href.substring(0, location.href.length - "index.html".length);
+    }
+  </script>
+  
+    <title>
+      关于我
+    </title>
     
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
-        media="(prefers-color-scheme: light)">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/dracula.min.css"
-        media="(prefers-color-scheme: dark)">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
-        media="(prefers-color-scheme: no-preference)">
-    <style type="text/css">
-        body {
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
+          media="(prefers-color-scheme: light)">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/dracula.min.css"
+          media="(prefers-color-scheme: dark)">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
+          media="(prefers-color-scheme: no-preference)">
+        <style type="text/css">
+          body {
             width: 60%;
             margin: 0 auto;
             padding: 2em;
             font-family: 'Segoe UI',
-                "Microsoft Yahei Light",
-                "San Francisco",
-                "Ping Fang SC",
-                "Roboto",
-                "Noto Sans CJK",
-                Tahoma, Geneva, Verdana, sans-serif;
-        }
+              "Microsoft Yahei Light",
+              "San Francisco",
+              "Ping Fang SC",
+              "Roboto",
+              "Noto Sans CJK",
+              Tahoma, Geneva, Verdana, sans-serif;
+          }
 
-        p > img {
+          p>img {
             margin: 0 auto;
             display: block;
             max-width: 80%;
-        }
+          }
 
-        span.field {
+          span.field {
             display: inline-block;
             font-weight: bolder;
             font-size: smaller;
-        }
+          }
 
-        pre {
+          pre {
             max-width: 90%;
             overflow-x: scroll;
             padding: 1em;
             border-radius: 5px;
-        }
+          }
 
-        a {
+          a {
             text-decoration: none;
             color: cornflowerblue;
-        }
+          }
 
-        a:visited {
+          a:visited {
             color: cornflowerblue;
-        }
+          }
 
-        a:hover {
+          a:hover {
             color: darkgray;
-        }
+          }
 
-        a.disabled-link {
+          a.disabled-link {
             color: lightcoral;
             text-decoration: line-through;
-        }
+          }
 
-        nav,
-        nav ul {
+          nav,
+          nav ul {
             display: inline-block;
-        }
+          }
 
-        .tags ul,
-        footer ul {
+          .tags ul,
+          footer ul {
             padding: 0;
             display: inline;
-        }
+          }
 
-        header h1 {
+          header h1 {
             display: inline-block;
             min-width: 320px;
             max-width: 50%;
@@ -90,86 +92,88 @@
             text-overflow: ellipsis;
             white-space: nowrap;
             margin: auto;
-        }
+          }
 
-        @media screen and (max-width: 1200px) {
+          @media screen and (max-width: 1200px) {
             body {
-                width: 90%;
-                max-width: 720px;
-                padding: 0;
-                margin: 1em auto;
+              width: 90%;
+              max-width: 720px;
+              padding: 0;
+              margin: 1em auto;
             }
 
             header h1 {
-                max-width: 90%;
-                width: 90%;
+              max-width: 90%;
+              width: 90%;
             }
-        }
+          }
 
-        nav li,
-        .tags li,
-        footer li {
+          nav li,
+          .tags li,
+          footer li {
             display: inline;
             border-right: 1px solid darkgray;
             padding: 0 1em;
-        }
+          }
 
-        nav li:last-child,
-        .tags li:last-child,
-        footer li:last-child {
+          nav li:last-child,
+          .tags li:last-child,
+          footer li:last-child {
             border: none;
-        }
+          }
 
-        .post-list h3 {
+          .post-list h3 {
             margin: 0.3em 0;
-        }
+          }
 
-        blockquote {
+          blockquote {
             margin: 0.5em;
             border: 1px dotted darkgrey;
             border-radius: 0.5em;
             padding: 0 1em;
-        }
+          }
 
-        div.image-description {
+          div.image-description {
             text-align: center;
             color: gray;
             font-size: smaller;
-        }
+          }
 
-        @media (prefers-color-scheme: dark) {
+          @media (prefers-color-scheme: dark) {
             body {
-                background-color: #090810;
-                color: floralwhite;
-                opacity: 0.83;
+              background-color: #090810;
+              color: floralwhite;
+              opacity: 0.83;
             }
 
             pre {
-                background-color: #282a36;
+              background-color: #282a36;
             }
-        }
-    </style>
+          }
+        </style>
 </head>
 
 <body>
 
-    <header>
-        
-        <h1 title="关于我">关于我</h1>
-        
-        <nav>
+  <header>
+    
+      <h1 title="关于我">
+        关于我
+      </h1>
+      
+          <nav>
             <ul>
-                <li><a href="/">Home</a></li>
-                <li><a href="/articles">Articles</a></li>
-                <li><a href="/about">About</a></li>
+              <li><a href="/">Home</a></li>
+              <li><a href="/articles">Articles</a></li>
+              <li><a href="/about">About</a></li>
             </ul>
-        </nav>
-        <hr>
-        <span class="field">Author: <a href="/about">KimmyLeo</a></span>
-        
-    </header>
-    <article>
-        <p>我是KimmyLeo，一名程序员，同时也是PMI认证的项目管理专家（PMP）和敏捷认证实践者（ACP）。主要研究的方向是工程化、编程语言和Web后端系统。我<strong>精通</strong>数种编程语言，但其中大部分都是因为对其恨之入骨，反倒使得我更了解它。</p>
+          </nav>
+          <hr>
+          <span class="field">Author: <a href="/about">KimmyLeo</a></span>
+          
+  </header>
+  <article>
+    <p>我是KimmyLeo，一名程序员，同时也是PMI认证的项目管理专家（PMP）和敏捷认证实践者（ACP）。主要研究的方向是工程化、编程语言和Web后端系统。我<strong>精通</strong>数种编程语言，但其中大部分都是因为对其恨之入骨，反倒使得我更了解它。</p>
 <p>我先后就职过外企、上市公司和创业公司，带领过各种类型的团队，做过很多领域的生产系统，对于业务理解和实现方面有着丰富的经验。同时我个人比较喜欢研究系统软件层面内容，尤其是编译器、数据库这方面（这也是我“精通”了很多编程语言的一部分原因）。</p>
 <p>我使用过绝大多数主流的技术栈，了解他们分别的优缺点，这一点让我在自己做一些东西的时候可以毫不犹豫地去选择趁手的工具。我工作主要使用的是JVM系的技术栈，包括Java、Groovy、Kotlin和Scala这些以及相关的技术，业余使用比较多的是JavaScript（包含Node以及Typescript和一些其他AltJS）、Go和C++。我认为目前大部分编程语言都不够完美，所以也在自己尝试设计编程语言，并且紧跟着新的编程语言趋势，关注了近年来出现的Swift、Hack、Julia、Nim和Rust、V、Zig等一系列小众语言。</p>
 <p>除了技术之外我还关注一些非技术话题，早些年曾经了解过一些语言学和符号学的知识，最近比较热衷的是古代史。除此之外，因为个人比较关注学习和知识相关的内容，也接触过一些认知科学和认知心理学的内容。我非常喜欢玩电子游戏，特别是那些沉浸感较强，能够引导和引发我思考的游戏类型。</p>
@@ -191,34 +195,34 @@
 </ul>
 <p>你可以通过我的公众号（lightych、kimmyfun），或者通过邮件<a href="mailto:kimmy📧typecons.com?subject=Consulting%20From%20Wiki" title="null">kimmy📧typecons.com</a>来联系我。</p>
 
-        
+      
 
-    </article>
-    <!-- <div>
+  </article>
+  <!-- <div>
         <h5>See Also</h5>
         <ul>
             <li><a href="/about">About Me</a></li>
         </ul>
     </div> -->
-    <span class="field">创建时间：2016-05-11</span>
-    <span class="field">最近更新时间：2021-02-10</span>
-    <hr>
-    <footer>
-        <ul>
-            <li><a href="/about">关于我</a></li>
-            <li><a href="/sitemap.xml">站点地图</a></li>
-            <li><a href="/rss.xml">RSS</a></li>
-            <li>Copyright &copy; KimmyLeo</li>
-        </ul>
-    </footer>
-    <script type="text/javascript">
-        document.querySelectorAll(".disabled-link").forEach(el => el.addEventListener("click", (e) => {
-            alert("链接页面不存在！");
-            e.preventDefault();
-        }));
-    </script>
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script
+  <span class="field">创建时间：2016-05-11</span>
+  <span class="field">最近更新时间：2021-02-10</span>
+  <hr>
+  <footer>
+    <ul>
+      <li><a href="/about">关于我</a></li>
+      <li><a href="/sitemap.xml">站点地图</a></li>
+      <li><a href="/rss.xml">RSS</a></li>
+      <li>Copyright &copy; KimmyLeo</li>
+    </ul>
+  </footer>
+  <script type="text/javascript">
+    document.querySelectorAll(".disabled-link").forEach(el => el.addEventListener("click", (e) => {
+      alert("链接页面不存在！");
+      e.preventDefault();
+    }));
+  </script>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script
 </body>
 
 </html>

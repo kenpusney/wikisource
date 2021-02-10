@@ -2,86 +2,88 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script type="text/javascript">
-        if (location.href.endsWith("index.html")) {
-            location.href = location.href.substring(0, location.href.length - "index.html".length);
-        }
-    </script>
-    
-    <title>文章列表</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script type="text/javascript">
+    if (location.href.endsWith("index.html")) {
+      location.href = location.href.substring(0, location.href.length - "index.html".length);
+    }
+  </script>
+  
+    <title>
+      文章列表
+    </title>
     
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
-        media="(prefers-color-scheme: light)">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/dracula.min.css"
-        media="(prefers-color-scheme: dark)">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
-        media="(prefers-color-scheme: no-preference)">
-    <style type="text/css">
-        body {
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
+          media="(prefers-color-scheme: light)">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/dracula.min.css"
+          media="(prefers-color-scheme: dark)">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
+          media="(prefers-color-scheme: no-preference)">
+        <style type="text/css">
+          body {
             width: 60%;
             margin: 0 auto;
             padding: 2em;
             font-family: 'Segoe UI',
-                "Microsoft Yahei Light",
-                "San Francisco",
-                "Ping Fang SC",
-                "Roboto",
-                "Noto Sans CJK",
-                Tahoma, Geneva, Verdana, sans-serif;
-        }
+              "Microsoft Yahei Light",
+              "San Francisco",
+              "Ping Fang SC",
+              "Roboto",
+              "Noto Sans CJK",
+              Tahoma, Geneva, Verdana, sans-serif;
+          }
 
-        p > img {
+          p>img {
             margin: 0 auto;
             display: block;
             max-width: 80%;
-        }
+          }
 
-        span.field {
+          span.field {
             display: inline-block;
             font-weight: bolder;
             font-size: smaller;
-        }
+          }
 
-        pre {
+          pre {
             max-width: 90%;
             overflow-x: scroll;
             padding: 1em;
             border-radius: 5px;
-        }
+          }
 
-        a {
+          a {
             text-decoration: none;
             color: cornflowerblue;
-        }
+          }
 
-        a:visited {
+          a:visited {
             color: cornflowerblue;
-        }
+          }
 
-        a:hover {
+          a:hover {
             color: darkgray;
-        }
+          }
 
-        a.disabled-link {
+          a.disabled-link {
             color: lightcoral;
             text-decoration: line-through;
-        }
+          }
 
-        nav,
-        nav ul {
+          nav,
+          nav ul {
             display: inline-block;
-        }
+          }
 
-        .tags ul,
-        footer ul {
+          .tags ul,
+          footer ul {
             padding: 0;
             display: inline;
-        }
+          }
 
-        header h1 {
+          header h1 {
             display: inline-block;
             min-width: 320px;
             max-width: 50%;
@@ -90,329 +92,436 @@
             text-overflow: ellipsis;
             white-space: nowrap;
             margin: auto;
-        }
+          }
 
-        @media screen and (max-width: 1200px) {
+          @media screen and (max-width: 1200px) {
             body {
-                width: 90%;
-                max-width: 720px;
-                padding: 0;
-                margin: 1em auto;
+              width: 90%;
+              max-width: 720px;
+              padding: 0;
+              margin: 1em auto;
             }
 
             header h1 {
-                max-width: 90%;
-                width: 90%;
+              max-width: 90%;
+              width: 90%;
             }
-        }
+          }
 
-        nav li,
-        .tags li,
-        footer li {
+          nav li,
+          .tags li,
+          footer li {
             display: inline;
             border-right: 1px solid darkgray;
             padding: 0 1em;
-        }
+          }
 
-        nav li:last-child,
-        .tags li:last-child,
-        footer li:last-child {
+          nav li:last-child,
+          .tags li:last-child,
+          footer li:last-child {
             border: none;
-        }
+          }
 
-        .post-list h3 {
+          .post-list h3 {
             margin: 0.3em 0;
-        }
+          }
 
-        blockquote {
+          blockquote {
             margin: 0.5em;
             border: 1px dotted darkgrey;
             border-radius: 0.5em;
             padding: 0 1em;
-        }
+          }
 
-        div.image-description {
+          div.image-description {
             text-align: center;
             color: gray;
             font-size: smaller;
-        }
+          }
 
-        @media (prefers-color-scheme: dark) {
+          @media (prefers-color-scheme: dark) {
             body {
-                background-color: #090810;
-                color: floralwhite;
-                opacity: 0.83;
+              background-color: #090810;
+              color: floralwhite;
+              opacity: 0.83;
             }
 
             pre {
-                background-color: #282a36;
+              background-color: #282a36;
             }
-        }
-    </style>
+          }
+        </style>
 </head>
 
 <body>
 
-    <header>
-        
-        <h1 title="文章列表">文章列表</h1>
-        
-        <nav>
+  <header>
+    
+      <h1 title="文章列表">
+        文章列表
+      </h1>
+      
+          <nav>
             <ul>
-                <li><a href="/">Home</a></li>
-                <li><a href="/articles">Articles</a></li>
-                <li><a href="/about">About</a></li>
+              <li><a href="/">Home</a></li>
+              <li><a href="/articles">Articles</a></li>
+              <li><a href="/about">About</a></li>
             </ul>
-        </nav>
-        <hr>
-        <span class="field">Author: <a href="/about">KimmyLeo</a></span>
-        
-    </header>
-    <article>
-        
-        
+          </nav>
+          <hr>
+          <span class="field">Author: <a href="/about">KimmyLeo</a></span>
+          
+  </header>
+  <article>
+    
+      
         <h2>当前类目下的页面：</h2>
         <ul class="post-list">
-            
+          
             <li>
-                <h3><a
-                        href="/articles/on-universal-programming-language-model">通用语言模型</a><small>
-                        2021-01-30 </small></h3>
+              <h3><a href="/articles/on-universal-programming-language-model">
+                  通用语言模型
+                    
+                </a><small>
+                  2021-01-30
+                </small></h3>
             </li>
             
             <li>
-                <h3><a
-                        href="/articles/programmer-software-engineer-and-coder">程序员、软件工程师和码农</a><small>
-                        2020-12-06 </small></h3>
+              <h3><a href="/articles/programmer-software-engineer-and-coder">
+                  程序员、软件工程师和码农
+                    
+                </a><small>
+                  2020-12-06
+                </small></h3>
             </li>
             
             <li>
-                <h3><a
-                        href="/articles/3-questions-about-nocode">low-code 三问</a><small>
-                        2020-10-16 </small></h3>
+              <h3><a href="/articles/3-questions-about-nocode">
+                  low-code 三问
+                    
+                </a><small>
+                  2020-10-16
+                </small></h3>
             </li>
             
             <li>
-                <h3><a
-                        href="/articles/opinion">我的观点/</a><small>
-                        2020-09-10 </small></h3>
+              <h3><a href="/articles/opinion">
+                  我的观点
+                    /
+                </a><small>
+                  2020-09-10
+                </small></h3>
             </li>
             
             <li>
-                <h3><a
-                        href="/articles/On REST">被抛弃的REST</a><small>
-                        2020-08-11 </small></h3>
+              <h3><a href="/articles/On REST">
+                  被抛弃的REST
+                    
+                </a><small>
+                  2020-08-11
+                </small></h3>
             </li>
             
             <li>
-                <h3><a
-                        href="/articles/35 years of super mario bros">超级马里奥</a><small>
-                        2020-08-11 </small></h3>
+              <h3><a href="/articles/35 years of super mario bros">
+                  超级马里奥
+                    
+                </a><small>
+                  2020-08-11
+                </small></h3>
             </li>
             
             <li>
-                <h3><a
-                        href="/articles/github arctic archive 2020">强力文集：GitHub北极代码归档是对人类发展的不自信</a><small>
-                        2020-07-26 </small></h3>
+              <h3><a href="/articles/github arctic archive 2020">
+                  强力文集：GitHub北极代码归档是对人类发展的不自信
+                    
+                </a><small>
+                  2020-07-26
+                </small></h3>
             </li>
             
             <li>
-                <h3><a
-                        href="/articles/architect_tool">软件架构的图形工具</a><small>
-                        2020-07-14 </small></h3>
+              <h3><a href="/articles/architect_tool">
+                  软件架构的图形工具
+                    
+                </a><small>
+                  2020-07-14
+                </small></h3>
             </li>
             
             <li>
-                <h3><a
-                        href="/articles/A taste of Flutter">说说 Flutter：Skia、Dart 及其历史</a><small>
-                        2020-05-29 </small></h3>
+              <h3><a href="/articles/A taste of Flutter">
+                  说说 Flutter：Skia、Dart 及其历史
+                    
+                </a><small>
+                  2020-05-29
+                </small></h3>
             </li>
             
             <li>
-                <h3><a
-                        href="/articles/GW-BASIC open source">又一个上古神器开源了，GW-BASIC</a><small>
-                        2020-05-22 </small></h3>
+              <h3><a href="/articles/GW-BASIC open source">
+                  又一个上古神器开源了，GW-BASIC
+                    
+                </a><small>
+                  2020-05-22
+                </small></h3>
             </li>
             
             <li>
-                <h3><a
-                        href="/articles/Electronic Heroin">谁制造了电子海洛因</a><small>
-                        2020-05-18 </small></h3>
+              <h3><a href="/articles/Electronic Heroin">
+                  谁制造了电子海洛因
+                    
+                </a><small>
+                  2020-05-18
+                </small></h3>
             </li>
             
             <li>
-                <h3><a
-                        href="/articles/Pac-Man - 40th">40 周年：关于《吃豆人》Pac-Man</a><small>
-                        2020-05-03 </small></h3>
+              <h3><a href="/articles/Pac-Man - 40th">
+                  40 周年：关于《吃豆人》Pac-Man
+                    
+                </a><small>
+                  2020-05-03
+                </small></h3>
             </li>
             
             <li>
-                <h3><a
-                        href="/articles/On Sandbox Game">说说沙盒游戏</a><small>
-                        2020-05-02 </small></h3>
+              <h3><a href="/articles/On Sandbox Game">
+                  说说沙盒游戏
+                    
+                </a><small>
+                  2020-05-02
+                </small></h3>
             </li>
             
             <li>
-                <h3><a
-                        href="/articles/30hours">30小时制</a><small>
-                        2020-04-28 </small></h3>
+              <h3><a href="/articles/30hours">
+                  30小时制
+                    
+                </a><small>
+                  2020-04-28
+                </small></h3>
             </li>
             
             <li>
-                <h3><a
-                        href="/articles/A taste of Flutter (sensored)">说说 Flutter：Skia、Dart 及其历史（预览版）</a><small>
-                        2020-04-03 </small></h3>
+              <h3><a href="/articles/A taste of Flutter (sensored)">
+                  说说 Flutter：Skia、Dart 及其历史（预览版）
+                    
+                </a><small>
+                  2020-04-03
+                </small></h3>
             </li>
             
             <li>
-                <h3><a
-                        href="/articles/Now use the light, we want to see">Now Use the Light, We Want to See</a><small>
-                        2020-03-17 </small></h3>
+              <h3><a href="/articles/Now use the light, we want to see">
+                  Now Use the Light, We Want to See
+                    
+                </a><small>
+                  2020-03-17
+                </small></h3>
             </li>
             
             <li>
-                <h3><a
-                        href="/articles/Life is Strange">Life is Strange</a><small>
-                        2020-02-23 </small></h3>
+              <h3><a href="/articles/Life is Strange">
+                  Life is Strange
+                    
+                </a><small>
+                  2020-02-23
+                </small></h3>
             </li>
             
             <li>
-                <h3><a
-                        href="/articles/How to avoid 2019-nCov">在家躺尸时可以玩些什么</a><small>
-                        2020-01-28 </small></h3>
+              <h3><a href="/articles/How to avoid 2019-nCov">
+                  在家躺尸时可以玩些什么
+                    
+                </a><small>
+                  2020-01-28
+                </small></h3>
             </li>
             
             <li>
-                <h3><a
-                        href="/articles/Long Live Unsafe">actix-web 已死，unsafe 永生</a><small>
-                        2020-01-18 </small></h3>
+              <h3><a href="/articles/Long Live Unsafe">
+                  actix-web 已死，unsafe 永生
+                    
+                </a><small>
+                  2020-01-18
+                </small></h3>
             </li>
             
             <li>
-                <h3><a
-                        href="/articles/On-Service-Builder">函数式编程、服务端组件与 Service Builder</a><small>
-                        2019-12-01 </small></h3>
+              <h3><a href="/articles/On-Service-Builder">
+                  函数式编程、服务端组件与 Service Builder
+                    
+                </a><small>
+                  2019-12-01
+                </small></h3>
             </li>
             
             <li>
-                <h3><a
-                        href="/articles/JSONSpec">Rethink JSONSpec/</a><small>
-                        2019-04-29 </small></h3>
+              <h3><a href="/articles/JSONSpec">
+                  Rethink JSONSpec
+                    /
+                </a><small>
+                  2019-04-29
+                </small></h3>
             </li>
             
             <li>
-                <h3><a
-                        href="/articles/On Roguelike">聊聊Roguelike</a><small>
-                        2019-02-11 </small></h3>
+              <h3><a href="/articles/On Roguelike">
+                  聊聊Roguelike
+                    
+                </a><small>
+                  2019-02-11
+                </small></h3>
             </li>
             
             <li>
-                <h3><a
-                        href="/articles/Interviewed-A-Golang-User">面试了一个精通Go语言的人…（上）</a><small>
-                        2018-03-27 </small></h3>
+              <h3><a href="/articles/Interviewed-A-Golang-User">
+                  面试了一个精通Go语言的人…（上）
+                    
+                </a><small>
+                  2018-03-27
+                </small></h3>
             </li>
             
             <li>
-                <h3><a
-                        href="/articles/How-to-be-top-programmer-in-1-year">作为一个天才，如何在一年之内编程技术达到阿里巴巴p9～10级别？</a><small>
-                        2018-03-27 </small></h3>
+              <h3><a href="/articles/How-to-be-top-programmer-in-1-year">
+                  作为一个天才，如何在一年之内编程技术达到阿里巴巴p9～10级别？
+                    
+                </a><small>
+                  2018-03-27
+                </small></h3>
             </li>
             
             <li>
-                <h3><a
-                        href="/articles/AI Programmer">人工智能取代程序员？</a><small>
-                        2017-10-09 </small></h3>
+              <h3><a href="/articles/AI Programmer">
+                  人工智能取代程序员？
+                    
+                </a><small>
+                  2017-10-09
+                </small></h3>
             </li>
             
             <li>
-                <h3><a
-                        href="/articles/Cpp in 21 days">21天精通C++模板语言</a><small>
-                        2014-12-31 </small></h3>
+              <h3><a href="/articles/Cpp in 21 days">
+                  21天精通C++模板语言
+                    
+                </a><small>
+                  2014-12-31
+                </small></h3>
             </li>
             
             <li>
-                <h3><a
-                        href="/articles/Language as a Service">LaaP/S: Language as a Product / Service</a><small>
-                        2014-12-20 </small></h3>
+              <h3><a href="/articles/Language as a Service">
+                  LaaP/S: Language as a Product / Service
+                    
+                </a><small>
+                  2014-12-20
+                </small></h3>
             </li>
             
             <li>
-                <h3><a
-                        href="/articles/htdpl">如何设计编程语言/</a><small>
-                        2014-11-29 </small></h3>
+              <h3><a href="/articles/htdpl">
+                  如何设计编程语言
+                    /
+                </a><small>
+                  2014-11-29
+                </small></h3>
             </li>
             
             <li>
-                <h3><a
-                        href="/articles/Kimmys Laws of Programming Language">Kimmy 编程语言定律</a><small>
-                        2014-11-22 </small></h3>
+              <h3><a href="/articles/Kimmys Laws of Programming Language">
+                  Kimmy 编程语言定律
+                    
+                </a><small>
+                  2014-11-22
+                </small></h3>
             </li>
             
             <li>
-                <h3><a
-                        href="/articles/How to pubish a book">怎样出书</a><small>
-                        2014-03-08 </small></h3>
+              <h3><a href="/articles/How to pubish a book">
+                  怎样出书
+                    
+                </a><small>
+                  2014-03-08
+                </small></h3>
             </li>
             
             <li>
-                <h3><a
-                        href="/articles/Fundamental Arithmetics">算术基础系列/</a><small>
-                        2013-07-08 </small></h3>
+              <h3><a href="/articles/Fundamental Arithmetics">
+                  算术基础系列
+                    /
+                </a><small>
+                  2013-07-08
+                </small></h3>
             </li>
             
             <li>
-                <h3><a
-                        href="/articles/htlpl">如何学习编程语言</a><small>
-                        2013-04-02 </small></h3>
+              <h3><a href="/articles/htlpl">
+                  如何学习编程语言
+                    
+                </a><small>
+                  2013-04-02
+                </small></h3>
             </li>
             
             <li>
-                <h3><a
-                        href="/articles/Ajoo_combinators">Ajoo: 论面向组合子程序设计方法 系列文章/</a><small>
-                        2006-01-13 </small></h3>
+              <h3><a href="/articles/Ajoo_combinators">
+                  Ajoo: 论面向组合子程序设计方法 系列文章
+                    /
+                </a><small>
+                  2006-01-13
+                </small></h3>
             </li>
             
             <li>
-                <h3><a
-                        href="/articles/on-learning">on-learning</a><small>
-                        #N/A </small></h3>
+              <h3><a href="/articles/on-learning">
+                  on-learning
+                    
+                </a><small>
+                  #N/A
+                </small></h3>
             </li>
             
             <li>
-                <h3><a
-                        href="/articles/games-help-me-through-2020">伴我走过2020的游戏</a><small>
-                        #N/A </small></h3>
+              <h3><a href="/articles/games-help-me-through-2020">
+                  伴我走过2020的游戏
+                    
+                </a><small>
+                  #N/A
+                </small></h3>
             </li>
             
         </ul>
         
 
-    </article>
-    <!-- <div>
+  </article>
+  <!-- <div>
         <h5>See Also</h5>
         <ul>
             <li><a href="/about">About Me</a></li>
         </ul>
     </div> -->
-    <span class="field">创建时间：2017-04-15</span>
-    <span class="field">最近更新时间：2021-02-10</span>
-    <hr>
-    <footer>
-        <ul>
-            <li><a href="/about">关于我</a></li>
-            <li><a href="/sitemap.xml">站点地图</a></li>
-            <li><a href="/rss.xml">RSS</a></li>
-            <li>Copyright &copy; KimmyLeo</li>
-        </ul>
-    </footer>
-    <script type="text/javascript">
-        document.querySelectorAll(".disabled-link").forEach(el => el.addEventListener("click", (e) => {
-            alert("链接页面不存在！");
-            e.preventDefault();
-        }));
-    </script>
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script
+  <span class="field">创建时间：2017-04-15</span>
+  <span class="field">最近更新时间：2021-02-10</span>
+  <hr>
+  <footer>
+    <ul>
+      <li><a href="/about">关于我</a></li>
+      <li><a href="/sitemap.xml">站点地图</a></li>
+      <li><a href="/rss.xml">RSS</a></li>
+      <li>Copyright &copy; KimmyLeo</li>
+    </ul>
+  </footer>
+  <script type="text/javascript">
+    document.querySelectorAll(".disabled-link").forEach(el => el.addEventListener("click", (e) => {
+      alert("链接页面不存在！");
+      e.preventDefault();
+    }));
+  </script>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script
 </body>
 
 </html>

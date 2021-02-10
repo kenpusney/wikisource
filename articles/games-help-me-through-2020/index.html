@@ -2,86 +2,88 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script type="text/javascript">
-        if (location.href.endsWith("index.html")) {
-            location.href = location.href.substring(0, location.href.length - "index.html".length);
-        }
-    </script>
-    
-    <title>伴我走过2020的游戏</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script type="text/javascript">
+    if (location.href.endsWith("index.html")) {
+      location.href = location.href.substring(0, location.href.length - "index.html".length);
+    }
+  </script>
+  
+    <title>
+      伴我走过2020的游戏
+    </title>
     
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
-        media="(prefers-color-scheme: light)">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/dracula.min.css"
-        media="(prefers-color-scheme: dark)">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
-        media="(prefers-color-scheme: no-preference)">
-    <style type="text/css">
-        body {
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
+          media="(prefers-color-scheme: light)">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/dracula.min.css"
+          media="(prefers-color-scheme: dark)">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
+          media="(prefers-color-scheme: no-preference)">
+        <style type="text/css">
+          body {
             width: 60%;
             margin: 0 auto;
             padding: 2em;
             font-family: 'Segoe UI',
-                "Microsoft Yahei Light",
-                "San Francisco",
-                "Ping Fang SC",
-                "Roboto",
-                "Noto Sans CJK",
-                Tahoma, Geneva, Verdana, sans-serif;
-        }
+              "Microsoft Yahei Light",
+              "San Francisco",
+              "Ping Fang SC",
+              "Roboto",
+              "Noto Sans CJK",
+              Tahoma, Geneva, Verdana, sans-serif;
+          }
 
-        p > img {
+          p>img {
             margin: 0 auto;
             display: block;
             max-width: 80%;
-        }
+          }
 
-        span.field {
+          span.field {
             display: inline-block;
             font-weight: bolder;
             font-size: smaller;
-        }
+          }
 
-        pre {
+          pre {
             max-width: 90%;
             overflow-x: scroll;
             padding: 1em;
             border-radius: 5px;
-        }
+          }
 
-        a {
+          a {
             text-decoration: none;
             color: cornflowerblue;
-        }
+          }
 
-        a:visited {
+          a:visited {
             color: cornflowerblue;
-        }
+          }
 
-        a:hover {
+          a:hover {
             color: darkgray;
-        }
+          }
 
-        a.disabled-link {
+          a.disabled-link {
             color: lightcoral;
             text-decoration: line-through;
-        }
+          }
 
-        nav,
-        nav ul {
+          nav,
+          nav ul {
             display: inline-block;
-        }
+          }
 
-        .tags ul,
-        footer ul {
+          .tags ul,
+          footer ul {
             padding: 0;
             display: inline;
-        }
+          }
 
-        header h1 {
+          header h1 {
             display: inline-block;
             min-width: 320px;
             max-width: 50%;
@@ -90,86 +92,88 @@
             text-overflow: ellipsis;
             white-space: nowrap;
             margin: auto;
-        }
+          }
 
-        @media screen and (max-width: 1200px) {
+          @media screen and (max-width: 1200px) {
             body {
-                width: 90%;
-                max-width: 720px;
-                padding: 0;
-                margin: 1em auto;
+              width: 90%;
+              max-width: 720px;
+              padding: 0;
+              margin: 1em auto;
             }
 
             header h1 {
-                max-width: 90%;
-                width: 90%;
+              max-width: 90%;
+              width: 90%;
             }
-        }
+          }
 
-        nav li,
-        .tags li,
-        footer li {
+          nav li,
+          .tags li,
+          footer li {
             display: inline;
             border-right: 1px solid darkgray;
             padding: 0 1em;
-        }
+          }
 
-        nav li:last-child,
-        .tags li:last-child,
-        footer li:last-child {
+          nav li:last-child,
+          .tags li:last-child,
+          footer li:last-child {
             border: none;
-        }
+          }
 
-        .post-list h3 {
+          .post-list h3 {
             margin: 0.3em 0;
-        }
+          }
 
-        blockquote {
+          blockquote {
             margin: 0.5em;
             border: 1px dotted darkgrey;
             border-radius: 0.5em;
             padding: 0 1em;
-        }
+          }
 
-        div.image-description {
+          div.image-description {
             text-align: center;
             color: gray;
             font-size: smaller;
-        }
+          }
 
-        @media (prefers-color-scheme: dark) {
+          @media (prefers-color-scheme: dark) {
             body {
-                background-color: #090810;
-                color: floralwhite;
-                opacity: 0.83;
+              background-color: #090810;
+              color: floralwhite;
+              opacity: 0.83;
             }
 
             pre {
-                background-color: #282a36;
+              background-color: #282a36;
             }
-        }
-    </style>
+          }
+        </style>
 </head>
 
 <body>
 
-    <header>
-        
-        <h1 title="伴我走过2020的游戏">伴我走过2020的游戏</h1>
-        
-        <nav>
+  <header>
+    
+      <h1 title="伴我走过2020的游戏">
+        伴我走过2020的游戏
+      </h1>
+      
+          <nav>
             <ul>
-                <li><a href="/">Home</a></li>
-                <li><a href="/articles">Articles</a></li>
-                <li><a href="/about">About</a></li>
+              <li><a href="/">Home</a></li>
+              <li><a href="/articles">Articles</a></li>
+              <li><a href="/about">About</a></li>
             </ul>
-        </nav>
-        <hr>
-        <span class="field">Author: <a href="/about">KimmyLeo</a></span>
-        
-    </header>
-    <article>
-        <h1 id="伴我走过2020的游戏">伴我走过2020的游戏</h1>
+          </nav>
+          <hr>
+          <span class="field">Author: <a href="/about">KimmyLeo</a></span>
+          
+  </header>
+  <article>
+    <h1 id="伴我走过2020的游戏">伴我走过2020的游戏</h1>
 <p>现在是2021年的一个阳光明媚的下午。这篇文章原本不存在的。我整个12月份都在想着怎么总结下自己的2020，另外一个公众号在12月15日发了一篇勉强算是总结的文章。在这里却不知道用什么形式，总结什么内容。</p>
 <p>不过在今天标记刚看过的电影的时候，豆瓣提醒我，去年一年看的电影只有29部。这远不及以往年份的一半，甚至不如活得最颓废的2016年（45部）。游戏却被我标记了一百多。</p>
 <p>这么多游戏单是流水账也能凑齐一篇水文了。</p>
@@ -185,34 +189,34 @@
 <p>起初我写“在家躺尸时可以玩什么”的时候，根本没想过这一年会是这样过来的。而三月份给大家推荐女性向游戏的时候，正是我主动辞职失业接近崩溃的边缘。但是两个人在一起还是最终把这个难关熬了下来。我在成都迷茫时，她在身边陪伴；我来上海漂泊时，她在成都坚守；我在上海落定后，她来身边照料。这整个过程里面，游戏也成了分散和释放我们负能量的渠道，以及架起我们之间互动的桥梁。我们一起交替游玩通关了瘟疫传说、合作通关了怒之铁拳、一起在各种解谜和傻屌游戏（完全不靠谱快递、鹅作剧、超市尖叫购物车、死亡方块……）里面玩的乱七八糟的开心。我也一步步带她入坑空洞骑士和两部奥日，顺便看着她动作游戏方面直线超越我，在进步，在突破。</p>
 <p>我不敢说2021年会变得更好，但是再怎么糟糕我也不担心了。</p>
 
-        
+      
 
-    </article>
-    <!-- <div>
+  </article>
+  <!-- <div>
         <h5>See Also</h5>
         <ul>
             <li><a href="/about">About Me</a></li>
         </ul>
     </div> -->
-    <span class="field">创建时间：#N/A</span>
-    <span class="field">最近更新时间：2021-02-10</span>
-    <hr>
-    <footer>
-        <ul>
-            <li><a href="/about">关于我</a></li>
-            <li><a href="/sitemap.xml">站点地图</a></li>
-            <li><a href="/rss.xml">RSS</a></li>
-            <li>Copyright &copy; KimmyLeo</li>
-        </ul>
-    </footer>
-    <script type="text/javascript">
-        document.querySelectorAll(".disabled-link").forEach(el => el.addEventListener("click", (e) => {
-            alert("链接页面不存在！");
-            e.preventDefault();
-        }));
-    </script>
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script
+  <span class="field">创建时间：#N/A</span>
+  <span class="field">最近更新时间：2021-02-10</span>
+  <hr>
+  <footer>
+    <ul>
+      <li><a href="/about">关于我</a></li>
+      <li><a href="/sitemap.xml">站点地图</a></li>
+      <li><a href="/rss.xml">RSS</a></li>
+      <li>Copyright &copy; KimmyLeo</li>
+    </ul>
+  </footer>
+  <script type="text/javascript">
+    document.querySelectorAll(".disabled-link").forEach(el => el.addEventListener("click", (e) => {
+      alert("链接页面不存在！");
+      e.preventDefault();
+    }));
+  </script>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script
 </body>
 
 </html>

@@ -2,86 +2,88 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script type="text/javascript">
-        if (location.href.endsWith("index.html")) {
-            location.href = location.href.substring(0, location.href.length - "index.html".length);
-        }
-    </script>
-    
-    <title>又一个上古神器开源了，GW-BASIC</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script type="text/javascript">
+    if (location.href.endsWith("index.html")) {
+      location.href = location.href.substring(0, location.href.length - "index.html".length);
+    }
+  </script>
+  
+    <title>
+      又一个上古神器开源了，GW-BASIC
+    </title>
     
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
-        media="(prefers-color-scheme: light)">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/dracula.min.css"
-        media="(prefers-color-scheme: dark)">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
-        media="(prefers-color-scheme: no-preference)">
-    <style type="text/css">
-        body {
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
+          media="(prefers-color-scheme: light)">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/dracula.min.css"
+          media="(prefers-color-scheme: dark)">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
+          media="(prefers-color-scheme: no-preference)">
+        <style type="text/css">
+          body {
             width: 60%;
             margin: 0 auto;
             padding: 2em;
             font-family: 'Segoe UI',
-                "Microsoft Yahei Light",
-                "San Francisco",
-                "Ping Fang SC",
-                "Roboto",
-                "Noto Sans CJK",
-                Tahoma, Geneva, Verdana, sans-serif;
-        }
+              "Microsoft Yahei Light",
+              "San Francisco",
+              "Ping Fang SC",
+              "Roboto",
+              "Noto Sans CJK",
+              Tahoma, Geneva, Verdana, sans-serif;
+          }
 
-        p > img {
+          p>img {
             margin: 0 auto;
             display: block;
             max-width: 80%;
-        }
+          }
 
-        span.field {
+          span.field {
             display: inline-block;
             font-weight: bolder;
             font-size: smaller;
-        }
+          }
 
-        pre {
+          pre {
             max-width: 90%;
             overflow-x: scroll;
             padding: 1em;
             border-radius: 5px;
-        }
+          }
 
-        a {
+          a {
             text-decoration: none;
             color: cornflowerblue;
-        }
+          }
 
-        a:visited {
+          a:visited {
             color: cornflowerblue;
-        }
+          }
 
-        a:hover {
+          a:hover {
             color: darkgray;
-        }
+          }
 
-        a.disabled-link {
+          a.disabled-link {
             color: lightcoral;
             text-decoration: line-through;
-        }
+          }
 
-        nav,
-        nav ul {
+          nav,
+          nav ul {
             display: inline-block;
-        }
+          }
 
-        .tags ul,
-        footer ul {
+          .tags ul,
+          footer ul {
             padding: 0;
             display: inline;
-        }
+          }
 
-        header h1 {
+          header h1 {
             display: inline-block;
             min-width: 320px;
             max-width: 50%;
@@ -90,86 +92,88 @@
             text-overflow: ellipsis;
             white-space: nowrap;
             margin: auto;
-        }
+          }
 
-        @media screen and (max-width: 1200px) {
+          @media screen and (max-width: 1200px) {
             body {
-                width: 90%;
-                max-width: 720px;
-                padding: 0;
-                margin: 1em auto;
+              width: 90%;
+              max-width: 720px;
+              padding: 0;
+              margin: 1em auto;
             }
 
             header h1 {
-                max-width: 90%;
-                width: 90%;
+              max-width: 90%;
+              width: 90%;
             }
-        }
+          }
 
-        nav li,
-        .tags li,
-        footer li {
+          nav li,
+          .tags li,
+          footer li {
             display: inline;
             border-right: 1px solid darkgray;
             padding: 0 1em;
-        }
+          }
 
-        nav li:last-child,
-        .tags li:last-child,
-        footer li:last-child {
+          nav li:last-child,
+          .tags li:last-child,
+          footer li:last-child {
             border: none;
-        }
+          }
 
-        .post-list h3 {
+          .post-list h3 {
             margin: 0.3em 0;
-        }
+          }
 
-        blockquote {
+          blockquote {
             margin: 0.5em;
             border: 1px dotted darkgrey;
             border-radius: 0.5em;
             padding: 0 1em;
-        }
+          }
 
-        div.image-description {
+          div.image-description {
             text-align: center;
             color: gray;
             font-size: smaller;
-        }
+          }
 
-        @media (prefers-color-scheme: dark) {
+          @media (prefers-color-scheme: dark) {
             body {
-                background-color: #090810;
-                color: floralwhite;
-                opacity: 0.83;
+              background-color: #090810;
+              color: floralwhite;
+              opacity: 0.83;
             }
 
             pre {
-                background-color: #282a36;
+              background-color: #282a36;
             }
-        }
-    </style>
+          }
+        </style>
 </head>
 
 <body>
 
-    <header>
-        
-        <h1 title="又一个上古神器开源了，GW-BASIC">又一个上古神器开源了，GW-BASIC</h1>
-        
-        <nav>
+  <header>
+    
+      <h1 title="又一个上古神器开源了，GW-BASIC">
+        又一个上古神器开源了，GW-BASIC
+      </h1>
+      
+          <nav>
             <ul>
-                <li><a href="/">Home</a></li>
-                <li><a href="/articles">Articles</a></li>
-                <li><a href="/about">About</a></li>
+              <li><a href="/">Home</a></li>
+              <li><a href="/articles">Articles</a></li>
+              <li><a href="/about">About</a></li>
             </ul>
-        </nav>
-        <hr>
-        <span class="field">Author: <a href="/about">KimmyLeo</a></span>
-        
-    </header>
-    <article>
-        <p>最近微软发布了一则新闻。他们<a href="https://devblogs.microsoft.com/commandline/microsoft-open-sources-gw-basic/" title="Microsoft Basic 开源了">把 30 多年前的 Microsoft Basic 开源了</a>。很高兴微软能够这样积极的<a href="https://pulse.microsoft.com/nl-nl/business-leadership-nl-nl/na/fa1-microsoft-loves-open-source/" title="Microsoft Loves Open Source">拥抱开源社区</a>，也特别期待能够进一步看到微软开放出来更多的系统。</p>
+          </nav>
+          <hr>
+          <span class="field">Author: <a href="/about">KimmyLeo</a></span>
+          
+  </header>
+  <article>
+    <p>最近微软发布了一则新闻。他们<a href="https://devblogs.microsoft.com/commandline/microsoft-open-sources-gw-basic/" title="Microsoft Basic 开源了">把 30 多年前的 Microsoft Basic 开源了</a>。很高兴微软能够这样积极的<a href="https://pulse.microsoft.com/nl-nl/business-leadership-nl-nl/na/fa1-microsoft-loves-open-source/" title="Microsoft Loves Open Source">拥抱开源社区</a>，也特别期待能够进一步看到微软开放出来更多的系统。</p>
 <p><strong>BASIC</strong> 对于微软来说是一个非常重要的语言。微软的第一桶金就是<strong>比尔·盖茨</strong>和<strong>保罗·艾伦</strong>在 70 年代的 <strong>Altair 8800</strong> 上面开发的 Altair Basic。随后 Basic 作为一个基础的软件，进入到了不同的软件平台，特别在 70 年代末 80 年代初个人计算机刚刚兴起的年代 <strong>Commodore 64</strong>、<strong>Atari 2600</strong> 甚至是 <strong>NES</strong>（红白机）上面都有 basic 的实现。</p>
 <p><img src='https://imgkr.cn-bj.ufileos.com/1dd9348e-cf1b-4cf3-a188-1c21dd3af972.jpg' alt='日版（FamiCom）的Family Basic，附件是一个键盘——是不是像极了小霸王（雾）'/><div class='image-description'><span>⬆️</span>日版（FamiCom）的Family Basic，附件是一个键盘——是不是像极了小霸王（雾）</div></p>
 <p>可以说那个时代的 Basic 相对来说比当今的 Python 还要流行，比生化危机 4 和上古卷轴 5 所跨的平台还要多。在早期 C 语言还没有成为各个操作系统标配接口的时候，Basic 可是给基础用户使用的一个标准接口。而微软就成了 Basic 界的扛把子。在很长的一段时间内，各种家用电脑上的 Basic 软件都由微软来供应，并且在十多年后，微软发布了知名的 <a href="https://mp.weixin.qq.com/s/2F2g9WeIAqVwn03jpg3oiA" title="null">Visual Basic</a>，而其中的 Visual Basic 6.0，直到又过了 20 多年后的今天，还有人在用。</p>
@@ -182,34 +186,34 @@
 <p><img src='https://imgkr.cn-bj.ufileos.com/e51a93a3-c805-43f2-b2a7-c9e3739a0e9c.jpg' alt='一代传奇 Commodore 64'/><div class='image-description'><span>⬆️</span>一代传奇 Commodore 64</div></p>
 <p>好的，关于这些上古神器，我们今天就说这些，祝大家周末愉快。</p>
 
-        
+      
 
-    </article>
-    <!-- <div>
+  </article>
+  <!-- <div>
         <h5>See Also</h5>
         <ul>
             <li><a href="/about">About Me</a></li>
         </ul>
     </div> -->
-    <span class="field">创建时间：2020-05-22</span>
-    <span class="field">最近更新时间：2021-02-10</span>
-    <hr>
-    <footer>
-        <ul>
-            <li><a href="/about">关于我</a></li>
-            <li><a href="/sitemap.xml">站点地图</a></li>
-            <li><a href="/rss.xml">RSS</a></li>
-            <li>Copyright &copy; KimmyLeo</li>
-        </ul>
-    </footer>
-    <script type="text/javascript">
-        document.querySelectorAll(".disabled-link").forEach(el => el.addEventListener("click", (e) => {
-            alert("链接页面不存在！");
-            e.preventDefault();
-        }));
-    </script>
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script
+  <span class="field">创建时间：2020-05-22</span>
+  <span class="field">最近更新时间：2021-02-10</span>
+  <hr>
+  <footer>
+    <ul>
+      <li><a href="/about">关于我</a></li>
+      <li><a href="/sitemap.xml">站点地图</a></li>
+      <li><a href="/rss.xml">RSS</a></li>
+      <li>Copyright &copy; KimmyLeo</li>
+    </ul>
+  </footer>
+  <script type="text/javascript">
+    document.querySelectorAll(".disabled-link").forEach(el => el.addEventListener("click", (e) => {
+      alert("链接页面不存在！");
+      e.preventDefault();
+    }));
+  </script>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script
 </body>
 
 </html>
