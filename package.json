@@ -36,6 +36,7 @@
       "public/*",
       "node_modules/*",
       "test/*"
-    ]
+    ],
+    "ext": "js,json,md"
   }
 }
