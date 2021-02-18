@@ -1,5 +1,5 @@
 ---
-title: 圣战捡屎 A Shit of Holy War
+title: 圣战简史 A Brief History of Holy War
 date: 2019-05-05
 ---
 

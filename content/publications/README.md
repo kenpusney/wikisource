@@ -23,7 +23,7 @@ date: 2018-08-14
 
 ## 创作中作品
 
- - [:books/i2p]()
- - [:books/eoad]()
- - [:books/bhoc]()
+ - [:publications/i2p]()
+ - [:publications/eoad]()
+ - [:publications/bhoc]()
 
