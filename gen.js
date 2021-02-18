@@ -12,9 +12,13 @@ async function generate() {
   const files = await scan({patterns: `${config.sourceDir}/**/*.md`});
 
   for (let file of files) {
-    const item = await render(await markup(await read(file, wiki), wiki), wiki)
+    await read(file, wiki);
+  }
 
-    save(item.target, item.rendered)
+  for (let post of Object.values(wiki.posts)) {
+    const item = await render(markup(post, wiki), wiki);
+
+    save(item.target, item.rendered);
   }
 
   save("public/sitemap.xml", await sitemap(wiki));
