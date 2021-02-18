@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script type="text/javascript">
+    if (location.href.endsWith("index.html")) {
+      location.href = location.href.substring(0, location.href.length - "index.html".length);
+    }
+  </script>
+  
+    <title>
+      F# 是比 Scala 更好的语言吗？
+    </title>
+    
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
+          media="(prefers-color-scheme: light)">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/dracula.min.css"
+          media="(prefers-color-scheme: dark)">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
+          media="(prefers-color-scheme: no-preference)">
+        <style type="text/css">
+          body {
+            width: 60%;
+            margin: 0 auto;
+            padding: 2em;
+            font-family: 'Segoe UI',
+              "Microsoft Yahei Light",
+              "San Francisco",
+              "Ping Fang SC",
+              "Roboto",
+              "Noto Sans CJK",
+              Tahoma, Geneva, Verdana, sans-serif;
+          }
+
+          p>img {
+            margin: 0 auto;
+            display: block;
+            max-width: 80%;
+          }
+
+          span.field {
+            display: inline-block;
+            font-weight: bolder;
+            font-size: smaller;
+          }
+
+          pre {
+            max-width: 90%;
+            overflow-x: scroll;
+            padding: 1em;
+            border-radius: 5px;
+          }
+
+          a {
+            text-decoration: none;
+            color: cornflowerblue;
+          }
+
+          a:visited {
+            color: cornflowerblue;
+          }
+
+          a:hover {
+            color: darkgray;
+          }
+
+          a.disabled-link {
+            color: lightcoral;
+            text-decoration: line-through;
+          }
+
+          nav,
+          nav ul {
+            display: inline-block;
+          }
+
+          .tags ul,
+          footer ul {
+            padding: 0;
+            display: inline;
+          }
+
+          header h1 {
+            display: inline-block;
+            min-width: 320px;
+            max-width: 50%;
+            width: 50%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            margin: auto;
+          }
+
+          @media screen and (max-width: 1200px) {
+            body {
+              width: 90%;
+              max-width: 720px;
+              padding: 0;
+              margin: 1em auto;
+            }
+
+            header h1 {
+              max-width: 90%;
+              width: 90%;
+            }
+          }
+
+          nav li,
+          .tags li,
+          footer li {
+            display: inline;
+            border-right: 1px solid darkgray;
+            padding: 0 1em;
+          }
+
+          nav li:last-child,
+          .tags li:last-child,
+          footer li:last-child {
+            border: none;
+          }
+
+          .post-list h3 {
+            margin: 0.3em 0;
+          }
+
+          blockquote {
+            margin: 0.5em;
+            border: 1px dotted darkgrey;
+            border-radius: 0.5em;
+            padding: 0 1em;
+          }
+
+          div.image-description {
+            text-align: center;
+            color: gray;
+            font-size: smaller;
+          }
+
+          @media (prefers-color-scheme: dark) {
+            body {
+              background-color: #090810;
+              color: floralwhite;
+              opacity: 0.83;
+            }
+
+            pre {
+              background-color: #282a36;
+            }
+          }
+        </style>
+</head>
+
+<body>
+
+  <header>
+    
+      <h1 title="F# 是比 Scala 更好的语言吗？">
+        F# 是比 Scala 更好的语言吗？
+      </h1>
+      
+          <nav>
+            <ul>
+              <li><a href="/">Home</a></li>
+              <li><a href="/articles">Articles</a></li>
+              <li><a href="/about">About</a></li>
+            </ul>
+          </nav>
+          <hr>
+          <span class="field">Author: <a href="/about">KimmyLeo</a></span>
+          
+  </header>
+  <article>
+    <h1 id="f-是比-scala-更好的语言吗？">F# 是比 Scala 更好的语言吗？</h1>
+<p><a href="https://www.zhihu.com/question/36394177/answer/67297001" title="null">知乎链接</a></p>
+<hr>
+<p><span class="RichText ztext CopyrightRichText-richText" itemprop="text"><p>F#基本上是直接照搬了OCaml，另外，以微软的实力做出这样一个语言，并不怎么能体现水平。不过稍好一些的是在适当的时机把它推出来了。</p><p>但是Scala基本上是一路踩着坑过来的。所以到现在发展的浑身上下都是瓶颈。vczh说他复杂真的不是随便说说，你去看看Scalaz就知道了（虽然更多时候体现的是智商问题。</p><p>你要真说这两个哪个更好，我只能说Scala。不过除非你能有Atry那水平，否则也就是把它当成高级的Java语法糖（而且上手还不怎么容易的那种。</p><p>F#对初学者的友好程度跟OCaml其实是一个级别的，不过还好有个牛逼点的IDE扛着，再加上.NET平台，还是能把他们甩几公里。</p>===============<br>你们丫，自己Java/C#都还没学好就想这么远，真的以为这些东西是随便什么人都能搞的啊？</span></p>
+
+      
+
+  </article>
+  <!-- <div>
+        <h5>See Also</h5>
+        <ul>
+            <li><a href="/about">About Me</a></li>
+        </ul>
+    </div> -->
+  <span class="field">创建时间：2015-10-11</span>
+  <span class="field">最近更新时间：2021-02-18</span>
+  <hr>
+  <footer>
+    <ul>
+      <li><a href="/about">关于我</a></li>
+      <li><a href="/sitemap.xml">站点地图</a></li>
+      <li><a href="/rss.xml">RSS</a></li>
+      <li>Copyright &copy; KimmyLeo</li>
+    </ul>
+  </footer>
+  <script type="text/javascript">
+    document.querySelectorAll(".disabled-link").forEach(el => el.addEventListener("click", (e) => {
+      alert("链接页面不存在！");
+      e.preventDefault();
+    }));
+  </script>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script
+</body>
+
+</html>

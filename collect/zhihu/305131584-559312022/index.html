@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script type="text/javascript">
+    if (location.href.endsWith("index.html")) {
+      location.href = location.href.substring(0, location.href.length - "index.html".length);
+    }
+  </script>
+  
+    <title>
+      为什么没有一种令绝大部分程序员满意的编程语言？
+    </title>
+    
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
+          media="(prefers-color-scheme: light)">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/dracula.min.css"
+          media="(prefers-color-scheme: dark)">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
+          media="(prefers-color-scheme: no-preference)">
+        <style type="text/css">
+          body {
+            width: 60%;
+            margin: 0 auto;
+            padding: 2em;
+            font-family: 'Segoe UI',
+              "Microsoft Yahei Light",
+              "San Francisco",
+              "Ping Fang SC",
+              "Roboto",
+              "Noto Sans CJK",
+              Tahoma, Geneva, Verdana, sans-serif;
+          }
+
+          p>img {
+            margin: 0 auto;
+            display: block;
+            max-width: 80%;
+          }
+
+          span.field {
+            display: inline-block;
+            font-weight: bolder;
+            font-size: smaller;
+          }
+
+          pre {
+            max-width: 90%;
+            overflow-x: scroll;
+            padding: 1em;
+            border-radius: 5px;
+          }
+
+          a {
+            text-decoration: none;
+            color: cornflowerblue;
+          }
+
+          a:visited {
+            color: cornflowerblue;
+          }
+
+          a:hover {
+            color: darkgray;
+          }
+
+          a.disabled-link {
+            color: lightcoral;
+            text-decoration: line-through;
+          }
+
+          nav,
+          nav ul {
+            display: inline-block;
+          }
+
+          .tags ul,
+          footer ul {
+            padding: 0;
+            display: inline;
+          }
+
+          header h1 {
+            display: inline-block;
+            min-width: 320px;
+            max-width: 50%;
+            width: 50%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            margin: auto;
+          }
+
+          @media screen and (max-width: 1200px) {
+            body {
+              width: 90%;
+              max-width: 720px;
+              padding: 0;
+              margin: 1em auto;
+            }
+
+            header h1 {
+              max-width: 90%;
+              width: 90%;
+            }
+          }
+
+          nav li,
+          .tags li,
+          footer li {
+            display: inline;
+            border-right: 1px solid darkgray;
+            padding: 0 1em;
+          }
+
+          nav li:last-child,
+          .tags li:last-child,
+          footer li:last-child {
+            border: none;
+          }
+
+          .post-list h3 {
+            margin: 0.3em 0;
+          }
+
+          blockquote {
+            margin: 0.5em;
+            border: 1px dotted darkgrey;
+            border-radius: 0.5em;
+            padding: 0 1em;
+          }
+
+          div.image-description {
+            text-align: center;
+            color: gray;
+            font-size: smaller;
+          }
+
+          @media (prefers-color-scheme: dark) {
+            body {
+              background-color: #090810;
+              color: floralwhite;
+              opacity: 0.83;
+            }
+
+            pre {
+              background-color: #282a36;
+            }
+          }
+        </style>
+</head>
+
+<body>
+
+  <header>
+    
+      <h1 title="为什么没有一种令绝大部分程序员满意的编程语言？">
+        为什么没有一种令绝大部分程序员满意的编程语言？
+      </h1>
+      
+          <nav>
+            <ul>
+              <li><a href="/">Home</a></li>
+              <li><a href="/articles">Articles</a></li>
+              <li><a href="/about">About</a></li>
+            </ul>
+          </nav>
+          <hr>
+          <span class="field">Author: <a href="/about">KimmyLeo</a></span>
+          
+  </header>
+  <article>
+    <h1 id="为什么没有一种令绝大部分程序员满意的编程语言？">为什么没有一种令绝大部分程序员满意的编程语言？</h1>
+<p><a href="https://www.zhihu.com/question/305131584/answer/559312022" title="null">知乎链接</a></p>
+<hr>
+<p><span class="RichText ztext CopyrightRichText-richText" itemprop="text"><p>因为所有编程语言都是Domain Specific的[1]。</p><p>这个Domain可大可小，小到该应用所承载的业务，大到整个团队的组成和公司的整体环境。就像我们本来可以通过非常简单的postgrest顺手搭一些直接映射DB Schema的RESTful API，但考虑团（zhao）队（bu）发（dao）展（ren），不得不走Spring包一遍。</p><p>所以，每个语言的存在就是为了满足特定的需求：可能是快速实现和验证一个新的编程语言的idea，你可以用Racket/Haskell；如果考虑只是要兼容团队智商稳定发展，那Java是完美的选项；如果是撸一个业务简单但追求高并发性能的后端服务，选Go就好了[2]。</p><p>而且你没有发现这些编程语言的团队和社区也是超这个角度靠拢的嘛。JCP一直在完善各种应用性的标准；Rust直接标榜自己是系统级编程语言；D语言也在尝试努力砍掉（至少是尽量少用）GC相关的东西，往高性能和系统开发靠拢。虽然因为能做所有的事情很重要，但没有一个杀手级的应用和场景，这种高大全的东西也没人赶乱用啊（你看看隔壁的wg21/C++）[3]。</p><p class="ztext-empty-paragraph"><br></p><ol><li><a href="https://link.zhihu.com/?target=http%3A//kimleo.lofter.com/post/46977_3ced116" class=" wrap external" target="_blank" rel="nofollow noreferrer">Kimmy&#39;s First Law of Programming Language</a></li><li><a href="https://www.zhihu.com/question/26725004/answer/33842872" class="internal">各种语言层出不穷，C++ 如何改变越来越萎缩的局面？</a></li><li><a href="https://link.zhihu.com/?target=http%3A//kimleo.lofter.com/post/46977_3fadb3a" class=" wrap external" target="_blank" rel="nofollow noreferrer">如何设计编程语言-Kim Leo</a></li></ol><p></p></span></p>
+
+      
+
+  </article>
+  <!-- <div>
+        <h5>See Also</h5>
+        <ul>
+            <li><a href="/about">About Me</a></li>
+        </ul>
+    </div> -->
+  <span class="field">创建时间：2018-12-25</span>
+  <span class="field">最近更新时间：2021-02-18</span>
+  <hr>
+  <footer>
+    <ul>
+      <li><a href="/about">关于我</a></li>
+      <li><a href="/sitemap.xml">站点地图</a></li>
+      <li><a href="/rss.xml">RSS</a></li>
+      <li>Copyright &copy; KimmyLeo</li>
+    </ul>
+  </footer>
+  <script type="text/javascript">
+    document.querySelectorAll(".disabled-link").forEach(el => el.addEventListener("click", (e) => {
+      alert("链接页面不存在！");
+      e.preventDefault();
+    }));
+  </script>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script
+</body>
+
+</html>

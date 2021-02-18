@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script type="text/javascript">
+    if (location.href.endsWith("index.html")) {
+      location.href = location.href.substring(0, location.href.length - "index.html".length);
+    }
+  </script>
+  
+    <title>
+      sicp中的流模式在实际开发中有什么应用？
+    </title>
+    
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
+          media="(prefers-color-scheme: light)">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/dracula.min.css"
+          media="(prefers-color-scheme: dark)">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
+          media="(prefers-color-scheme: no-preference)">
+        <style type="text/css">
+          body {
+            width: 60%;
+            margin: 0 auto;
+            padding: 2em;
+            font-family: 'Segoe UI',
+              "Microsoft Yahei Light",
+              "San Francisco",
+              "Ping Fang SC",
+              "Roboto",
+              "Noto Sans CJK",
+              Tahoma, Geneva, Verdana, sans-serif;
+          }
+
+          p>img {
+            margin: 0 auto;
+            display: block;
+            max-width: 80%;
+          }
+
+          span.field {
+            display: inline-block;
+            font-weight: bolder;
+            font-size: smaller;
+          }
+
+          pre {
+            max-width: 90%;
+            overflow-x: scroll;
+            padding: 1em;
+            border-radius: 5px;
+          }
+
+          a {
+            text-decoration: none;
+            color: cornflowerblue;
+          }
+
+          a:visited {
+            color: cornflowerblue;
+          }
+
+          a:hover {
+            color: darkgray;
+          }
+
+          a.disabled-link {
+            color: lightcoral;
+            text-decoration: line-through;
+          }
+
+          nav,
+          nav ul {
+            display: inline-block;
+          }
+
+          .tags ul,
+          footer ul {
+            padding: 0;
+            display: inline;
+          }
+
+          header h1 {
+            display: inline-block;
+            min-width: 320px;
+            max-width: 50%;
+            width: 50%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            margin: auto;
+          }
+
+          @media screen and (max-width: 1200px) {
+            body {
+              width: 90%;
+              max-width: 720px;
+              padding: 0;
+              margin: 1em auto;
+            }
+
+            header h1 {
+              max-width: 90%;
+              width: 90%;
+            }
+          }
+
+          nav li,
+          .tags li,
+          footer li {
+            display: inline;
+            border-right: 1px solid darkgray;
+            padding: 0 1em;
+          }
+
+          nav li:last-child,
+          .tags li:last-child,
+          footer li:last-child {
+            border: none;
+          }
+
+          .post-list h3 {
+            margin: 0.3em 0;
+          }
+
+          blockquote {
+            margin: 0.5em;
+            border: 1px dotted darkgrey;
+            border-radius: 0.5em;
+            padding: 0 1em;
+          }
+
+          div.image-description {
+            text-align: center;
+            color: gray;
+            font-size: smaller;
+          }
+
+          @media (prefers-color-scheme: dark) {
+            body {
+              background-color: #090810;
+              color: floralwhite;
+              opacity: 0.83;
+            }
+
+            pre {
+              background-color: #282a36;
+            }
+          }
+        </style>
+</head>
+
+<body>
+
+  <header>
+    
+      <h1 title="sicp中的流模式在实际开发中有什么应用？">
+        sicp中的流模式在实际开发中有什么应用？
+      </h1>
+      
+          <nav>
+            <ul>
+              <li><a href="/">Home</a></li>
+              <li><a href="/articles">Articles</a></li>
+              <li><a href="/about">About</a></li>
+            </ul>
+          </nav>
+          <hr>
+          <span class="field">Author: <a href="/about">KimmyLeo</a></span>
+          
+  </header>
+  <article>
+    <h1 id="sicp中的流模式在实际开发中有什么应用？">sicp中的流模式在实际开发中有什么应用？</h1>
+<p><a href="https://www.zhihu.com/question/31423936/answer/51875751" title="null">知乎链接</a></p>
+<hr>
+<p><span class="RichText ztext CopyrightRichText-richText" itemprop="text"><p>谢邀！</p><p>你的感觉没错，iterator模式就是一个典型的例子。<br>如果还觉得不对劲的话，可以看看C++ Range Proposal（<a href="https://link.zhihu.com/?target=https%3A//ericniebler.github.io/std/wg21/D4128.html" class=" wrap external" target="_blank" rel="nofollow noreferrer" data-za-detail-view-id="1043">D4128: Ranges for the Standard Library: Revision 1</a>）。</p><p>延时计算使用非常广泛，比如<a href="https://link.zhihu.com/?target=https%3A//en.wikipedia.org/wiki/Futures_and_promises" class=" wrap external" target="_blank" rel="nofollow noreferrer">Futures/promises</a>（当然其中已经不仅仅是延时了），比如Python的yield，比如C#的async/await。<br>还有像Haskell这样的编程语言，本身就是lazy by default的。</p>一方面，就是call by need，也就是说，在我需要的时候才会求值，不会浪费太多的计算在无用的事情上。<br><blockquote>比如你要去读一个文本文件特定的某一行，等待以后处理，lazy的话，只是会保存你的文件句柄和行号，在你真的要对该行文本处理的时候才会去读取然后处理，而非lazy的处理过程可能会是直接打开文件，读取到该行文本，然后直接交给你。（嗯，就是I/O Stream）</blockquote><p>另一方面，这种设计可以增强任务的异步性和并行性，也就是说，我可以把要计算的东西切换到另一个线程/进程去执行，等他得到结果之后我可能才会需要对其处理。一个很明显的例子就是Promise模式。</p><p>延伸一点的话，像<a href="https://link.zhihu.com/?target=http%3A//libevent.org/" class=" wrap external" target="_blank" rel="nofollow noreferrer">libevent</a>这种都算是类似的应用。</p>另外，C++怎么就没有延时求值了？Functor / Iterator / Stream / Lambda又不是摆设。<br>以及：<a href="https://link.zhihu.com/?target=https%3A//gist.github.com/kenpusney/4db995e8b774826ff1c7" class=" wrap external" target="_blank" rel="nofollow noreferrer">lazy.c</a>（一时找不到例子了自己弄了个丑的）</span></p>
+
+      
+
+  </article>
+  <!-- <div>
+        <h5>See Also</h5>
+        <ul>
+            <li><a href="/about">About Me</a></li>
+        </ul>
+    </div> -->
+  <span class="field">创建时间：2015-06-19</span>
+  <span class="field">最近更新时间：2021-02-18</span>
+  <hr>
+  <footer>
+    <ul>
+      <li><a href="/about">关于我</a></li>
+      <li><a href="/sitemap.xml">站点地图</a></li>
+      <li><a href="/rss.xml">RSS</a></li>
+      <li>Copyright &copy; KimmyLeo</li>
+    </ul>
+  </footer>
+  <script type="text/javascript">
+    document.querySelectorAll(".disabled-link").forEach(el => el.addEventListener("click", (e) => {
+      alert("链接页面不存在！");
+      e.preventDefault();
+    }));
+  </script>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script
+</body>
+
+</html>

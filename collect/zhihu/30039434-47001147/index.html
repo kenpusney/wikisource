@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script type="text/javascript">
+    if (location.href.endsWith("index.html")) {
+      location.href = location.href.substring(0, location.href.length - "index.html".length);
+    }
+  </script>
+  
+    <title>
+      编程语言的跨界真的那么容易吗？
+    </title>
+    
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
+          media="(prefers-color-scheme: light)">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/dracula.min.css"
+          media="(prefers-color-scheme: dark)">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
+          media="(prefers-color-scheme: no-preference)">
+        <style type="text/css">
+          body {
+            width: 60%;
+            margin: 0 auto;
+            padding: 2em;
+            font-family: 'Segoe UI',
+              "Microsoft Yahei Light",
+              "San Francisco",
+              "Ping Fang SC",
+              "Roboto",
+              "Noto Sans CJK",
+              Tahoma, Geneva, Verdana, sans-serif;
+          }
+
+          p>img {
+            margin: 0 auto;
+            display: block;
+            max-width: 80%;
+          }
+
+          span.field {
+            display: inline-block;
+            font-weight: bolder;
+            font-size: smaller;
+          }
+
+          pre {
+            max-width: 90%;
+            overflow-x: scroll;
+            padding: 1em;
+            border-radius: 5px;
+          }
+
+          a {
+            text-decoration: none;
+            color: cornflowerblue;
+          }
+
+          a:visited {
+            color: cornflowerblue;
+          }
+
+          a:hover {
+            color: darkgray;
+          }
+
+          a.disabled-link {
+            color: lightcoral;
+            text-decoration: line-through;
+          }
+
+          nav,
+          nav ul {
+            display: inline-block;
+          }
+
+          .tags ul,
+          footer ul {
+            padding: 0;
+            display: inline;
+          }
+
+          header h1 {
+            display: inline-block;
+            min-width: 320px;
+            max-width: 50%;
+            width: 50%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            margin: auto;
+          }
+
+          @media screen and (max-width: 1200px) {
+            body {
+              width: 90%;
+              max-width: 720px;
+              padding: 0;
+              margin: 1em auto;
+            }
+
+            header h1 {
+              max-width: 90%;
+              width: 90%;
+            }
+          }
+
+          nav li,
+          .tags li,
+          footer li {
+            display: inline;
+            border-right: 1px solid darkgray;
+            padding: 0 1em;
+          }
+
+          nav li:last-child,
+          .tags li:last-child,
+          footer li:last-child {
+            border: none;
+          }
+
+          .post-list h3 {
+            margin: 0.3em 0;
+          }
+
+          blockquote {
+            margin: 0.5em;
+            border: 1px dotted darkgrey;
+            border-radius: 0.5em;
+            padding: 0 1em;
+          }
+
+          div.image-description {
+            text-align: center;
+            color: gray;
+            font-size: smaller;
+          }
+
+          @media (prefers-color-scheme: dark) {
+            body {
+              background-color: #090810;
+              color: floralwhite;
+              opacity: 0.83;
+            }
+
+            pre {
+              background-color: #282a36;
+            }
+          }
+        </style>
+</head>
+
+<body>
+
+  <header>
+    
+      <h1 title="编程语言的跨界真的那么容易吗？">
+        编程语言的跨界真的那么容易吗？
+      </h1>
+      
+          <nav>
+            <ul>
+              <li><a href="/">Home</a></li>
+              <li><a href="/articles">Articles</a></li>
+              <li><a href="/about">About</a></li>
+            </ul>
+          </nav>
+          <hr>
+          <span class="field">Author: <a href="/about">KimmyLeo</a></span>
+          
+  </header>
+  <article>
+    <h1 id="编程语言的跨界真的那么容易吗？">编程语言的跨界真的那么容易吗？</h1>
+<p><a href="https://www.zhihu.com/question/30039434/answer/47001147" title="null">知乎链接</a></p>
+<hr>
+<p><span class="RichText ztext CopyrightRichText-richText" itemprop="text"><p>又看到有人吹<b>函数式编程</b>和有人<b>黑C++</b>。</p><p><b>编程语言跨界很难</b>。<br><span><span class="UserLink"><div class="Popover"><div id="Popover11-toggle" aria-haspopup="true" aria-expanded="false" aria-owns="Popover11-content"><a class="UserLink-link" data-za-detail-view-element_name="User" target="_blank" href="//www.zhihu.com/people/0970f947b898ecc0ec035f9126dd4e08">@vczh</a></div></div></span></span> 的“学完”背后包含了多少不为人知的艰辛，你去看看他做了哪些事情和实现过什么东西大概就会明白了。<br>而且，当你们真得看过C++的STL和《21天学通C++模版编程语言》[1]的时候，就不会觉得什么Functional Programming好神奇了，也不会觉得什么闭包、高阶函数会让人激动万分了（连Pascal和Ada都有type-safe的高阶函数我会乱说？）</p><p><b>编程语言跨界很简单</b>。<br>你去翻一翻Yesod的教程[2]就能开心地用<b>Haskell</b>写Web应用了，不需要理解什么是Monad。</p><p>私以为，能够跑这里来回答这个问题的，“学完”一门编程语言的人没有多少。<b>题主所说的那几个老鸟</b>，也是希望题主能够按照通过Yesod学习Haskell的路子来学习的吧。</p><p>说白了目前的应用架构再复杂也还是那么多东西，只是切换技术栈（语言？）的话，就像题主你之前做的那样，一一对应过去就可以了。（哦什么？你说在C++里面找不到Interceptor和Proxy？你确定你对比的是Java而不是Java EE？或者你应该服务端框架[3]中去找概念？<br>但是如果你真的希望多学习一些东西，或者是对自己现在的技术多有所理解的话，去深入研究一遍，是非常有必要的。而这时候编程语言相对来说只是基础，也许你要面对的可能是更多更复杂的 内容。</p><p>关键还是看你怎么想。</p>就像某仁兄说的，<br><blockquote><u>和语言本身无关，是自己的眼界阻碍了自己的能力。</u></blockquote><br><p>哦，我13年整理过一个豆列[4]，跟本问题的内容应该有关系。</p><p>[1] <a href="https://link.zhihu.com/?target=http%3A//blog.kimleo.net/post/46977_4f86f38" class=" wrap external" target="_blank" rel="nofollow noreferrer">21天学通C++模版编程语言。-Kim Leo</a><br>[2] <a href="https://link.zhihu.com/?target=http%3A//yannesposito.com/Scratch/en/blog/Yesod-tutorial-for-newbies/" class=" wrap external" target="_blank" rel="nofollow noreferrer">YBlog - Haskell web programming</a><br>[3] <a href="https://link.zhihu.com/?target=https%3A//github.com/facebook/proxygen" class=" wrap external" target="_blank" rel="nofollow noreferrer">facebook/proxygen · GitHub</a><br>[4] <a href="https://link.zhihu.com/?target=http%3A//www.douban.com/doulist/2642251/" class=" wrap external" target="_blank" rel="nofollow noreferrer">跨越编程语言界限</a><br>[5] <a href="https://link.zhihu.com/?target=http%3A//www.douban.com/doulist/4041785/" class=" wrap external" target="_blank" rel="nofollow noreferrer">C++: From novice to Professional</a></p><p>以上。</p>=========================<br>谢 <span><span class="UserLink"><div class="Popover"><div id="Popover12-toggle" aria-haspopup="true" aria-expanded="false" aria-owns="Popover12-content"><a class="UserLink-link" data-za-detail-view-element_name="User" target="_blank" href="//www.zhihu.com/people/b7734862be39b570374b4d89e058666a">@罗宸</a></div></div></span></span>指出本答案中的各项纰漏，目前已修订，并做出以下解释：<br><ol><li>答案是随手写的，没有过心，如果你觉得过度主观，可以举报。我尊重大家的意见。<br></li><li>空列语言和概念是没用的，只会对不了解这些的人造成更大的困惑。比如Functional Programming，比如Monad，比如Lisp和Haskell，比如闭包和高阶函数。<br></li><li>&quot;通过Yesod学习Haskell的路子&quot;是指先简单入门一门语言，然后选取一个基于该语言的框架直接去做应用；至少看起来你可以用该语言做出东西来，也算是一种“学会”。就像大部分Java程序员虽然功底不如RFX，依然可以开心地用Java EE一样。（Yesod是一个基于Haskell的Web框架，详见 <a href="https://link.zhihu.com/?target=http%3A//www.yesodweb.com/" class=" external" target="_blank" rel="nofollow noreferrer"><span class="invisible">http://www.</span><span class="visible">yesodweb.com/</span><span class="invisible"></span></a>）</li><li>关于夹杂私货，抱歉可能因为我见识太少，没办法列举更多能够解释和扩展该话题的另外[4]和[5]我认为不算是私货，只是我希望推荐给各位的书。除了搜集工作之外，所有的功劳都要归于豆瓣网和各位作者。</li><li>本文不是鸡汤，也不是干货，只是针对答案提出自己的观点。有任何疑问或者建议，请直接回复或者私信。</li><li>再次谢谢客观的知乎。</li></ol></span></p>
+
+      
+
+  </article>
+  <!-- <div>
+        <h5>See Also</h5>
+        <ul>
+            <li><a href="/about">About Me</a></li>
+        </ul>
+    </div> -->
+  <span class="field">创建时间：2015-05-07</span>
+  <span class="field">最近更新时间：2021-02-18</span>
+  <hr>
+  <footer>
+    <ul>
+      <li><a href="/about">关于我</a></li>
+      <li><a href="/sitemap.xml">站点地图</a></li>
+      <li><a href="/rss.xml">RSS</a></li>
+      <li>Copyright &copy; KimmyLeo</li>
+    </ul>
+  </footer>
+  <script type="text/javascript">
+    document.querySelectorAll(".disabled-link").forEach(el => el.addEventListener("click", (e) => {
+      alert("链接页面不存在！");
+      e.preventDefault();
+    }));
+  </script>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script
+</body>
+
+</html>

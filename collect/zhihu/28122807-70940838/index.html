@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script type="text/javascript">
+    if (location.href.endsWith("index.html")) {
+      location.href = location.href.substring(0, location.href.length - "index.html".length);
+    }
+  </script>
+  
+    <title>
+      如何给开源项目起一个简洁，上口的项目名称？
+    </title>
+    
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
+          media="(prefers-color-scheme: light)">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/dracula.min.css"
+          media="(prefers-color-scheme: dark)">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
+          media="(prefers-color-scheme: no-preference)">
+        <style type="text/css">
+          body {
+            width: 60%;
+            margin: 0 auto;
+            padding: 2em;
+            font-family: 'Segoe UI',
+              "Microsoft Yahei Light",
+              "San Francisco",
+              "Ping Fang SC",
+              "Roboto",
+              "Noto Sans CJK",
+              Tahoma, Geneva, Verdana, sans-serif;
+          }
+
+          p>img {
+            margin: 0 auto;
+            display: block;
+            max-width: 80%;
+          }
+
+          span.field {
+            display: inline-block;
+            font-weight: bolder;
+            font-size: smaller;
+          }
+
+          pre {
+            max-width: 90%;
+            overflow-x: scroll;
+            padding: 1em;
+            border-radius: 5px;
+          }
+
+          a {
+            text-decoration: none;
+            color: cornflowerblue;
+          }
+
+          a:visited {
+            color: cornflowerblue;
+          }
+
+          a:hover {
+            color: darkgray;
+          }
+
+          a.disabled-link {
+            color: lightcoral;
+            text-decoration: line-through;
+          }
+
+          nav,
+          nav ul {
+            display: inline-block;
+          }
+
+          .tags ul,
+          footer ul {
+            padding: 0;
+            display: inline;
+          }
+
+          header h1 {
+            display: inline-block;
+            min-width: 320px;
+            max-width: 50%;
+            width: 50%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            margin: auto;
+          }
+
+          @media screen and (max-width: 1200px) {
+            body {
+              width: 90%;
+              max-width: 720px;
+              padding: 0;
+              margin: 1em auto;
+            }
+
+            header h1 {
+              max-width: 90%;
+              width: 90%;
+            }
+          }
+
+          nav li,
+          .tags li,
+          footer li {
+            display: inline;
+            border-right: 1px solid darkgray;
+            padding: 0 1em;
+          }
+
+          nav li:last-child,
+          .tags li:last-child,
+          footer li:last-child {
+            border: none;
+          }
+
+          .post-list h3 {
+            margin: 0.3em 0;
+          }
+
+          blockquote {
+            margin: 0.5em;
+            border: 1px dotted darkgrey;
+            border-radius: 0.5em;
+            padding: 0 1em;
+          }
+
+          div.image-description {
+            text-align: center;
+            color: gray;
+            font-size: smaller;
+          }
+
+          @media (prefers-color-scheme: dark) {
+            body {
+              background-color: #090810;
+              color: floralwhite;
+              opacity: 0.83;
+            }
+
+            pre {
+              background-color: #282a36;
+            }
+          }
+        </style>
+</head>
+
+<body>
+
+  <header>
+    
+      <h1 title="如何给开源项目起一个简洁，上口的项目名称？">
+        如何给开源项目起一个简洁，上口的项目名称？
+      </h1>
+      
+          <nav>
+            <ul>
+              <li><a href="/">Home</a></li>
+              <li><a href="/articles">Articles</a></li>
+              <li><a href="/about">About</a></li>
+            </ul>
+          </nav>
+          <hr>
+          <span class="field">Author: <a href="/about">KimmyLeo</a></span>
+          
+  </header>
+  <article>
+    <h1 id="如何给开源项目起一个简洁，上口的项目名称？">如何给开源项目起一个简洁，上口的项目名称？</h1>
+<p><a href="https://www.zhihu.com/question/28122807/answer/70940838" title="null">知乎链接</a></p>
+<hr>
+<p><span class="RichText ztext CopyrightRichText-richText" itemprop="text">都是个人小玩意儿，献丑了。<br><ul><li>第一个具名的项目叫<b>Doors</b>，操作系统，内核代号Soil（泥土），倒过来就是LiOS。当然，还没开始做。<br></li><li>然后当时在考虑设计我系统的一套兼顾了桌面和移动的UI，照抄Aero的设计，名字叫<b>aerobium</b>（喜氧菌）。后来Android就出来了，就放弃了。</li><li>大一C语言课程设计那个照抄Lua的语言，叫<b>Ice</b>（Integrated Command Engine）。</li><li>给Lua 5.1添加的一套对象系统，叫做<b>required</b>。（后来想想为什么不再加一个optional＝。＝</li><li>自己设计了一套字节码，写了一个垃圾的寄存器机，叫<b>DumpCore</b>，原因是运行的时候经常core dump。</li><li>Java 8刚出来的时候，顺手写了一个跟stream很像的轮子，用_和$来做util类（最渣实践），叫做<b>hjkit</b>（Hey[黑] Java Kit），因为引入了$，另一个名字又叫<b>j8Query</b>。</li><li>写过一个用于方便管理bash脚本的工具，叫<b>kit</b>，本身就是工具集的意思，扩展开叫Keep It Tidy。</li><li>用peg.js生成parser，抄袭了 <span><span class="UserLink"><div class="Popover"><div id="Popover9-toggle" aria-haspopup="true" aria-expanded="false" aria-owns="Popover9-content"><a class="UserLink-link" data-za-detail-view-element_name="User" target="_blank" href="//www.zhihu.com/people/b6d28ac2b88b7f230552bab4a0aceaca">@Belleve</a></div></div></span></span>菊苣博客上写的一段代码，实现了一个编译到JS的语言，叫<b>KILL</b>（Kimmy&#39;s Interpreter for Limited Lambda）。</li><li>雄心勃勃想写用clojure一个分布式的in-mem db，命名叫<b>clark</b>，已夭折。原型叫<b>rackdis</b>，意为Racket-based Redis。</li><li>一直在探索一套新的编程语言，催生了两个项目，一个叫<b>ng</b>（当然就是next generation），另一个叫<b>69</b>。结果现在都是废弃状态。</li><li>一直处于半死不活状态的一套C++类库，取名叫<b>Canvas</b>。其中还有一个专门扩展C语法的，叫<b>Certainly</b>。</li><li>以及设计并准备实现的一套用于任务管理（GTD）的DSL，叫做<b>taskiller</b>。</li><li>感觉现在的Terminal和Shell都太难用了想设计一个新的结合版，叫<b>Lexterm</b>（Leo&#39;s Extended Terminal）。</li></ul><br><p>还有更多挖过的坑，没放到GitHub上的大概也都忘了。电脑里面始终都有两个文件夹，一个叫Projects一个叫Workspace，虽然我也不知道怎么分的。<br>希望能够启发一下题主吧。</p>另外，最近在搞手写AST的编程语言<b>Yample</b>，欢迎来拍砖。</span></p>
+
+      
+
+  </article>
+  <!-- <div>
+        <h5>See Also</h5>
+        <ul>
+            <li><a href="/about">About Me</a></li>
+        </ul>
+    </div> -->
+  <span class="field">创建时间：2015-11-05</span>
+  <span class="field">最近更新时间：2021-02-18</span>
+  <hr>
+  <footer>
+    <ul>
+      <li><a href="/about">关于我</a></li>
+      <li><a href="/sitemap.xml">站点地图</a></li>
+      <li><a href="/rss.xml">RSS</a></li>
+      <li>Copyright &copy; KimmyLeo</li>
+    </ul>
+  </footer>
+  <script type="text/javascript">
+    document.querySelectorAll(".disabled-link").forEach(el => el.addEventListener("click", (e) => {
+      alert("链接页面不存在！");
+      e.preventDefault();
+    }));
+  </script>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script
+</body>
+
+</html>

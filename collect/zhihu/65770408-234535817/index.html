@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script type="text/javascript">
+    if (location.href.endsWith("index.html")) {
+      location.href = location.href.substring(0, location.href.length - "index.html".length);
+    }
+  </script>
+  
+    <title>
+      能否重新定义机器语言？
+    </title>
+    
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
+          media="(prefers-color-scheme: light)">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/dracula.min.css"
+          media="(prefers-color-scheme: dark)">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
+          media="(prefers-color-scheme: no-preference)">
+        <style type="text/css">
+          body {
+            width: 60%;
+            margin: 0 auto;
+            padding: 2em;
+            font-family: 'Segoe UI',
+              "Microsoft Yahei Light",
+              "San Francisco",
+              "Ping Fang SC",
+              "Roboto",
+              "Noto Sans CJK",
+              Tahoma, Geneva, Verdana, sans-serif;
+          }
+
+          p>img {
+            margin: 0 auto;
+            display: block;
+            max-width: 80%;
+          }
+
+          span.field {
+            display: inline-block;
+            font-weight: bolder;
+            font-size: smaller;
+          }
+
+          pre {
+            max-width: 90%;
+            overflow-x: scroll;
+            padding: 1em;
+            border-radius: 5px;
+          }
+
+          a {
+            text-decoration: none;
+            color: cornflowerblue;
+          }
+
+          a:visited {
+            color: cornflowerblue;
+          }
+
+          a:hover {
+            color: darkgray;
+          }
+
+          a.disabled-link {
+            color: lightcoral;
+            text-decoration: line-through;
+          }
+
+          nav,
+          nav ul {
+            display: inline-block;
+          }
+
+          .tags ul,
+          footer ul {
+            padding: 0;
+            display: inline;
+          }
+
+          header h1 {
+            display: inline-block;
+            min-width: 320px;
+            max-width: 50%;
+            width: 50%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            margin: auto;
+          }
+
+          @media screen and (max-width: 1200px) {
+            body {
+              width: 90%;
+              max-width: 720px;
+              padding: 0;
+              margin: 1em auto;
+            }
+
+            header h1 {
+              max-width: 90%;
+              width: 90%;
+            }
+          }
+
+          nav li,
+          .tags li,
+          footer li {
+            display: inline;
+            border-right: 1px solid darkgray;
+            padding: 0 1em;
+          }
+
+          nav li:last-child,
+          .tags li:last-child,
+          footer li:last-child {
+            border: none;
+          }
+
+          .post-list h3 {
+            margin: 0.3em 0;
+          }
+
+          blockquote {
+            margin: 0.5em;
+            border: 1px dotted darkgrey;
+            border-radius: 0.5em;
+            padding: 0 1em;
+          }
+
+          div.image-description {
+            text-align: center;
+            color: gray;
+            font-size: smaller;
+          }
+
+          @media (prefers-color-scheme: dark) {
+            body {
+              background-color: #090810;
+              color: floralwhite;
+              opacity: 0.83;
+            }
+
+            pre {
+              background-color: #282a36;
+            }
+          }
+        </style>
+</head>
+
+<body>
+
+  <header>
+    
+      <h1 title="能否重新定义机器语言？">
+        能否重新定义机器语言？
+      </h1>
+      
+          <nav>
+            <ul>
+              <li><a href="/">Home</a></li>
+              <li><a href="/articles">Articles</a></li>
+              <li><a href="/about">About</a></li>
+            </ul>
+          </nav>
+          <hr>
+          <span class="field">Author: <a href="/about">KimmyLeo</a></span>
+          
+  </header>
+  <article>
+    <h1 id="能否重新定义机器语言？">能否重新定义机器语言？</h1>
+<p><a href="https://www.zhihu.com/question/65770408/answer/234535817" title="null">知乎链接</a></p>
+<hr>
+<p><span class="RichText ztext CopyrightRichText-richText" itemprop="text"><p>谢邀。</p><p>那么请问这个机器的每一位你要设置几个状态，分别怎么在物理层实现。</p><p class="ztext-empty-paragraph"><br></p><ol><li><b>从机器的结构来说</b></li></ol><p>采用二进制位的一个原因是电路通断表示状态易于实现，所以无论是0，1还是阴阳（参考易经，64卦象刚好是 <img src="https://www.zhihu.com/equation?tex=2%5E%7B6%7D+%3D+64" alt="[公式]" eeimg="1" data-formula="2^{6} = 64"> ），都只是我们在具体描述二进制值得时候采用的符号而已；另外一个原因就是，电路是可以组合的，这样简单的二进制我们可以通过位扩展来增强其计算能力，比如现在64位就完全能满足日常工作和生活了。</p><p class="ztext-empty-paragraph"><br></p><p>如果题主想象的是从根本上解决这个问题，那么就必然要扩展进制位。当然不是没人进行过尝试；但是要么还是以二进制电路为基础做基元位宽的改动（比如把两个二进制位当成一个四进制位，或者跟题主当前描述的有点相似），要么就要专门设计一套曲折的逻辑和基本上能够被实现的结构（比如，三进制计算机。参见<a href="https://link.zhihu.com/?target=http%3A//www.wikiwand.com/en/Ternary_computer" class=" wrap external" target="_blank" rel="nofollow noreferrer">Ternary computer</a>）。但是，第一种办法设计、实现和推行起来都很复杂（毕竟二元数理逻辑近几百年还是最被普遍接受的），第二种办法又不能够摆脱现有的结构，所以，并没有什么意义。</p><p class="ztext-empty-paragraph"><br></p><p>2.<b>从汉字字符集上来说</b></p><p>汉字字符数量庞大，字形复杂多变，而且多数都存在着形态相似、同音、多义的情况，并不像拉丁字符等可以在8位以内能够完整表示出来。并且，无论是通过笔划还是拼音编码，都很难高效的表示文字，所以其结果可能还不如现在通行的国标码或者UCS，然而他们都是使用的四字节以内的数字来表示。</p><p>一个简单的例子比如，我用五笔划（横竖撇折勾）来表示基本的一个汉字字元位，那么如果我要表示“方文山”，大概会是：</p><blockquote>撇（点）横勾撇撇（点）横撇撇（捺）竖折竖</blockquote><p>但其实，汉字“放”完全可以跟“方文”是同样的编码。这只是一个简单的例子，但其实汉字的任何合成字拆开以后都能跟对应的单字冲突（“题”，“是页”）。</p><p>有个办法可以解决这个问题，就是跟变长编码的思路类似，在每个字符的前面加一个长度信息，比如</p><blockquote>4撇（点）横勾撇4撇（点）横撇撇（捺）3竖折竖</blockquote><p>但是这样就更容易搞得不伦不类了，特别是遇到动辄几十画的字，简直能要人命。</p><p class="ztext-empty-paragraph"><br></p><p>3.<b>中文编程语言</b></p><p>其实说到底，现在计算机的这套模型，在生物计算和量子计算还没有突破性的结构变动并量产之前，是基本上很稳定的模型了，所以不要老是想着从都到尾都汉化。就如同中文配音的外语电影总感觉有些违和一样，反倒不如学学字幕组，保留原声，在字幕再创作上好好下功夫。</p><p>无论再怎么复杂，编程语言的前端也只是做到了艹字符串并转化为编译器的运行时抽象表示。所以学学Parsing技术造几个跟业务集成度比较高的DSL，远比花费大心机搞一堆狗屁不通的“中文编程语言”稳得多。</p><p class="ztext-empty-paragraph"><br></p><p>以上。</p><p></p></span></p>
+
+      
+
+  </article>
+  <!-- <div>
+        <h5>See Also</h5>
+        <ul>
+            <li><a href="/about">About Me</a></li>
+        </ul>
+    </div> -->
+  <span class="field">创建时间：2017-09-24</span>
+  <span class="field">最近更新时间：2021-02-18</span>
+  <hr>
+  <footer>
+    <ul>
+      <li><a href="/about">关于我</a></li>
+      <li><a href="/sitemap.xml">站点地图</a></li>
+      <li><a href="/rss.xml">RSS</a></li>
+      <li>Copyright &copy; KimmyLeo</li>
+    </ul>
+  </footer>
+  <script type="text/javascript">
+    document.querySelectorAll(".disabled-link").forEach(el => el.addEventListener("click", (e) => {
+      alert("链接页面不存在！");
+      e.preventDefault();
+    }));
+  </script>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script
+</body>
+
+</html>

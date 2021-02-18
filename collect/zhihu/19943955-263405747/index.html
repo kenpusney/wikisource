@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script type="text/javascript">
+    if (location.href.endsWith("index.html")) {
+      location.href = location.href.substring(0, location.href.length - "index.html".length);
+    }
+  </script>
+  
+    <title>
+      PHP 比 Java 的开发效率高在哪？
+    </title>
+    
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
+          media="(prefers-color-scheme: light)">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/dracula.min.css"
+          media="(prefers-color-scheme: dark)">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
+          media="(prefers-color-scheme: no-preference)">
+        <style type="text/css">
+          body {
+            width: 60%;
+            margin: 0 auto;
+            padding: 2em;
+            font-family: 'Segoe UI',
+              "Microsoft Yahei Light",
+              "San Francisco",
+              "Ping Fang SC",
+              "Roboto",
+              "Noto Sans CJK",
+              Tahoma, Geneva, Verdana, sans-serif;
+          }
+
+          p>img {
+            margin: 0 auto;
+            display: block;
+            max-width: 80%;
+          }
+
+          span.field {
+            display: inline-block;
+            font-weight: bolder;
+            font-size: smaller;
+          }
+
+          pre {
+            max-width: 90%;
+            overflow-x: scroll;
+            padding: 1em;
+            border-radius: 5px;
+          }
+
+          a {
+            text-decoration: none;
+            color: cornflowerblue;
+          }
+
+          a:visited {
+            color: cornflowerblue;
+          }
+
+          a:hover {
+            color: darkgray;
+          }
+
+          a.disabled-link {
+            color: lightcoral;
+            text-decoration: line-through;
+          }
+
+          nav,
+          nav ul {
+            display: inline-block;
+          }
+
+          .tags ul,
+          footer ul {
+            padding: 0;
+            display: inline;
+          }
+
+          header h1 {
+            display: inline-block;
+            min-width: 320px;
+            max-width: 50%;
+            width: 50%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            margin: auto;
+          }
+
+          @media screen and (max-width: 1200px) {
+            body {
+              width: 90%;
+              max-width: 720px;
+              padding: 0;
+              margin: 1em auto;
+            }
+
+            header h1 {
+              max-width: 90%;
+              width: 90%;
+            }
+          }
+
+          nav li,
+          .tags li,
+          footer li {
+            display: inline;
+            border-right: 1px solid darkgray;
+            padding: 0 1em;
+          }
+
+          nav li:last-child,
+          .tags li:last-child,
+          footer li:last-child {
+            border: none;
+          }
+
+          .post-list h3 {
+            margin: 0.3em 0;
+          }
+
+          blockquote {
+            margin: 0.5em;
+            border: 1px dotted darkgrey;
+            border-radius: 0.5em;
+            padding: 0 1em;
+          }
+
+          div.image-description {
+            text-align: center;
+            color: gray;
+            font-size: smaller;
+          }
+
+          @media (prefers-color-scheme: dark) {
+            body {
+              background-color: #090810;
+              color: floralwhite;
+              opacity: 0.83;
+            }
+
+            pre {
+              background-color: #282a36;
+            }
+          }
+        </style>
+</head>
+
+<body>
+
+  <header>
+    
+      <h1 title="PHP 比 Java 的开发效率高在哪？">
+        PHP 比 Java 的开发效率高在哪？
+      </h1>
+      
+          <nav>
+            <ul>
+              <li><a href="/">Home</a></li>
+              <li><a href="/articles">Articles</a></li>
+              <li><a href="/about">About</a></li>
+            </ul>
+          </nav>
+          <hr>
+          <span class="field">Author: <a href="/about">KimmyLeo</a></span>
+          
+  </header>
+  <article>
+    <h1 id="php-比-java-的开发效率高在哪？">PHP 比 Java 的开发效率高在哪？</h1>
+<p><a href="https://www.zhihu.com/question/19943955/answer/263405747" title="null">知乎链接</a></p>
+<hr>
+<p><span class="RichText ztext CopyrightRichText-richText" itemprop="text"><p>PHP高就高在它脏。</p><p>所以你随便糊一个什么东西基本上满足需求，写再乱的代码只要能运行起来就有好。<br>但是反过来如果想要他变得干净就要费劲了：一大堆的convention，各种黑科技，没错虽然psr标准化了但是autoload这东西真的就是在糊啊。</p><p>很多人会喷C++程序员都习惯随手造轮子，PHP可是把随手Hack的轮子都直接当成了标准来处理了的。</p><p>这么脏确实方便，就像一些答案里说的，随手就能登上机器改代码等等。可是，这样搞对Ops和质量保证很不友好啊。比如你在生产机器上fix了一个bug，在什么情况下把它合并到主分支呢？难道还要在生产机器上配置一套vcs客户端？</p><p>再者，业务复杂和高吞吐量的情况下，PHP这些特色都没了：要么没有一个强有力的类型系统做保障结果自身写成了一坨屎，要么滥用动态特性造成代码极度不可读。所以很有可能的原因是，团队的核心成员离职以后这个项目基本就废了，不得不再挖新坑。更神奇的是PHP中这种能够诡异地实现各种需求的特性还真是非常的多，更加剧了这一问题。</p><p>第三点就是，PHP是很multi-paradigm的，而且因为一些设计的缺陷导致项目里面不得不交叉混用各种不同的paradigm。加之语言版本的混乱，配置的复杂（当然现在你可以php -S了），以及各种安全性和一些隐晦的缺陷，这些都是影响项目稳定性的致命伤害：因为这些原因可能会有一大部分人不得不在不同机器/操作系统上保留不同的配置，或者是固守某个特定的版本，或者坚持使用自己hack出来的工具。</p><p>当然其实上面那些缺陷，除了作为动态语言必有的之外，Java里也多少都存在（特别是对于初学者，或者至今还在使用一些老旧技术栈的人）。但关键是，首先Java自身设计上还是有一定的紧凑和保守（所谓的歧视程序员智商），对于团队协作来说非常的重要，毕竟不是每个人都是大牛。其次Java有非常完善的标准和工具集，自动化程度非常的高，这就避免了需要程序员“ssh到服务器”这种尴尬的操作。另外作为一个工业级的编程语言，Java（及一部分开发框架）在可靠性方面是少有能及的，这一点你PHP再洗也没用。</p><p>所以对比一下其实就出来了，PHP脏又快，所以，个人或者小团队快速实现一些原型产品的时候可能会非常的方便，但是随着业务逻辑变复杂，这个优势会逐渐消失。反观Java虽然自由度不高，设计的看起来有些蠢，但是有工业级框架和工具的支撑前期开发上不比PHP差劲，而且能够保证后续的可维护性：至少每个人都能看懂代码。</p><p>———</p><p>关于程序员，我觉得完全不能按照使用的编程语言来划分，更不应该随便用80%这个数字来随便代表别人。</p><br><p>就像，ssh到Linux这种本身作为基本的ops知识是一个合格的开发人员的必备，而且，自动化工具的存在带给开发人员的好处就是，不用再处理这些脏东西了，把更多的时间留给更好的实现逻辑和提升质量：在源头控制好了问题，就更不会存在ssh到生产环境修bug这种操作了。</p><br><br>以上。</span></p>
+
+      
+
+  </article>
+  <!-- <div>
+        <h5>See Also</h5>
+        <ul>
+            <li><a href="/about">About Me</a></li>
+        </ul>
+    </div> -->
+  <span class="field">创建时间：2017-11-21</span>
+  <span class="field">最近更新时间：2021-02-18</span>
+  <hr>
+  <footer>
+    <ul>
+      <li><a href="/about">关于我</a></li>
+      <li><a href="/sitemap.xml">站点地图</a></li>
+      <li><a href="/rss.xml">RSS</a></li>
+      <li>Copyright &copy; KimmyLeo</li>
+    </ul>
+  </footer>
+  <script type="text/javascript">
+    document.querySelectorAll(".disabled-link").forEach(el => el.addEventListener("click", (e) => {
+      alert("链接页面不存在！");
+      e.preventDefault();
+    }));
+  </script>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script
+</body>
+
+</html>

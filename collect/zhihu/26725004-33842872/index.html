@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script type="text/javascript">
+    if (location.href.endsWith("index.html")) {
+      location.href = location.href.substring(0, location.href.length - "index.html".length);
+    }
+  </script>
+  
+    <title>
+      各种语言层出不穷，C++ 如何改变越来越萎缩的局面？
+    </title>
+    
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
+          media="(prefers-color-scheme: light)">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/dracula.min.css"
+          media="(prefers-color-scheme: dark)">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
+          media="(prefers-color-scheme: no-preference)">
+        <style type="text/css">
+          body {
+            width: 60%;
+            margin: 0 auto;
+            padding: 2em;
+            font-family: 'Segoe UI',
+              "Microsoft Yahei Light",
+              "San Francisco",
+              "Ping Fang SC",
+              "Roboto",
+              "Noto Sans CJK",
+              Tahoma, Geneva, Verdana, sans-serif;
+          }
+
+          p>img {
+            margin: 0 auto;
+            display: block;
+            max-width: 80%;
+          }
+
+          span.field {
+            display: inline-block;
+            font-weight: bolder;
+            font-size: smaller;
+          }
+
+          pre {
+            max-width: 90%;
+            overflow-x: scroll;
+            padding: 1em;
+            border-radius: 5px;
+          }
+
+          a {
+            text-decoration: none;
+            color: cornflowerblue;
+          }
+
+          a:visited {
+            color: cornflowerblue;
+          }
+
+          a:hover {
+            color: darkgray;
+          }
+
+          a.disabled-link {
+            color: lightcoral;
+            text-decoration: line-through;
+          }
+
+          nav,
+          nav ul {
+            display: inline-block;
+          }
+
+          .tags ul,
+          footer ul {
+            padding: 0;
+            display: inline;
+          }
+
+          header h1 {
+            display: inline-block;
+            min-width: 320px;
+            max-width: 50%;
+            width: 50%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            margin: auto;
+          }
+
+          @media screen and (max-width: 1200px) {
+            body {
+              width: 90%;
+              max-width: 720px;
+              padding: 0;
+              margin: 1em auto;
+            }
+
+            header h1 {
+              max-width: 90%;
+              width: 90%;
+            }
+          }
+
+          nav li,
+          .tags li,
+          footer li {
+            display: inline;
+            border-right: 1px solid darkgray;
+            padding: 0 1em;
+          }
+
+          nav li:last-child,
+          .tags li:last-child,
+          footer li:last-child {
+            border: none;
+          }
+
+          .post-list h3 {
+            margin: 0.3em 0;
+          }
+
+          blockquote {
+            margin: 0.5em;
+            border: 1px dotted darkgrey;
+            border-radius: 0.5em;
+            padding: 0 1em;
+          }
+
+          div.image-description {
+            text-align: center;
+            color: gray;
+            font-size: smaller;
+          }
+
+          @media (prefers-color-scheme: dark) {
+            body {
+              background-color: #090810;
+              color: floralwhite;
+              opacity: 0.83;
+            }
+
+            pre {
+              background-color: #282a36;
+            }
+          }
+        </style>
+</head>
+
+<body>
+
+  <header>
+    
+      <h1 title="各种语言层出不穷，C++ 如何改变越来越萎缩的局面？">
+        各种语言层出不穷，C++ 如何改变越来越萎缩的局面？
+      </h1>
+      
+          <nav>
+            <ul>
+              <li><a href="/">Home</a></li>
+              <li><a href="/articles">Articles</a></li>
+              <li><a href="/about">About</a></li>
+            </ul>
+          </nav>
+          <hr>
+          <span class="field">Author: <a href="/about">KimmyLeo</a></span>
+          
+  </header>
+  <article>
+    <h1 id="各种语言层出不穷，c-如何改变越来越萎缩的局面？">各种语言层出不穷，C++ 如何改变越来越萎缩的局面？</h1>
+<p><a href="https://www.zhihu.com/question/26725004/answer/33842872" title="null">知乎链接</a></p>
+<hr>
+<p><span class="RichText ztext CopyrightRichText-richText" itemprop="text"><p>你可以把那些语言看成各公司/组织生产的略微关注General Purpose的DSL，domain就是他们自家公司的业务或者产品。否则为啥我就觉着Dart和golang来就像一坨屎，而TypeScript和C++就随心所欲呢。</p><p>非要说的话，老代码和trick代码只说明了一件事儿：这家公司没有一个程序员，都只是会码代码；否则是不会设计出这种连技术平滑升级都做不到的项目的。毕竟微软积累了这么多年的代码，依然能够自豪的升级自家的平台。另外还有想说的一点，gcc这么复杂的玩意儿都敢推倒重来，该公司那点东西又能怎么样。</p><p>好吧现在来说说C++：</p><p>（太晚了，去做作业，明天再说吧。</p><b>好吧我们接着来说C++</b>：<br>个人观点：<br><blockquote><b>C++是最像C语言的编程语言里面最像Haskell的编程语言（没有之一）。</b></blockquote>C++他爹也说过，C++是融合了Direct Hardware Mapping和Domain Abstraction的。而且在这个方面目前没有人能比它做得更好。<br>同样的转到<a href="http://www.zhihu.com/question/26751127" class="internal">隔壁的问题</a>，C++几乎具备了答案中提到的全部要素，所谓的感觉C++变得老旧不堪，要么是没有看过<a href="https://link.zhihu.com/?target=https%3A//gac.codeplex.com/SourceControl/latest" class=" wrap external" target="_blank" rel="nofollow noreferrer"><em>真正</em></a>的C++代码，要么就是被DSL给惯坏了。 <span><span class="UserLink"><div class="Popover"><div id="Popover10-toggle" aria-haspopup="true" aria-expanded="false" aria-owns="Popover10-content"><a class="UserLink-link" data-za-detail-view-element_name="User" target="_blank" href="//www.zhihu.com/people/0970f947b898ecc0ec035f9126dd4e08">@vczh</a></div></div></span></span>给了我们一套近乎完美的实例，无论是学习还是使用能让你体会到C++究竟是什么样子的。<br>还有也是很重要的一点，C++支持自主和自动化资源管理，如果你知道我说的是RAII而不是GC的话。</span></p>
+
+      
+
+  </article>
+  <!-- <div>
+        <h5>See Also</h5>
+        <ul>
+            <li><a href="/about">About Me</a></li>
+        </ul>
+    </div> -->
+  <span class="field">创建时间：2014-11-22</span>
+  <span class="field">最近更新时间：2021-02-18</span>
+  <hr>
+  <footer>
+    <ul>
+      <li><a href="/about">关于我</a></li>
+      <li><a href="/sitemap.xml">站点地图</a></li>
+      <li><a href="/rss.xml">RSS</a></li>
+      <li>Copyright &copy; KimmyLeo</li>
+    </ul>
+  </footer>
+  <script type="text/javascript">
+    document.querySelectorAll(".disabled-link").forEach(el => el.addEventListener("click", (e) => {
+      alert("链接页面不存在！");
+      e.preventDefault();
+    }));
+  </script>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script
+</body>
+
+</html>
