@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script type="text/javascript">
+    if (location.href.endsWith("index.html")) {
+      location.href = location.href.substring(0, location.href.length - "index.html".length);
+    }
+  </script>
+  
+    <title>
+      Accumulator-passing style
+    </title>
+    
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
+          media="(prefers-color-scheme: light)">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/dracula.min.css"
+          media="(prefers-color-scheme: dark)">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
+          media="(prefers-color-scheme: no-preference)">
+        <style type="text/css">
+          body {
+            width: 60%;
+            margin: 0 auto;
+            padding: 2em;
+            font-family: 'Segoe UI',
+              "Microsoft Yahei Light",
+              "San Francisco",
+              "Ping Fang SC",
+              "Roboto",
+              "Noto Sans CJK",
+              Tahoma, Geneva, Verdana, sans-serif;
+          }
+
+          p>img {
+            margin: 0 auto;
+            display: block;
+            max-width: 80%;
+          }
+
+          span.field {
+            display: inline-block;
+            font-weight: bolder;
+            font-size: smaller;
+          }
+
+          pre {
+            max-width: 90%;
+            overflow-x: scroll;
+            padding: 1em;
+            border-radius: 5px;
+          }
+
+          a {
+            text-decoration: none;
+            color: cornflowerblue;
+          }
+
+          a:visited {
+            color: cornflowerblue;
+          }
+
+          a:hover {
+            color: darkgray;
+          }
+
+          a.disabled-link {
+            color: lightcoral;
+            text-decoration: line-through;
+          }
+
+          nav,
+          nav ul {
+            display: inline-block;
+          }
+
+          .tags ul,
+          footer ul {
+            padding: 0;
+            display: inline;
+          }
+
+          header h1 {
+            display: inline-block;
+            min-width: 320px;
+            max-width: 50%;
+            width: 50%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            margin: auto;
+          }
+
+          @media screen and (max-width: 1200px) {
+            body {
+              width: 90%;
+              max-width: 720px;
+              padding: 0;
+              margin: 1em auto;
+            }
+
+            header h1 {
+              max-width: 90%;
+              width: 90%;
+            }
+          }
+
+          nav li,
+          .tags li,
+          footer li {
+            display: inline;
+            border-right: 1px solid darkgray;
+            padding: 0 1em;
+          }
+
+          nav li:last-child,
+          .tags li:last-child,
+          footer li:last-child {
+            border: none;
+          }
+
+          .post-list h3 {
+            margin: 0.3em 0;
+          }
+
+          blockquote {
+            margin: 0.5em;
+            border: 1px dotted darkgrey;
+            border-radius: 0.5em;
+            padding: 0 1em;
+          }
+
+          div.image-description {
+            text-align: center;
+            color: gray;
+            font-size: smaller;
+          }
+
+          @media (prefers-color-scheme: dark) {
+            body {
+              background-color: #090810;
+              color: floralwhite;
+              opacity: 0.83;
+            }
+
+            pre {
+              background-color: #282a36;
+            }
+          }
+        </style>
+</head>
+
+<body>
+
+  <header>
+    
+      <h1 title="Accumulator-passing style">
+        Accumulator-passing style
+      </h1>
+      
+          <nav>
+            <ul>
+              <li><a href="/">Home</a></li>
+              <li><a href="/articles">Articles</a></li>
+              <li><a href="/about">About</a></li>
+            </ul>
+          </nav>
+          <hr>
+          <span class="field">Author: <a href="/about">KimmyLeo</a></span>
+          
+  </header>
+  <article>
+    <p>在你所需要知道的关于函数的一切开篇我就提到了一种把 fibonacci 函数的树状递归改成迭代式尾递归形式的方法。这种方法一直以来都是了解函数式编程入门必须要了解的内容，但穷尽了我的语言能力也没办法给他一个合适的名称。</p>
+<p>今天恰好在微信群挖坟的时候看到了这样一个概念，Accumulator-passing style，瞬间豁然开朗。尽管使用 Google 搜索了一下发现这个词也不是那么常见，首页也就只有几个相关的结果，但确实能把这个概念相对准确地描述清楚。</p>
+<p>顺便根据 Google 搜索结果找到了几个更加简单的实现 accumulator-passing style 的说明文档。这里选一篇的内容摘录一下，附上我改过的实例。比起在之前的教程中绕来绕去通过循环转写的方式实现（思路来自 Alexander Stepanov 的 Elements of Programming）要更加简单直接。</p>
+<h2 id="尾递归">尾递归</h2>
+<p>首先要解释的一个概念是<strong>尾递归</strong>。（这也是之前教程中遗漏的内容 😅）</p>
+<p>尾递归（tail-recursion）是递归的一种特殊形式。即函数的最后一个动作是对自身的尾调用（tail call）。</p>
+<p>一个尾调用是指函数的最后一个动作是返回一个函数的调用结果。这样可以通过简化函数栈帧来进行性能优化（tail call elimination，尾调用消除）。</p>
+<p>比如：</p>
+<pre><code class="language-js"><span class="hljs-keyword">function</span> <span class="hljs-title">fact1</span>(n) {
+  if (n == 0) {
+    <span class="hljs-keyword">return</span> <span class="hljs-type">1</span>;
+  }
+  <span class="hljs-keyword">return</span> n * fact1(n - <span class="hljs-number">1</span>);
+}
+
+<span class="hljs-keyword">function</span> <span class="hljs-title">fact2</span>(n, acc) {
+  if (n == 0) {
+    <span class="hljs-keyword">return</span> <span class="hljs-type">acc</span>;
+  }
+  <span class="hljs-keyword">return</span> fact2(n - <span class="hljs-number">1</span>, n * acc);
+}
+</code></pre>
+<p>在上面两个示例中，<code>fact1</code> 是常规的递归，<code>fact2</code> 则是尾递归的形式。因为在 <code>fact1</code> 中，除了对自身递归调用以外，还需要再拿到结果计算 <code>n * _</code>。而 <code>fact2</code> 中，最后的动作则只有简单的对自身的递归调用，所有的参数传递也是在调用之前就需要求值完成的。</p>
+<h2 id="改写成-accumulator-passing-style-的步骤">改写成 accumulator-passing style 的步骤</h2>
+<p>只需要简单的 4 步，就可以轻松的把大部分递归改写成 accumulator style。这里以 factorial（阶乘）函数为例。</p>
+<pre><code class="language-js"><span class="hljs-keyword">function</span> <span class="hljs-title">fact</span>(n) {
+  if (n == 0) {
+    <span class="hljs-keyword">return</span> <span class="hljs-type">1</span>;
+  }
+  <span class="hljs-keyword">return</span> n * fact(n - <span class="hljs-number">1</span>);
+}
+</code></pre>
+<p><strong>第一步</strong>，引入 accumulator 作为参数。</p>
+<pre><code class="language-js"><span class="hljs-keyword">function</span> fact<span class="hljs-constructor">Acc(<span class="hljs-params">n</span>, <span class="hljs-params">acc</span>)</span> {
+  ...
+</code></pre>
+<p>因为 accumulator 在整个递归过程中用于累计递归的结算结果和额外的状态，所以显然把他作为参数传递给下一次调用是最好的办法。这里的 accumulator 并不仅限于一个参数。像之前提到的 fibonacci 函数，需要把前一次的结果也传递给下一次调用，也就出现两个额外参数的情况。</p>
+<p><strong>第二步</strong>，在递归的终结点返回 accumulator 的值。</p>
+<pre><code class="language-js"><span class="hljs-keyword">function</span> <span class="hljs-title">factAcc</span>(n, acc) {
+  if (n == 0) {
+    <span class="hljs-keyword">return</span> <span class="hljs-type">acc</span>;
+  }
+  ...
+</code></pre>
+<p>前面说了，既然 accumulator 用于累计计算结果，那到了递归终止的时候，就应该把结果返回。在 factorial 函数的例子中，当我们递归到 0 的时候，已经把前面该累乘的结果计算进了 <code>acc</code> 里面。</p>
+<p><strong>第三步</strong>，递归调用当前函数，更新参数和 accumulator 的值。</p>
+<pre><code class="language-js"><span class="hljs-keyword">function</span> fact<span class="hljs-constructor">Acc(<span class="hljs-params">n</span>, <span class="hljs-params">acc</span>)</span> {
+  <span class="hljs-keyword">if</span> (n<span class="hljs-operator"> == </span><span class="hljs-number">0</span>) {
+    return acc;
+  }
+  return fact<span class="hljs-constructor">Acc(<span class="hljs-params">n</span> - 1, <span class="hljs-params">acc</span> <span class="hljs-operator">*</span> <span class="hljs-params">n</span>)</span>;
+}
+</code></pre>
+<p>这里是稍微困难的一步，即如何改写之前的递归调用点。这需要看对应的场景来确定如何计算累计结果。在 factorial 的例子中，就是简单的把每次递归的 n 累乘进来。而在其他很多场合，则需要更进一步的设计。如 fibonacci 的树状递归，本质上是前后两次计算结果的合并，处理起来就没这么明显。</p>
+<p><strong>第四步</strong>，写一个函数 wrap 刚才的尾递归函数，初始化 accumulator。</p>
+<pre><code class="language-js"><span class="hljs-keyword">function</span> <span class="hljs-title">fact</span>(n) {
+  <span class="hljs-keyword">return</span> <span class="hljs-type">factAcc(n,</span> <span class="hljs-number">1</span>);
+}
+</code></pre>
+<h2 id="例：fibonacci-函数">例：fibonacci 函数</h2>
+<pre><code class="language-js"><span class="hljs-keyword">function</span> <span class="hljs-title">fib</span>(n) {
+  if (n == 0 || n == 1) {
+    <span class="hljs-keyword">return</span> <span class="hljs-type">1</span>;
+  }
+  <span class="hljs-keyword">return</span> fib(n - <span class="hljs-number">1</span>) + fib(n - <span class="hljs-number">2</span>);
+}
+</code></pre>
+<p><strong>第一步</strong>，引入 accumulator 作为参数。因为有两次递归调用，设计到结果合并，引入两个参数。</p>
+<pre><code class="language-js"><span class="hljs-keyword">function</span> fib<span class="hljs-constructor">Acc(<span class="hljs-params">n</span>, <span class="hljs-params">a</span>, <span class="hljs-params">b</span>)</span> {
+  ...
+</code></pre>
+<p><strong>第二步</strong>，在递归的终结点返回 accumulator 的值。</p>
+<pre><code class="language-js"><span class="hljs-keyword">function</span> <span class="hljs-title">fibAcc</span>(n, a, b) {
+  if (n == 0 || n == 1) {
+    <span class="hljs-keyword">return</span> <span class="hljs-type">a</span>;
+  }
+  ...
+</code></pre>
+<p><strong>第三步</strong>，递归调用当前函数，更新参数和 accumulator 的值。fibnacci 函数的定义，第 n 次结果是前两次结果（假设分别为 <code>a</code>、<code>b</code>）的和（即 <code>a + b</code>），下一次再取到的“前两次结果”就变成了 <code>b</code>、 <code>a + b</code>。</p>
+<pre><code class="language-js"><span class="hljs-keyword">function</span> fib<span class="hljs-constructor">Acc(<span class="hljs-params">n</span>, <span class="hljs-params">a</span>, <span class="hljs-params">b</span>)</span> {
+  <span class="hljs-keyword">if</span> (n<span class="hljs-operator"> == </span><span class="hljs-number">0</span><span class="hljs-operator"> || </span>n<span class="hljs-operator"> == </span><span class="hljs-number">1</span>) {
+    return a;
+  }
+  return fib<span class="hljs-constructor">Acc(<span class="hljs-params">n</span>-1, <span class="hljs-params">b</span>, <span class="hljs-params">a</span> + <span class="hljs-params">b</span>)</span>;
+}
+</code></pre>
+<p><strong>第四步</strong>，写一个函数 wrap 刚才的尾递归函数，初始化 accumulator。</p>
+<pre><code class="language-js"><span class="hljs-keyword">function</span> <span class="hljs-title">fib</span>(n) {
+  <span class="hljs-keyword">return</span> <span class="hljs-type">fibAcc(n,</span> <span class="hljs-number">1</span>, <span class="hljs-number">1</span>);
+}
+</code></pre>
+<h2 id="练习题">练习题</h2>
+<p>各位可以试着自行改写一下 <code>sum</code>（列表求和）、<code>map</code>（列表映射）和 <code>fold</code>（列表折叠）的实现。（前两个相对简单，第三个需要多思考一下）</p>
+<p>其定义分别如下：</p>
+<pre><code class="language-js">
+<span class="hljs-comment">// sum([a, b, c]) = a + b + c</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">sum</span><span class="hljs-params">(xs)</span> </span>{
+  <span class="hljs-keyword">if</span> (xs.length == <span class="hljs-number">0</span>) {
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+  }
+  <span class="hljs-keyword">let</span> [first, ...rest] = xs;
+  <span class="hljs-keyword">return</span> first + sum(rest);
+}
+
+<span class="hljs-comment">// map([a, b, c], fn) = [fn(a), fn(b), fn(c)]</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">map</span><span class="hljs-params">(xs, fn)</span> </span>{
+  <span class="hljs-keyword">if</span> (xs.length == <span class="hljs-number">0</span>) {
+    <span class="hljs-keyword">return</span> [];
+  }
+  <span class="hljs-keyword">let</span> [first, ...rest] = xs;
+  <span class="hljs-keyword">return</span> [<span class="hljs-function"><span class="hljs-keyword">fn</span><span class="hljs-params">(first)</span>, ...<span class="hljs-title">map</span><span class="hljs-params">(rest, fn)</span>]</span>;
+}
+
+<span class="hljs-comment">// fold([a, b, c], fn, z) == fn(a, fn(b, fn(c, zero)))</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">fold</span><span class="hljs-params">(xs, fn, zero)</span> </span>{
+  <span class="hljs-keyword">if</span> (xs.length == <span class="hljs-number">0</span>) {
+    <span class="hljs-keyword">return</span> zero;
+  }
+  <span class="hljs-keyword">let</span> [first, ...rest] = xs;
+  <span class="hljs-keyword">return</span> <span class="hljs-function"><span class="hljs-keyword">fn</span><span class="hljs-params">(first, fold<span class="hljs-params">(rest, fn, zero)</span>)</span></span>;
+}
+</code></pre>
+
+      
+
+  </article>
+  <!-- <div>
+        <h5>See Also</h5>
+        <ul>
+            <li><a href="/about">About Me</a></li>
+        </ul>
+    </div> -->
+  <span class="field">创建时间：2021-02-24</span>
+  <span class="field">最近更新时间：2021-03-11</span>
+  <hr>
+  <footer>
+    <ul>
+      <li><a href="/about">关于我</a></li>
+      <li><a href="/sitemap.xml">站点地图</a></li>
+      <li><a href="/rss.xml">RSS</a></li>
+      <li>Copyright &copy; KimmyLeo</li>
+    </ul>
+  </footer>
+  <script type="text/javascript">
+    document.querySelectorAll(".disabled-link").forEach(el => el.addEventListener("click", (e) => {
+      alert("链接页面不存在！");
+      e.preventDefault();
+    }));
+  </script>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script
+</body>
+
+</html>
